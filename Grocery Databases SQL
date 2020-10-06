@@ -1,0 +1,367 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost
+-- Generation Time: Oct 07, 2020 at 01:42 AM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.10
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `GroceryStore`
+--
+CREATE DATABASE IF NOT EXISTS `GroceryStore` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `GroceryStore`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_id`
+--
+
+DROP TABLE IF EXISTS `customer_id`;
+CREATE TABLE `customer_id` (
+  `customer_id` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `middle_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `cell_phone` int(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `payment_method` varchar(100) NOT NULL,
+  `rewards` varchar(250) NOT NULL,
+  `promotions` varchar(150) NOT NULL,
+  `transaction_history` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employee_id`
+--
+
+DROP TABLE IF EXISTS `employee_id`;
+CREATE TABLE `employee_id` (
+  `employee_id` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `pin_number` int(11) NOT NULL,
+  `payroll` varchar(150) NOT NULL,
+  `daily_sales` int(11) NOT NULL,
+  `daily_returns` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employee_info`
+--
+
+DROP TABLE IF EXISTS `employee_info`;
+CREATE TABLE `employee_info` (
+  `employee_information` int(11) NOT NULL,
+  `first_name` varchar(150) NOT NULL,
+  `middle_initial` varchar(5) NOT NULL,
+  `last_name` varchar(150) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `phone_number` int(11) NOT NULL,
+  `SSN` int(11) NOT NULL,
+  `street_address` varchar(200) NOT NULL,
+  `city` varchar(200) NOT NULL,
+  `state` varchar(4) NOT NULL,
+  `zip_code` varchar(10) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `login`
+--
+
+DROP TABLE IF EXISTS `login`;
+CREATE TABLE `login` (
+  `login_id` int(11) NOT NULL,
+  `username` varchar(150) NOT NULL,
+  `password` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_id`
+--
+
+DROP TABLE IF EXISTS `product_id`;
+CREATE TABLE `product_id` (
+  `product_id` int(11) NOT NULL,
+  `QR_code` varchar(100) NOT NULL,
+  `serial_number` int(100) NOT NULL,
+  `make` varchar(100) NOT NULL,
+  `model_number` int(100) NOT NULL,
+  `model_name` varchar(100) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  `link_supplier_data` varchar(100) NOT NULL,
+  `cost` int(11) NOT NULL,
+  `selling_price` int(11) NOT NULL,
+  `MSRP` int(11) NOT NULL,
+  `in_stock` varchar(150) NOT NULL,
+  `reorder_amount` int(11) NOT NULL,
+  `base_stock` int(11) NOT NULL,
+  `discounts` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reports`
+--
+
+DROP TABLE IF EXISTS `reports`;
+CREATE TABLE `reports` (
+  `report_system` int(11) NOT NULL,
+  `final_overview_sales` int(11) NOT NULL,
+  `refunds` int(11) NOT NULL,
+  `payment_method` varchar(100) NOT NULL,
+  `profit` int(11) NOT NULL,
+  `loss` int(11) NOT NULL,
+  `received_products` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ticket_system`
+--
+
+DROP TABLE IF EXISTS `ticket_system`;
+CREATE TABLE `ticket_system` (
+  `ticket_info` int(11) NOT NULL,
+  `employee_pin` int(11) NOT NULL,
+  `product_barcode` int(11) NOT NULL,
+  `customer` int(11) NOT NULL,
+  `transaction` int(11) NOT NULL,
+  `return_item` varchar(150) NOT NULL,
+  `exchange_sales` int(11) NOT NULL,
+  `credit_card` varchar(200) NOT NULL,
+  `cash` varchar(100) NOT NULL,
+  `promo_code` varchar(150) NOT NULL,
+  `employee_discount` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendor_id`
+--
+
+DROP TABLE IF EXISTS `vendor_id`;
+CREATE TABLE `vendor_id` (
+  `vendor_account` int(11) NOT NULL,
+  `vendor_name` varchar(100) NOT NULL,
+  `vendor_number` int(11) NOT NULL,
+  `vendor_address` varchar(100) NOT NULL,
+  `company_code` varchar(100) NOT NULL,
+  `purchasing_data` int(11) NOT NULL,
+  `shipments` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `customer_id`
+--
+ALTER TABLE `customer_id`
+  ADD PRIMARY KEY (`customer_id`),
+  ADD KEY `rewards` (`rewards`,`promotions`,`transaction_history`),
+  ADD KEY `first_name` (`first_name`,`last_name`,`cell_phone`,`email`),
+  ADD KEY `payment_method` (`payment_method`);
+
+--
+-- Indexes for table `employee_id`
+--
+ALTER TABLE `employee_id`
+  ADD PRIMARY KEY (`employee_id`),
+  ADD KEY `daily_sales` (`daily_sales`),
+  ADD KEY `daily_returns` (`daily_returns`);
+
+--
+-- Indexes for table `employee_info`
+--
+ALTER TABLE `employee_info`
+  ADD PRIMARY KEY (`employee_information`);
+
+--
+-- Indexes for table `login`
+--
+ALTER TABLE `login`
+  ADD PRIMARY KEY (`login_id`),
+  ADD KEY `username` (`username`,`password`);
+
+--
+-- Indexes for table `product_id`
+--
+ALTER TABLE `product_id`
+  ADD PRIMARY KEY (`product_id`),
+  ADD KEY `QR_code` (`QR_code`,`serial_number`,`cost`,`selling_price`,`in_stock`,`discounts`),
+  ADD KEY `in_stock` (`in_stock`);
+
+--
+-- Indexes for table `reports`
+--
+ALTER TABLE `reports`
+  ADD PRIMARY KEY (`report_system`),
+  ADD KEY `received_products` (`received_products`),
+  ADD KEY `final_overview_sales` (`final_overview_sales`),
+  ADD KEY `refunds` (`refunds`),
+  ADD KEY `payment_method` (`payment_method`),
+  ADD KEY `profit` (`profit`);
+
+--
+-- Indexes for table `ticket_system`
+--
+ALTER TABLE `ticket_system`
+  ADD PRIMARY KEY (`ticket_info`),
+  ADD KEY `employee_pin` (`employee_pin`),
+  ADD KEY `employee_pin_2` (`employee_pin`),
+  ADD KEY `product` (`product_barcode`),
+  ADD KEY `customer` (`customer`),
+  ADD KEY `transaction` (`transaction`,`return_item`,`exchange_sales`,`credit_card`,`cash`,`promo_code`),
+  ADD KEY `credit_card` (`credit_card`),
+  ADD KEY `cash` (`cash`),
+  ADD KEY `employee_discount` (`employee_discount`);
+
+--
+-- Indexes for table `vendor_id`
+--
+ALTER TABLE `vendor_id`
+  ADD PRIMARY KEY (`vendor_account`),
+  ADD KEY `shipments` (`shipments`),
+  ADD KEY `purchasing_data` (`purchasing_data`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `customer_id`
+--
+ALTER TABLE `customer_id`
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `employee_id`
+--
+ALTER TABLE `employee_id`
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `employee_info`
+--
+ALTER TABLE `employee_info`
+  MODIFY `employee_information` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `login`
+--
+ALTER TABLE `login`
+  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product_id`
+--
+ALTER TABLE `product_id`
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `reports`
+--
+ALTER TABLE `reports`
+  MODIFY `report_system` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ticket_system`
+--
+ALTER TABLE `ticket_system`
+  MODIFY `ticket_info` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `vendor_id`
+--
+ALTER TABLE `vendor_id`
+  MODIFY `vendor_account` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `customer_id`
+--
+ALTER TABLE `customer_id`
+  ADD CONSTRAINT `customer_id_ibfk_1` FOREIGN KEY (`payment_method`) REFERENCES `ticket_system` (`credit_card`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `employee_id`
+--
+ALTER TABLE `employee_id`
+  ADD CONSTRAINT `employee_id_ibfk_1` FOREIGN KEY (`daily_sales`) REFERENCES `reports` (`report_system`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `employee_id_ibfk_2` FOREIGN KEY (`daily_returns`) REFERENCES `reports` (`report_system`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `employee_id_ibfk_3` FOREIGN KEY (`employee_id`) REFERENCES `login` (`login_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `employee_info`
+--
+ALTER TABLE `employee_info`
+  ADD CONSTRAINT `employee_info_ibfk_1` FOREIGN KEY (`employee_information`) REFERENCES `employee_id` (`employee_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `product_id`
+--
+ALTER TABLE `product_id`
+  ADD CONSTRAINT `product_id_ibfk_1` FOREIGN KEY (`in_stock`) REFERENCES `vendor_id` (`shipments`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `product_id_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `ticket_system` (`product_barcode`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `reports`
+--
+ALTER TABLE `reports`
+  ADD CONSTRAINT `reports_ibfk_1` FOREIGN KEY (`final_overview_sales`) REFERENCES `vendor_id` (`vendor_account`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `reports_ibfk_2` FOREIGN KEY (`refunds`) REFERENCES `employee_id` (`daily_returns`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `reports_ibfk_3` FOREIGN KEY (`received_products`) REFERENCES `vendor_id` (`shipments`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `ticket_system`
+--
+ALTER TABLE `ticket_system`
+  ADD CONSTRAINT `ticket_system_ibfk_1` FOREIGN KEY (`employee_pin`) REFERENCES `employee_id` (`employee_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `ticket_system_ibfk_3` FOREIGN KEY (`customer`) REFERENCES `customer_id` (`customer_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `ticket_system_ibfk_4` FOREIGN KEY (`credit_card`) REFERENCES `reports` (`payment_method`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `ticket_system_ibfk_5` FOREIGN KEY (`cash`) REFERENCES `reports` (`payment_method`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `ticket_system_ibfk_6` FOREIGN KEY (`transaction`) REFERENCES `employee_id` (`daily_sales`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `ticket_system_ibfk_7` FOREIGN KEY (`employee_discount`) REFERENCES `employee_id` (`employee_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `vendor_id`
+--
+ALTER TABLE `vendor_id`
+  ADD CONSTRAINT `vendor_id_ibfk_1` FOREIGN KEY (`purchasing_data`) REFERENCES `product_id` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
