@@ -4,6 +4,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
+    overflow-y: hidden;
 }
 
 p {
@@ -19,17 +20,30 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 
+#locnav{
+    position: fixed;
+}
+
+#salespanel{
+    padding: 2px 2px;
+    margin-top: 30px;
+}
+
 .navbar {
+    width: 100%;
     padding: 5px 5px;
     background: #fff;
     border: none;
     border-radius: 0;
-    margin-bottom: 20px;
     box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-brand{
     padding: 15px;
+}
+
+.nav-item{
+    padding: 8px;
 }
 
 .navbar-btn {
@@ -45,8 +59,18 @@ a, a:hover, a:focus {
     margin-bottom: 20px;
 }
 
+#payline {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px solid;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+
 .card-deck{
-    padding: 25px;
+    margin-top: 30px;
+    padding: 20px;
 }
 
 /* ---------------------------------------------------
@@ -140,17 +164,55 @@ a.article, a.article:hover {
 
 
 /* ---------------------------------------------------
+    Sidebar
+----------------------------------------------------- */
+
+#paymentbar {
+    width: 250px;
+    position: fixed;
+    top: 70;
+    right: 0;
+    height: 100vh;
+    z-index: 999;
+    background: #fafafa;
+    margin-top: 30px;
+    border: 1px solid rgb(189, 189, 189);
+    border-top: none;
+    border-radius: 5px;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+#paymentbar ul li {
+    padding: 8px;
+    font-size: 1.1em;
+}
+
+#paybtn{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+/* ---------------------------------------------------
     Content Page
 ----------------------------------------------------- */
 #content {
     width: calc(100% - 250px);
-    padding: 40px;
+    margin-top: 40px;
     min-height: 100vh;
     transition: all 0.3s;
     position: absolute;
     top: 0;
     right: 0;
+    overflow: hidden;
 }
+
+#controlscreen{
+    margin-left:30px
+}
+
+#salescontent{
+    width: calc(100% - 250px);
+}
+
 #content.active {
     width: 100%;
 }
