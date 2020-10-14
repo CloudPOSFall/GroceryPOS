@@ -25,11 +25,13 @@
 
 <body>
 
+  <!-- bootstrap popper js-->
   <script src="js/popper.min.js"></script>
+  <!-- bootstrap js -->
   <script src="js/bootstrap.min.js"></script>
+  <!--jquery -->
   <script src="js/jquery-3.3.1.slim.min.js"></script>
   <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-
 
   <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
     <div class="container-fluid">

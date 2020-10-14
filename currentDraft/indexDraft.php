@@ -32,10 +32,9 @@ $dbconn = mysqli_connect($server, $dbusername, $password, $db) or die("Unable To
 </head>
 
 <body id="fixedBckg">
-
   <!-- bootstrap popper js-->
   <script src="js/popper.min.js"></script>
-  <!-- bootstrap ja -->
+  <!-- bootstrap js -->
   <script src="js/bootstrap.min.js"></script>
   <!--jquery -->
   <script src="js/jquery-3.3.1.slim.min.js"></script>
