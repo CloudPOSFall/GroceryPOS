@@ -1,5 +1,5 @@
 <?php
-  include_once ('/php_only/config.php');
+  include_once ('config.php');
 
   if(!$conn)
   {
