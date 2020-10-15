@@ -1,13 +1,4 @@
-<?php
-
-$server = "localhost";
-$dbusername = "root";
-$password = "";
-$db = "grocerystore";
-$dbconn = mysqli_connect($server, $dbusername, $password, $db) or die("Unable To Connect To Database");
-
-?>
-
+<!--This file does not need any PHP since its the home page, unless we want to load something from database-->
 
 <!DOCTYPE html>
 
