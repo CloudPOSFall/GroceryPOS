@@ -2,22 +2,22 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Sales | MarketPOS</title>
+  <title>Sales | MarketPOS</title>
 
-    <!--bootstrap css -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!--our css -->
-    <link rel="stylesheet" href="styleDraft.css">
-    <!--jquery scrollbar css -->
-    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+  <!--bootstrap css -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!--our css -->
+  <link rel="stylesheet" href="styleDraft.css">
+  <!--jquery scrollbar css -->
+  <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
 
-    <!--font awesome js -->
-    <script defer src="js/solid.js"></script>
-    <script defer src="js/fontawesome.js"></script>
+  <!--font awesome js -->
+  <script defer src="js/solid.js"></script>
+  <script defer src="js/fontawesome.js"></script>
 
 </head>
 
@@ -81,50 +81,50 @@
         </div>
 
         <div class="card card-body bg-light">
-            <div class="form-group">
+          <div class="form-group">
             <form class="form-horizontal" method="post" action="signupInsert.php">
-                        <div class="form-group">
-                            <input name="fname" class="form-control" placeholder="First Name">
-                        </div>
-                        <div class="form-group">
-                            <input name="lname"  class="form-control" placeholder="Last Name">
-                        </div>
-                        <div class="form-group">
-                            <input name="email" class="form-control"  placeholder="Email Address">
-                        </div>
-                        <div class="form-group">
-                            <input name="phone" class="form-control"  placeholder="Phone Number">
-                        </div>
-                        <div class="form-group">
-                            <input name="company" class="form-control" placeholder="Company">
-                        </div>
-                        <div class="form-group">
-                            <input name="pass" class="form-control"  placeholder="Password">
-                        </div>
-                        <div class="form-group">
-                            <select name="stores"  class="form-control">
-                                <option selected>Number of locations</option>
-                                <option>0</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3-5</option>
-                                <option>5-10</option>
-                                <option>10+</option>
-                            </select>
-                        </div>
-                        <div class="col text-center">
-                            <button type="submit" class="btn-lg btn-primary">Get Started</button>
-                        </div>
-                    </form>
+              <div class="form-group">
+                <input name="fname" class="form-control" placeholder="First Name">
+              </div>
+              <div class="form-group">
+                <input name="lname" class="form-control" placeholder="Last Name">
+              </div>
+              <div class="form-group">
+                <input name="email" class="form-control" placeholder="Email Address">
+              </div>
+              <div class="form-group">
+                <input name="phone" class="form-control" placeholder="Phone Number">
+              </div>
+              <div class="form-group">
+                <input name="company" class="form-control" placeholder="Company">
+              </div>
+              <div class="form-group">
+                <input name="pass" class="form-control" placeholder="Password">
+              </div>
+              <div class="form-group">
+                <select name="stores" class="form-control">
+                  <option selected>Number of locations</option>
+                  <option>0</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3-5</option>
+                  <option>5-10</option>
+                  <option>10+</option>
+                </select>
+              </div>
+              <div class="col text-center">
+                <button type="submit" class="btn-lg btn-primary">Get Started</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-sm-4 sidenav">
         </div>
       </div>
-      <div class="col-sm-4 sidenav">
-      </div>
     </div>
-  </div>
 
-  <footer class="container-fluid fixed-bottom">
-  </footer>
+    <footer class="container-fluid fixed-bottom">
+    </footer>
 
 </body>
 

@@ -3,22 +3,22 @@
 <!DOCTYPE html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Sales | MarketPOS</title>
+  <title>Sales | MarketPOS</title>
 
-    <!--bootstrap css -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!--our css -->
-    <link rel="stylesheet" href="styleDraft.css">
-    <!--jquery scrollbar css -->
-    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+  <!--bootstrap css -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!--our css -->
+  <link rel="stylesheet" href="styleDraft.css">
+  <!--jquery scrollbar css -->
+  <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
 
-    <!--font awesome js -->
-    <script defer src="js/solid.js"></script>
-    <script defer src="js/fontawesome.js"></script>
+  <!--font awesome js -->
+  <script defer src="js/solid.js"></script>
+  <script defer src="js/fontawesome.js"></script>
 
 </head>
 
@@ -68,7 +68,6 @@
 
 
   <!-- Image Carousal -->
-
   <div id="upPad">
     <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
       <!--Information needed to where the javascript should take the slide in what order-->
@@ -82,22 +81,22 @@
         <div class="carousel-item active">
           <img src="media/credit.jpg" width="500" height="500" class="d-block mx-auto" alt="music">
           <div class="carousel-caption d-none d-md-block">
-            <h5>port</h5>
-            <p>words</p>
+            <h5>Secure Payments</h5>
+            <p>be able to pay online using credit card!</p>
           </div>
         </div>
         <div class="carousel-item">
           <img src="media/coding.jpg" width="1000" height="500" class="d-block mx-auto" alt="decor">
           <div class="carousel-caption d-none d-md-block">
-            <h5 style="color: black;">computing</h5>
-            <p style="color: black;">words</p>
+            <h5>Clound Based Software</h5>
+            <p>log in from anywhere around your store, from any device! </p>
           </div>
         </div>
         <div class="carousel-item">
           <img src="media/desk.jpg" width="1000" height="500" class="d-block mx-auto" alt="food">
           <div class="carousel-caption d-none d-md-block">
-            <h5>desk</h5>
-            <p>words</p>
+            <h5>Portable</h5>
+            <p>plan your business and get started today!</p>
           </div>
         </div>
       </div>
@@ -114,17 +113,21 @@
   </div>
   <!-- End of Image Carousal -->
 
+  <!--Jumbotron showing mission assignment-->
   <div id="centerPad">
     <div class="jumbotron">
-      <h1 class="display-4">title</h1>
-      <p class="lead">subtitle</p>
+      <h1 class="display-4">Market Place Point of Sales System</h1>
+      <p class="lead">a convinient, cloud based, pos system</p>
       <hr class="my-4">
-      <p>ILorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum elit ipsum, ac porta metus auctor in. Vestibulum sed quam pulvinar, lobortis quam vitae, tempus leo. Quisque rhoncus suscipit tristique. In aliquam quam et nunc mattis ultrices. Curabitur at leo quis ligula dictum congue. Vestibulum tempus, tellus sit amet scelerisque facilisis, neque sem suscipit magna, ut dapibus diam tellus egestas orci. Vestibulum in condimentum est, vitae dapibus erat. Nulla facilisi. Donec elementum est et interdum tincidunt. Aenean sagittis congue lacus, vel bibendum ligula dignissim ornare. Maecenas et tempor diam, non varius risus. Nulla tortor lectus, dapibus et tempor sed, finibus sit amet eros.</p>
+      <p>With our design techniques, you'll be able to store the make, model, and description of all the items in your inventory. You'll also be able to store employee data and assign to each employee with a secure account. To ensure that your business is running smoothly, daily ZResports are printed at the closing of every shift while also getting the chance to review profits and losses, and you'll get the choice to allow grouping of reports to match sales to a tax calendar of payments. You don't even have to worry about security, our built in system runs in accordance with the Financial Regulatory Compliance, with the ability to connect to on line credit card checking and handling,
+        Safe guarding any customer data stored for marketing, and provide the safety of a secure login. Just give us a try to find out! </p>
       <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
     </div>
   </div>
+  <!--End of Jumbotron-->
 
-  <div class="container-fluid padding">
+  <!--Short Description of Software-->
+  <div id="upPad" class="container-fluid padding">
     <div class="row welcome text-center">
       <div class="col-12">
         <h1 class="display-4">E-Vendor</h1>
@@ -136,97 +139,104 @@
       </div>
     </div>
   </div>
+  <!--End of Short Description-->
 
-
-
-  <div class="container-fluid padding">
+  <!--Technology infromation-->
+  <div id="upPad" class="container-fluid padding">
     <div class="row text-center padding">
       <div class="col-xs-12 col-sm-6 col-md-4">
-        <i class="fas fa-code"></i>
-        <h3>title</h3>
-        <p>words words words</p>
+        <i class="fas fa-server"></i>
+        <h4>PHP</h4>
+        <p>Server Side requests to online </br>database ran by PHP</p>
       </div>
       <div class="col-xs-12 col-sm-6 col-md-4">
         <i class="fas fa-bold"></i>
-        <h3>titel</h3>
-        <p>words words words</p>
+        <h4>BootStrap</h4>
+        <p>Front End designed with Bootstrap </br>CSS library</p>
       </div>
       <div class="col-sm-12 col-md-4">
-        <i class="fas fa-css3"></i>
-        <h3>titel</h3>
-        <p>words words words/p>
+        <i class="fas fa-database"></i>
+        <h4>MySQL</h4>
+        <p>Data held and securely stored</br> in the MySQL Database</p>
       </div>
     </div>
     <hr class="my-4">
   </div>
+  <!--end of tech info-->
 
-
-
-
-  <div id="leftPad">
-    <div class="card mb-3" style="max-width: 540px;">
-      <div class="row no-gutters">
-        <div class="col-md-4">
-          <img src="..." class="card-img" alt="...">
+  <!--Team Credentials-->
+  <div id="upPad" class="container-fluid padding">
+    <div class="row text-center padding">
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="card mb-3" style="max-width: 540px;">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img src="..." class="card-img" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Alex Carlson</h5>
+                <p class="card-text">Providing first hand experience with Point of Sale Systems, Backend aswell as Frontend Web Development. </p>
+                <p class="card-text"><small class="text-muted"></small></p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <p class="card-text"><small class="text-muted"></small></p>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="card mb-3" style="max-width: 540px;">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img src="..." class="card-img" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Cameron Dyas</h5>
+                <p class="card-text">Supplying the connection between our database and our online system using the latest coding techniques with PHP</p>
+                <p class="card-text"><small class="text-muted"></small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="card mb-3" style="max-width: 540px;">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img src="..." class="card-img" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Johnny Tejada</h5>
+                <p class="card-text">Having created the database design, letting us pull and update a plethora of information from it through SQL</p>
+                <p class="card-text"><small class="text-muted"></small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="card mb-3" style="max-width: 540px;">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img src="..." class="card-img" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Charles Agudelo</h5>
+                <p class="card-text">Creating dynamic frontend websites, aswell as providing it with functionality using Javascript</p>
+                <p class="card-text"><small class="text-muted"></small></p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <hr class="my-4">
+  </div>
+  <!--End of Credentials-->
 
-
-    <div class="card mb-3" style="max-width: 540px;">
-      <div class="row no-gutters">
-        <div class="col-md-4">
-          <img src="..." class="card-img" alt="...">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <p class="card-text"><small class="text-muted"></small></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
-    <div class="card mb-3" style="max-width: 540px;">
-      <div class="row no-gutters">
-        <div class="col-md-4">
-          <img src="..." class="card-img" alt="...">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <p class="card-text"><small class="text-muted"></small></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card mb-3" style="max-width: 540px;">
-      <div class="row no-gutters">
-        <div class="col-md-4">
-          <img src="..." class="card-img" alt="...">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <p class="card-text"><small class="text-muted"></small></p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--<script src="" async defer></script>-->
+  <!--<script src="" async defer></script>-->
 
 </body>
 

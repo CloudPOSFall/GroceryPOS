@@ -1,91 +1,51 @@
 <?php
 // Initialize the session
-session_start();
- 
+ob_start();
 // Check if the user is already logged in, if yes then redirect him to welcome page
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: welcome.php");
-    exit;
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+  header("Location: accountHomeDraft.php");
+  exit;
 }
- 
+
 // Include config file
 include_once "config.php";
- 
+
 // Define variables and initialize with empty values
 $email = $password = "";
 $email_err = $password_err = "";
- 
-// Processing form data when form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
-    // Check if email is empty
-    if(empty(trim($_POST["email"]))){
-      $email_err = "Please enter email.";
-  } else{
-      $email = trim($_POST["email"]);
-  }
-    
-    // Check if password is empty
-    if(empty(trim($_POST["password"]))){
-      $password_err = "Please enter your password.";
-  } else{
-      $password = trim($_POST["password"]);
-  }
-    
-    // Validate credentials
-    if(empty($email_err) && empty($password_err)){
-        // Prepare a select statement
-        $sql = "SELECT 'id', 'email', 'password' FROM storelevel_signup WHERE username = ?";
-        
-        if($stmt = mysqli_prepare($conn, $sql)){
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "s", $param_email);
-            
-            // Set parameters
-            $param_email = $email;
-            
-            // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                // Store result
-                mysqli_stmt_store_result($stmt);
-                
-                // Check if email exists, if yes then verify pass
-                if(mysqli_stmt_num_rows($stmt) == 1){                    
-                    // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password);
-                    if(mysqli_stmt_fetch($stmt)){
-                        if(password_verify($password, $hashed_password)){
-                            // password is correct, so start a new session
-                            session_start();
-                            
-                            // Store data in session variables
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;
-                            $_SESSION["email"] = $email;                            
-                            
-                            // Redirect user to welcome page
-                            echo "Logged in!";
-                            header("location: welcome.php");
-                        } else{
-                            // Display an error message if password is not valid
-                            $password_err = "The password you entered was not valid.";
-                        }
-                    }
-                } else{
-                    // Display an error message if email doesn't exist
-                    $email_err = "No account found with that email.";
-                }
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
-            }
 
-            // Close statement
-            mysqli_stmt_close($stmt);
-        }
+// Processing form data when form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+  // Check if email is empty
+  if (empty(trim($_POST["email"]))) {
+    $email_err = "Please enter email.";
+  } else {
+    $email = trim($_POST["email"]);
+    $email = mysqli_real_escape_string($conn, $email);
+  }
+
+  // Check if password is empty
+  if (empty(trim($_POST["password"]))) {
+    $password_err = "Please enter your password.";
+  } else {
+    $mypassword = trim($_POST["password"]);
+    $mypassword = mysqli_real_escape_string($conn, $mypassword);
+  }
+
+  // Validate credentials
+  if (empty($email_err) && empty($password_err)) {
+    // Prepare a select statement
+    $query = mysqli_query($conn, "SELECT ID,email,password FROM storelevel_signup WHERE email = '$email' AND password = '$mypassword'");
+    $numrows = mysqli_num_rows($query);
+    if ($numrows != 0) {
+      $_SESSION["email"] = $email;
+      header("Location: accountHomeDraft.php");
+      ob_end_flush();
+    } else {
+      $error = "Login Invalid!";
     }
-    
-    // Close connection
-    mysqli_close($conn);
+  }
 }
 ?>
 
@@ -95,22 +55,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Sales | MarketPOS</title>
+  <title>Sales | MarketPOS</title>
 
-    <!--bootstrap css -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!--our css -->
-    <link rel="stylesheet" href="styleDraft.css">
-    <!--jquery scrollbar css -->
-    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+  <!--bootstrap css -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!--our css -->
+  <link rel="stylesheet" href="styleDraft.css">
+  <!--jquery scrollbar css -->
+  <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
 
-    <!--font awesome js -->
-    <script defer src="js/solid.js"></script>
-    <script defer src="js/fontawesome.js"></script>
+  <!--font awesome js -->
+  <script defer src="js/solid.js"></script>
+  <script defer src="js/fontawesome.js"></script>
 
 </head>
 
@@ -161,7 +121,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   <div class="container-fluid text-center">
     <div class="row content">
       <div class="col-sm-4 sidenav">
-</div>
+      </div>
 
 
       <div class="col-sm-4 text-left">
@@ -187,7 +147,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
               <input type="checkbox" class="form-check-input" id="remember">
               <label class="form-check-label" name="remember">Remember me</label>
             </div>
-            <button type="submit" style="padding: 10px" class="btn-lg btn-success" > Log In</button>
+            <button type="submit" style="padding: 10px" class="btn-lg btn-success"> Log In</button>
             <p>Don't have an account? <a href="signupDraft.php">Sign up now</a>.</p>
           </form>
         </div>

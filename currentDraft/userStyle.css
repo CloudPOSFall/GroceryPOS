@@ -27,6 +27,15 @@ a, a:hover, a:focus {
 #salespanel{
     padding: 2px 2px;
     margin-top: 30px;
+    margin-left: 0px;
+}
+
+
+#salestable{
+    width: calc(100% - 210px);
+    margin-top: -22px;
+    margin-left: -12px;
+
 }
 
 .navbar {
@@ -121,7 +130,7 @@ a, a:hover, a:focus {
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
-    background: #00802b;
+    background: #016923;
 }
 
 #navcard{
