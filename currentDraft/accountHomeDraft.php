@@ -117,7 +117,7 @@
             </div>
             <div class="card-footer">
               <form>
-                <input type="button" class="btn-sm btn-primary" onclick="window.location.href='sale.html'" value="Work Order" />
+                <input type="button" class="btn-sm btn-primary" onclick="window.location.href='sale.html'" value="Total Sales" />
               </form>
             </div>
           </div>
