@@ -150,7 +150,7 @@
                 <div class="nav-item">
                     <div class="card" style="padding: 8px">No Customer Selected</div>
                 </div>
-                <input class="form-control" type="search" placeholder="Search Customers" aria-label="Search">
+                <input class="form-control" type="text" name="search" placeholder="Search Customers" aria-label="Search">
                 <button class="btn btn-dark navbar-btn" type="submit"> Look Up</button>
                 <div class="nav-item">
                     <button class="btn navbar-btn"> New</button></div>
@@ -161,7 +161,8 @@
 
         <nav class="navbar navbar-light" style="background-color: #e2e2e2;">
             <form class="form-inline">
-                <input class="form-control" type="search" placeholder="Item Search" aria-label="Search">
+                <input class="form-control" type="search" placeholder="Item Search" id="search" aria-label="Search">
+                <ul class="list-group" id="result"></ul>
                 <button class="btn btn-dark navbar-btn" type="submit"> Search</button>
                 <div class="nav-item">
                     <button class="btn navbar-btn"> Misc</button>
@@ -253,6 +254,32 @@
                 $('.collapse.in').toggleClass('in');
                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
             });
+
+             // event begins when the user releases the key
+            $('#search').keyup(function() {
+                // creates null result field
+                $('#result').html('');
+                // variable to hold search input
+                var searchField = $('#search').val();
+                // function that creates a variable which matches the search as a regular expression
+                var expression = new RegExp(searchField, "i");
+                // loads JSON file 
+                $.getJSON('products.json', function(data) { $.each(data, function(key, value) {
+                // .search to see if the string matches the expression
+                if (value.name.search(expression) != -1 || value.price.search(expression) != -1) {
+                    // creates the list items which are the results from the search
+                    $('#result').append('<li class="list-group-item link-class"> '+value.name+' | <span class="text-muted">'+value.price+'</span></li>');
+                }});   
+            });});
+            // event which replaces the search area with chosen result
+            $('#result').on('click', 'li', function() {
+            // seperates price with a vertical bar
+            var click_text = $(this).text().split('|');
+            // attatch bar
+            $('#search').val($.trim(click_text[0]));
+            // creates null result field
+            $("#result").html('');
+        });
         });
 
         //global variables for both the sum and table
