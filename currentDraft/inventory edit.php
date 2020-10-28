@@ -26,7 +26,7 @@
 </html>
 <?php
 $con = mysqli_connect("localhost", "root", "");
-$db = mysqli_select_db($con,'GroceryStore');
+$db = mysqli_select_db($con,'grocerystore');
 
 if(isset($_POST['update']))
 {
