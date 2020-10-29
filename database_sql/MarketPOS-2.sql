@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 29, 2020 at 04:41 AM
+-- Generation Time: Oct 29, 2020 at 10:37 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -35,8 +35,7 @@ CREATE TABLE `customer_info` (
   `middle_initial` varchar(1) NOT NULL,
   `last_name` varchar(100) NOT NULL,
   `phone_number` int(11) NOT NULL,
-  `rewards` int(11) NOT NULL,
-  `employee_id` int(11) NOT NULL
+  `rewards` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -50,7 +49,8 @@ CREATE TABLE `employee_id` (
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `pin_number` int(11) NOT NULL,
-  `employee_information` int(11) NOT NULL
+  `employee_information` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -211,15 +211,15 @@ CREATE TABLE `zreport_system` (
 -- Indexes for table `customer_info`
 --
 ALTER TABLE `customer_info`
-  ADD PRIMARY KEY (`customer_id`),
-  ADD KEY `employee_id` (`employee_id`);
+  ADD PRIMARY KEY (`customer_id`);
 
 --
 -- Indexes for table `employee_id`
 --
 ALTER TABLE `employee_id`
   ADD PRIMARY KEY (`employee_id`),
-  ADD KEY `employee_information` (`employee_information`);
+  ADD KEY `employee_information` (`employee_information`),
+  ADD KEY `customer_id` (`customer_id`);
 
 --
 -- Indexes for table `employee_info`
@@ -345,16 +345,11 @@ ALTER TABLE `zreport_system`
 --
 
 --
--- Constraints for table `customer_info`
---
-ALTER TABLE `customer_info`
-  ADD CONSTRAINT `customer_info_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee_id` (`employee_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Constraints for table `employee_id`
 --
 ALTER TABLE `employee_id`
-  ADD CONSTRAINT `employee_id_ibfk_1` FOREIGN KEY (`employee_information`) REFERENCES `employee_info` (`employee_information`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `employee_id_ibfk_1` FOREIGN KEY (`employee_information`) REFERENCES `employee_info` (`employee_information`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `employee_id_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `inventory_sales`
@@ -379,7 +374,7 @@ ALTER TABLE `ticket_system`
 -- Constraints for table `zreport_system`
 --
 ALTER TABLE `zreport_system`
-  ADD CONSTRAINT `zreport_system_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `zreport_system_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `inventory_system` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `zreport_system_ibfk_2` FOREIGN KEY (`ticket_id`) REFERENCES `ticket_system` (`ticket_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
