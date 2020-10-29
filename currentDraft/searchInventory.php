@@ -13,14 +13,15 @@
         $result = mysqli_query($con,$query);
         // Get number of matches
         $queryResult = mysqli_num_rows($result);
+        // Search through table for match
+        while($row = mysqli_fetch_assoc($result)){
+            // Output the match from the database
+            echo "<div> <p>" .$row['model_name']. "</p> </div>";
+        }
         // Makes sure the number of matches is greater then 0
         if($queryResult > 0) {
-            // Search through table for match
-            while($row = mysqli_fetch_assoc($result)){
-                // Output the match from the database
-                echo "<div> <p>" .$row['model_name']. "</p> </div>";
             }
-        } else {
+         else {
             // Let us know if no matches
             echo "no matching results";
         }
