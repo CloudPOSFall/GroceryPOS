@@ -1,19 +1,25 @@
 <?php 
+    if(isset($_POST['submit'])) {
+        // Loads the config file to connect to database 
+        include_once('config.php');
 
-    $server = "localhost";
-    $dbusername = "root";
-    $password = "";
-    $db = "grocerystore";
-    $debug = "false";
+        $query = "SELECT * FROM  inventory_system";
 
-    $conn = mysqli_connect($server, $dbusername, $password, $db);
-    if($conn->connect_error){
-	    die('Could not connect: ' . $conn-> connect_error);
-    }elseif($debug == "true"){
-	    echo nl2br("\nDEBUG:\n");
-	    echo nl2br("3 \n 2 \n 1...");
-	    echo nl2br("\n Connected successfully\n");
-	}
+        $result = mysqli_query($conn, $query)
+            or die("Couldn't execute query");
+
+        while($row = msqli_fetch_assoc())
+    }
+    /*    $searchQuery = $_POST['submit'];
+        $searchQuery = preg_replace("#[^0-9a-z]#i","",$searchQuery);
+        $query = mysql_query("SELECT * FROM inventory_system WHERE model_name LIKE '%searchQuery%'");
+        while($row = mysql_fetch_array($query)) {
+            $mname = $row['model_name'];
+            $output .= '<div> '.$mname.'</div>';
+        }
+        print("$output");*/
+
+    
 ?>
 
 <!DOCTYPE html>
@@ -27,14 +33,23 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
     </head>
     <body>
-        <div class="container" style="width:900px;">
-            <!--Area to search for products, aka "search"-->
-            <div align="center">
-                <input type="text" name="search" class="form-control" id="search" placeholder="Search For Product" />
+        <form>
+            <div class="container" style="width:900px;">
+                <!--Area to search for products, aka "search"-->
+                <div align="center">
+                    <div class="row">
+                        <div class="col-sm">
+                            <input type="text" name="search" class="form-control" id="search" placeholder="Search For Product"/>
+                        </div>
+                        <div class="col-sm">
+                            <input type="submit" value="Search">
+                        </div>
+                    </div>
+                </div>
+                <!--Area that shows results from search, aka "result"-->
+                <ul class="list-group" id="result"></ul>
             </div>
-            <!--Area that shows results from search, aka "result"-->
-            <ul class="list-group" id="result"></ul>
-        </div>
+        </form>
     </body>
 </html>
 <script>
