@@ -6,20 +6,12 @@
     $search = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        
-
-
-
-    }
-    
-
-
-    // Run this php if Search button is pushed
-    if(isset($_POST['Search'])) {
+        // Run this php if Search button is pushed
+         if(isset($_POST['Search'])) {
         // Grabs input from the "Search Products" text field
         $searchQuery = $_POST['searchProducts'];
         // Searches database for names like the input
-        $query = mysqli_query($conn, "SELECT * FROM product_inventory WHERE model_name = '$email' ");
+        $query = mysqli_query($conn, "SELECT * FROM product_inventory WHERE model_name = '$search' ");
         // Get number of matches
         $queryResult = mysqli_num_rows($query);
         
@@ -39,6 +31,11 @@
             echo "no matching results";
         }
     }
+    }
+    
+
+
+    
 ?>
 
 <!DOCTYPE html>
