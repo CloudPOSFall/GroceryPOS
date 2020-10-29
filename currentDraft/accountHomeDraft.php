@@ -1,12 +1,12 @@
 <?php
 session_start();
 $name = $_SESSION['first_name'];
-$format = '--------------%s %s--------------'."<br>";
+$format = '%s %s'."<br>";
 $lname = $_SESSION['last_name'];
-$format1 = '----------%s------------'."<br>";
+$format1 = '%s'."<br>";
 $emailtxt = $_SESSION['email'];
 //echo sprintf($format1,$emailtxt);
-$format2 = '--------------%s----------------'."<br>";
+$format2 = '%s'."<br>";
 $company = $_SESSION['company_name'];
 //echo sprintf($format2,$company);
 ?>
@@ -112,6 +112,18 @@ $company = $_SESSION['company_name'];
 	  
 	  
     <!--control buttons-->
+	  <div align = "center">
+	  <div class="card" style="width: 18rem;">
+		  <img class="card-img-top" src="media/prof.png" alt="Card image cap">
+        <div class="card-body">
+      <p class="card-text"><?php
+                echo sprintf($format,$name,$lname);
+                echo sprintf($format1,$emailtxt);
+                echo sprintf($format2,$company);
+                ?></p>
+      </div>
+		</div>
+	  </div>
     <div class="wrapper" id="controlscreen">
       <div class="card-deck">
         <div class="col-md-3">
@@ -178,30 +190,8 @@ $company = $_SESSION['company_name'];
           </div>
         </div>
       </div>
-
-	  <div class="col-md-3">
-          <div class="card text-center">
-            <div class="card-header bg-primary text-white">
-              <div class="row">
-                <div class="col">
-                  <i class="fa fa-list fa-4x"></i>
-                </div>
-                <div class="col">
-               	<?php
-				echo sprintf($format,$name,$lname);		
-	    		echo sprintf($format1,$emailtxt);
-	    		echo sprintf($format2,$company);
-				?>
-                </div>
-              </div>
-            </div>
-            <div class="card-footer">
-              <form>
-                <input type="button" class="btn-sm btn-primary" onclick="window.location.href='workorderDraft.php';" value="Work Order" />
-              </form>
-            </div>
-          </div>
-        </div>
+	  
+	  
 
     </div>
 
