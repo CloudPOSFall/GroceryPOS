@@ -5,11 +5,11 @@
 <body>
   <h3 > Update Form in PHP </h3>
     <form action="" method="post">
-      <input type="text" placeholder=" Enter Inventory Sales ID " name="id"/>
-      <input type="text" placeholder=" Enter Ticket ID " name="tid"/>
-      <input type="text" placeholder=" Enter Product ID " name="pid"/>
-      <input type="text" placeholder=" QTY " name="qty"/>
-      <input type="text" placeholder=" Unit Price " name="unit"/>
+      <input type="number" placeholder=" Enter Inventory Sales ID " name="id" step="1"/>
+      <input type="number" placeholder=" Enter Ticket ID " name="tid" step="1"/>
+      <input type="number" placeholder=" Enter Product ID " name="pid" step="1"/>
+      <input type="number" placeholder=" QTY " name="qty" step="1"/>
+      <input type="number" placeholder=" Unit Price " name="unit" step="0.01"/>
       <input type="text" placeholder=" Discount " name="discount"/>
       <input type="submit" name="update" value="UPDATE"/>
     </form>

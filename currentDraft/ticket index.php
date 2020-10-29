@@ -5,14 +5,14 @@
 <body>
             <h3> Ticket System </h3>
             <form action="ticketinsert.php" method="post">
-              <input type="text" placeholder=" Date " name="date">
+              <input type="date" placeholder=" Date " name="date">
               <input type="text" placeholder=" Time " name="time">
-              <input type="text" placeholder=" Subtotal " name="sub">
-              <input type="text" placeholder=" Total " name="total">
-              <input type="text" placeholder=" Tax " name="tax">
-              <input type="text" placeholder=" Tax Rate " name="rate">
-              <input type="text" placeholder=" Employee ID " name="eid">
-              <input type="text" placeholder=" Inventory Sales ID " name="isid">
+              <input type="number" placeholder=" Subtotal " name="sub" step="0.01">
+              <input type="number" placeholder=" Total " name="total" step="0.01">
+              <input type="number" placeholder=" Tax " name="tax" step="0.01">
+              <input type="number" placeholder=" Tax Rate " name="rate" step="0.01">
+              <input type="number" placeholder=" Employee ID " name="eid" step="1">
+              <input type="number" placeholder=" Inventory Sales ID " name="isid" step="1">
               <button name="submit">Submit</button>
             </form>
 </body>

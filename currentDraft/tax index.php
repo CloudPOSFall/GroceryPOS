@@ -5,7 +5,7 @@
 <body>
             <h3> Tax Document </h3>
             <form action="taxinsert.php" method="post">
-              <input type="text" placeholder=" Tax Year " name="year">
+              Tax Year <input type="date" placeholder=" yyyy " name="year">
               <input type="number" placeholder=" State Rate " name="state" step="0.01">
               <input type="number" placeholder=" County Rate " name="county" step="0.01">
               <input type="number" placeholder=" City Rate " name="city" step="0.01">

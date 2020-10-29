@@ -5,10 +5,10 @@
 <body>
   <h3 > Update Form in PHP </h3>
     <form action="" method="post">
-      <input type="text" placeholder=" Enter Employee ID " name="id"/>
-      <input type="text" placeholder=" Email " name="email"/>
-      <input type="text" placeholder=" Password " name="password"/>
-      <input type="text" placeholder=" Pin Number " name="pin"/>
+      <input type="number" placeholder=" Enter Employee ID " name="id" step="1"/>
+      <input type="email" placeholder=" Email " name="email"/>
+      <input type="password" placeholder=" Password " name="password"/>
+      <input type="number" placeholder=" Pin Number " name="pin"/>
       <input type="submit" name="update" value="UPDATE"/>
     </form>
 </body>
