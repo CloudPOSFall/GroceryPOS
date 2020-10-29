@@ -35,21 +35,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   // Validate credentials
   if (empty($email_err) && empty($password_err)) {
-    // Prepare a select statement
-    $query = mysqli_query($conn, "SELECT ID,email,password FROM storelevel_signup WHERE email = '$email' AND password = '$mypassword'");
-    $numrows = mysqli_num_rows($query);
-    if ($numrows != 0) {
-      $_SESSION["email"] = $email;
-      header("Location: accountHomeDraft.php");
-      ob_end_flush();
-    } else {
-      $error = "Login Invalid!";
-    }
-  }
+   $query = mysqli_query($conn,"SELECT ID,email,password,first_name,last_name,company_name FROM storelevel_signup WHERE email = '$email' AND password = '$mypassword'");
+		$numrows = mysqli_num_rows($query);
+		if($numrows!=0)
+		{
+			while($numrows = mysqli_fetch_assoc($query)) {
+				$first_name = $numrows["first_name"];
+				$first_name = mysqli_real_escape_string($conn,$first_name);
+				$last_name =  $numrows["last_name"];
+				$last_name = mysqli_real_escape_string($conn,$last_name);
+				$company_name = $numrows["company_name"];
+				$company_name = mysqli_real_escape_string($conn,$company_name);
+			}
+			session_start();
+			$_SESSION["email"] = $email;
+	  		$_SESSION["first_name"] = $first_name;
+	  		$_SESSION["last_name"] = $last_name;
+	  		$_SESSION["company_name"] = $company_name;
+			header("Location: accountHomeDraft.php");
+			ob_end_flush();
+		}else{
+			$password_wrong = "Invalid Username or Password.";
+		}
+	}    
 }
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
