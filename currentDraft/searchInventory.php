@@ -34,7 +34,7 @@
         <title>Search Function for POS</title>
     </head>
     <body>
-    <div align="center">
+    <div class="text-center">
         <form action="searchInventory.php" method="post">
             <input type="text" name="searchProducts" placeholder="Search Products"/>
             <input type="submit" name="Search"/> 

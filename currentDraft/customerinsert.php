@@ -6,7 +6,7 @@
     echo 'Not Connected To Server';
   }
 
-  if(!mysqli_select_db($con, 'GroceryStore'))
+  if(!mysqli_select_db($con, 'grocerystore'))
   {
     echo 'Database Not Selected';
   }
@@ -27,13 +27,13 @@
       $PhoneNumber = $_POST['number'];
       $Rewards = $_POST['rewards'];
 
-      $query = "insert into customer_info (email, password, first_name, middle_initial, last_name, phone_number, rewards)
+      $query = "INSERT INTO customer_info (email, password, first_name, middle_initial, last_name, phone_number, rewards)
               values ('$Email', '$Password', '$FirstName', '$MiddleInitial', '$LastName', '$PhoneNumber', '$Rewards')";
       $result = mysqli_query($con, $query);
 
       if($result)
       {
-        header("location:customerview.php");
+        header("location: customerview.php");
       }
       else
       {
