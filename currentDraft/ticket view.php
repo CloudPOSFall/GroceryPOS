@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width-device-width, initial-scale=1.0">
-  <meta http-equiv"X-UA-Compatible" content="ie-edge">
+  <meta  http-equiv="X-UA-Compatible" content="ie-edge">
   <title>Ticket System Records</title>
 </head>
 <body>
@@ -40,7 +40,7 @@
                 $Tax = $row['tax'];
                 $TaxRate = $row['tax_rate'];
                 $EmployeeID = $row['employee_id'];
-                $InventorySalesID = = $row['ISID'];
+               // $InventorySalesID = = $row['ISID'];
 
             ?>
               <tr>
