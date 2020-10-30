@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Customer Document</title>
+  <title>MarketPOS | Add Vendor</title>
 
 
   <!--bootstrap css -->
@@ -107,33 +107,27 @@
     <div class="container justify-content-center" id="formscreen">
       <div class="card card-body bg-light" style="width: 35rem;">
 
-        <!--  <div class="form-group row">
-              <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-              <div class="col-sm-10">
-                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-              </div>
-            </div> -->
         <div class="card-body">
           <form action="vendorinsert.php" method="post">
             <div class="form-group row">
               <label class="col-4"  for="Vendor Name ">Vendor Name </label>
-              <input class="col-6"  type="text" placeholder=" Vendor Name " name="fname" />
+              <input class="col-6"  type="text" placeholder=" Vendor Name " name="name" />
             </div>
             <div class="form-group row">
               <label class="col-4"  for="Vendor Number">Vendor Number</label>
-              <input class="col-6"  type="text" placeholder=" Vendor Number " name="mi" />
+              <input class="col-6"  type="number" placeholder=" Vendor Number " name="number" />
             </div>
             <div class="form-group row">
               <label class="col-4"  for="Vendor Address">Vendor Address</label>
-              <input class="col-6"  type="text" placeholder=" Vendor Address " name="lname" />
+              <input class="col-6"  type="text" placeholder=" Vendor Address " name="addy" />
             </div>
             <div class="form-group row">
               <label class="col-4"  for="Company Code">Company Code</label>
-              <input class="col-6"  type="tel" placeholder=" Company Code " name="number" />
+              <input class="col-6"  type="number" placeholder=" Company Code " name="code" />
             </div>
             <div class="form-group row">
-              <label class="col-4" for="email" >Shipments</label>
-              <input class="col-6" type="email" placeholder=" Shipments " name="email" />
+              <label class="col-4" for="Shipments" >Shipments</label>
+              <input class="col-6" type="number" placeholder=" Shipments " name="ship" />
             </div>
             <div class="text-center"><button name="submit" class="btn-lg btn-primary"> Submit</button></div> 
           </form>
