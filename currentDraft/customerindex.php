@@ -115,15 +115,6 @@
         <div class="card-body">
           <form action="customerinsert.php" method="post">
             <div class="form-group row">
-              <label class="col-4" for="email" >Email</label>
-              <input class="col-6" type="email" placeholder=" Email " name="email" />
-            </div>
-
-            <div class="form-group row">
-              <label class="col-4" for="Password">Password</label>
-              <input class="col-6" type="password" name="password" placeholder="Password">
-            </div>
-            <div class="form-group row">
               <label class="col-4"  for="First Name">First Name</label>
               <input class="col-6"  type="text" placeholder=" First Name " name="fname" />
             </div>
@@ -138,6 +129,15 @@
             <div class="form-group row">
               <label class="col-4"  for="Phone Number">Phone Number</label>
               <input class="col-6"  type="tel" placeholder=" Phone Number " name="number" />
+            </div>
+            <div class="form-group row">
+              <label class="col-4" for="email" >Email</label>
+              <input class="col-6" type="email" placeholder=" Email " name="email" />
+            </div>
+
+            <div class="form-group row">
+              <label class="col-4" for="Password">Password</label>
+              <input class="col-6" type="password" name="password" placeholder="Password">
             </div>
             <div class="form-group row">
               <label class="col-4"  for="Rewards">Rewards </label>
