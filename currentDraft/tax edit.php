@@ -5,12 +5,12 @@
 <body>
   <h3 > Update Form in PHP </h3>
     <form action="" method="post">
-      <input type="text" placeholder=" Enter Tax ID " name="id"/>
-      <input type="text" placeholder=" Tax Year" name="year"/>
-      <input type="number" placeholder=" State Rate " name="state" step="0.01"/>
-      <input type="number" placeholder=" County Rate " name="county" step="0.01"/>
-      <input type="number" placeholder=" City Rate " name="city" step="0.01"/>
-      <input type="number" placeholder=" Tax Rate " name="tax" step="0.01"/>
+      <input type="number" placeholder=" Enter Tax ID " name="id" step="1"/>
+      Tax Year <input type="date" placeholder=" yyyy " name="year">
+      <input type="number" placeholder=" State Rate " name="state" step="0.01">
+      <input type="number" placeholder=" County Rate " name="county" step="0.01">
+      <input type="number" placeholder=" City Rate " name="city" step="0.01">
+      <input type="number" placeholder=" Tax Rate " name="tax" step="0.01">
       <input type="submit" name="update" value="UPDATE"/>
     </form>
 </body>

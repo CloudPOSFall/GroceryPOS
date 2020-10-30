@@ -226,6 +226,10 @@ a.article, a.article:hover {
     width: 100%;
 }
 
+#formscreen{
+    margin-top: 40px;
+}
+
 
 /* ---------------------------------------------------
     Media devices

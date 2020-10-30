@@ -42,7 +42,7 @@
 
       if($result)
       {
-        header("location:productview.php");
+        header("location:product view.php");
       }
       else
       {

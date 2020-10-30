@@ -5,14 +5,14 @@
 <body>
   <h3 > Update Form in PHP </h3>
     <form action="" method="post">
-      <input type="text" placeholder=" Enter ID " name="id"/>
-      <input type="text" placeholder=" Email " name="email"/>
-      <input type="text" placeholder=" Password " name="password"/>
-      <input type="text" placeholder=" First Name " name="fname"/>
-      <input type="text" placeholder=" Last Name " name="lname"/>
-      <input type="text" placeholder=" Phone Number " name="number"/>
-      <input type="text" placeholder=" Number of Stores " name="stores"/>
-      <input type="text" placeholder=" Company Name " name="company"/>
+      <input type="number" placeholder=" Enter ID " name="id" step="1"/>
+      <input type="email" placeholder=" Email " name="email">
+      <input type="password" placeholder=" Password " name="password">
+      <input type="text" placeholder=" First Name " name="fname">
+      <input type="text" placeholder=" Last Name " name="lname">
+      <input type="number" placeholder=" Phone Number " name="number">
+      <input type="number" placeholder=" Number of Stores " name="stores" step="1">
+      <input type="text" placeholder=" Company Name " name="company">
       <input type="submit" name="update" value="UPDATE"/>
     </form>
 </body>

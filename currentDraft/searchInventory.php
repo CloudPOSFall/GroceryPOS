@@ -1,31 +1,73 @@
 <?php 
     // connection to database
     include_once('config.php');
-    // connection for query
-    $con = mysqli_connect('localhost', 'root', '', 'GroceryStore');
-    // Run this php if Search button is pushed
-    if(isset($_POST['Search'])) {
-        // Grabs input from the "Search Products" text field
-        $searchQuery = $_POST['searchProducts'];
-        // Searches database for names like the input
-        $query = "SELECT * FROM inventory_system WHERE model_name LIKE '%searchQuery%'";
-        // Get the result from the search
-        $result = mysqli_query($con,$query);
-        // Get number of matches
-        $queryResult = mysqli_num_rows($result);
-        // Search through table for match
-        while($row = mysqli_fetch_assoc($result)){
-            // Output the match from the database
-            echo "<div> <p>" .$row['model_name']. "</p> </div>";
+    session_start();
+
+    class Product {
+        public $qrCode;
+        public $serialNumber;
+        public $make;
+        public $modelNumber;
+        public $modelName;
+        public $description;
+        public $linkSupplierData;
+        public $cost;
+        public $sellingPrice;
+        public $msrp;
+        public $inStock;
+        public $reOrder;
+        public $baseStock;
+
+        function __construct($qrCode,$serialNumber,$make,$modelNumber,$modelName,
+                             $description,$linkSupplierData,$cost,$sellingPrice,
+                             $msrp,$inStock,$reOrder,$baseStock) {
+           
         }
-        // Makes sure the number of matches is greater then 0
-        if($queryResult > 0) {
-            }
-         else {
-            // Let us know if no matches
-            echo "no matching results";
+
+        function set_modelname($modeName) {
+            $this->modelName = $modelName; 
         }
+
+        function get_modelname() {
+            return $this->modelName;
     }
+
+
+
+    $search = "";
+    $model_name = "";
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Run this php if Search button is pushed
+        if(isset($_GET['Search'])) {
+            // Grabs input from the "Search Products" text field
+            $searchQuery = $_GET['searchProducts'];
+            // Searches database for names like the input
+            $query = mysqli_query($conn, "SELECT model_name FROM product_inventory WHERE model_name = '$search' ");
+            // Get number of matches
+            $queryResult = mysqli_num_rows($query);
+            // Makes sure the number of matches is greater then 0
+            if($queryResult != 0) {
+                // Search through table for match
+                while($queryResult = mysqli_fetch_assoc($query)){
+                    $model_name = $queryResult["model_name"];
+                    $model_name = mysqli_real_escape_string($conn,$model_name);
+                    // Output the match from the database
+                    echo "<div> <p>" .$queryResult['model_name']. "</p> </div>";
+                }
+                $_SESSION["model_name"] = $model_name;
+            } else {
+                // Let us know if no matches
+                echo "no matching results";
+            }}
+
+           /* // Output amount of results
+            echo "There are " .$queryResult. " results.";
+            // Output the match from the database
+            echo "<div> <p>" .$row['model_name']. "</p> </div>";*/
+        
+        
+    }    
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +81,7 @@
             <input type="text" name="searchProducts" placeholder="Search Products"/>
             <input type="submit" name="Search"/> 
         </form>
+        <p> <?php echo $model_name  ?> </p>
     </div>
     </body>
 </html>

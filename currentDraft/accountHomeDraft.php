@@ -1,3 +1,16 @@
+<?php
+session_start();
+$name = $_SESSION['first_name'];
+$format = '%s %s'."<br>";
+$lname = $_SESSION['last_name'];
+$format1 = '%s'."<br>";
+$emailtxt = $_SESSION['email'];
+//echo sprintf($format1,$emailtxt);
+$format2 = '%s'."<br>";
+$company = $_SESSION['company_name'];
+//echo sprintf($format2,$company);
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -77,8 +90,6 @@
 
   <!--page content-->
   <div id="content">
-
-
     <!--location navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="locnav">
       <div class="container-fluid">
@@ -98,8 +109,22 @@
         </div>
       </div>
     </nav>
-
+	  
+	  
     <!--control buttons-->
+	  
+	  <div align = "center" style="padding-top: 40px;">
+	  <div class="card" style="width: 18rem;">
+		  <img class="card-img-top" src="media/prof.png" alt="Card image cap">
+        <div class="card-body">
+      <p class="card-text"><?php
+                echo sprintf($format,$name,$lname);
+                echo sprintf($format1,$emailtxt);
+                echo sprintf($format2,$company);
+                ?></p>
+      </div>
+	  </div>
+	  </div>
     <div class="wrapper" id="controlscreen">
       <div class="card-deck">
         <div class="col-md-3">
@@ -144,7 +169,7 @@
             </div>
           </div>
         </div>
-
+		
         <div class="col-md-3">
           <div class="card text-center">
             <div class="card-header bg-primary text-white">
@@ -166,13 +191,12 @@
           </div>
         </div>
       </div>
-
-
+	  
+	  
 
     </div>
 
     <!--END page content-->
-
     <!-- bootstrap popper js-->
     <script src="js/popper.min.js"></script>
     <!-- bootstrap ja -->

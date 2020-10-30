@@ -6,7 +6,7 @@
     echo 'Not Connected To Server';
   }
 
-  if(!mysqli_select_db($conn, 'grocerystore'))
+  if(!mysqli_select_db($conn, 'marketpos-2'))
   {
     echo 'Database Not Selected';
   }

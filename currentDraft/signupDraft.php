@@ -19,9 +19,6 @@
   <script defer src="js/solid.js"></script>
   <script defer src="js/fontawesome.js"></script>
 
-</head>
-
-<body>
   <!-- bootstrap popper js-->
   <script src="js/popper.min.js"></script>
   <!-- bootstrap js -->
@@ -29,6 +26,11 @@
   <!--jquery -->
   <script src="js/jquery-3.3.1.slim.min.js"></script>
   <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+</head>
+
+<body>
+  
 
   <!-- Navigation Bar -->
   <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
