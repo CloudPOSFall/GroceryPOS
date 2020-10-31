@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 30, 2020 at 02:35 AM
+-- Generation Time: Oct 31, 2020 at 08:02 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -42,6 +42,15 @@ CREATE TABLE `customer_info` (
   `zip_code` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `customer_info`
+--
+
+INSERT INTO `customer_info` (`customer_id`, `email`, `password`, `first_name`, `middle_initial`, `last_name`, `phone_number`, `rewards`, `street_address`, `city`, `state`, `zip_code`) VALUES
+(2, 'johnnyfran20002@gmail.com', 'password', 'Johnny', 'F', 'Tejada', 6463210000, 23, '10005 Hawk Drive', 'Queens', 'NY', 12432),
+(3, 'josh2003@hotmail.com', 'password', 'Josh', 'k', 'Brown', 3475650000, 12, '1849 54th Street', 'New York', 'NY', 12384),
+(4, 'jdfjdh@aim.com', 'fhfhkas', 'kksfksfkh', 'f', 'kafkfkjkfj', 6463210000, 43, 'jfvkkjsnvkj', 'jnvjnekv', 'er', 4324);
+
 -- --------------------------------------------------------
 
 --
@@ -52,20 +61,20 @@ CREATE TABLE `employee_info` (
   `employee_id` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `pin_number` int(20) NOT NULL,
+  `pin_number` float NOT NULL,
   `first_name` varchar(100) NOT NULL,
   `middle_initial` varchar(1) NOT NULL,
   `last_name` varchar(100) NOT NULL,
-  `user_id` int(100) NOT NULL,
-  `phone_number` int(11) NOT NULL,
-  `SSN` int(11) NOT NULL,
+  `user_id` float NOT NULL,
+  `phone_number` float NOT NULL,
+  `SSN` float NOT NULL,
   `street_address` varchar(100) NOT NULL,
   `city` varchar(100) NOT NULL,
   `state` varchar(2) NOT NULL,
   `zip_code` varchar(10) NOT NULL,
   `start_date` varchar(100) NOT NULL,
   `end_date` varchar(50) NOT NULL,
-  `customer_id` int(11) DEFAULT NULL
+  `customer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -270,13 +279,13 @@ ALTER TABLE `zreport_system`
 -- AUTO_INCREMENT for table `customer_info`
 --
 ALTER TABLE `customer_info`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `employee_info`
 --
 ALTER TABLE `employee_info`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `inventory_sales`
