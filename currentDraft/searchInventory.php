@@ -30,13 +30,15 @@
 
         function get_modelname() {
             return $this->modelName;
+        }
     }
 
 
-
+    //global variables
     $search = "";
     $model_name = "";
 
+    // Form calls on the current page
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Run this php if Search button is pushed
         if(isset($_GET['Search'])) {
@@ -50,7 +52,7 @@
             if($queryResult != 0) {
                 // Search through table for match
                 while($queryResult = mysqli_fetch_assoc($query)){
-                    $model_name = $queryResult["model_name"];
+                    $model_name = $queryResult['model_name'];
                     $model_name = mysqli_real_escape_string($conn,$model_name);
                     // Output the match from the database
                     echo "<div> <p>" .$queryResult['model_name']. "</p> </div>";
@@ -65,8 +67,6 @@
             echo "There are " .$queryResult. " results.";
             // Output the match from the database
             echo "<div> <p>" .$row['model_name']. "</p> </div>";*/
-        
-        
     }    
 ?>
 
