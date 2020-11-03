@@ -1,5 +1,5 @@
 <?php
-  $con = mysqli_connect('localhost', 'root', '', 'GroceryStore');
+  $con = mysqli_connect('localhost', 'root', '', 'marketpos-2');
 
   if(isset($_GET['Del']))
   {

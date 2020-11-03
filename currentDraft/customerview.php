@@ -110,12 +110,12 @@ $result = mysqli_query($conn, $query);
 
 
     <nav class="navbar navbar-light" id="salespanel">
-            <form class="form-inline">
-                <div class="nav-item">
-                    <div class="card" style="padding: 8px"></div>
+            <form class="form-inline" method="post" action="customerview.php">
+                <div class="nav-item" style="padding: 8px">
+                    <input class="form-control" name="customer" placeholder="Search Customers" aria-label="Search">
+                <button class="btn btn-dark navbar-btn" name="submit-search"> Look Up</button>
                 </div>
-                <input class="form-control" type="search" placeholder="Search Customers" aria-label="Search">
-                <button class="btn btn-dark navbar-btn" type="submit"> Look Up</button>
+                
                 <div class="nav-item mr-auto">
                 <a class="btn navbar-btn btn-light" href="customerindex.php" role="button"> New Customer</a></div>
             </form>
@@ -129,7 +129,7 @@ $result = mysqli_query($conn, $query);
         
           <div class="row">
             <div class="col m-auto">
-              <div class="card mt-5" card-body bg-light>
+              <div class="card mt-5 bg-light">
                 <table class="table table-bordered">
                   <tr>
                     <td> ID </td>
@@ -137,34 +137,41 @@ $result = mysqli_query($conn, $query);
                     <td> Last Name </td>
                     <td> Phone Number </td>
                     <td> Email </td>
-                    <td> Password </td>
                     <td> Rewards </td>
                   </tr>
 
-                  <?php
-                  while ($row = mysqli_fetch_assoc($result)) {
-                    $ID = $row['customer_id'];
-                    $FirstName = $row['first_name'];
-                    $LastName = $row['last_name'];
-                    $PhoneNumber = $row['phone_number'];
-                    $Email = $row['email'];
-                    $Password = $row['password'];
-                    $Rewards = $row['rewards'];
+                <?php
 
-                  ?>
-                    <tr>
-                      <td><?php echo $ID ?></td>
-                      <td><?php echo $FirstName ?></td>
-                      <td><?php echo $LastName ?></td>
-                      <td><?php echo $PhoneNumber ?></td>
-                      <td><?php echo $Email ?></td>
-                      <td><?php echo $Password ?></td>
-                      <td><?php echo $Rewards ?></td>
-                      <td><a href="customerdelete.php?Del=<?php echo $ID ?>">Delete</a></td>
-                    </tr>
-                  <?php
+
+                if(isset($_POST['submit-search'])){
+                  $search = mysqli_real_escape_string($conn, $_POST['customer']);
+                  $sql = "SELECT * FROM customer_info WHERE first_name LIKE '%$search%'AND last_name LIKE '%$search%' OR phone_number LIKE '%$search%' OR email LIKE '%$search%'";
+                  $result = mysqli_query($conn, $sql);
+                  $queryResults = mysqli_num_rows($result);
+
+                  if ($queryResults > 0){
+                    while ($row = mysqli_fetch_assoc($result)) {
+                      echo "<div class='card mt-5 card-body bg-light'><tr><td>".$row['customer_id']."</td><td>"
+                      .$row['first_name']."</td><td>".$row['last_name']."</td><td>".$row['phone_number']. "</td><td>"
+                      .$row['email']."</td><td>".$row['password']."</td><td>".$row['rewards'].
+                      "</td><td><a class='btn navbar-btn btn-dark' role='button' href='customerdelete.php?Del="
+                      .$row['customer_id']."'>Delete</a></td></tr></div>";
+                    }
+             
+                  } else{
+                      echo "<div class='card'>There are no results matching your search</div>";
                   }
-                  ?>
+                }else{
+                  while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<div class='card mt-5 card-body bg-light'><tr><td>".$row['customer_id']."</td><td>"
+                    .$row['first_name']."</td><td>".$row['last_name']."</td><td>".$row['phone_number']. "</td><td>"
+                    .$row['email']."</td><td>".$row['password']."</td><td>".$row['rewards'].
+                    "</td><td><a class='btn navbar-btn btn-dark' role='button' href='customerdelete.php?Del="
+                    .$row['customer_id']."'>Delete</a></td></tr></div>";
+                  }
+                }
+              
+                ?>
 
                 </table>
               </div>

@@ -1,15 +1,5 @@
 <?php
-  $con = mysqli_connect('localhost', 'root', '', 'GroceryStore');
-
-  if(!$con)
-  {
-    echo 'Not Connected To Server';
-  }
-
-  if(!mysqli_select_db($con, 'grocerystore'))
-  {
-    echo 'Database Not Selected';
-  }
+require_once('config.php');
 
   if(isset($_POST['submit']))
   {
@@ -29,7 +19,7 @@
 
       $query = "INSERT INTO customer_info (email, password, first_name, middle_initial, last_name, phone_number, rewards)
               values ('$Email', '$Password', '$FirstName', '$MiddleInitial', '$LastName', '$PhoneNumber', '$Rewards')";
-      $result = mysqli_query($con, $query);
+      $result = mysqli_query($conn, $query);
 
       if($result)
       {

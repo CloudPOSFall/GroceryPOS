@@ -1,20 +1,10 @@
 <?php
-  $con = mysqli_connect('localhost', 'root', '', 'GroceryStore');
-
-  if(!$con)
-  {
-    echo 'Not Connected To Server';
-  }
-
-  if(!mysqli_select_db($con, 'GroceryStore'))
-  {
-    echo 'Database Not Selected';
-  }
+  require_once('config.php');
 
   if(isset($_POST['submit']))
   {
-    if(empty($_POST['fname']) || empty($_POST['mi']) || empty($_POST['lname']) || empty($_POST['id']) || empty($_POST['number']) || empty($_POST['ssn']) || empty($_POST['street']) ||
-     empty($_POST['city']) || empty($_POST['state']) || empty($_POST['zip']) || empty($_POST['start']) || empty($_POST['end']))
+    if(empty($_POST['fname']) || empty($_POST['lname']) || empty($_POST['id']) || empty($_POST['number']) || empty($_POST['ssn']) || empty($_POST['street']) ||
+     empty($_POST['city']) || empty($_POST['state']) || empty($_POST['zip']) || empty($_POST['start']))
     {
       echo ' Please Fill in the Blanks ';
     }
@@ -36,7 +26,9 @@
       $query = "insert into employee_info (first_name, middle_initial, last_name, user_id, phone_number, SSN, street_address, city, state, zip_code, start_date, end_date)
               values ('$FirstName', '$MiddleIniial', '$LastName', '$UserID', '$PhoneNumber', '$SSN', '$StreetAddress', '$City', '$State', '$ZipCode', '$StartDate', '$EndDate')";
 
-      $result = mysqli_query($con, $query);
+      $result = mysqli_query($conn, $query);
+
+      
 
       if($result)
       {
@@ -44,7 +36,7 @@
       }
       else
       {
-        echo ' Please Check Your Query ';
+        echo " Please Check Your Query";
       }
     }
   }
