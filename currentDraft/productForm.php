@@ -6,6 +6,12 @@
 
     <?php 
         if(isset($_GET['submit'])){
+            include 'getSubType.php';
+        }
+    ?>
+
+    <?php 
+        if(isset($_GET['submit'])){
             include 'productTypeWithTable.php';
         }
     ?>

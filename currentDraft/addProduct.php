@@ -1,8 +1,8 @@
 <?php
 if(isset($_POST['submit'])) {
     include_once('config.php');
-    $query = "INSERT INTO products(productName, productType, price, inStock)
-              VALUES ('".$_POST['n']."','".$_POST['t']."','".$_POST['p']."', '".$_POST['s']."')";
+    $query = "INSERT INTO products(productName, productType, productSubType, price, inStock)
+              VALUES ('".$_POST['n']."','".$_POST['t']."', '".$_POST['b']."', '".$_POST['p']."', '".$_POST['s']."')";
     if($conn->query($query) === TRUE) {
         echo "Product added";
     } else {
@@ -15,6 +15,8 @@ if(isset($_POST['submit'])) {
     <input name="n" id="n" type="text"><br><br>
     <label for="t">Product Type</label><br>
     <input name="t" id="t" type="text"><br><br>
+    <label for="b">Product Sub-Type</label><br>
+    <input name="b" id="b" type="text"><br><br>
     <label for="p">Product Price</label><br>
     <input name="p" id="p" type="text"><br><br>
     <label for="s">Product Ammount</label><br>
