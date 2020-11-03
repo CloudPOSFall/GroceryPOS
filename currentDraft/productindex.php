@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
   <meta charset="utf-8">
@@ -26,7 +26,10 @@
   <!--jquery -->
   <script src="js/jquery-3.3.1.slim.min.js"></script>
   <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-
+</head>	
+<body>	
+	
+ 
 
 
             <h3 style = "text-align:center"> Add New Inventory </h3>
@@ -99,5 +102,28 @@
 		</div>
 	</div>
 	</div>
+  <!--END page content-->
+    <!-- bootstrap popper js-->
+    <script src="js/popper.min.js"></script>
+    <!-- bootstrap ja -->
+    <script src="js/bootstrap.min.js"></script>
+    <!--jquery -->
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#sidebar").mCustomScrollbar({
+          theme: "minimal"
+        });
+
+        $('#sidebarCollapse').on('click', function() {
+          $('#sidebar, #content').toggleClass('active');
+          $('.collapse.in').toggleClass('in');
+          $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+        });
+      });
+    </script>
 </body>
+
 </html>
