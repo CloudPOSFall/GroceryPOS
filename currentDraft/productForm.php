@@ -1,23 +1,13 @@
-<?php 
-    
-    if(isset($_GET['submit'])){
-        $proType = $_GET['productType'];
-    }
-?>
-
-<form method="get" action="<?php echo $_SERVER['PHP_SELF'];?>">
+<form method="get" type="button" action="<?php echo $_SERVER['PHP_SELF'];?>">
 
     <?php include 'getProductByType.php'; ?>
 
-    <input type="submit" name="submit" value="">
+    <input type="submit" name="submit" value="Get This Category">
 
     <?php 
-    if(isset($_GET['submit'])){
-        $productCat = $_GET['productType'];
-        echo ("Products of ");
-        include 'productTypeWithTable.php';
-    }
+        if(isset($_GET['submit'])){
+            include 'productTypeWithTable.php';
+        }
     ?>
-    
-</form>
 
+</form>
