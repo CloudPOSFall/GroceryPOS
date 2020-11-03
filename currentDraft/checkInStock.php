@@ -10,14 +10,9 @@
 
 
     while($row = mysqli_fetch_assoc($result)) {
-        $tableCode .= "<tr><th>". $row['productName'] . "</th> <th><input name='newStock' id='newStock' type='text'><input type='submit' name='submit' value='Add Stock'></th> </tr>";
+        $tableCode .= "<tr><th>". $row['productName'] . "</th> </tr>";
     }
 
     $tableCode .= "</table>";
     echo ($tableCode);
-
-    if(isset($_POST['submit'])) {
-        echo "new stock";
-        $query = "UPDATE products SET inStock = '".$_POST['newStock']."' ";
-    }
 ?>
