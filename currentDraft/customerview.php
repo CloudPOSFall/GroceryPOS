@@ -98,7 +98,7 @@ $result = mysqli_query($conn, $query);
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="nav navbar-nav mr-auto">
-            <a class="navbar-brand" href="customercontrol.html"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <a class="navbar-brand" href="customerview.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
               </svg> Customers</a>
           </ul>
@@ -139,6 +139,7 @@ $result = mysqli_query($conn, $query);
                 <td> Phone Number </td>
                 <td> Email </td>
                 <td> Rewards </td>
+                <td> </td>
               </tr>
 
               <div class='card mt-5 bg-light'>
@@ -156,9 +157,10 @@ $result = mysqli_query($conn, $query);
                       echo "<tr><td>" . $row['customer_id'] . "</td><td>"
                         . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
                         . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
-                        . $row['email'] . "</td><td>" . $row['password'] . "</td><td>" . $row['rewards'] .
+                        . $row['email'] . "</td><td>" . $row['rewards'] .
                         "</td><td><a class='btn navbar-btn btn-dark' role='button' href='customerdelete.php?Del="
-                        . $row['customer_id'] . "'>Delete</a></td></tr>";
+                        . $row['customer_id'] . "'>Delete</a></td><td><a class='btn navbar-btn btn-dark' role='button' href='customeredit.php?Upd="
+                        . $row['customer_id'] . "'>Update</a></td></tr>";
                     }
                   } else {
                     echo "<div>There are no results matching your search</div>";
@@ -168,9 +170,10 @@ $result = mysqli_query($conn, $query);
                     echo "<tr><td>" . $row['customer_id'] . "</td><td>"
                       . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
                       . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
-                      . $row['email'] . "</td><td>" . $row['password'] . "</td><td>" . $row['rewards'] .
+                      . $row['email'] . "</td><td>"  . $row['rewards'] .
                       "</td><td><a class='btn navbar-btn btn-dark' role='button' href='customerdelete.php?Del="
-                      . $row['customer_id'] . "'>Delete</a></td></tr>";
+                      . $row['customer_id'] . "'>Delete</a></td><td><a class='btn navbar-btn btn-dark' role='button' href='customeredit.php?Upd="
+                      . $row['customer_id'] . "'>Update</a></td></tr>";
                   }
                 }
 
