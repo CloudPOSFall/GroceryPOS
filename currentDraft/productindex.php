@@ -127,58 +127,42 @@ $format = '%s %s'."<br>";
 	<div class = "card card-body bg-light" stlye = "width: 35rem;">
 		<div class="card-body">	
 			<h3 style = "text-align:center"> Add New Inventory </h3>
-            <form action="product insert.php" method="post">
+            <form action="productinsert.php" method="post">
 				<div class = "form-group row">
-				<label class = "col-4" for = "QR">QR </label>
-                <input class ="col-6" type = "text" placeholder=" QR Code " name="qr"/>
-				</div>
-				<div class = "form-group row">
-				<label class = "col-4" for = "Serial Number">Serial No. </label>
-				<input class ="col-6" type = "text" placeholder="Serial No. " name="serial"/>
+				<label class = "col-4" for = "Barcode">Barcode </label>
+                <input class ="col-6" type = "text" placeholder=" Barcode " name="barcode"/>
 				</div>
 			    <div class = "form-group row">
-				<label class = "col-4" for = "Make">Make </label>
-				<input class ="col-6" type = "text" placeholder="Make " name="make"/>
-				</div>
-				<div class = "form-group row">
-				<label class = "col-4" for = "Model Number">Model No. </label>
-				<input class ="col-6" type = "text" placeholder="Model Number " name="model"/>
-				</div>
-				<div class = "form-group row">
-				<label class = "col-4" for = "Model Name">Model Name </label>
-				<input class ="col-6" type = "text" placeholder="Model Name " name="name"/>
+				<label class = "col-4" for = "Brand">Brand </label>
+				<input class ="col-6" type = "text" placeholder="Brand " name="brand"/>
 				</div>
 				<div class = "form-group row">
 				<label class = "col-4" for = "Description">Description </label>
-				<input class ="col-6" type = "text" placeholder="Description " name="d"/>
+				<input class ="col-6" type = "text" placeholder="Description " name="description"/>
 				</div>
 				<div class = "form-group row">
-				<label class = "col-4" for = "Link of Supplier Data">Link of Supplier Data </label>
-				<input class ="col-6" type = "text" placeholder="Link of Supplier Data " name="link"/>
+				<label class = "col-4" for = "Category">Category </label>
+				<input class ="col-6" type = "text" placeholder="Category " name="category"/>
 				</div>
 				<div class = "form-group row">
-				<label class = "col-4" for = "Cost">Cost </label>
-				<input class ="col-6" type = "text" placeholder="Cost " name="cost"/>
+				<label class = "col-4" for = "Unit_Price">Unit Price </label>
+				<input class ="col-6" type = "text" placeholder="Unit Price " name="unit_price"/>
 				</div>
 				<div class = "form-group row">
 				<label class = "col-4" for = "Selling Price">Selling Price </label>
-				<input class ="col-6" type = "text" placeholder="Selling Price " name="price"/>
-				</div>
-			    <div class = "form-group row">
-				<label class = "col-4" for = "MSRP">MSRP </label>
-				<input class ="col-6" type = "text" placeholder="MSRP " name="msrp"/>
+				<input class ="col-6" type = "text" placeholder="Selling Price " name="selling_price"/>
 				</div>
 				<div class = "form-group row">
-				<label class = "col-4" for = "In Stock">In Stock </label>
-				<input class ="col-6" type = "text" placeholder="In Stock " name="in"/>
+				<label class = "col-4" for = "Quantity">Quantity </label>
+				<input class ="col-6" type = "text" placeholder="Quantity " name="quantity"/>
 				</div>
 			    <div class = "form-group row">
-				<label class = "col-4" for = "Reorder Amount">Reorder Amount </label>
-				<input class ="col-6" type = "text" placeholder="Reorder Amount " name="amount"/>
+				<label class = "col-4" for = "in_stock">In Stock </label>
+				<input class ="col-6" type = "text" placeholder="In Stock " name="instock"/>
 				</div>
 				<div class = "form-group row">
-				<label class = "col-4" for = "Base Stock">Base Stock </label>
-				<input class ="col-6" type = "text" placeholder="Base Stock " name="base"/>
+				<label class = "col-4" for = "Reorder_Amount">Reorder Amount </label>
+				<input class ="col-6" type = "text" placeholder="Reorder Amount " name="reorder"/>
 				</div>
              	<div class = "form-group row">
 				<label class = "col-4" for = "Vendor ID">Vendor ID</label>

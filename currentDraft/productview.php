@@ -1,5 +1,5 @@
 <?php
-  $con = mysqli_connect('localhost', 'root', '', 'GroceryStore');
+  $con = mysqli_connect('localhost', 'root', '', 'marketpos-2');
   $query = "select * from product_inventory";
   $result = mysqli_query($con,$query);
 ?>
@@ -39,57 +39,43 @@
           <table class="table table-bordered">
             <tr>
               <td> <b>ID</b> </td>
-              <td> <b>QR Code</b> </td>
-              <td> <b>Serial Number</b> </td>
-              <td> <b>Make </b></td>
-              <td> <b>Model Number</b> </td>
-              <td> <b>Model Name</b> </td>
-              <td> <b>Description</b> </td>
-              <td> <b>Link of Supplier Data</b> </td>
-              <td> <b>Cost </b></td>
+              <td> <b>Barcode</b> </td>
+              <td> <b>Brand</b> </td>
+              <td> <b>Description </b></td>
+              <td> <b>Category</b> </td>
+              <td> <b>Unit Price</b> </td>
               <td> <b>Selling Price</b> </td>
-              <td> <b>MSRP </b></td>
-              <td> <b>In Stock</b> </td>
+              <td> <b>Quantity</b> </td>
+              <td> <b>In Stock </b></td>
               <td> <b>Reorder Amount</b> </td>
-              <td> <b>Base Stock</b> </td>
-              <td> <b>Vendor ID</b> </td>
+              <td> <b>Vendor ID </b></td>
             </tr>
 
             <?php
               while($row=mysqli_fetch_assoc($result))
               {
                 $ID = $row['product_id'];
-                $QRCode = $row['QR_code'];
-                $SerialNumber = $row['serial_number'];
-                $Make = $row['make'];
-                $ModelNumber = $row['model_number'];
-                $ModelName = $row['model_name'];
+                $Barcode = $row['barcode'];
                 $Description = $row['description'];
-                $LinkofSupplierData = $row['link_supplier_data'];
-                $Cost = $row['cost'];
+                $Category = $row['category'];
+                $unitPrice = $row['unit_price'];
                 $SellingPrice = $row['selling_price'];
-                $MSRP = $row['MSRP'];
-                $InStock = $row['in_stock'];
+                $Quantity = $row['quantity'];
+				$inStock = $row['in_stock'];
                 $ReorderAmount = $row['reorder_amount'];
-                $BaseStock = $row['base_stock'];
                 $VendorID = $row['vendor_id'];
 
             ?>
               <tr>
                 <td><?php echo $ID ?></td>
-                <td><?php echo $QRCode ?></td>
-                <td><?php echo $SerialNumber ?></td>
-                <td><?php echo $Make ?></td>
-                <td><?php echo $ModelNumber ?></td>
-                <td><?php echo $ModelName ?></td>
+                <td><?php echo $Barcode ?></td>
                 <td><?php echo $Description ?></td>
-                <td><?php echo $LinkofSupplierData ?></td>
-                <td><?php echo $Cost ?></td>
+                <td><?php echo $Category ?></td>
+                <td><?php echo $unitPrice ?></td>
                 <td><?php echo $SellingPrice ?></td>
-                <td><?php echo $MSRP ?></td>
-                <td><?php echo $InStock ?></td>
+                <td><?php echo $Quantity ?></td>
+                <td><?php echo $inStock ?></td>
                 <td><?php echo $ReorderAmount ?></td>
-                <td><?php echo $BaseStock ?></td>
                 <td><?php echo $VendorID ?></td>
                 <td><a href ="productdelete.php?Del=<?php echo $ID ?>">Delete</a></td>
               </tr>

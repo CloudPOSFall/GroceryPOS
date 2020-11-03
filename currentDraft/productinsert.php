@@ -4,41 +4,38 @@ include_once ('config.php');
 
   if(isset($_POST['submit']))
   {
-    if(empty($_POST['qr']) || empty($_POST['serial']) || empty($_POST['make']) || empty($_POST['model']) || empty($_POST['name']) || empty($_POST['d']) || empty($_POST['link']) ||
-     empty($_POST['cost']) || empty($_POST['price']) || empty($_POST['msrp']) || empty($_POST['in']) || empty($_POST['amount']) || empty($_POST['base']) || empty($_POST['vendor']))
+    if(empty($_POST['barcode'])  || empty($_POST['brand']) || empty($_POST['description']) ||empty($_POST['category']) || empty($_POST['unit_price']) || empty($_POST['selling_price']) || empty($_POST['quantity']) || empty($_POST['instock']) || empty($_POST['reorder']) || empty($_POST['vendor']))
     {
       echo ' Please Fill in the Blanks ';
     }
     else
     {
-      $QRCode = $_POST['qr'];
-      $SerialNumber = $_POST['serial'];
-      $Make = $_POST['make'];
-      $ModelNumber = $_POST['model'];
-      $ModelName = $_POST['name'];
-      $Description = $_POST['d'];
-      $LinkofSupplierData = $_POST['link'];
-      $Cost = $_POST['cost'];
-      $SellingPrice = $_POST['price'];
-      $MSRP = $_POST['msrp'];
-      $InStock = $_POST['in'];
-      $ReorderAmount = $_POST['amount'];
-      $BaseStock = $_POST['base'];
-      $VendorID = $_POST['vendor'];
+      $barcode = $_POST['barcode'];
+      $brand = $_POST['brand'];
+      $description = $_POST['description'];
+	  $category = $_POST['category'];
+      $unitprice = $_POST['unit_price'];
+      $sellingPrice = $_POST['selling_price'];
+      $quantity = $_POST['quantity'];
+      $in_stock = $_POST['instock'];
+      $reorder = $_POST['reorder'];
+      $vendorID = $_POST['vendor'];
 
-      $query = "insert into product_inventory (QR_code, serial_number, make, model_number, model_name, description, link_supplier_data, cost, selling_price, MSRP, in_stock, reorder_amount, base_stock, vendor_id)
-              values ('$QRCode', '$SerialNumber', '$Make', '$ModelNumber', '$ModelName', '$Description', '$LinkofSupplierData', '$Cost', '$SellingPrice', '$MSRP', '$InStock', '$ReorderAmount', '$BaseStock', '$VendorID')";
+
+      $query = "INSERT INTO product_inventory (barcode, brand, description, category, unit_price, selling_price, quantity, in_stock , reorder_amount , vendor_id) VALUES ('$barcode','$brand','$description', '$category', '$unitprice', '$sellingPrice', '$quantity','$in_stock','$reorder','$vendorID')";
 
       $result = mysqli_query($conn, $query);
 
       if($result)
       {
-        header("location:product view.php");
+		echo 'Inserted';
+		header("location:productview.php");
       }
       else
-      {
-        echo ' Please Check Your Query ';
+	  {
+		  echo 'Not Inserted';
       }
+	  header("refresh:2; url=productindex.php");
     }
   }
 ?>
