@@ -1,9 +1,9 @@
 <?php
     include_once('config.php');
 
-?>
 
-<?php
+
+
 
     if(isset($_GET['productType'])) {
         $query = "SELECT DISTINCT productSubType FROM products WHERE productType = '".$_GET['productType']."' ORDER BY productSubType";

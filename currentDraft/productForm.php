@@ -10,8 +10,10 @@
         }
     ?>
 
+    <input type="submit" name="submitsub" value="Get This Sub Category">
+
     <?php 
-        if(isset($_GET['submit'])){
+        if(isset($_GET['submitsub'])){
             include 'productTypeWithTable.php';
         }
     ?>
