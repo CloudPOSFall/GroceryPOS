@@ -1,5 +1,5 @@
 <?php
-  $con = mysqli_connect('localhost', 'root', '', 'GroceryStore');
+  require_once('config.php');
 
   if(!$con)
   {
@@ -36,7 +36,7 @@
 
       $query = "insert into zreport_system (total_sales, transactions, new_customers, opening_amount, closing_amount, short, cash_sales, cash_returns, drops, payouts, pay_ins, purchases, ticket_id, product_id)
               values ('$TotalSales', '$Transactions', '$NumberofnewCustomers', '$OpeningAmount', '$ClosingAmount', '$Short', '$CashSales', '$CashReturns', '$Drops', '$Payouts', '$Payins', '$Purchases', '$TicketID', '$ProductID')";
-      $result = mysqli_query($con, $query);
+      $result = mysqli_query($conn, $query);
 
       if($result)
       {

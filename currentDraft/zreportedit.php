@@ -25,15 +25,14 @@
 </body>
 </html>
 <?php
-$con = mysqli_connect("localhost", "root", "");
-$db = mysqli_select_db($con,'GroceryStore');
+require_once('config.php');
 
 if(isset($_POST['update']))
 {
   $id = $_POST['id'];
 
   $query = "update zreport_system set total_sales = '$_POST[total]', transactions = '$_POST[transactions]', new_customers = '$_POST[customers]', opening_amount = '$_POST[open]', closing_amount = '$_POST[close]', short = '$_POST[short]', cash_sales = '$_POST[cash]', cash_returns = '$_POST[returns]', drops = '$_POST[drops]', payouts = '$_POST[payouts]', pay_ins = '$_POST[payins]', purchases = '$_POST[purchases]', ticket_id = '$_POST[tid]', product_id = '$_POST[pid]' where zreport_id='$_POST[id]'";
-  $result = mysqli_query($con,$query);
+  $result = mysqli_query($conn,$query);
 
   if($result)
   {

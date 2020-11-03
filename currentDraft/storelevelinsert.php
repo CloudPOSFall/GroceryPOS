@@ -1,15 +1,5 @@
 <?php
-  $con = mysqli_connect('localhost', 'root', '', 'GroceryStore');
-
-  if(!$con)
-  {
-    echo 'Not Connected To Server';
-  }
-
-  if(!mysqli_select_db($con, 'GroceryStore'))
-  {
-    echo 'Database Not Selected';
-  }
+  require_once('config.php');
 
   if(isset($_POST['submit']))
   {
@@ -30,7 +20,7 @@
       $query = "insert into storelevel_signup (email, password, first_name, last_name, phone_number, number_of_stores, company_name)
               values ('$Email', '$Password', '$FirstName', '$LastName', '$PhoneNumber', '$NumberofStores', '$CompanyName')";
 
-      $result = mysqli_query($con, $query);
+      $result = mysqli_query($conn, $query);
 
       if($result)
       {

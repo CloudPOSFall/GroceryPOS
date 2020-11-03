@@ -1,11 +1,11 @@
 <?php
-  $con = mysqli_connect('localhost', 'root', '', 'GroceryStore');
+  require_once('config.php');
 
   if(isset($_GET['Del']))
   {
     $ID = $_GET['Del'];
     $query = " delete from zreport_system where zreport_id = '".$ID."'";
-    $result = mysqli_query($con,$query);
+    $result = mysqli_query($conn,$query);
 
     if($result)
     {

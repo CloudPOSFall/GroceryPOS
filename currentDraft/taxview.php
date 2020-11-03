@@ -1,5 +1,5 @@
 <?php
-  $con = mysqli_connect('localhost', 'root', '', 'GroceryStore');
+  require_once('config.php');
 
   if(!$con)
   {
@@ -28,7 +28,7 @@
       $query = "insert into tax_table (tax_year, state_rate, county_rate, city_rate, tax_rate)
               values ('$TaxYear', '$StateRate', '$CountyRate', '$CityRate', '$TaxRate')";
 
-      $result = mysqli_query($con, $query);
+      $result = mysqli_query($conn, $query);
 
       if($result)
       {

@@ -1,11 +1,11 @@
 <?php
-  $con = mysqli_connect('localhost', 'root', '', 'marketpos-2');
+ require_once('config.php');
 
   if(isset($_GET['Del']))
   {
     $ID = $_GET['Del'];
     $query = " delete from employee_info where employee_information = '".$ID."'";
-    $result = mysqli_query($con,$query);
+    $result = mysqli_query($conn,$query);
 
     if($result)
     {

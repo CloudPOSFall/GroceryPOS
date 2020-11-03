@@ -19,15 +19,14 @@
 </body>
 </html>
 <?php
-$con = mysqli_connect("localhost", "root", "");
-$db = mysqli_select_db($con,'GroceryStore');
+require_once('config.php');
 
 if(isset($_POST['update']))
 {
   $id = $_POST['id'];
 
   $query = "update ticket_system set date = '$_POST[date]', time = '$_POST[time]', subtotal = '$_POST[sub]', total = '$_POST[total]', tax = '$_POST[tax]', tax_rate = '$_POST[rate]', employee_id = '$_POST[eid]', ISID = '$_POST[isid]' where ticket_id ='$_POST[id]'";
-  $result = mysqli_query($con,$query);
+  $result = mysqli_query($conn,$query);
 
   if($result)
   {

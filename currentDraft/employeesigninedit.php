@@ -14,15 +14,14 @@
 </body>
 </html>
 <?php
-$con = mysqli_connect("localhost", "root", "");
-$db = mysqli_select_db($con,'GroceryStore');
+require_once('config.php');
 
 if(isset($_POST['update']))
 {
   $id = $_POST['id'];
 
   $query = "update employee_id set email = '$_POST[email]', password = '$_POST[password]', pin_number = '$_POST[pin]', employee_information = '$_POST[id]' where employee_id='$_POST[id]'";
-  $result = mysqli_query($con,$query);
+  $result = mysqli_query($conn,$query);
 
   if($result)
   {

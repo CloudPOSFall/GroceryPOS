@@ -16,15 +16,14 @@
 </body>
 </html>
 <?php
-$con = mysqli_connect("localhost", "root", "");
-$db = mysqli_select_db($con,'GroceryStore');
+require_once('config.php');
 
 if(isset($_POST['update']))
 {
   $id = $_POST['id'];
 
   $query = "update tax_table set tax_year = '$_POST[year]', state_rate = '$_POST[state]', county_rate = '$_POST[county]', city_rate = '$_POST[city]', tax_rate = '$_POST[tax]' where TTID ='$_POST[id]'";
-  $result = mysqli_query($con,$query);
+  $result = mysqli_query($conn,$query);
 
   if($result)
   {

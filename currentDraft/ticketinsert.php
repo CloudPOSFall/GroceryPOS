@@ -1,5 +1,5 @@
 <?php
-  $con = mysqli_connect('localhost', 'root', '', 'GroceryStore');
+  require_once('config.php');
 
   if(!$con)
   {
@@ -32,7 +32,7 @@
       $query = "insert into ticket_system (date, time, subtotal, total, tax, tax_rate, employee_id, ISID)
               values ('$Date', '$Time', '$Subtotal', '$Total', '$Tax', '$TaxRate', '$EmployeeID', '$InventorySalesID')";
 
-      $result = mysqli_query($con, $query);
+      $result = mysqli_query($conn, $query);
 
       if($result)
       {

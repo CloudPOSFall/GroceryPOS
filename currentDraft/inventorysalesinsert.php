@@ -1,15 +1,6 @@
 <?php
-  $con = mysqli_connect('localhost', 'root', '', 'GroceryStore');
+  require_once('config.php');
 
-  if(!$con)
-  {
-    echo 'Not Connected To Server';
-  }
-
-  if(!mysqli_select_db($con, 'GroceryStore'))
-  {
-    echo 'Database Not Selected';
-  }
 
   if(isset($_POST['submit']))
   {
@@ -28,7 +19,7 @@
       $query = "insert into inventory_sales (ticket_id, product_id, qty, unit_price, discount)
               values ('$TicketID', '$ProductID', '$QTY', '$UnitPrice', '$Discount')";
 
-      $result = mysqli_query($con, $query);
+      $result = mysqli_query($conn, $query);
 
       if($result)
       {

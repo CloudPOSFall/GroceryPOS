@@ -1,14 +1,15 @@
 <?php
-  $con = mysqli_connect('localhost', 'root', '', 'GroceryStore');
+  require_once('config.php');
 
   if(isset($_GET['Del']))
   {
     $ID = $_GET['Del'];
     $query = " delete from storelevel_signup where ID = '".$ID."'";
-    $result = mysqli_query($con,$query);
+    $result = mysqli_query($conn,$query);
 
     if($result)
     {
+      
       header("location:storelevelview.php");
     }
     else

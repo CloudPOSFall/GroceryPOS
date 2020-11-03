@@ -1,15 +1,6 @@
 <?php
-  $con = mysqli_connect('localhost', 'root', '', 'GroceryStore');
+  require_once('config.php');
 
-  if(!$con)
-  {
-    echo 'Not Connected To Server';
-  }
-
-  if(!mysqli_select_db($con, 'GroceryStore'))
-  {
-    echo 'Database Not Selected';
-  }
 
   if(isset($_POST['submit']))
   {
@@ -38,7 +29,7 @@
       $query = "insert into product_inventory (QR_code, serial_number, make, model_number, model_name, description, link_supplier_data, cost, selling_price, MSRP, in_stock, reorder_amount, base_stock, vendor_id)
               values ('$QRCode', '$SerialNumber', '$Make', '$ModelNumber', '$ModelName', '$Description', '$LinkofSupplierData', '$Cost', '$SellingPrice', '$MSRP', '$InStock', '$ReorderAmount', '$BaseStock', '$VendorID')";
 
-      $result = mysqli_query($con, $query);
+      $result = mysqli_query($conn, $query);
 
       if($result)
       {

@@ -23,15 +23,14 @@
 </body>
 </html>
 <?php
-$con = mysqli_connect("localhost", "root", "");
-$db = mysqli_select_db($con,'GroceryStore');
+require_once('config.php');
 
 if(isset($_POST['update']))
 {
   $id = $_POST['id'];
 
   $query = "update employee_info set first_name = '$_POST[fname]', middle_initial = '$_POST[mi]', last_name = '$_POST[lname]', user_id = '$_POST[uid]', phone_number = '$_POST[number]', SSN = '$_POST[ssn]', street_address = '$_POST[street]', city = '$_POST[city]', state = '$_POST[state]', zip_code = '$_POST[zip]', start_date = '$_POST[start]', end_date = '$_POST[end]' where employee_information='$_POST[id]'";
-  $result = mysqli_query($con,$query);
+  $result = mysqli_query($conn,$query);
 
   if($result)
   {

@@ -1,15 +1,6 @@
 <?php
-  $con = mysqli_connect('localhost', 'root', '');
+ require_once('config.php');
 
-  if(!$con)
-  {
-    echo 'Not Connected To Server';
-  }
-
-  if(!mysqli_select_db($con, 'employee_id'))
-  {
-    echo 'Database Not Selected';
-  }
 
   $employee = $_POST['employeeid'];
   $username = $_POST['email'];
@@ -24,7 +15,7 @@
 
 
   
-  if(!mysqli_query($con, $sql))
+  if(!mysqli_query($conn, $sql))
   {
     echo 'Not Inserted';
   }
