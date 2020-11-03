@@ -1,5 +1,5 @@
 <?php
-require_once('config.php');
+include_once ('config.php');
 $query = "SELECT * FROM customer_info";
 $result = mysqli_query($conn, $query);
 
@@ -22,5 +22,3 @@ $result = mysqli_query($conn, $query);
                     }
                     echo $queryResults;
                 }
-
-?>

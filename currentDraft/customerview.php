@@ -1,5 +1,5 @@
 <?php
-require_once('config.php');
+include_once ('config.php');
 $query = "SELECT * FROM customer_info";
 $result = mysqli_query($conn, $query);
 ?>
@@ -98,11 +98,9 @@ $result = mysqli_query($conn, $query);
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="nav navbar-nav mr-auto">
-            <a class="navbar-brand" href="customercontrol.html"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill"
-                  fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                    d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
-                </svg>  Customers</a>
+            <a class="navbar-brand" href="customercontrol.html"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+              </svg> Customers</a>
           </ul>
         </div>
       </div>
@@ -110,75 +108,81 @@ $result = mysqli_query($conn, $query);
 
 
     <nav class="navbar navbar-light" id="salespanel">
-            <form class="form-inline" method="post" action="customerview.php">
-                <div class="nav-item" style="padding: 8px">
-                    <input class="form-control" name="customer" placeholder="Search Customers" aria-label="Search">
-                <button class="btn btn-dark navbar-btn" name="submit-search"> Look Up</button>
-                </div>
-                
-                <div class="nav-item mr-auto">
-                <a class="btn navbar-btn btn-light" href="customerindex.php" role="button"> New Customer</a></div>
-            </form>
+      <form class="form-inline" method="post" action="customerview.php">
+        <div class="nav-item" style="padding: 8px">
+          <input class="form-control" name="customer" placeholder="Search Customers" aria-label="Search">
+          <button class="btn btn-dark navbar-btn" name="submit-search"> Look Up</button>
+        </div>
 
-        </nav>
+        <div class="nav-item mr-auto">
+          <a class="btn navbar-btn btn-light" href="customerindex.php" role="button"> New Customer</a></div>
+      </form>
+    </nav>
 
 
     <div class="container justify-content-center" id="formscreen">
-      
 
-        
-          <div class="row">
-            <div class="col m-auto">
-              <div class="card mt-5 bg-light">
-                <table class="table table-bordered">
-                  <tr>
-                    <td> ID </td>
-                    <td> First Name </td>
-                    <td> Last Name </td>
-                    <td> Phone Number </td>
-                    <td> Email </td>
-                    <td> Rewards </td>
-                  </tr>
 
+
+      <div class="row">
+        <div class="col m-auto">
+          <div class="card mt-5 bg-light">
+            <table class="table table-bordered">
+              <tr>
+                <td> ID </td>
+                <td> First Name </td>
+                <td> Last Name </td>
+                <td> Street </td>
+                <td> City</td>
+                <td> State</td>
+                <td> Zip </td>
+                <td> Phone Number </td>
+                <td> Email </td>
+                <td> Rewards </td>
+              </tr>
+
+              <div class='card mt-5 bg-light'>
                 <?php
 
-
-                if(isset($_POST['submit-search'])){
+                if (isset($_POST['submit-search'])) {
                   $search = mysqli_real_escape_string($conn, $_POST['customer']);
-                  $sql = "SELECT * FROM customer_info WHERE first_name LIKE '%$search%'AND last_name LIKE '%$search%' OR phone_number LIKE '%$search%' OR email LIKE '%$search%'";
+                  $sql = "SELECT * FROM customer_info WHERE first_name LIKE '%$search%' OR last_name LIKE '%$search%' OR phone_number LIKE '%$search%' OR email LIKE '%$search%'";
                   $result = mysqli_query($conn, $sql);
                   $queryResults = mysqli_num_rows($result);
 
-                  if ($queryResults > 0){
+                  if ($queryResults > 0) {
+                    echo "<div>There are $queryResults results matching your search</div><br>";
                     while ($row = mysqli_fetch_assoc($result)) {
-                      echo "<div class='card mt-5 card-body bg-light'><tr><td>".$row['customer_id']."</td><td>"
-                      .$row['first_name']."</td><td>".$row['last_name']."</td><td>".$row['phone_number']. "</td><td>"
-                      .$row['email']."</td><td>".$row['password']."</td><td>".$row['rewards'].
-                      "</td><td><a class='btn navbar-btn btn-dark' role='button' href='customerdelete.php?Del="
-                      .$row['customer_id']."'>Delete</a></td></tr></div>";
+                      echo "<tr><td>" . $row['customer_id'] . "</td><td>"
+                        . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
+                        . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
+                        . $row['email'] . "</td><td>" . $row['password'] . "</td><td>" . $row['rewards'] .
+                        "</td><td><a class='btn navbar-btn btn-dark' role='button' href='customerdelete.php?Del="
+                        . $row['customer_id'] . "'>Delete</a></td></tr>";
                     }
-             
-                  } else{
-                      echo "<div class='card'>There are no results matching your search</div>";
+                  } else {
+                    echo "<div>There are no results matching your search</div>";
                   }
-                }else{
+                } else {
                   while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<div class='card mt-5 card-body bg-light'><tr><td>".$row['customer_id']."</td><td>"
-                    .$row['first_name']."</td><td>".$row['last_name']."</td><td>".$row['phone_number']. "</td><td>"
-                    .$row['email']."</td><td>".$row['password']."</td><td>".$row['rewards'].
-                    "</td><td><a class='btn navbar-btn btn-dark' role='button' href='customerdelete.php?Del="
-                    .$row['customer_id']."'>Delete</a></td></tr></div>";
+                    echo "<tr><td>" . $row['customer_id'] . "</td><td>"
+                      . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
+                      . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
+                      . $row['email'] . "</td><td>" . $row['password'] . "</td><td>" . $row['rewards'] .
+                      "</td><td><a class='btn navbar-btn btn-dark' role='button' href='customerdelete.php?Del="
+                      . $row['customer_id'] . "'>Delete</a></td></tr>";
                   }
                 }
-              
-                ?>
 
-                </table>
+                ?>
               </div>
-            </div>
+
+            </table>
           </div>
-        
-      
+        </div>
+      </div>
+
+
     </div>
 </body>
 
@@ -195,4 +199,5 @@ $result = mysqli_query($conn, $query);
     });
   });
 </script>
+
 </html>

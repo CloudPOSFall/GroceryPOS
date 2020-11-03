@@ -101,10 +101,10 @@
         </div>
       </div>
     </nav>
-    
-    
-    <div class="container justify-content-center" id="formscreen">
-      <div class="card card-body bg-light" style="width: 35rem;">
+
+
+    <div class="container justify-content-center">
+      <div class="card card-body bg-light" style="width: 35rem;" id="formscreen">
 
         <!--  <div class="form-group row">
               <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
@@ -115,23 +115,39 @@
         <div class="card-body">
           <form action="customerinsert.php" method="post">
             <div class="form-group row">
-              <label class="col-4"  for="First Name">First Name</label>
-              <input class="col-6"  type="text" placeholder=" First Name " name="fname" />
+              <label class="col-4" for="First Name">First Name</label>
+              <input class="col-6" type="text" placeholder=" First Name " name="fname" />
             </div>
             <div class="form-group row">
-              <label class="col-4"  for="Middle Initial">Middle Initial</label>
-              <input class="col-6"  type="text" placeholder=" Middle Initial " name="mi" />
+              <label class="col-4" for="Middle Initial">Middle Initial</label>
+              <input class="col-6" type="text" placeholder=" Middle Initial " name="mi" />
             </div>
             <div class="form-group row">
-              <label class="col-4"  for="Last Name">Last Name</label>
-              <input class="col-6"  type="text" placeholder=" Last Name " name="lname" />
+              <label class="col-4" for="Last Name">Last Name</label>
+              <input class="col-6" type="text" placeholder=" Last Name " name="lname" />
             </div>
             <div class="form-group row">
-              <label class="col-4"  for="Phone Number">Phone Number</label>
-              <input class="col-6"  type="tel" placeholder=" Phone Number " name="number" />
+              <label class="col-4" for="Phone Number">Phone Number</label>
+              <input class="col-6" type="tel" placeholder=" Phone Number " name="number" />
             </div>
             <div class="form-group row">
-              <label class="col-4" for="email" >Email</label>
+              <label class="col-4" for="Street">Street</label>
+              <input class="col-6" type="text" placeholder=" Last Name " name="street" />
+            </div>
+            <div class="form-group row">
+              <label class="col-4" for="City">City</label>
+              <input class="col-6" type="text" placeholder=" Last Name " name="city" />
+            </div>
+            <div class="form-group row">
+              <label class="col-4" for="State">State</label>
+              <input class="col-6" type="text" placeholder=" Last Name " name="state" />
+            </div>
+            <div class="form-group row">
+              <label class="col-4" for="Zip Code">Zip Code</label>
+              <input class="col-6" type="text" placeholder=" Last Name " name="zip" />
+            </div>
+            <div class="form-group row">
+              <label class="col-4" for="email">Email</label>
               <input class="col-6" type="email" placeholder=" Email " name="email" />
             </div>
 
@@ -140,15 +156,15 @@
               <input class="col-6" type="password" name="password" placeholder="Password">
             </div>
             <div class="form-group row">
-              <label class="col-4"  for="Rewards">Rewards </label>
-              <input class="col-6"  type="number" placeholder=" Rewards " name="rewards" step="1" />
+              <label class="col-4" for="Rewards">Rewards </label>
+              <input class="col-6" type="number" placeholder=" Rewards " name="rewards" step="1" />
             </div>
-            <div class="text-center"><button name="submit" class="btn-lg btn-primary"> Submit</button></div> 
+            <div class="text-center"><button name="submit" class="btn-lg btn-primary"> Submit</button></div>
           </form>
         </div>
       </div>
     </div>
-   
+
   </div>
   </div>
 

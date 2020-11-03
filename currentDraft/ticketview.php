@@ -1,5 +1,5 @@
 <?php
-  require_once('config.php');
+  include_once ('config.php');
   $query = "select * from ticket_system";
   $result = mysqli_query($conn,$query);
 ?>

@@ -1,5 +1,5 @@
 <?php
-require_once('config.php');
+include_once ('config.php');
 $query = "SELECT * FROM vendorinfo";
 $result = mysqli_query($conn, $query);
 ?>
@@ -7,7 +7,7 @@ $result = mysqli_query($conn, $query);
 <html>
 
 <head>
-<title>MarketPOS | View Vendors</title>
+  <title>MarketPOS | View Vendors</title>
 
 
   <!--bootstrap css -->
@@ -98,13 +98,10 @@ $result = mysqli_query($conn, $query);
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="nav navbar-nav mr-auto">
-            <a class="navbar-brand" href="customercontrol.html"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-list-stars"
-                  fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                    d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5z" />
-                  <path
-                    d="M2.242 2.194a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.277.277 0 0 0-.094.3l.173.569c.078.256-.213.462-.423.3l-.417-.324a.267.267 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.277.277 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.271.271 0 0 0 .259-.194l.162-.53zm0 4a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.277.277 0 0 0-.094.3l.173.569c.078.255-.213.462-.423.3l-.417-.324a.267.267 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.277.277 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.271.271 0 0 0 .259-.194l.162-.53zm0 4a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.277.277 0 0 0-.094.3l.173.569c.078.255-.213.462-.423.3l-.417-.324a.267.267 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.277.277 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.271.271 0 0 0 .259-.194l.162-.53z" />
-                </svg>  Vendors</a>
+            <a class="navbar-brand" href="customercontrol.html"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-list-stars" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5z" />
+                <path d="M2.242 2.194a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.277.277 0 0 0-.094.3l.173.569c.078.256-.213.462-.423.3l-.417-.324a.267.267 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.277.277 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.271.271 0 0 0 .259-.194l.162-.53zm0 4a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.277.277 0 0 0-.094.3l.173.569c.078.255-.213.462-.423.3l-.417-.324a.267.267 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.277.277 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.271.271 0 0 0 .259-.194l.162-.53zm0 4a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.277.277 0 0 0-.094.3l.173.569c.078.255-.213.462-.423.3l-.417-.324a.267.267 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.277.277 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.271.271 0 0 0 .259-.194l.162-.53z" />
+              </svg> Vendors</a>
           </ul>
         </div>
       </div>
@@ -112,69 +109,74 @@ $result = mysqli_query($conn, $query);
 
 
     <nav class="navbar navbar-light" id="salespanel">
-            <form class="form-inline">
-                <div class="nav-item">
-                    <div class="card" style="padding: 8px"></div>
-                </div>
-                <input class="form-control" type="search" placeholder="Search Vendors" aria-label="Search">
-                <button class="btn btn-dark navbar-btn" type="submit"> Search</button>
-                <div class="nav-item mr-auto">
-                <a class="btn navbar-btn btn-light" href="vendorindex.php" role="button"> Add Vendor</a></div>
-            </form>
+      <form class="form-inline" method="post" action="vendorview.php">
+        <div class="nav-item" style="padding: 8px">
+          <input class="form-control" name="vendor" placeholder="Search Vendors" aria-label="Search">
+          <button class="btn btn-dark navbar-btn" name="submit-search"> Search</button>
+        </div>
 
-        </nav>
+        <div class="nav-item mr-auto">
+          <a class="btn navbar-btn btn-light" href="vendorindex.php" role="button"> New Vendor</a></div>
+      </form>
+
+    </nav>
 
 
     <div class="container justify-content-center" id="formscreen">
-      
+
+
+
+      <div class="row">
+        <div class="col m-auto">
+          <div class="card mt-5" card-body bg-light>
+            <table class="table table-bordered">
+              <tr>
+                <td> ID </td>
+                <td> Vendor Name </td>
+                <td> Vendor Number </td>
+                <td> Vendor Address </td>
+                <td> Company Code </td>
+                <td> Shipments </td>
+              </tr>
+
 
         
-          <div class="row">
-            <div class="col m-auto">
-              <div class="card mt-5" card-body bg-light>
-                <table class="table table-bordered">
-                <tr>
-                  <td> ID </td>
-                  <td> Vendor Name </td>
-                  <td> Vendor Number </td>
-                  <td> Vendor Address </td>
-                  <td> Company Code </td>
-                  <td> Shipments </td>
-                </tr>
 
-                
-                  <?php
-                  
-                  while ($row = mysqli_fetch_assoc($result)) {
-                    
-                    $ID = $row['vendor_id'];
-                    $VendorName = $row['vendor_name'];
-                    $VendorNumber = $row['vendor_number'];
-                    $VendorAddress = $row['vendor_address'];
-                    $CompanyCode = $row['company_code'];
-                    $Shipments = $row['shipments'];
-                  
+                <?php
 
-                  ?>
-                    <tr>
-                      <td><?php echo $ID ?></td>
-                      <td><?php echo $VendorName ?></td>
-                      <td><?php echo $VendorNumber ?></td>
-                      <td><?php echo $VendorAddress ?></td>
-                      <td><?php echo $CompanyCode ?></td>
-                      <td><?php echo $Shipments ?></td>
-                      <td><a href ="vendordelete.php?Del=<?php echo $ID ?>">Delete</a></td>
-                    </tr>
-                  <?php
+                if (isset($_POST['submit-search'])) {
+                  $search = mysqli_real_escape_string($conn, $_POST['vendor']);
+                  $sql = "SELECT * FROM vendorinfo WHERE vendor_name LIKE '%$search%' OR vendor_number LIKE '%$search%' OR vendor_address LIKE '%$search%' OR company_code LIKE '%$search%'";
+                  $result = mysqli_query($conn, $sql);
+                  $queryResults = mysqli_num_rows($result);
+
+                  if ($queryResults > 0) {
+                    echo "<div>There are $queryResults results matching your search</div><br>";
+                    while ($row = mysqli_fetch_assoc($result)) {
+                      echo "<tr><td>" . $row['vendor_id'] . "</td><td>"
+                        . $row['vendor_name'] . "</td><td>" . $row['vendor_number'] . "</td><td>" . $row['vendor_address'] . "</td><td>"
+                        . $row['company_code'] . "</td><td>" . $row['shipments'] . "</td><td><a class='btn navbar-btn btn-dark' role='button' href='vendordelete.php?Del='"
+                        . $row['vendor_id'] . "'>Delete</a></td></tr>";
+                    }
+                  } else {
+                    echo "<div>There are no results matching your search</div>";
                   }
-                  ?>
+                } else {
+                  while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr><td>" . $row['vendor_id'] . "</td><td>"
+                      . $row['vendor_name'] . "</td><td>" . $row['vendor_number'] . "</td><td>" . $row['vendor_address'] . "</td><td>"
+                      . $row['company_code'] . "</td><td>" . $row['shipments'] . "</td><td><a class='btn navbar-btn btn-dark' role='button' href='vendordelete.php?Del='"
+                      . $row['vendor_id'] . "'>Delete</a></td></tr>";
+                  }
+                }
 
-                </table>
-              </div>
-            </div>
+                ?>
+            </table>
           </div>
-        
-      
+        </div>
+      </div>
+
+
     </div>
 </body>
 
@@ -191,4 +193,5 @@ $result = mysqli_query($conn, $query);
     });
   });
 </script>
+
 </html>

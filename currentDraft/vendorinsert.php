@@ -1,15 +1,6 @@
 <?php
-  $con = mysqli_connect('localhost', 'root', '', 'GroceryStore');
+  include_once ('config.php');
 
-  if(!$con)
-  {
-    echo 'Not Connected To Server';
-  }
-
-  if(!mysqli_select_db($con, 'GroceryStore'))
-  {
-    echo 'Database Not Selected';
-  }
 
   if(isset($_POST['submit']))
   {
@@ -27,7 +18,7 @@
 
       $query = "insert into vendorinfo (vendor_name, vendor_number, vendor_address, company_code, shipments)
               values ('$VendorName', '$VendorNumber', '$VendorAddress', '$CompanyCode', '$Shipments')";
-      $result = mysqli_query($con, $query);
+      $result = mysqli_query($conn, $query);
 
       if($result)
       {

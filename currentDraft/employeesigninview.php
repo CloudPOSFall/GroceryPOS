@@ -1,5 +1,5 @@
 <?php
-  require_once('config.php');
+include_once ('config.php');
   $query = "select * from employee_id";
   $result = mysqli_query($conn,$query);
 ?>

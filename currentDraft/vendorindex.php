@@ -104,8 +104,8 @@
     </nav>
     
     
-    <div class="container justify-content-center" id="formscreen">
-      <div class="card card-body bg-light" style="width: 35rem;">
+    <div class="container justify-content-center" >
+      <div class="card card-body bg-light" style="width: 35rem;" id="formscreen">
 
         <div class="card-body">
           <form action="vendorinsert.php" method="post">
