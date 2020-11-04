@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 04, 2020 at 12:41 AM
+-- Generation Time: Nov 04, 2020 at 01:36 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -161,12 +161,12 @@ CREATE TABLE `tax_table` (
 
 CREATE TABLE `ticket_system` (
   `ticket_id` int(11) NOT NULL,
-  `date` int(11) NOT NULL,
-  `time` int(11) NOT NULL,
-  `subtotal` int(11) NOT NULL,
-  `total` int(11) NOT NULL,
-  `tax` int(11) NOT NULL,
-  `tax_rate` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `time` time NOT NULL,
+  `subtotal` float NOT NULL,
+  `total` float NOT NULL,
+  `tax` float NOT NULL,
+  `tax_rate` float NOT NULL,
   `employee_id` int(11) DEFAULT NULL,
   `ISID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -199,14 +199,14 @@ CREATE TABLE `zreport_system` (
   `total_sales` int(11) NOT NULL,
   `transactions` int(11) NOT NULL,
   `new_customers` int(11) NOT NULL,
-  `opening_amount` int(11) NOT NULL,
-  `closing_amount` int(11) NOT NULL,
-  `short` int(11) NOT NULL,
-  `cash_sales` int(11) NOT NULL,
-  `cash_returns` int(11) NOT NULL,
-  `drops` int(11) NOT NULL,
-  `payouts` int(11) NOT NULL,
-  `pay_ins` int(11) NOT NULL,
+  `opening_amount` float NOT NULL,
+  `closing_amount` float NOT NULL,
+  `short` float NOT NULL,
+  `cash_sales` float NOT NULL,
+  `cash_returns` float NOT NULL,
+  `drops` float NOT NULL,
+  `payouts` float NOT NULL,
+  `pay_ins` float NOT NULL,
   `purchases` int(11) NOT NULL,
   `ticket_id` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL
