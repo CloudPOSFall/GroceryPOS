@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 04, 2020 at 01:36 AM
+-- Generation Time: Nov 04, 2020 at 04:46 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -49,7 +49,8 @@ INSERT INTO `customer_info` (`customer_id`, `email`, `password`, `first_name`, `
 (1, 'johnnyfran20002@gmail.com', 'passwood', 'Johnny', 'Tejada', 6463214487, 33, '10005 Hawk Drive ', 'Queens', 'NY', 12321),
 (2, 'tylerherro23@gmail.com', 'password', 'Tyler', 'Herro', 3475436578, 90, '12th Street', 'New York', 'NY', 9874),
 (3, 'bronny45@hotmail.com', 'lebron', 'Bronny', 'James', 2124567656, 44, '21 Wood Street', 'Woodhaven', 'VT', 7384),
-(4, 'kyrieirving2@hotmail.com', 'kyrie', 'Kyrie', 'Irving', 2123434567, 14, '74 2nd Ave', 'New York', 'NY', 12343);
+(4, 'kyrieirving2@hotmail.com', 'kyrie', 'Kyrie', 'Irving', 2123434567, 14, '74 2nd Ave', 'New York', 'NY', 12343),
+(5, 'georgeL@aim.com', 'lopez', 'George', 'Lopez', 8454323456, 98, '34th Street', 'New York', 'NY', 11002);
 
 -- --------------------------------------------------------
 
@@ -102,6 +103,13 @@ CREATE TABLE `inventory_sales` (
   `discount` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `inventory_sales`
+--
+
+INSERT INTO `inventory_sales` (`ISID`, `ticket_id`, `product_id`, `qty`, `unit_price`, `discount`) VALUES
+(1, NULL, NULL, 5, 6.99, '50%');
+
 -- --------------------------------------------------------
 
 --
@@ -110,17 +118,27 @@ CREATE TABLE `inventory_sales` (
 
 CREATE TABLE `product_inventory` (
   `product_id` int(11) NOT NULL,
-  `barcode` varchar(50) NOT NULL,
-  `brand` varchar(50) NOT NULL,
-  `description` varchar(50) NOT NULL,
-  `category` varchar(50) NOT NULL,
+  `productName` varchar(50) NOT NULL,
+  `productType` varchar(50) NOT NULL,
+  `productSubType` varchar(50) NOT NULL,
   `unit_price` float NOT NULL,
-  `selling_price` float NOT NULL,
-  `quantity` int(11) NOT NULL,
   `in_stock` int(11) NOT NULL,
-  `reorder_amount` float NOT NULL,
   `vendor_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product_inventory`
+--
+
+INSERT INTO `product_inventory` (`product_id`, `productName`, `productType`, `productSubType`, `unit_price`, `in_stock`, `vendor_id`) VALUES
+(1, 'Dairy Pure', 'dairy', 'milk', 7.99, 10, 1),
+(2, 'Horizon', 'dairy', 'milk', 8.99, 3, 2),
+(3, 'Old Croc Chedder', 'dairy', 'cheese', 4.85, 5, NULL),
+(4, 'Kerrygold Chedder', 'dairy', 'cheese', 8.99, 65, NULL),
+(5, 'Dole Banana', 'produce', 'banana', 4.99, 56, NULL),
+(6, 'Chiquita', 'produce', 'banana', 5.55, 45, NULL),
+(7, 'Cherry', 'produce', 'tomato', 3.59, 21, NULL),
+(8, 'Brandywine', 'produce', 'tomato', 5.99, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -133,6 +151,7 @@ CREATE TABLE `storelevel_signup` (
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
   `phone_number` double NOT NULL,
   `number_of_stores` int(11) NOT NULL,
   `company_name` varchar(50) NOT NULL
@@ -153,6 +172,14 @@ CREATE TABLE `tax_table` (
   `tax_rate` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tax_table`
+--
+
+INSERT INTO `tax_table` (`TTID`, `tax_year`, `state_tax`, `county_tax`, `city_rate`, `tax_rate`) VALUES
+(1, 2020, 1.14, 0.23, 2.25, 2.25),
+(2, 2019, 2.45, 1.19, 2.25, 2.25);
+
 -- --------------------------------------------------------
 
 --
@@ -171,6 +198,13 @@ CREATE TABLE `ticket_system` (
   `ISID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `ticket_system`
+--
+
+INSERT INTO `ticket_system` (`ticket_id`, `date`, `time`, `subtotal`, `total`, `tax`, `tax_rate`, `employee_id`, `ISID`) VALUES
+(1, '2020-07-12', '12:45:50', 9.99, 9.99, 1.23, 0.13, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -187,6 +221,14 @@ CREATE TABLE `vendorinfo` (
   `company_code` int(11) NOT NULL,
   `shipments` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `vendorinfo`
+--
+
+INSERT INTO `vendorinfo` (`vendor_id`, `vendor_name`, `street_address`, `city`, `state`, `zip_code`, `company_code`, `shipments`) VALUES
+(1, 'City Market', '2212 3rd Ave', 'New York', 'NY', 10035, 3536, 22),
+(2, 'Patel Grocery Retail & Wholesale', '5303 4th Ave', 'Brooklyn', 'NY', 11220, 8765, 9);
 
 -- --------------------------------------------------------
 
@@ -285,7 +327,7 @@ ALTER TABLE `zreport_system`
 -- AUTO_INCREMENT for table `customer_info`
 --
 ALTER TABLE `customer_info`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `employee_info`
@@ -297,13 +339,13 @@ ALTER TABLE `employee_info`
 -- AUTO_INCREMENT for table `inventory_sales`
 --
 ALTER TABLE `inventory_sales`
-  MODIFY `ISID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ISID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `product_inventory`
 --
 ALTER TABLE `product_inventory`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `storelevel_signup`
@@ -315,19 +357,19 @@ ALTER TABLE `storelevel_signup`
 -- AUTO_INCREMENT for table `tax_table`
 --
 ALTER TABLE `tax_table`
-  MODIFY `TTID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `TTID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ticket_system`
 --
 ALTER TABLE `ticket_system`
-  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `vendorinfo`
 --
 ALTER TABLE `vendorinfo`
-  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `zreport_system`
@@ -344,6 +386,12 @@ ALTER TABLE `zreport_system`
 --
 ALTER TABLE `employee_info`
   ADD CONSTRAINT `employee_info_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+
+--
+-- Constraints for table `inventory_sales`
+--
+ALTER TABLE `inventory_sales`
+  ADD CONSTRAINT `inventory_sales_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `product_inventory`
