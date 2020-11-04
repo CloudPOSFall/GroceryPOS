@@ -2,7 +2,12 @@
   $con = mysqli_connect('localhost', 'root', '', 'marketpos-2');
   $query = "select * from product_inventory";
   $result = mysqli_query($con,$query);
+
+session_start();
+$name = $_SESSION['first_name'];
+$format = '%s %s'."<br>";
 ?>
+
 <!DOCTYPE html>
 <html lang="eng">
 <head>
@@ -36,7 +41,7 @@
     </div>
     <ul class="list-unstyled components">
       <div class="card" id="navcard">
-        <h5 class="text-center">Current User <svg width=".6em" height=".6em" viewBox="0 0 16 16"
+        <h5 class="text-center"><?php echo $name ?> <svg width=".6em" height=".6em" viewBox="0 0 16 16"
             class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
@@ -54,7 +59,7 @@
       </li>
       </li>
       <li>
-        <a href="salescontrolv3.html"><svg width=".8em" height=".8em" viewBox="0 0 16 16"
+        <a href="salescontrolv3.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16"
             class="bi bi-credit-card-2-back" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd"
               d="M14 3H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2z" />
@@ -63,14 +68,14 @@
           </svg> Sales</a>
       </li>
       <li>
-        <a href="inventorycontrol.html"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-inbox-fill"
+        <a href="inventorycontrol.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-inbox-fill"
             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd"
               d="M4.98 4a.5.5 0 0 0-.39.188L1.54 8H6a.5.5 0 0 1 .5.5 1.5 1.5 0 1 0 3 0A.5.5 0 0 1 10 8h4.46l-3.05-3.812A.5.5 0 0 0 11.02 4H4.98zm-1.17-.437A1.5 1.5 0 0 1 4.98 3h6.04a1.5 1.5 0 0 1 1.17.563l3.7 4.625a.5.5 0 0 1 .106.374l-.39 3.124A1.5 1.5 0 0 1 14.117 13H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .106-.374l3.7-4.625z" />
           </svg> Inventory</a>
       </li>
       <li>
-        <a href="customercontrol.html"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill"
+        <a href="customercontrol.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill"
             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd"
               d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
