@@ -131,14 +131,14 @@ session_start();
                 <tr>
                     <th class="col-1"></th>
                     <th class="col-1">ID</th>
-                    <th class="col-4">Description</th>
+                    <th class="col-2">Description</th>
                     <th class="col-1">Quantity</th>
                     <th class="col-1">Price</th>
                     <th class="col-2">Category</th>
                     <th class="col-2">Type</th>
                 </tr>
 
-              
+                <form name='add' method='post' action='newsaleALEX.php'>
               <?php
                 if (isset($_POST['item-search'])) {
                     $search = mysqli_real_escape_string($conn, $_POST['isearch']);
@@ -147,8 +147,8 @@ session_start();
                     $queryResults = mysqli_num_rows($result);
                     if ($queryResults > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<tr><td><form name='add' method='post' action='newsaleALEX.php'><button class='btn navbar-btn btn-light' name='additem'>
-                            Add</button><input name='sproduct' maxlength='4' value='". $row['product_id'] ."' readonly /></form></td><td>" .$row['productName']. "</td><td>" .$row['in_stock']. "</td><td>".$row['unit_price']. "</td><td>" .$row['productType'].
+                            echo "<tr><td><button class='btn navbar-btn btn-light' name='additem'>
+                            Add</button></td><td><input name='sproduct' size='1' value='". $row['product_id'] ."' readonly /></td><td>" .$row['productName']. "</td><td>" .$row['in_stock']. "</td><td>".$row['unit_price']. "</td><td>" .$row['productType'].
                             "</td><td>" .$row['productSubType']. "</td></tr>";
                         }
                     }else {
@@ -156,12 +156,13 @@ session_start();
                     }
                 }else {
                     while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<tr></td><td><input name='isearch' maxlength='4' value='".$row['product_id']."' readonly /></td><td>" .$row['productName']. "</td><td>" .$row['in_stock']. "</td><td>".$row['unit_price']. "</td><td>" .$row['productType'].
+                        echo "<tr><td><button class='btn navbar-btn btn-light' name='additem'>
+                        Add</button></td><td><input name='sproduct' size='1' value='". $row['product_id'] ."' readonly /></td><td>" .$row['productName']. "</td><td>" .$row['in_stock']. "</td><td>".$row['unit_price']. "</td><td>" .$row['productType'].
                         "</td><td>" .$row['productSubType']. "</td></tr>";
                     }  
                   }
                 ?>
-              
+              </form>
 
             </table>
           </div>

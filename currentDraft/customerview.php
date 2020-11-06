@@ -1,5 +1,5 @@
 <?php
-include_once ('config.php');
+include_once('config.php');
 $query = "SELECT * FROM customer_info";
 $result = mysqli_query($conn, $query);
 ?>
@@ -120,72 +120,69 @@ $result = mysqli_query($conn, $query);
     </nav>
 
 
-    <div class="container justify-content-center" id="formscreen">
+    <div class="container justify-content-center" id="tablescreen">
 
 
 
-      <div class="row">
-        <div class="col m-auto">
-          <div class="card bg-light">
-            <table class="table table-bordered">
+      <div class="col-12">
+
+        <div class="card mt-5 bg-light">
+          <table class="table table-bordered" style="font-size:80%;">
+            <thead>
               <tr>
-                <td> ID </td>
-                <td> First Name </td>
-                <td> Last Name </td>
-                <td> Street </td>
-                <td> City</td>
-                <td> State</td>
-                <td> Zip </td>
-                <td> Phone Number </td>
-                <td> Email </td>
-                <td> Rewards </td>
-                <td> </td>
-                <td> </td>
+                <th class="col"> ID </th>
+                <th class="col"> First Name </th>
+                <th class="col"> Last Name </th>
+                <th class="col"> Street </th>
+                <th class="col"> City</th>
+                <th class="col"> State</th>
+                <th class="col"> Zip </th>
+                <th class="col"> Phone Number </th>
+                <th class="col"> Email </th>
+                <th class="col"> Rewards </th>
+                <th class="col"> </th>
               </tr>
+            </thead>
+            <tbody>
+              <?php
 
-              
-                <?php
+              if (isset($_POST['submit-search'])) {
+                $search = mysqli_real_escape_string($conn, $_POST['customer']);
+                $sql = "SELECT * FROM customer_info WHERE first_name LIKE '%$search%' OR last_name LIKE '%$search%' OR phone_number LIKE '%$search%' OR email LIKE '%$search%'";
+                $result = mysqli_query($conn, $sql);
+                $queryResults = mysqli_num_rows($result);
 
-                if (isset($_POST['submit-search'])) {
-                  $search = mysqli_real_escape_string($conn, $_POST['customer']);
-                  $sql = "SELECT * FROM customer_info WHERE first_name LIKE '%$search%' OR last_name LIKE '%$search%' OR phone_number LIKE '%$search%' OR email LIKE '%$search%'";
-                  $result = mysqli_query($conn, $sql);
-                  $queryResults = mysqli_num_rows($result);
-
-                  if ($queryResults > 0) {
-                    echo "<div>There are $queryResults results matching your search</div><br>";
-                    while ($row = mysqli_fetch_assoc($result)) {
-                      echo "<tr><td>" . $row['customer_id'] . "</td><td>"
-                        . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
-                        . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
-                        . $row['email'] . "</td><td>" . $row['rewards'] .
-                        "</td><td><a class='btn navbar-btn btn-dark' role='button' href='customerdelete.php?Del="
-                        . $row['customer_id'] . "'>Delete</a></td><td><a class='btn navbar-btn btn-dark' role='button' href='customeredit.php?Upd="
-                        . $row['customer_id'] . "'>Update</a></td></tr>";
-                    }
-                  } else {
-                    echo "<div>There are no results matching your search</div>";
-                  }
-                } else {
+                if ($queryResults > 0) {
+                  echo "<div>There are $queryResults results matching your search</div><br>";
                   while ($row = mysqli_fetch_assoc($result)) {
                     echo "<tr><td>" . $row['customer_id'] . "</td><td>"
                       . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
                       . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
-                      . $row['email'] . "</td><td>"  . $row['rewards'] .
+                      . $row['email'] . "</td><td>" . $row['rewards'] .
                       "</td><td><a class='btn navbar-btn btn-dark' role='button' href='customerdelete.php?Del="
                       . $row['customer_id'] . "'>Delete</a></td><td><a class='btn navbar-btn btn-dark' role='button' href='customeredit.php?Upd="
                       . $row['customer_id'] . "'>Update</a></td></tr>";
                   }
+                } else {
+                  echo "<div>There are no results matching your search</div>";
                 }
+              } else {
+                while ($row = mysqli_fetch_assoc($result)) {
+                  echo "<tr><td>" . $row['customer_id'] . "</td><td>"
+                    . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
+                    . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
+                    . $row['email'] . "</td><td>"  . $row['rewards'] .
+                    "</td><td><a class='btn btn-dark' role='button' href='customerdelete.php?Del="
+                    . $row['customer_id'] . "'>Delete</a></td><td><a class='btn btn-dark' role='button' href='customeredit.php?Upd="
+                    . $row['customer_id'] . "'>Update</a></td></tr>";
+                }
+              }
 
-                ?>
-              
-
-            </table>
-          </div>
+              ?>
+            </tbody>
+          </table>
         </div>
       </div>
-
 
     </div>
 </body>

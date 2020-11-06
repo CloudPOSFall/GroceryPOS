@@ -185,7 +185,6 @@ if (isset($_POST['update'])) {
   $id = $_POST['id'];
   $Email = $_POST['email'];
   $FirstName = $_POST['fname'];
-  $MiddleInitial = $_POST['mi'];
   $LastName = $_POST['lname'];
   $PhoneNumber = $_POST['number'];
   $Rewards = $_POST['rewards'];
@@ -194,7 +193,7 @@ if (isset($_POST['update'])) {
   $State = $_POST['state'];
   $Zip = $_POST['zip'];
 
-  $query = "UPDATE customer_info SET email = '$Email', first_name = '$FirstName', middle_initial = '$MiddleInitial', last_name = '$LastName', phone_number = '$PhoneNumber', rewards = '$Rewards', street_address = '$Street', city = '$City', state = '$State', zip_code = '$Zip' WHERE customer_id = '$id' ";
+  $query = "UPDATE customer_info SET email = '$Email', first_name = '$FirstName', last_name = '$LastName', phone_number = '$PhoneNumber', rewards = '$Rewards', street_address = '$Street', city = '$City', state = '$State', zip_code = '$Zip' WHERE customer_id = '$id' ";
   $result = mysqli_query($conn, $query);
 
   if ($result) {
