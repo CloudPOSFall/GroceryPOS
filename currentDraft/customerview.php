@@ -166,7 +166,29 @@ $result = mysqli_query($conn, $query);
                 } else {
                   echo "<div>There are no results matching your search</div>";
                 }
-              } else {
+              }else if (isset($_POST['sale-search'])) {
+                $search = mysqli_real_escape_string($conn, $_POST['customer']);
+                $sql = "SELECT * FROM customer_info WHERE first_name LIKE '%$search%' OR last_name LIKE '%$search%' OR phone_number LIKE '%$search%' OR email LIKE '%$search%'";
+                $result = mysqli_query($conn, $sql);
+                $queryResults = mysqli_num_rows($result);
+
+                if ($queryResults > 0) {
+                  echo "<div>There are $queryResults results matching your search</div><br>";
+                  while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr><td>" . $row['customer_id'] . "</td><td>"
+                    . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
+                    . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
+                    . $row['email'] . "</td><td>"  . $row['rewards'] .
+                    "</td><td><a class='btn btn-dark' role='button' href='newsaleALEX.php?Add="
+                    . $row['customer_id'] . "'>Attach</a></td><td><a class='btn btn-dark' role='button' href='customeredit.php?Upd="
+                    . $row['customer_id'] . "'>Update</a></td></tr>";
+                  }
+                } else {
+                  echo "<div>There are no results matching your search</div>";
+                }
+              }
+              
+              else {
                 while ($row = mysqli_fetch_assoc($result)) {
                   echo "<tr><td>" . $row['customer_id'] . "</td><td>"
                     . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"

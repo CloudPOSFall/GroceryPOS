@@ -1,5 +1,5 @@
 <?php
-include_once ('config.php');
+include_once('config.php');
 ?>
 
 <!DOCTYPE html>
@@ -31,65 +31,46 @@ include_once ('config.php');
     <!--nav sidebar-->
     <nav id="sidebar">
         <div class="sidebar-header">
-            <h1><a class="navbar-brand relative-top" href="indexDraft.php" id="navcard"><svg width="1.5em"
-                        height="1.5em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1z" />
+            <h1><a class="navbar-brand relative-top" href="indexDraft.php" id="navcard"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1z" />
                     </svg>
                     MarketPOS</a></h1>
         </div>
         <ul class="list-unstyled components">
             <div class="card" id="navcard">
-                <h5 class="text-center">Current User <svg width=".6em" height=".6em" viewBox="0 0 16 16"
-                        class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                <h5 class="text-center">Current User <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
                     </svg></h5>
             </div>
             <li class="active">
             <li>
-                <a href="accounthomeDraft.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-house-fill"
-                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M8 3.293l6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
-                        <path fill-rule="evenodd"
-                            d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
+                <a href="accounthomeDraft.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-house-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M8 3.293l6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+                        <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
                     </svg> Home</a>
             </li>
             </li>
             <li>
-                <a href="salescontrolv3.html"><svg width=".8em" height=".8em" viewBox="0 0 16 16"
-                        class="bi bi-credit-card-2-back" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M14 3H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2z" />
-                        <path
-                            d="M11 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1zM1 9h14v2H1V9z" />
+                <a href="salescontrolv3.html"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-credit-card-2-back" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M14 3H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2z" />
+                        <path d="M11 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1zM1 9h14v2H1V9z" />
                     </svg> Sales</a>
             </li>
             <li>
-                <a href="inventorycontrol.html"><svg width=".8em" height=".8em" viewBox="0 0 16 16"
-                        class="bi bi-inbox-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M4.98 4a.5.5 0 0 0-.39.188L1.54 8H6a.5.5 0 0 1 .5.5 1.5 1.5 0 1 0 3 0A.5.5 0 0 1 10 8h4.46l-3.05-3.812A.5.5 0 0 0 11.02 4H4.98zm-1.17-.437A1.5 1.5 0 0 1 4.98 3h6.04a1.5 1.5 0 0 1 1.17.563l3.7 4.625a.5.5 0 0 1 .106.374l-.39 3.124A1.5 1.5 0 0 1 14.117 13H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .106-.374l3.7-4.625z" />
+                <a href="inventorycontrol.html"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-inbox-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4.98 4a.5.5 0 0 0-.39.188L1.54 8H6a.5.5 0 0 1 .5.5 1.5 1.5 0 1 0 3 0A.5.5 0 0 1 10 8h4.46l-3.05-3.812A.5.5 0 0 0 11.02 4H4.98zm-1.17-.437A1.5 1.5 0 0 1 4.98 3h6.04a1.5 1.5 0 0 1 1.17.563l3.7 4.625a.5.5 0 0 1 .106.374l-.39 3.124A1.5 1.5 0 0 1 14.117 13H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .106-.374l3.7-4.625z" />
                     </svg> Inventory</a>
             </li>
             <li>
-                <a href="customercontrol.html"><svg width=".8em" height=".8em" viewBox="0 0 16 16"
-                        class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                <a href="customercontrol.html"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
                     </svg> Customers</a>
             </li>
             <li>
-                <a href="#"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-clipboard-data"
-                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                        <path fill-rule="evenodd"
-                            d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-                        <path
-                            d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z" />
+                <a href="#"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-clipboard-data" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                        <path fill-rule="evenodd" d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                        <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z" />
                     </svg> Reports</a>
             </li>
 
@@ -117,10 +98,11 @@ include_once ('config.php');
                     </li>
                     <div id="payline"></div>
                     <div class="sidebar-header">
-                        <h5>Total</h5>
+                        <h5>Total <div id="total" style="float: right;"></div></h5>
                     </div>
                     <div id="payline"></div>
                     <div class="container text-center">
+                
                         <button class="btn-lg btn-success navbar-btn" id="paybtn"> Payment</button></div>
                 </ul>
             </div>
@@ -135,13 +117,9 @@ include_once ('config.php');
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="nav navbar-nav mr-auto">
-                    <a class="navbar-brand" href="salescontrolv3.html"><svg width=".8em" height=".8em"
-                            viewBox="0 0 16 16" class="bi bi-credit-card-2-back" fill="currentColor"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M14 3H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2z" />
-                            <path
-                                d="M11 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1zM1 9h14v2H1V9z" />
+                    <a class="navbar-brand" href="salescontrolv3.html"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-credit-card-2-back" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M14 3H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2z" />
+                            <path d="M11 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1zM1 9h14v2H1V9z" />
                         </svg> Sales</a>
                 </ul>
             </div>
@@ -150,10 +128,26 @@ include_once ('config.php');
         <nav class="navbar navbar-light" style="background-color: #a1b6a8;" id="salespanel">
             <form class="form-inline" method="post" action="customerview.php">
                 <div class="nav-item">
-                    <div class="card" style="padding: 8px">No Customer Selected</div>
+
+                    <?php
+                    if (isset($_GET['Add'])) {
+                        $ID = $_GET['Add'];
+                        $cQuery = "SELECT * FROM customer_info WHERE customer_id LIKE '%$ID%'";
+                        $cResult = mysqli_query($conn, $cQuery);
+                        $cQueryRes= mysqli_num_rows($cResult);
+                        if ($cQueryRes > 0) {
+                            while ($crow = mysqli_fetch_assoc($cResult)) {
+                                echo "<div class='card' style='padding: 8px'>" . $_SESSION['sale'][] = $crow['first_name'] . " " . $crow['last_name'] . "</div>";
+                            }
+                        } 
+                    }else {
+                        echo "<div class='card' style='padding: 8px'>No Customer Selected</div>";
+                    }
+                    ?>
+
                 </div>
-                <input class="form-control" name="customer" placeholder="Search Customers" aria-label="Search">
-                <button class="btn btn-dark navbar-btn" type="submit-search"> Look Up</button>
+                <input class="form-control col-5" name="customer" placeholder="Search Customers" aria-label="Search">
+                <button class="btn btn-dark navbar-btn" name="sale-search"> Look Up</button>
                 <div class="nav-item">
                     <button class="btn navbar-btn"> New</button></div>
             </form>
@@ -175,53 +169,49 @@ include_once ('config.php');
 
         </nav>
 
-        
-
-        <table class="table table-striped" id="salescontent">
+    <div class="table-responsive">
+        <table class="table table-striped table-hove" id="salescontent">
             <thead>
                 <tr>
-                    <th class="col-6">Description</th>
+                    <th class="col-5 ml-auto">Description</th>
                     <th class="col-2">Price</th>
-                    <th class="col-1">Quantity</th>
-                    <th class="col-1">Tax</th>
-                    <th class="col-2">Subtotal</th>
+                    <th class="col-1 text-center">Quantity</th>
+                    <th class="col-2 text-center">Tax</th>
+                    <th class="col-2 text-center">Subtotal</th>
                 </tr>
             </thead>
             <tbody>
 
 
 
-            <?php
-            //if ($row['in_stock'] > 0){}
-            //}else{
-            //echo "<div>The item you searched for is not in stock</div>";
+                <?php
+                //if ($row['in_stock'] > 0){}
+                //}else{
+                //echo "<div>The item you searched for is not in stock</div>";
 
-            
-            if (isset($_POST['additem'])) {
-                $search = $_POST['sproduct'];
-                $query = "SELECT * FROM product_inventory WHERE product_id LIKE '%$search%'";
-                $taxquery = "SELECT tax_rate FROM tax_table";
-                $result = mysqli_query($conn, $query);
-                $taxres = mysqli_query($conn, $taxquery);
-                $tax = mysqli_fetch_assoc($taxres);
-                $queryResults = mysqli_num_rows($result);
-                if ($queryResults > 0) {
-                    while ($row = mysqli_fetch_assoc($result)){
-                        echo "<tr><td>".$row['productName']. "</td><td>" .$row['unit_price']. "</td><td> 1 </td><td>" 
-                        . number_format($row['unit_price'] * $tax['tax_rate'], 2) . "</td><td>" .number_format($row['unit_price'] * (1 + $tax['tax_rate']), 2)  . "</td></tr>";
+
+                if (isset($_POST['additem'])) {
+                    $search = $_POST['sproduct'];
+                    $query = "SELECT * FROM product_inventory WHERE product_id LIKE '%$search%'";
+                    $taxquery = "SELECT tax_rate FROM tax_table";
+                    $result = mysqli_query($conn, $query);
+                    $taxres = mysqli_query($conn, $taxquery);
+                    $tax = mysqli_fetch_assoc($taxres);
+                    $queryResults = mysqli_num_rows($result);
+                    if ($queryResults > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo "<tr><td>" . $row['productName'] . "</td><td>" . $row['unit_price'] . "</td><td class='text-center'> 1 </td><td class='text-center'>"
+                                . number_format($row['unit_price'] * $tax['tax_rate'], 2) . "</td><td class='text-center'>" . number_format($row['unit_price'] * (1 + $tax['tax_rate']), 2)  . "</td></tr>";
+                        }
+                    } else {
+                        echo "Problem adding item via Product ID";
                     }
-                }else {
-                    echo "Problem adding item via Product ID";
-                }
-            }else{
-                echo "<tr><th scope='row'></th><td></td><td></td><td></td><td></td></tr><tr><th scope='row'></th>
-                <td></td><td></td><td></td><td></td></tr><tr><th scope='row'></th><td></td><td></td><td></td><td></td></tr>";
-            }
+                } 
                 ?>
             </tbody>
         </table>
-
-        <!--#e2e2e2-->
+    </div>       
+  <!--#e2e2e2-->
 
 
     </div>
@@ -229,7 +219,7 @@ include_once ('config.php');
 
 
 
-
+    
     <!--END page content-->
 
     <!-- bootstrap popper js-->
@@ -251,8 +241,46 @@ include_once ('config.php');
                 $('.collapse.in').toggleClass('in');
                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
             });
+
+             // event begins when the user releases the key
+            $('#search').keyup(function() {
+                // creates null result field
+                $('#result').html('');
+                // variable to hold search input
+                var searchField = $('#search').val();
+                // function that creates a variable which matches the search as a regular expression
+                var expression = new RegExp(searchField, "i");
+                // loads JSON file 
+                $.getJSON('products.json', function(data) { $.each(data, function(key, value) {
+                // .search to see if the string matches the expression
+                if (value.name.search(expression) != -1 || value.price.search(expression) != -1) {
+                    // creates the list items which are the results from the search
+                    $('#result').append('<li class="list-group-item link-class"> '+value.name+' | <span class="text-muted">'+value.price+'</span></li>');
+                }});   
+            });});
+            // event which replaces the search area with chosen result
+            $('#result').on('click', 'li', function() {
+            // seperates price with a vertical bar
+            var click_text = $(this).text().split('|');
+            // attatch bar
+            $('#search').val($.trim(click_text[0]));
+            // creates null result field
+            $("#result").html('');
+        });
         });
 
+        //global variables for both the sum and table
+        var totalSum = 0;
+
+        var table = document.getElementById("salestable");
+        //loop through table to add together the costs
+        for (var i = 1; i < table.rows.length; i++) {
+            totalSum = totalSum + parseFloat(table.rows[i].cells[1].innerHTML);
+        }
+        //function to display total price onclick
+        function total() {
+            document.getElementById("total").innerHTML = Math.round((totalSum + Number.EPSILON) * 100) / 100;
+        }
 
     </script>
 </body>

@@ -3,6 +3,12 @@ include_once ('config.php');
 $query = "SELECT * FROM product_inventory";
 $result = mysqli_query($conn, $query);
 session_start();
+ 
+//Check if the session variable exists.
+if(!isset($_SESSION['sale'])){
+    //If it doesn't, create an empty array.
+    $_SESSION['sale'] = array();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -138,7 +144,7 @@ session_start();
                     <th class="col-2">Type</th>
                 </tr>
 
-                <form name='add' method='post' action='newsaleALEX.php'>
+                
               <?php
                 if (isset($_POST['item-search'])) {
                     $search = mysqli_real_escape_string($conn, $_POST['isearch']);
@@ -147,8 +153,8 @@ session_start();
                     $queryResults = mysqli_num_rows($result);
                     if ($queryResults > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<tr><td><button class='btn navbar-btn btn-light' name='additem'>
-                            Add</button></td><td><input name='sproduct' size='1' value='". $row['product_id'] ."' readonly /></td><td>" .$row['productName']. "</td><td>" .$row['in_stock']. "</td><td>".$row['unit_price']. "</td><td>" .$row['productType'].
+                            echo "<tr><td><form name='add' method='post' action='newsaleALEX.php'><button class='btn navbar-btn btn-light' name='additem'>
+                            Add</button></td><td><input name='sproduct' size='1' value='". $row['product_id'] ."' readonly /></form></td><td>" .$row['productName']. "</td><td>" .$row['in_stock']. "</td><td>".$row['unit_price']. "</td><td>" .$row['productType'].
                             "</td><td>" .$row['productSubType']. "</td></tr>";
                         }
                     }else {
@@ -162,7 +168,7 @@ session_start();
                     }  
                   }
                 ?>
-              </form>
+              
 
             </table>
           </div>
