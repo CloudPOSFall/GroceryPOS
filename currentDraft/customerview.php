@@ -156,12 +156,12 @@ $result = mysqli_query($conn, $query);
                   echo "<div>There are $queryResults results matching your search</div><br>";
                   while ($row = mysqli_fetch_assoc($result)) {
                     echo "<tr><td>" . $row['customer_id'] . "</td><td>"
-                      . $row['email'] . "</td><td>" . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
-                      . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
-                      . $row['email'] . "</td><td>" . $row['rewards'] .
-                      "</td><td><a class='btn navbar-btn btn-dark' role='button' href='customerdelete.php?Del="
-                      . $row['customer_id'] . "'>Delete</a></td><td><a class='btn navbar-btn btn-dark' role='button' href='customeredit.php?Upd="
-                      . $row['customer_id'] . "'>Update</a></td></tr>";
+                    . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
+                    . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
+                    . $row['email'] . "</td><td>"  . $row['rewards'] .
+                    "</td><td><a class='btn btn-dark' role='button' href='customerdelete.php?Del="
+                    . $row['customer_id'] . "'>Delete</a></td><td><a class='btn btn-dark' role='button' href='customeredit.php?Upd="
+                    . $row['customer_id'] . "'>Update</a></td></tr>";
                   }
                 } else {
                   echo "<div>There are no results matching your search</div>";
