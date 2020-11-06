@@ -1,12 +1,17 @@
 <?php
 session_start();
-$name = $_SESSION['first_name'];
+$email = $_SESSION['email'];
 $format = '%s %s'."<br>";
+$password = $_SESSION['password'];
+$format = '%s %s'."<br>";
+$name = $_SESSION['first_name'];
+$format1 = '%s %s'."<br>";
 $lname = $_SESSION['last_name'];
 $format1 = '%s'."<br>";
-$emailtxt = $_SESSION['email'];
-//echo sprintf($format1,$emailtxt);
-$format2 = '%s'."<br>";
+$phone = $_SESSION['phone_number'];
+$format2 = '%s %s'."<br>";
+$number = $_SESSION['number_of_stores'];
+$format2 = '%s %s'."<br>";
 $company = $_SESSION['company_name'];
 //echo sprintf($format2,$company);
 ?>
@@ -109,18 +114,18 @@ $company = $_SESSION['company_name'];
         </div>
       </div>
     </nav>
-	  
-	  
+
+
     <!--control buttons-->
-	  
+
 	  <div align = "center" style="padding-top: 40px;">
 	  <div class="card" style="width: 18rem;">
 		  <img class="card-img-top" src="media/prof.png" alt="Card image cap">
         <div class="card-body">
       <p class="card-text"><?php
-                echo sprintf($format,$name,$lname);
-                echo sprintf($format1,$emailtxt);
-                echo sprintf($format2,$company);
+                echo sprintf($format,$email,$password);
+                echo sprintf($format1,$name,$lname);
+                echo sprintf($format2,$phone,$number,$company);
                 ?></p>
       </div>
 	  </div>
@@ -169,7 +174,7 @@ $company = $_SESSION['company_name'];
             </div>
           </div>
         </div>
-		
+
         <div class="col-md-3">
           <div class="card text-center">
             <div class="card-header bg-primary text-white">
@@ -191,8 +196,8 @@ $company = $_SESSION['company_name'];
           </div>
         </div>
       </div>
-	  
-	  
+
+
 
     </div>
 
