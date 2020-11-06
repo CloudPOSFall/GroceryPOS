@@ -130,6 +130,7 @@ $result = mysqli_query($conn, $query);
             <table class="table table-bordered">
               <tr>
                 <td> ID </td>
+                <td> Email </td>
                 <td> First Name </td>
                 <td> Last Name </td>
                 <td> Street </td>
@@ -137,7 +138,6 @@ $result = mysqli_query($conn, $query);
                 <td> State</td>
                 <td> Zip </td>
                 <td> Phone Number </td>
-                <td> Email </td>
                 <td> Rewards </td>
                 <td> </td>
               </tr>
@@ -155,9 +155,9 @@ $result = mysqli_query($conn, $query);
                     echo "<div>There are $queryResults results matching your search</div><br>";
                     while ($row = mysqli_fetch_assoc($result)) {
                       echo "<tr><td>" . $row['customer_id'] . "</td><td>"
-                        . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
+                        . $row['email'] . "</td><td>" . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
                         . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
-                        . $row['email'] . "</td><td>" . $row['rewards'] .
+                        . $row['rewards'] .
                         "</td><td><a class='btn navbar-btn btn-dark' role='button' href='customerdelete.php?Del="
                         . $row['customer_id'] . "'>Delete</a></td><td><a class='btn navbar-btn btn-dark' role='button' href='customeredit.php?Upd="
                         . $row['customer_id'] . "'>Update</a></td></tr>";
@@ -168,9 +168,9 @@ $result = mysqli_query($conn, $query);
                 } else {
                   while ($row = mysqli_fetch_assoc($result)) {
                     echo "<tr><td>" . $row['customer_id'] . "</td><td>"
-                      . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
+                      . $row['email'] . "</td><td>" . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
                       . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
-                      . $row['email'] . "</td><td>"  . $row['rewards'] .
+                      . $row['rewards'] .
                       "</td><td><a class='btn navbar-btn btn-dark' role='button' href='customerdelete.php?Del="
                       . $row['customer_id'] . "'>Delete</a></td><td><a class='btn navbar-btn btn-dark' role='button' href='customeredit.php?Upd="
                       . $row['customer_id'] . "'>Update</a></td></tr>";

@@ -102,8 +102,8 @@
         </div>
       </div>
     </nav>
-    
-    
+
+
     <div class="container justify-content-center" >
       <div class="card card-body bg-light" style="width: 35rem;" id="formscreen">
 
@@ -114,12 +114,24 @@
               <input class="col-6"  type="text" placeholder=" Vendor Name " name="name" />
             </div>
             <div class="form-group row">
-              <label class="col-4"  for="Vendor Number">Vendor Number</label>
+              <label class="col-4"  for="Vendor Number">Vendor Number </label>
               <input class="col-6"  type="number" placeholder=" Vendor Number " name="number" />
             </div>
             <div class="form-group row">
-              <label class="col-4"  for="Vendor Address">Vendor Address</label>
-              <input class="col-6"  type="text" placeholder=" Vendor Address " name="addy" />
+              <label class="col-4"  for="Street Address">Street Address </label>
+              <input class="col-6"  type="text" placeholder=" Street Address " name="street" />
+            </div>
+            <div class="form-group row">
+              <label class="col-4"  for="City">City </label>
+              <input class="col-6"  type="text" placeholder=" City " name="city" />
+            </div>
+            <div class="form-group row">
+              <label class="col-4"  for="State">State </label>
+              <input class="col-6"  type="text" placeholder=" State " name="state" />
+            </div>
+            <div class="form-group row">
+              <label class="col-4"  for="Zip Code">Zip Code </label>
+              <input class="col-6"  type="text" placeholder=" Zip Code " name="zip" />
             </div>
             <div class="form-group row">
               <label class="col-4"  for="Company Code">Company Code</label>
@@ -129,7 +141,7 @@
               <label class="col-4" for="Shipments" >Shipments</label>
               <input class="col-6" type="number" placeholder=" Shipments " name="ship" />
             </div>
-            <div class="text-center"><button name="submit" class="btn-lg btn-primary"> Submit</button></div> 
+            <div class="text-center"><button name="submit" class="btn-lg btn-primary"> Submit</button></div>
           </form>
         </div>
       </div>
