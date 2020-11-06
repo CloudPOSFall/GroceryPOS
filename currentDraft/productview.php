@@ -1,7 +1,7 @@
 <?php
-  $con = mysqli_connect('localhost', 'root', '', 'GroceryStore');
+  include_once ('config.php');
   $query = "select * from product_inventory";
-  $result = mysqli_query($con,$query);
+  $result = mysqli_query($conn,$query);
 ?>
 <!DOCTYPE html>
 <html lang="eng">

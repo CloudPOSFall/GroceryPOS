@@ -1,3 +1,7 @@
+<?php
+include_once ('config.php');
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -22,7 +26,6 @@
 </head>
 
 <body>
-
 
 
     <!--nav sidebar-->
@@ -145,12 +148,12 @@
         </nav>
 
         <nav class="navbar navbar-light" style="background-color: #a1b6a8;" id="salespanel">
-            <form class="form-inline">
+            <form class="form-inline" method="post" action="customerview.php">
                 <div class="nav-item">
                     <div class="card" style="padding: 8px">No Customer Selected</div>
                 </div>
-                <input class="form-control" type="search" placeholder="Search Customers" aria-label="Search">
-                <button class="btn btn-dark navbar-btn" type="submit"> Look Up</button>
+                <input class="form-control" name="customer" placeholder="Search Customers" aria-label="Search">
+                <button class="btn btn-dark navbar-btn" type="submit-search"> Look Up</button>
                 <div class="nav-item">
                     <button class="btn navbar-btn"> New</button></div>
             </form>
@@ -159,9 +162,9 @@
 
 
         <nav class="navbar navbar-light" style="background-color: #e2e2e2;">
-            <form class="form-inline">
-                <input class="form-control" type="search" placeholder="Item Search" aria-label="Search">
-                <button class="btn btn-dark navbar-btn" type="submit"> Search</button>
+            <form class="form-inline" method="post" action="saleitemslist.php">
+                <input class="form-control" name="isearch" placeholder="Item Search" aria-label="Search">
+                <button class="btn btn-dark navbar-btn" name="item-search"> Search</button>
                 <div class="nav-item">
                     <button class="btn navbar-btn"> Misc</button>
                 </div>
@@ -172,34 +175,49 @@
 
         </nav>
 
+        
+
         <table class="table table-striped" id="salescontent">
             <thead>
-                <tr class="d-flex">
-                    <th class="col-9">Description</th>
-                    <th class="col-2">Quantity</th>
-                    <th class="col-2">Tax</th>
+                <tr>
+                    <th class="col-6">Description</th>
+                    <th class="col-2">Price</th>
+                    <th class="col-1">Quantity</th>
+                    <th class="col-1">Tax</th>
                     <th class="col-2">Subtotal</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+
+
+
+            <?php
+            //if ($row['in_stock'] > 0){}
+            //}else{
+            //echo "<div>The item you searched for is not in stock</div>";
+
+            
+            if (isset($_POST['additem'])) {
+                $search = $_POST['sproduct'];
+                $query = "SELECT * FROM product_inventory WHERE product_id LIKE '%$search%'";
+                $taxquery = "SELECT tax_rate FROM tax_table";
+                $result = mysqli_query($conn, $query);
+                $taxres = mysqli_query($conn, $taxquery);
+                $tax = mysqli_fetch_assoc($taxres);
+                $queryResults = mysqli_num_rows($result);
+                if ($queryResults > 0) {
+                    while ($row = mysqli_fetch_assoc($result)){
+                        echo "<tr><td>".$row['productName']. "</td><td>" .$row['unit_price']. "</td><td> 1 </td><td>" 
+                        . number_format($row['unit_price'] * $tax['tax_rate'], 2) . "</td><td>" .number_format($row['unit_price'] * (1 + $tax['tax_rate']), 2)  . "</td></tr>";
+                    }
+                }else {
+                    echo "Problem adding item via Product ID";
+                }
+            }else{
+                echo "<tr><th scope='row'></th><td></td><td></td><td></td><td></td></tr><tr><th scope='row'></th>
+                <td></td><td></td><td></td><td></td></tr><tr><th scope='row'></th><td></td><td></td><td></td><td></td></tr>";
+            }
+                ?>
             </tbody>
         </table>
 

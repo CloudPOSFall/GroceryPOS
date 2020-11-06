@@ -1,7 +1,8 @@
 <?php
 include_once ('config.php');
-$query = "SELECT * FROM customer_info";
+$query = "SELECT * FROM product_inventory";
 $result = mysqli_query($conn, $query);
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -98,86 +99,67 @@ $result = mysqli_query($conn, $query);
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="nav navbar-nav mr-auto">
-            <a class="navbar-brand" href="customerview.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
-              </svg> Customers</a>
+            <a class="navbar-brand" href="customerview.php"><svg width=".8em" height=".8em"
+                            viewBox="0 0 16 16" class="bi bi-credit-card-2-back" fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M14 3H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2z" />
+                            <path
+                                d="M11 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1zM1 9h14v2H1V9z" />
+                        </svg> Sales</a>
           </ul>
         </div>
       </div>
     </nav>
 
-
-    <nav class="navbar navbar-light" id="salespanel">
-      <form class="form-inline" method="post" action="customerview.php">
-        <div class="nav-item" style="padding: 8px">
-          <input class="form-control" name="customer" placeholder="Search Customers" aria-label="Search">
-          <button class="btn btn-dark navbar-btn" name="submit-search"> Look Up</button>
-        </div>
-
-        <div class="nav-item mr-auto">
-          <a class="btn navbar-btn btn-light" href="customerindex.php" role="button"> New Customer</a></div>
-      </form>
-    </nav>
-
-
     <div class="container justify-content-center" id="formscreen">
 
+    <div class="row justify-content-center">
+        <div style="padding: 0px 20px;">
+        <a href="newsaleALEX.php" type="button" class="btn btn-secondary" role="button"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-90deg-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M1.146 4.854a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H12.5A2.5 2.5 0 0 1 15 6.5v8a.5.5 0 0 1-1 0v-8A1.5 1.5 0 0 0 12.5 5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4z"/>
+        </svg></a>
+        </div>
+        <div class="card text-center"> <h4>Item Search Results</h4></div>
+    </div>
 
 
       <div class="row">
         <div class="col m-auto">
-          <div class="card bg-light">
+          <div class="card mt-5 bg-light">
             <table class="table table-bordered">
-              <tr>
-                <td> ID </td>
-                <td> First Name </td>
-                <td> Last Name </td>
-                <td> Street </td>
-                <td> City</td>
-                <td> State</td>
-                <td> Zip </td>
-                <td> Phone Number </td>
-                <td> Email </td>
-                <td> Rewards </td>
-                <td> </td>
-                <td> </td>
-              </tr>
+                <tr>
+                    <th class="col-1"></th>
+                    <th class="col-1">ID</th>
+                    <th class="col-4">Description</th>
+                    <th class="col-1">Quantity</th>
+                    <th class="col-1">Price</th>
+                    <th class="col-2">Category</th>
+                    <th class="col-2">Type</th>
+                </tr>
 
               
-                <?php
-
-                if (isset($_POST['submit-search'])) {
-                  $search = mysqli_real_escape_string($conn, $_POST['customer']);
-                  $sql = "SELECT * FROM customer_info WHERE first_name LIKE '%$search%' OR last_name LIKE '%$search%' OR phone_number LIKE '%$search%' OR email LIKE '%$search%'";
-                  $result = mysqli_query($conn, $sql);
-                  $queryResults = mysqli_num_rows($result);
-
-                  if ($queryResults > 0) {
-                    echo "<div>There are $queryResults results matching your search</div><br>";
-                    while ($row = mysqli_fetch_assoc($result)) {
-                      echo "<tr><td>" . $row['customer_id'] . "</td><td>"
-                        . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
-                        . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
-                        . $row['email'] . "</td><td>" . $row['rewards'] .
-                        "</td><td><a class='btn navbar-btn btn-dark' role='button' href='customerdelete.php?Del="
-                        . $row['customer_id'] . "'>Delete</a></td><td><a class='btn navbar-btn btn-dark' role='button' href='customeredit.php?Upd="
-                        . $row['customer_id'] . "'>Update</a></td></tr>";
+              <?php
+                if (isset($_POST['item-search'])) {
+                    $search = mysqli_real_escape_string($conn, $_POST['isearch']);
+                    $sql = "SELECT * FROM product_inventory WHERE productName LIKE '%$search%' OR productType LIKE '%$search%' OR productSubType LIKE '%$search%' ";
+                    $result = mysqli_query($conn, $sql);
+                    $queryResults = mysqli_num_rows($result);
+                    if ($queryResults > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo "<tr><td><form name='add' method='post' action='newsaleALEX.php'><button class='btn navbar-btn btn-light' name='additem'>
+                            Add</button><input name='sproduct' maxlength='4' value='". $row['product_id'] ."' readonly /></form></td><td>" .$row['productName']. "</td><td>" .$row['in_stock']. "</td><td>".$row['unit_price']. "</td><td>" .$row['productType'].
+                            "</td><td>" .$row['productSubType']. "</td></tr>";
+                        }
+                    }else {
+                        echo "<div>There are no results matching your search</div>";
                     }
-                  } else {
-                    echo "<div>There are no results matching your search</div>";
+                }else {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<tr></td><td><input name='isearch' maxlength='4' value='".$row['product_id']."' readonly /></td><td>" .$row['productName']. "</td><td>" .$row['in_stock']. "</td><td>".$row['unit_price']. "</td><td>" .$row['productType'].
+                        "</td><td>" .$row['productSubType']. "</td></tr>";
+                    }  
                   }
-                } else {
-                  while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<tr><td>" . $row['customer_id'] . "</td><td>"
-                      . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
-                      . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
-                      . $row['email'] . "</td><td>"  . $row['rewards'] .
-                      "</td><td><a class='btn navbar-btn btn-dark' role='button' href='customerdelete.php?Del="
-                      . $row['customer_id'] . "'>Delete</a></td><td><a class='btn navbar-btn btn-dark' role='button' href='customeredit.php?Upd="
-                      . $row['customer_id'] . "'>Update</a></td></tr>";
-                  }
-                }
-
                 ?>
               
 
