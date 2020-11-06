@@ -121,6 +121,14 @@ if (isset($_GET['Upd'])) {
               <input type="text" value=" <?php echo $findID ?> " name="id" readonly />
             </div>
             <div class="form-group row">
+              <label class="col-4" for="Email">Email</label>
+              <input type="text" value=" <?php echo $row['email'] ?> " name="email" />
+            </div>
+            <div class="form-group row">
+              <label class="col-4" for="Password">Password</label>
+              <input type="text" value=" <?php echo $row['password'] ?> " name="password" />
+            </div>
+            <div class="form-group row">
               <label class="col-4" for="First Name">First Name</label>
               <input type="text" value=" <?php echo $row['first_name'] ?> " name="fname" />
             </div>
@@ -147,10 +155,6 @@ if (isset($_GET['Upd'])) {
             <div class="form-group row">
               <label class="col-4" for="Zip Code">Zip Code</label>
               <input type="text" value=" <?php echo $row['zip_code'] ?> " name="zip" />
-            </div>
-            <div class="form-group row">
-              <label class="col-4" for="email">Email</label>
-              <input type="email" value=" <?php echo $row['email'] ?> " name="email" />
             </div>
             <div class="form-group row">
               <label class="col-4" for="Rewards">Rewards </label>
