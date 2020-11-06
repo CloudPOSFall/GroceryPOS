@@ -1,13 +1,7 @@
 <?php
-<<<<<<< HEAD
-include_once ('config.php');
-$query = "SELECT * FROM product_inventory";
-$result = mysqli_query($conn, $query);
-=======
   include_once ('config.php');
   $query = "select * from product_inventory";
   $result = mysqli_query($conn,$query);
->>>>>>> master
 ?>
 <!DOCTYPE html>
 <html>
