@@ -140,7 +140,7 @@ $result = mysqli_query($conn, $query);
               </tr>
 
 
-        
+
 
                 <?php
 
@@ -164,7 +164,7 @@ $result = mysqli_query($conn, $query);
                 } else {
                   while ($row = mysqli_fetch_assoc($result)) {
                     echo "<tr><td>" . $row['vendor_id'] . "</td><td>"
-                      . $row['vendor_name'] . "</td><td>" . $row['vendor_number'] . "</td><td>" . $row['vendor_address'] . "</td><td>"
+                      . $row['vendor_name'] . "</td><td>" . $row['street_address'] . "</td><td>" . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>"  
                       . $row['company_code'] . "</td><td>" . $row['shipments'] . "</td><td><a class='btn navbar-btn btn-dark' role='button' href='vendordelete.php?Del='"
                       . $row['vendor_id'] . "'>Delete</a></td></tr>";
                   }

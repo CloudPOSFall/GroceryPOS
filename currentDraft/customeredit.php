@@ -125,10 +125,6 @@ if (isset($_GET['Upd'])) {
               <input type="text" value=" <?php echo $row['first_name'] ?> " name="fname" />
             </div>
             <div class="form-group row">
-              <label class="col-4" for="Middle Initial">Middle Initial</label>
-              <input type="text" value=" <?php echo $row['middle_initial'] ?> " name="mi" />
-            </div>
-            <div class="form-group row">
               <label class="col-4" for="Last Name">Last Name</label>
               <input type="text" value=" <?php echo $row['last_name'] ?> " name="lname" />
             </div>
@@ -164,7 +160,7 @@ if (isset($_GET['Upd'])) {
           </form>
       </div>
 
-            
+
 </body>
 
 <script type="text/javascript">
