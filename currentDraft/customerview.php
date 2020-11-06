@@ -126,7 +126,7 @@ $result = mysqli_query($conn, $query);
 
       <div class="row">
         <div class="col m-auto">
-          <div class="card mt-5 bg-light">
+          <div class="card bg-light">
             <table class="table table-bordered">
               <tr>
                 <td> ID </td>
@@ -140,9 +140,10 @@ $result = mysqli_query($conn, $query);
                 <td> Phone Number </td>
                 <td> Rewards </td>
                 <td> </td>
+                <td> </td>
               </tr>
 
-              <div class='card mt-5 bg-light'>
+              
                 <?php
 
                 if (isset($_POST['submit-search'])) {
@@ -178,7 +179,7 @@ $result = mysqli_query($conn, $query);
                 }
 
                 ?>
-              </div>
+              
 
             </table>
           </div>
