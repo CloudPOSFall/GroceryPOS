@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 09, 2020 at 09:17 PM
+-- Generation Time: Nov 09, 2020 at 10:47 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -100,6 +100,8 @@ CREATE TABLE `inventory_sales` (
   `qty` int(11) NOT NULL,
   `unit_price` float NOT NULL,
   `discount` varchar(50) NOT NULL,
+  `cart_purchase` tinyint(1) NOT NULL,
+  `sale` tinyint(1) NOT NULL,
   `product_id` int(11) DEFAULT NULL,
   `ticket_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
