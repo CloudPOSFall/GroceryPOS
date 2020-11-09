@@ -28,9 +28,9 @@
   }
   else
   {
-    echo 'Inserted';
+      header("location:accountHomeDraft.php");
   }
 
-  header("refresh:2; url=signupDraft.php");
+  
 
 ?>

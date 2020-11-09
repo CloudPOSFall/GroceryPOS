@@ -1,7 +1,7 @@
 <?php
     include_once('config.php');
 
-    $query = "SELECT DISTINCT productType FROM products ORDER BY productType";
+    $query = "SELECT DISTINCT productType FROM product_inventory ORDER BY productType";
 
     $result = mysqli_query($conn, $query) or die("Execution failed");
 

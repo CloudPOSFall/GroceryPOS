@@ -6,7 +6,7 @@
 
 
     if(isset($_GET['productType'])) {
-        $query = "SELECT DISTINCT productSubType FROM products WHERE productType = '".$_GET['productType']."' ORDER BY productSubType";
+        $query = "SELECT DISTINCT productSubType FROM product_inventory WHERE productType = '".$_GET['productType']."' ORDER BY productSubType";
         $result = mysqli_query($conn, $query) or die("Execution failed");
 
         $tableCode = "<select name='productSubType'>";
