@@ -1,3 +1,51 @@
+<?php
+
+// Initialize the session
+ob_start();
+// Check if the user is already logged in, if yes then redirect him to welcome page
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
+{
+  header("Location: accountHomeDraft.php");
+  exit;
+}
+
+// Include config file
+include_once "config.php";
+
+// Define variables and initialize with empty values
+$pin = "";
+$pin_err = "";
+
+// Processing form data when form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+  // Check if pin is empty
+  if (empty(trim($_POST["pin"]))) {
+    $email_err = "Please enter pin.";
+  } else {
+    $pin = trim($_POST["pin"]);
+    $pin = mysqli_real_escape_string($conn, $pin);
+  }
+    // Validate credentials
+    if (empty($pin_err))
+    {
+    $query = mysqli_query($conn,"SELECT ID,email,password,pin_number,first_name,last_name,user_id,phone_number,SSN,street_address,city,state,zip_code,start_date FROM employee_info WHERE pin_number = '$pin'");
+        while($numrows = mysqli_fetch_assoc($query))
+        {
+			$first_name = $numrows["first_name"];
+			$first_name = mysqli_real_escape_string($conn,$first_name);
+    		$last_name =  $numrows["last_name"];
+            $last_name = mysqli_real_escape_string($conn,$last_name);
+    	}
+		session_start();
+		$_SESSION["email"] = $email;
+		$_SESSION["first_name"] = $first_name;
+  		$_SESSION["last_name"] = $last_name;
+		header("Location: accountHomeDraft.php");
+		ob_end_flush();		
+	}    
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,7 +94,7 @@
 
                     <br>
                     <h4 style="padding: 10px;">Employee Verification</h4><br>
-                    <form class="form-horizontal" method="post" action="signupInsert.php">
+                    <form class="form-horizontal" method="post" action="accountHomeDraft.php">
                         <div class="row justify-content-center" style="padding: 10px;">
                             <div class="form-group">
                                 <input name="pin" style="font-size: 1.5em" maxlength="4" size="6" class="form-control" placeholder="PIN">

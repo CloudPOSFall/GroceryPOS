@@ -51,7 +51,15 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="loginDraft.php">Log In</a>
+            <a class="nav-link" href="customerlogin.php">Customer </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="employeePinLogin.php">Employee </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="loginDraft.php">Storelevel </a>
           </li>
 
           <li class="nav-item">
