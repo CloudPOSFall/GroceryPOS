@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 04, 2020 at 04:46 AM
+-- Generation Time: Nov 09, 2020 at 09:17 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `marketpos2`
+-- Database: `marketpos-2`
 --
 
 -- --------------------------------------------------------
@@ -50,7 +50,7 @@ INSERT INTO `customer_info` (`customer_id`, `email`, `password`, `first_name`, `
 (2, 'tylerherro23@gmail.com', 'password', 'Tyler', 'Herro', 3475436578, 90, '12th Street', 'New York', 'NY', 9874),
 (3, 'bronny45@hotmail.com', 'lebron', 'Bronny', 'James', 2124567656, 44, '21 Wood Street', 'Woodhaven', 'VT', 7384),
 (4, 'kyrieirving2@hotmail.com', 'kyrie', 'Kyrie', 'Irving', 2123434567, 14, '74 2nd Ave', 'New York', 'NY', 12343),
-(5, 'georgeL@aim.com', 'lopez', 'George', 'Lopez', 8454323456, 98, '34th Street', 'New York', 'NY', 11002);
+(6, 'michaelj23@gmail.com', 'jordan', 'Michael', 'Jordan', 2125468796, 44, '14th Street', 'Chicago ', 'IL', 76854);
 
 -- --------------------------------------------------------
 
@@ -96,19 +96,13 @@ INSERT INTO `employee_info` (`employee_id`, `email`, `password`, `pin_number`, `
 
 CREATE TABLE `inventory_sales` (
   `ISID` int(11) NOT NULL,
-  `ticket_id` int(11) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL,
+  `name` varchar(50) NOT NULL,
   `qty` int(11) NOT NULL,
   `unit_price` float NOT NULL,
-  `discount` varchar(50) NOT NULL
+  `discount` varchar(50) NOT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `ticket_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `inventory_sales`
---
-
-INSERT INTO `inventory_sales` (`ISID`, `ticket_id`, `product_id`, `qty`, `unit_price`, `discount`) VALUES
-(1, NULL, NULL, 5, 6.99, '50%');
 
 -- --------------------------------------------------------
 
@@ -156,6 +150,15 @@ CREATE TABLE `storelevel_signup` (
   `number_of_stores` int(11) NOT NULL,
   `company_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `storelevel_signup`
+--
+
+INSERT INTO `storelevel_signup` (`ID`, `email`, `password`, `first_name`, `last_name`, `phone_number`, `number_of_stores`, `company_name`) VALUES
+(1, 'johnnyfran20002@gmail.com', 'password', 'Johnny', 'Tejada', 6463214487, 3, 'Walmart'),
+(2, 'herman44@hotmail.com', 'strongpassword', 'Bob', 'Herman', 2123456578, 1, 'Target'),
+(4, 'kjackson34@account.edu', '', 'Kevin', 'Jackson', 7187643345, 3, 'Dairy Queen');
 
 -- --------------------------------------------------------
 
@@ -276,7 +279,8 @@ ALTER TABLE `employee_info`
 --
 ALTER TABLE `inventory_sales`
   ADD PRIMARY KEY (`ISID`),
-  ADD KEY `ticket_id` (`ticket_id`,`product_id`);
+  ADD UNIQUE KEY `product_id` (`product_id`),
+  ADD UNIQUE KEY `ticket_id` (`ticket_id`);
 
 --
 -- Indexes for table `product_inventory`
@@ -327,7 +331,7 @@ ALTER TABLE `zreport_system`
 -- AUTO_INCREMENT for table `customer_info`
 --
 ALTER TABLE `customer_info`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `employee_info`
@@ -351,7 +355,7 @@ ALTER TABLE `product_inventory`
 -- AUTO_INCREMENT for table `storelevel_signup`
 --
 ALTER TABLE `storelevel_signup`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tax_table`
@@ -391,7 +395,8 @@ ALTER TABLE `employee_info`
 -- Constraints for table `inventory_sales`
 --
 ALTER TABLE `inventory_sales`
-  ADD CONSTRAINT `inventory_sales_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `inventory_sales_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `ticket_system` (`ticket_id`) ON DELETE NO ACTION ON UPDATE SET NULL,
+  ADD CONSTRAINT `inventory_sales_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
 -- Constraints for table `product_inventory`
@@ -403,9 +408,8 @@ ALTER TABLE `product_inventory`
 -- Constraints for table `ticket_system`
 --
 ALTER TABLE `ticket_system`
-  ADD CONSTRAINT `ticket_system_ibfk_1` FOREIGN KEY (`ISID`) REFERENCES `inventory_sales` (`ISID`) ON DELETE NO ACTION ON UPDATE SET NULL,
   ADD CONSTRAINT `ticket_system_ibfk_2` FOREIGN KEY (`employee_id`) REFERENCES `employee_info` (`employee_id`) ON DELETE NO ACTION ON UPDATE SET NULL,
-  ADD CONSTRAINT `ticket_system_ibfk_3` FOREIGN KEY (`ISID`) REFERENCES `inventory_sales` (`ISID`) ON DELETE NO ACTION ON UPDATE SET NULL;
+  ADD CONSTRAINT `ticket_system_ibfk_3` FOREIGN KEY (`ISID`) REFERENCES `inventory_sales` (`ISID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `zreport_system`
