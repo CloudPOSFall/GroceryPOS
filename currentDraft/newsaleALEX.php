@@ -1,5 +1,10 @@
 <?php
 include_once('config.php');
+
+if(!isset($_SESSION['sale'])){
+    //If it doesn't, create an empty array.
+    $_SESSION['customer'] = array();
+}
 ?>
 
 <!DOCTYPE html>
@@ -126,9 +131,6 @@ include_once('config.php');
         </nav>
 
         <nav class="navbar navbar-light" style="background-color: #a1b6a8;" id="salespanel">
-            <form class="form-inline" method="post" action="customerview.php">
-                <div class="nav-item">
-
                     <?php
                     if (isset($_GET['Add'])) {
                         $ID = $_GET['Add'];
@@ -137,20 +139,23 @@ include_once('config.php');
                         $cQueryRes= mysqli_num_rows($cResult);
                         if ($cQueryRes > 0) {
                             while ($crow = mysqli_fetch_assoc($cResult)) {
-                                echo "<div class='card' style='padding: 8px'>" . $_SESSION['sale'][] = $crow['first_name'] . " " . $crow['last_name'] . "</div>";
+                                $_SESSION['customer']['fname'] = $crow['first_name'];
+                                $_SESSION['customer']['lname'] = $crow['last_name'];
+                                echo "<form class='form-inline'><div class='card' style='padding: 8px'>" . $_SESSION['customer']['fname'] . " " . $_SESSION['customer']['lname'] . "</div>
+                                <div class='nav-item'><button href='newsaleALEX.php' class='btn navbar-btn'> Remove</button></div></form>";
                             }
                         } 
                     }else {
-                        echo "<div class='card' style='padding: 8px'>No Customer Selected</div>";
+                        echo "<form class='form-inline' method='post' action='customerview.php'><div class='card' style='padding: 8px'>No Customer Selected</div>
+                        <div class='nav-item'>
+                        <input class='form-control col-5' name='customer' placeholder='Search Customers' aria-label='Search'>
+                        <button class='btn btn-dark navbar-btn' name='sale-search'> Look Up</button></div></form>";
                     }
                     ?>
-
-                </div>
-                <input class="form-control col-5" name="customer" placeholder="Search Customers" aria-label="Search">
-                <button class="btn btn-dark navbar-btn" name="sale-search"> Look Up</button>
-                <div class="nav-item">
-                    <button class="btn navbar-btn"> New</button></div>
-            </form>
+                
+                
+                <div class="nav-item"><button class="btn navbar-btn"> New</button></div>
+            
 
         </nav>
 

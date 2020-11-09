@@ -129,7 +129,6 @@ if(!isset($_SESSION['sale'])){
         <div class="card text-center"> <h4>Item Search Results</h4></div>
     </div>
 
-
       <div class="row">
         <div class="col m-auto">
           <div class="card mt-5 bg-light">
@@ -153,7 +152,7 @@ if(!isset($_SESSION['sale'])){
                     $queryResults = mysqli_num_rows($result);
                     if ($queryResults > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<tr><td><form name='add' method='post' action='newsaleALEX.php'><button class='btn navbar-btn btn-light' name='additem'>
+                            echo "<tr><td><form method='post' action='newsaleALEX.php'><button class='btn navbar-btn btn-light' name='additem'>
                             Add</button></td><td><input name='sproduct' size='1' value='". $row['product_id'] ."' readonly /></form></td><td>" .$row['productName']. "</td><td>" .$row['in_stock']. "</td><td>".$row['unit_price']. "</td><td>" .$row['productType'].
                             "</td><td>" .$row['productSubType']. "</td></tr>";
                         }
