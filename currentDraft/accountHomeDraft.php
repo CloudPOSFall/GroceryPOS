@@ -151,7 +151,7 @@ $company = $_SESSION['company_name'];
         </div>
       </div>
     </div>
-    <div class="wrapper" id="controlscreen">
+    <div class="wrapper" id="homescreen">
       <div class="card-deck">
         <div class="col-md-3">
           <div class="card text-center">

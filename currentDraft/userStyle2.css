@@ -256,6 +256,10 @@ a.article, a.article:hover {
 }
 
 #controlscreen{
+    margin-left:30px;
+}
+
+#homescreen{
     margin-left:20%;
 }
 
