@@ -1,11 +1,10 @@
 <?php
 include_once('config.php');
 ?>
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
 <head>
-  <meta charset="utf-8">
+<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -21,17 +20,11 @@ include_once('config.php');
   <!--font awesome js -->
   <script defer src="js/solid.js"></script>
   <script defer src="js/fontawesome.js"></script>
-
 </head>
 
 <body>
-
-
-
-
-
-
-  
+	
+	
       <!--nav sidebar-->
       <nav id="sidebar">
         <div class="sidebar-header bg-dark">
@@ -138,109 +131,7 @@ include_once('config.php');
       </div>
     </nav>
 
-
-    <!--control buttons-->
-    <div class="wrapper" id="controlscreen">
-
-      <div class="card-deck">
-        <p>Customer Controls</p>
-        <div class="line"></div>
-        <a href="customerview.php">
-          <div class="card" id="pagecard">
-            <div class="card-body text-center">
-              <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-people-fill"
-                  fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                    d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
-                </svg></h5>
-              <p class="card-text">Customers</p>
-            </div>
-          </div>
-        </a>
-
-        <a href="customerindex.php">
-          <div class="card" id="pagecard">
-            <div class="card-body text-center">
-              <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person-plus"
-                  fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                    d="M8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10zM13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
-                </svg></h5>
-              <p class="card-text">New Customer</p>
-            </div>
-          </div>
-        </a>
-
-        <a href="customereditpage.php">
-          <div class="card" id="pagecard">
-            <div class="card-body text-center">
-              <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person-bounding-box"
-                  fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                    d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z" />
-                  <path fill-rule="evenodd"
-                    d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                </svg></h5>
-              <p class="card-text">Edit Customer</p>
-            </div>
-          </div>
-        </a>
-
-        <a href="#">
-          <div class="card" id="pagecard">
-            <div class="card-body text-center">
-              <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-intersect"
-                  fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                    d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2V2zm5 10v2a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-2v5a2 2 0 0 1-2 2H5zm6-8H6a2 2 0 0 0-2 2v5H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v2z" />
-                </svg></h5>
-              <p class="card-text">Merge Accounts</p>
-            </div>
-          </div>
-        </a>
-
-      </div>
-
-
-      <div class="card-deck">
-        <p></p>
-        <p>Rewards & Gift Cards</p>
-        <div class="line"></div>
-        <a href="rewardspage.php">
-          <div class="card" id="pagecard">
-            <div class="card-body text-center">
-              <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-award"
-                  fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                    d="M9.669.864L8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68L9.669.864zm1.196 1.193l-1.51-.229L8 1.126l-1.355.702-1.51.229-.684 1.365-1.086 1.072L3.614 6l-.25 1.506 1.087 1.072.684 1.365 1.51.229L8 10.874l1.356-.702 1.509-.229.684-1.365 1.086-1.072L12.387 6l.248-1.506-1.086-1.072-.684-1.365z" />
-                  <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z" />
-                </svg></h5>
-              <p class="card-text">Rewards</p>
-            </div>
-          </div>
-        </a>
-
-        <a href="giftcardspage.php">
-          <div class="card" id="pagecard">
-            <div class="card-body text-center">
-              <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-gift-fill"
-                  fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                    d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A2.968 2.968 0 0 1 3 2.506V2.5zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43a.522.522 0 0 0 .023.07zM9 3h2.932a.56.56 0 0 0 .023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0V3z" />
-                  <path d="M15 7v7.5a1.5 1.5 0 0 1-1.5 1.5H9V7h6zM2.5 16A1.5 1.5 0 0 1 1 14.5V7h6v9H2.5z" />
-                </svg></h5>
-              <p class="card-text">Gift Cards</p>
-            </div>
-          </div>
-        </a>
-
-      </div>
-
-
-    </div>
-  </div>
-
-  <!--END page content-->
+ <!--END page content-->
 
   <!-- bootstrap popper js-->
   <script src="js/popper.min.js"></script>
