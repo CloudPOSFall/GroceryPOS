@@ -1,7 +1,6 @@
 <?php
-
+include_once('config.php');
 // Initialize the session
-ob_start();
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
 {
@@ -10,7 +9,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
 }
 
 // Include config file
-include_once "config.php";
+
 
 // Define variables and initialize with empty values
 $pin = "";
@@ -21,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   // Check if pin is empty
   if (empty(trim($_POST["pin"]))) {
-    $email_err = "Please enter pin.";
+    $pin_err = "Please enter pin.";
   } else {
     $pin = trim($_POST["pin"]);
     $pin = mysqli_real_escape_string($conn, $pin);
@@ -29,21 +28,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate credentials
     if (empty($pin_err))
     {
-    $query = mysqli_query($conn,"SELECT ID,email,password,pin_number,first_name,last_name,user_id,phone_number,SSN,street_address,city,state,zip_code,start_date FROM employee_info WHERE pin_number = '$pin'");
-        while($numrows = mysqli_fetch_assoc($query))
-        {
-			$first_name = $numrows["first_name"];
-			$first_name = mysqli_real_escape_string($conn,$first_name);
-    		$last_name =  $numrows["last_name"];
-            $last_name = mysqli_real_escape_string($conn,$last_name);
-    	}
+    $query = mysqli_query($conn,"SELECT employee_id, email, password, pin_number, first_name, last_name, user_id, phone_number, SSN, street_address, city, state, zip_code, start_date, customer_id FROM employee_info WHERE pin_number = '$pin'");
+		$numrows = mysqli_num_rows($query);
+		if($numrows!=0)
+		{
+        	while($numrows = mysqli_fetch_assoc($query))
+        	{
+				$first_name = $numrows['first_name'];
+				$first_name = mysqli_real_escape_string($conn,$first_name);
+    			$last_name =  $numrows['last_name'];
+            	$last_name = mysqli_real_escape_string($conn,$last_name);
+    		}
+		}
 		session_start();
-		$_SESSION["email"] = $email;
 		$_SESSION["first_name"] = $first_name;
   		$_SESSION["last_name"] = $last_name;
 		header("Location: accountHomeDraft.php");
-		ob_end_flush();		
-	}    
+		ob_end_flush();	
+	}else{
+		$pin_err = "Incorrect pin";
+	}   
 }
 ?>
 <!DOCTYPE html>

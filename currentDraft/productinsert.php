@@ -19,8 +19,9 @@
         header("location:productview.php");
       }
       else
-      {
-        echo ' Please Check Your Query ';
+	  {
+		  echo 'Not Inserted';
       }
+	  header("refresh:2; url=productindex.php");
     }
 ?>
