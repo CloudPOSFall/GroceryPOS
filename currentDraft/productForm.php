@@ -1,3 +1,5 @@
+
+
 <form method="get" type="button" action="<?php echo $_SERVER['PHP_SELF'];?>">
 
     <?php //include 'productview.php'; ?>   
@@ -10,6 +12,7 @@
 
     <?php 
         if(isset($_GET['submit'])){
+            //$productType = $_GET['productType'];
             include 'getSubType.php';
         }
     ?>
