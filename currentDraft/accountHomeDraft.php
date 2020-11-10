@@ -140,13 +140,15 @@ $company = $_SESSION['company_name'];
     <!--control buttons-->
 
 	  <div align="center" style="padding-top: 40px;">
-	  <div class="card" style="width: 18rem;">
-		  <img class="card-img-top" src="media/prof.png" alt="Card image cap">
+    <div class="card" style="width: 12rem;">
+    
+      <img class="img-thumbnail" src="media/prof.png" style="height: 11rem;" 
+      alt="Card image cap"/>
         <div class="card-body">
-      <p class="card-text"><?php
+        <?php
                 echo sprintf($format,$name, $lname);
                 echo sprintf($format1,$company);
-                ?></p>
+                ?>
       </div>
 	  </div>
 	  </div>
