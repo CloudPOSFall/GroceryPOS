@@ -200,7 +200,7 @@ include_once('config.php');
           </div>
         </a>
 
-        <a href="#">
+        <a href="neworder.php">
           <div class="card" id="pagecard">
             <div class="card-body text-center">
               <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-clipboard-plus"
