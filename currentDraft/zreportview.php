@@ -31,8 +31,6 @@
               <td> Payouts </td>
               <td> Payins </td>
               <td> Purchases </td>
-              <td> Ticket ID </td>
-              <td> Product ID </td>
             </tr>
 
             <?php
@@ -51,8 +49,6 @@
                 $Payouts = $row['payouts'];
                 $Payins = $row['pay_ins'];
                 $Purchases = $row['purchases'];
-                $TicketID = $row['ticket_id'];
-                $ProductID = $row['product_id'];
             ?>
               <tr>
                 <td><?php echo $ID ?></td>
@@ -68,8 +64,6 @@
                 <td><?php echo $Payouts ?></td>
                 <td><?php echo $Payins ?></td>
                 <td><?php echo $Purchases ?></td>
-                <td><?php echo $TicketID ?></td>
-                <td><?php echo $ProductID ?></td>
                 <td><a href ="zreportdelete.php?Del=<?php echo $ID ?>">Delete</a></td>
               </tr>
             <?php
