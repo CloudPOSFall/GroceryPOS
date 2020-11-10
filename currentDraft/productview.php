@@ -151,9 +151,6 @@
 
 
     <div class="container justify-content-center" id="formscreen">
-
-
-
       <div class="row">
         <div class="col m-auto">
           <div class="card mt-5 bg-light">
