@@ -165,6 +165,8 @@
                 <td> </td>
               </tr>
 
+              <?php include('pracCategory.php')?>
+
               <div class='card mt-5 bg-light'>
                 <?php
 
