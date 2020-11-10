@@ -122,7 +122,7 @@ if(!isset($_SESSION['sale'])){
 
     <div class="row justify-content-center">
         <div style="padding: 0px 20px;">
-        <a href="newsaleALEX.php" type="button" class="btn btn-secondary" role="button"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-90deg-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <a href="sale.php" type="button" class="btn btn-secondary" role="button"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-90deg-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M1.146 4.854a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H12.5A2.5 2.5 0 0 1 15 6.5v8a.5.5 0 0 1-1 0v-8A1.5 1.5 0 0 0 12.5 5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4z"/>
         </svg></a>
         </div>
@@ -152,7 +152,7 @@ if(!isset($_SESSION['sale'])){
                     $queryResults = mysqli_num_rows($result);
                     if ($queryResults > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<tr><td><form method='post' action='newsaleALEX.php'><button class='btn navbar-btn btn-light' name='additem'>
+                            echo "<tr><td><form method='post' action='sale.php'><button class='btn navbar-btn btn-light' name='additem'>
                             Add</button></td><td><input name='sproduct' size='1' value='". $row['product_id'] ."' readonly /></form></td><td>" .$row['productName']. "</td><td>" .$row['in_stock']. "</td><td>".$row['unit_price']. "</td><td>" .$row['productType'].
                             "</td><td>" .$row['productSubType']. "</td></tr>";
                         }

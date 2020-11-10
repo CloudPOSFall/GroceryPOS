@@ -76,6 +76,16 @@ a, a:hover, a:focus {
     margin-top: 20px;
 }
 
+#navline {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 95%;
+    height: 1px;
+    border-bottom: 1px solid white;
+    opacity: 25%;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
 
 .card-deck{
     margin-top: 30px;
@@ -104,11 +114,14 @@ a, a:hover, a:focus {
 
 #sidebar .sidebar-header {
     padding-left: 20px;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    height: 4.5em;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
 }
 
 #sidebar ul.components {
     padding: 20px 0;
+    margin: auto;
+    width: 95%;
 }
 
 #sidebar ul p {
@@ -126,17 +139,20 @@ a, a:hover, a:focus {
     color: #000000;
     background: #ffffff ;
     opacity: 60%;
+    border-radius: 5px;
 }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
     background: #015e20;
+    margin: auto;
+    width: 97%;
+    border-radius: 5px;
 }
 
 #usercard{
-    padding-top: 10px;
-    padding-bottom: 10px;
     background: #015e20;
+    border-radius: 5px;
 }
 
 #pagecard{

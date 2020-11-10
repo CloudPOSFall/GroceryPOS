@@ -179,7 +179,7 @@ $result = mysqli_query($conn, $query);
                     . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
                     . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
                     . $row['email'] . "</td><td>"  . $row['rewards'] .
-                    "</td><td><a class='btn btn-dark' role='button' href='newsaleALEX.php?Add="
+                    "</td><td><a class='btn btn-dark' role='button' href='sale.php?Add="
                     . $row['customer_id'] . "'>Attach</a></td><td><a class='btn btn-dark' role='button' href='customeredit.php?Upd="
                     . $row['customer_id'] . "'>Update</a></td></tr>";
                   }
