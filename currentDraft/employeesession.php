@@ -40,7 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		session_start();
 		$_SESSION["email"] = $email;
 		$_SESSION["first_name"] = $first_name;
-  		$_SESSION["last_name"] = $last_name;
+        $_SESSION["last_name"] = $last_name;
+        $_SESSION["pin"] = $pin;
 		header("Location: accountHomeDraft.php");
 		ob_end_flush();		
 	}    
@@ -94,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     <br>
                     <h4 style="padding: 10px;">Employee Verification</h4><br>
-                    <form class="form-horizontal" method="post" action="sale.html">
+                    <form class="form-horizontal" method="post" action="sale.php">
                         <div class="row justify-content-center" style="padding: 10px;">
                             <div class="form-group">
                                 <input name="pin" style="font-size: 1.5em" maxlength="4" size="6" class="form-control" placeholder="PIN">

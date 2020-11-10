@@ -4,7 +4,8 @@
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
-    overflow-y: hidden;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 p {
@@ -28,6 +29,7 @@ a, a:hover, a:focus {
     padding: 2px 2px;
     margin-top: 30px;
     margin-left: 0px;
+    overflow-y: scroll;
 }
 
 
@@ -35,6 +37,7 @@ a, a:hover, a:focus {
     width: calc(100% - 210px);
     margin-top: -22px;
     margin-left: -12px;
+    overflow-y: scroll;
 
 }
 
@@ -76,6 +79,16 @@ a, a:hover, a:focus {
     margin-top: 20px;
 }
 
+#navline {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 95%;
+    height: 1px;
+    border-bottom: 1px solid white;
+    opacity: 25%;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
 
 .card-deck{
     margin-top: 30px;
@@ -104,11 +117,14 @@ a, a:hover, a:focus {
 
 #sidebar .sidebar-header {
     padding-left: 20px;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    height: 4.5em;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
 }
 
 #sidebar ul.components {
     padding: 20px 0;
+    margin: auto;
+    width: 95%;
 }
 
 #sidebar ul p {
@@ -126,17 +142,20 @@ a, a:hover, a:focus {
     color: #000000;
     background: #ffffff ;
     opacity: 60%;
+    border-radius: 5px;
 }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
-    background: #015e20;
+    background: #009933;
+    margin: auto;
+    width: 97%;
+    border-radius: 5px;
 }
 
 #usercard{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background: #015e20;
+    background: #01551d;
+    border-radius: 5px;
 }
 
 #pagecard{
@@ -233,24 +252,40 @@ a.article, a.article:hover {
     position: absolute;
     top: 0;
     right: 0;
-    overflow: hidden;
+    
 }
 
 #controlscreen{
-    margin-left:30px
+    margin-left:30px;
+}
+
+#homescreen{
+    margin-left:20%;
 }
 
 #salescontent{
     width: calc(100% - 250px);
+    
 }
 
 #content.active {
     width: 100%;
 }
 
+#repscreen{
+    margin-top: 50px;
+    margin-left: 20px;
+    
+    
+}
+.list-group-item{
+    font-size: 0.82em;
+}
+
 #formscreen{
     margin-top: 40px;
     left: 200px;
+    
     
 }
 #tablescreen{

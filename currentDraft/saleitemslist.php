@@ -69,12 +69,12 @@ if(!isset($_SESSION['sale'])){
           </svg> Sales</a>
       </li>
       <li>
-        <a href="inventorycontrol.html"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-inbox-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <a href="inventorycontrol.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-inbox-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M4.98 4a.5.5 0 0 0-.39.188L1.54 8H6a.5.5 0 0 1 .5.5 1.5 1.5 0 1 0 3 0A.5.5 0 0 1 10 8h4.46l-3.05-3.812A.5.5 0 0 0 11.02 4H4.98zm-1.17-.437A1.5 1.5 0 0 1 4.98 3h6.04a1.5 1.5 0 0 1 1.17.563l3.7 4.625a.5.5 0 0 1 .106.374l-.39 3.124A1.5 1.5 0 0 1 14.117 13H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .106-.374l3.7-4.625z" />
           </svg> Inventory</a>
       </li>
       <li>
-        <a href="customercontrol.html"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <a href="customercontrol.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
           </svg> Customers</a>
       </li>
@@ -122,7 +122,7 @@ if(!isset($_SESSION['sale'])){
 
     <div class="row justify-content-center">
         <div style="padding: 0px 20px;">
-        <a href="newsaleALEX.php" type="button" class="btn btn-secondary" role="button"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-90deg-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <a href="sale.php" type="button" class="btn btn-secondary" role="button"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-90deg-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M1.146 4.854a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H12.5A2.5 2.5 0 0 1 15 6.5v8a.5.5 0 0 1-1 0v-8A1.5 1.5 0 0 0 12.5 5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4z"/>
         </svg></a>
         </div>
@@ -152,7 +152,7 @@ if(!isset($_SESSION['sale'])){
                     $queryResults = mysqli_num_rows($result);
                     if ($queryResults > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<tr><td><form method='post' action='newsaleALEX.php'><button class='btn navbar-btn btn-light' name='additem'>
+                            echo "<tr><td><form method='post' action='sale.php'><button class='btn navbar-btn btn-light' name='additem'>
                             Add</button></td><td><input name='sproduct' size='1' value='". $row['product_id'] ."' readonly /></form></td><td>" .$row['productName']. "</td><td>" .$row['in_stock']. "</td><td>".$row['unit_price']. "</td><td>" .$row['productType'].
                             "</td><td>" .$row['productSubType']. "</td></tr>";
                         }
