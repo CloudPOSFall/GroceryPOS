@@ -1,7 +1,7 @@
 <?php
-session_start();
+include_once('config.php');
 $name = $_SESSION['first_name'];
-$format1 = '%s %s'."<br>";
+$format = '%s %s'."<br>";
 $lname = $_SESSION['last_name'];
 $format1 = '%s'."<br>";
 $company = $_SESSION['company_name'];
@@ -59,7 +59,7 @@ $company = $_SESSION['company_name'];
         </li>
         <div class="justify-content-center" id="navline"></div>
        
-            <li>
+            <li class="active">
                 <a href="accounthomeDraft.php">
                     <span style="padding:5px;">
                         <svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-house-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -89,7 +89,7 @@ $company = $_SESSION['company_name'];
                             <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
                         </svg></span> Customers</a>
             </li>
-            <li class="active">
+            <li>
                 <a href="reportsControlPanel.php">
                     <span style="padding:5px;">
                         <svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-clipboard-data" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -139,14 +139,13 @@ $company = $_SESSION['company_name'];
 
     <!--control buttons-->
 
-	  <div align = "center" style="padding-top: 40px;">
+	  <div align="center" style="padding-top: 40px;">
 	  <div class="card" style="width: 18rem;">
 		  <img class="card-img-top" src="media/prof.png" alt="Card image cap">
         <div class="card-body">
       <p class="card-text"><?php
-                echo sprintf($format,$name);
-                echo sprintf($format1,$lname);
-                echo sprintf($format2,$company);
+                echo sprintf($format,$name, $lname);
+                echo sprintf($format1,$company);
                 ?></p>
       </div>
 	  </div>

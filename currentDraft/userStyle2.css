@@ -144,14 +144,14 @@ a, a:hover, a:focus {
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
-    background: #015e20;
+    background: #009933;
     margin: auto;
     width: 97%;
     border-radius: 5px;
 }
 
 #usercard{
-    background: #015e20;
+    background: #01551d;
     border-radius: 5px;
 }
 
