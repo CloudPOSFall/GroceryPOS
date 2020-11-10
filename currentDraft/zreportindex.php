@@ -17,8 +17,6 @@
               <input type="text" placeholder=" Payouts " name="payouts">
               <input type="text" placeholder=" Payins " name="payins">
               <input type="text" placeholder=" Purchases " name="purchases">
-              <input type="text" placeholder=" Ticket ID" name="tid">
-              <input type="text" placeholder=" Product ID " name="pid">
               <button name="submit">Submit</button>
             </form>
 </body>

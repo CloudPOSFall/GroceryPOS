@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $server = "localhost";
 $dbusername = "root";
@@ -7,6 +7,7 @@ $db = "marketpos-2";
 $debug = "false";
 
 $conn = mysqli_connect($server, $dbusername, $password, $db);
+session_start();
 
 if($conn->connect_error){
 	die('Could not connect: ' . $conn-> connect_error);

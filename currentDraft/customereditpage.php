@@ -1,13 +1,8 @@
 <?php
-include_once ('config.php');
-if (isset($_GET['Upd'])) {
-  $findID = $_GET['Upd'];
-  $query = "SELECT * FROM customer_info WHERE customer_id LIKE '%$findID%'";
-  $result = mysqli_query($conn, $query);
-  $row = mysqli_fetch_assoc($result);
-}
+include_once('config.php');
+$query = "SELECT * FROM customer_info";
+$result = mysqli_query($conn, $query);
 ?>
-
 <!DOCTYPE html>
 <html>
 
@@ -38,8 +33,8 @@ if (isset($_GET['Upd'])) {
 
 <body>
 
-        <!--nav sidebar-->
-        <nav id="sidebar">
+          <!--nav sidebar-->
+          <nav id="sidebar">
         <div class="sidebar-header bg-dark">
             <h1><span><a class="navbar-brand relative-top" href="indexDraft.php"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1z" />
@@ -117,7 +112,6 @@ if (isset($_GET['Upd'])) {
         </div>
     </nav>
   <!--END nav sidebar-->
-
   <!--page content-->
   <div id="content">
 
@@ -142,60 +136,59 @@ if (isset($_GET['Upd'])) {
     </nav>
 
 
-    <div class="container justify-content-center">
+    <nav class="navbar navbar-light" id="salespanel">
+      <form class="form-inline" method="post" action="customerview.php">
+        <div class="nav-item" style="padding: 8px">
+          <input class="form-control" name="customer" placeholder="Search Customers" aria-label="Search">
+          <button class="btn btn-dark navbar-btn" name="submit-search"> Look Up</button>
+        </div>
+        </form>
+    </nav>
 
-    <div class="card card-body bg-light" style="width: 35rem;" id="formscreen">
-        <form action="" method="post">
-        <div class="form-group row">
-              <label class="col-4" for="id">Customer ID:  </label>
-              <input type="text" value=" <?php echo $findID ?> " name="id" readonly />
-            </div>
-            <div class="form-group row">
-              <label class="col-4" for="Email">Email</label>
-              <input type="text" value=" <?php echo $row['email'] ?> " name="email" />
-            </div>
-            <div class="form-group row">
-              <label class="col-4" for="Password">Password</label>
-              <input type="text" value=" <?php echo $row['password'] ?> " name="password" />
-            </div>
-            <div class="form-group row">
-              <label class="col-4" for="First Name">First Name</label>
-              <input type="text" value=" <?php echo $row['first_name'] ?> " name="fname" />
-            </div>
-            <div class="form-group row">
-              <label class="col-4" for="Last Name">Last Name</label>
-              <input type="text" value=" <?php echo $row['last_name'] ?> " name="lname" />
-            </div>
-            <div class="form-group row">
-              <label class="col-4" for="Phone Number">Phone Number</label>
-              <input type="tel" value=" <?php echo $row['phone_number'] ?> " name="number" />
-            </div>
-            <div class="form-group row">
-              <label class="col-4" for="Street">Street</label>
-              <input type="text" value=" <?php echo $row['street_address'] ?> " name="street" />
-            </div>
-            <div class="form-group row">
-              <label class="col-4" for="City">City</label>
-              <input type="text" value=" <?php echo $row['city'] ?> " name="city" />
-            </div>
-            <div class="form-group row">
-              <label class="col-4" for="State">State</label>
-              <input type="text" value=" <?php echo $row['state'] ?> " name="state" />
-            </div>
-            <div class="form-group row">
-              <label class="col-4" for="Zip Code">Zip Code</label>
-              <input type="text" value=" <?php echo $row['zip_code'] ?> " name="zip" />
-            </div>
-            <div class="form-group row">
-              <label class="col-4" for="Rewards">Rewards </label>
-              <input type="text" value=" <?php echo $row['rewards'] ?> " name="rewards" step="1" />
-            </div>
-            <div class="text-center"><button type="submit" name="update" class="btn-lg btn-primary"> Update</button></div>
-          </form>
-      </div>
+    <?php
+        if (isset($_POST['submit-search'])) {
+                $search = mysqli_real_escape_string($conn, $_POST['customer']);
+                $sql = "SELECT * FROM customer_info WHERE first_name LIKE '%$search%' OR last_name LIKE '%$search%' OR phone_number LIKE '%$search%' OR email LIKE '%$search%'";
+                $result = mysqli_query($conn, $sql);
+                $queryResults = mysqli_num_rows($result);
 
+                if ($queryResults > 0) {
+                  echo "<div>There are $queryResults results matching your search</div><br>";
+                  while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr><td>" . $row['customer_id'] . "</td><td>"
+                    . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
+                    . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
+                    . $row['email'] . "</td><td>"  . $row['rewards'] .
+                    "</td><td><a class='btn btn-dark' role='button' href='customerdelete.php?Del="
+                    . $row['customer_id'] . "'>Delete</a></td><td><a class='btn btn-dark' role='button' href='customeredit.php?Upd="
+                    . $row['customer_id'] . "'>Update</a></td></tr>";
+                  }
+                } else {
+                  echo "<div>There are no results matching your search</div>";
+                }
+              }else if (isset($_POST['sale-search'])) {
+                $search = mysqli_real_escape_string($conn, $_POST['customer']);
+                $sql = "SELECT * FROM customer_info WHERE first_name LIKE '%$search%' OR last_name LIKE '%$search%' OR phone_number LIKE '%$search%' OR email LIKE '%$search%'";
+                $result = mysqli_query($conn, $sql);
+                $queryResults = mysqli_num_rows($result);
 
-</body>
+                if ($queryResults > 0) {
+                  echo "<div>There are $queryResults results matching your search</div><br>";
+                  while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr><td>" . $row['customer_id'] . "</td><td>"
+                    . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
+                    . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
+                    . $row['email'] . "</td><td>"  . $row['rewards'] .
+                    "</td><td><a class='btn btn-dark' role='button' href='newsaleALEX.php?Add="
+                    . $row['customer_id'] . "'>Attach</a></td><td><a class='btn btn-dark' role='button' href='customeredit.php?Upd="
+                    . $row['customer_id'] . "'>Update</a></td></tr>";
+                  }
+                } else {
+                  echo "<div>There are no results matching your search</div>";
+                }
+              }
+              ?>
+            </body>
 
 <script type="text/javascript">
   $(document).ready(function() {
@@ -212,28 +205,3 @@ if (isset($_GET['Upd'])) {
 </script>
 
 </html>
-
-<?php
-if (isset($_POST['update'])) {
-
-  $id = $_POST['id'];
-  $Email = $_POST['email'];
-  $FirstName = $_POST['fname'];
-  $LastName = $_POST['lname'];
-  $PhoneNumber = $_POST['number'];
-  $Rewards = $_POST['rewards'];
-  $Street = $_POST['street'];
-  $City = $_POST['city'];
-  $State = $_POST['state'];
-  $Zip = $_POST['zip'];
-
-  $query = "UPDATE customer_info SET email = '$Email', first_name = '$FirstName', last_name = '$LastName', phone_number = '$PhoneNumber', rewards = '$Rewards', street_address = '$Street', city = '$City', state = '$State', zip_code = '$Zip' WHERE customer_id = '$id' ";
-  $result = mysqli_query($conn, $query);
-
-  if ($result) {
-    header("location:customerview.php");
-  } else {
-    echo ' Please Check Your Query ';
-  }
-}
-?>

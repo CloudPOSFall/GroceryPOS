@@ -1,4 +1,5 @@
 <?php
+include_once('config.php');
 // Initialize the session
 ob_start();
 // Check if the user is already logged in, if yes then redirect him to welcome page
@@ -8,7 +9,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
 }
 
 // Include config file
-include_once "config.php";
+
 
 // Define variables and initialize with empty values
 $email = $password = "";
@@ -35,19 +36,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   // Validate credentials
   if (empty($email_err) && empty($password_err)) {
-   $query = mysqli_query($conn,"SELECT ID,email,password,first_name,company_name FROM storelevel_signup WHERE email = '$email' AND password = '$mypassword'");
+   $query = mysqli_query($conn,"SELECT ID,email,password,first_name,last_name,company_name FROM storelevel_signup WHERE email = '$email' AND password = '$mypassword'");
 		$numrows = mysqli_num_rows($query);
 		if($numrows!=0)
 		{
 			while($numrows = mysqli_fetch_assoc($query)) {
 				$first_name = $numrows["first_name"];
 				$first_name = mysqli_real_escape_string($conn,$first_name);
+				$last_name =  $numrows["last_name"];
+				$last_name = mysqli_real_escape_string($conn,$last_name);
 				$company_name = $numrows["company_name"];
 				$company_name = mysqli_real_escape_string($conn,$company_name);
 			}
 			session_start();
 			$_SESSION["email"] = $email;
 	  		$_SESSION["first_name"] = $first_name;
+	  		$_SESSION["last_name"] = $last_name;
 	  		$_SESSION["company_name"] = $company_name;
 			header("Location: accountHomeDraft.php");
 			ob_end_flush();
@@ -110,7 +114,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="loginDraft.php">Log In</a>
+            <a class="nav-link" href="customerlogin.php">Customer </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="employeePinLogin.php">Employee </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="loginDraft.php">Storelevel </a>
           </li>
 
           <li class="nav-item">
@@ -146,7 +158,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <span class="help-block"><?php echo $email_err; ?></span>
             </div>
             <div class="form-group" <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>>
-              <label for="password">Password</label>
+              <label for="password">password</label>
               <input type="text" class="form-control" placeholder="Password" name="password">
               <span class="help-block"><?php echo $password_err; ?></span>
             </div>
