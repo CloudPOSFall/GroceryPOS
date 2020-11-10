@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 09, 2020 at 10:47 PM
+-- Generation Time: Nov 10, 2020 at 04:19 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -91,6 +91,27 @@ INSERT INTO `employee_info` (`employee_id`, `email`, `password`, `pin_number`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `gift_card`
+--
+
+CREATE TABLE `gift_card` (
+  `gift_id` int(11) NOT NULL,
+  `promo_number` double NOT NULL,
+  `card_balance` float NOT NULL,
+  `ticket_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `gift_card`
+--
+
+INSERT INTO `gift_card` (`gift_id`, `promo_number`, `card_balance`, `ticket_id`) VALUES
+(1, 2095, 10, 1),
+(2, 965, 20, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `inventory_sales`
 --
 
@@ -105,6 +126,14 @@ CREATE TABLE `inventory_sales` (
   `product_id` int(11) DEFAULT NULL,
   `ticket_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `inventory_sales`
+--
+
+INSERT INTO `inventory_sales` (`ISID`, `name`, `qty`, `unit_price`, `discount`, `cart_purchase`, `sale`, `product_id`, `ticket_id`) VALUES
+(2, 'Dairy Pure', 1, 7.99, '0.00', 0, 1, 1, NULL),
+(3, 'Horizon', 1, 8.99, '0.00', 0, 1, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -159,8 +188,7 @@ CREATE TABLE `storelevel_signup` (
 
 INSERT INTO `storelevel_signup` (`ID`, `email`, `password`, `first_name`, `last_name`, `phone_number`, `number_of_stores`, `company_name`) VALUES
 (1, 'johnnyfran20002@gmail.com', 'password', 'Johnny', 'Tejada', 6463214487, 3, 'Walmart'),
-(2, 'herman44@hotmail.com', 'strongpassword', 'Bob', 'Herman', 2123456578, 1, 'Target'),
-(4, 'kjackson34@account.edu', '', 'Kevin', 'Jackson', 7187643345, 3, 'Dairy Queen');
+(2, 'herman44@hotmail.com', 'strongpassword', 'Bob', 'Herman', 2123456578, 1, 'Target');
 
 -- --------------------------------------------------------
 
@@ -208,7 +236,8 @@ CREATE TABLE `ticket_system` (
 --
 
 INSERT INTO `ticket_system` (`ticket_id`, `date`, `time`, `subtotal`, `total`, `tax`, `tax_rate`, `employee_id`, `ISID`) VALUES
-(1, '2020-07-12', '12:45:50', 9.99, 9.99, 1.23, 0.13, NULL, NULL);
+(1, '2020-07-12', '12:45:50', 9.99, 9.99, 1.23, 0.13, NULL, NULL),
+(2, '2020-11-09', '21:49:09', 7.99, 7.99, 0.25, 0.45, 13, 2);
 
 -- --------------------------------------------------------
 
@@ -260,6 +289,14 @@ CREATE TABLE `zreport_system` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `zreport_system`
+--
+
+INSERT INTO `zreport_system` (`zreport_id`, `total_sales`, `transactions`, `new_customers`, `opening_amount`, `closing_amount`, `short`, `cash_sales`, `cash_returns`, `drops`, `payouts`, `pay_ins`, `purchases`, `ticket_id`, `product_id`) VALUES
+(1, 45, 30, 12, 100, 732.18, 0, 47.36, 1.75, 0, 0, 0, 690, 2, NULL),
+(3, 1235, 120, 33, 200, 1200, 0, 698.99, 12, 0, 0, 0, 48, 1, NULL);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -275,6 +312,13 @@ ALTER TABLE `customer_info`
 ALTER TABLE `employee_info`
   ADD PRIMARY KEY (`employee_id`),
   ADD UNIQUE KEY `customer_id` (`customer_id`);
+
+--
+-- Indexes for table `gift_card`
+--
+ALTER TABLE `gift_card`
+  ADD PRIMARY KEY (`gift_id`),
+  ADD UNIQUE KEY `ticket_id` (`ticket_id`);
 
 --
 -- Indexes for table `inventory_sales`
@@ -342,10 +386,16 @@ ALTER TABLE `employee_info`
   MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
+-- AUTO_INCREMENT for table `gift_card`
+--
+ALTER TABLE `gift_card`
+  MODIFY `gift_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `inventory_sales`
 --
 ALTER TABLE `inventory_sales`
-  MODIFY `ISID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ISID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `product_inventory`
@@ -369,7 +419,7 @@ ALTER TABLE `tax_table`
 -- AUTO_INCREMENT for table `ticket_system`
 --
 ALTER TABLE `ticket_system`
-  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `vendorinfo`
@@ -381,7 +431,7 @@ ALTER TABLE `vendorinfo`
 -- AUTO_INCREMENT for table `zreport_system`
 --
 ALTER TABLE `zreport_system`
-  MODIFY `zreport_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `zreport_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -392,6 +442,12 @@ ALTER TABLE `zreport_system`
 --
 ALTER TABLE `employee_info`
   ADD CONSTRAINT `employee_info_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+
+--
+-- Constraints for table `gift_card`
+--
+ALTER TABLE `gift_card`
+  ADD CONSTRAINT `gift_card_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `ticket_system` (`ticket_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
 
 --
 -- Constraints for table `inventory_sales`
