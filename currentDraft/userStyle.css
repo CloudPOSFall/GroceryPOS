@@ -93,7 +93,7 @@ a, a:hover, a:focus {
     left: 0;
     height: 100vh;
     z-index: 999;
-    background: #009933;
+    background: #016923; 
     color: #fff;
     transition: all 0.3s;
 }
@@ -103,19 +103,20 @@ a, a:hover, a:focus {
 }
 
 #sidebar .sidebar-header {
-    padding: 15px;
-    background: rgba(0, 128, 43, 0.897);
+    background: #016923;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 2px solid #006600;
+    border-bottom: 1px solid #006600;
+
 }
 
 #sidebar ul p {
     color: #fff;
     padding: 10px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 #sidebar ul li a {
@@ -125,7 +126,7 @@ a, a:hover, a:focus {
 }
 #sidebar ul li a:hover {
     color: #000000;
-    background: #fff;
+    background: rgb(105, 105, 105);
 }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
@@ -147,6 +148,14 @@ a[data-toggle="collapse"] {
     position: relative;
 }
 
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
 a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
     content: '\e259';
     display: block;
@@ -159,6 +168,17 @@ a[aria-expanded="true"]::before {
     content: '\e260';
 }
 
+ul.CTAs {
+    padding: 20px;
+}
+
+ul.CTAs a {
+    text-align: center;
+    font-size: 0.9em !important;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
 
 ul ul a {
     font-size: 0.9em !important;
@@ -170,6 +190,8 @@ a.article, a.article:hover {
     background: #00802bc4 !important;
     color: #fff !important;
 }
+
+
 
 
 /* ---------------------------------------------------
