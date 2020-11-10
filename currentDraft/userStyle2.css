@@ -4,7 +4,8 @@
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 p {
@@ -255,8 +256,7 @@ a.article, a.article:hover {
 }
 
 #controlscreen{
-    margin-left:30px
-    
+    margin-left:20%;
 }
 
 #salescontent{
@@ -266,6 +266,16 @@ a.article, a.article:hover {
 
 #content.active {
     width: 100%;
+}
+
+#repscreen{
+    margin-top: 50px;
+    margin-left: 20px;
+    
+    
+}
+.list-group-item{
+    font-size: 0.82em;
 }
 
 #formscreen{
