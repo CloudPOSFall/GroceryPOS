@@ -86,7 +86,7 @@ document.getElementById("subbtn").onclick = function() {
 
           if (isset($_POST['login'])) {
             //Your SQL Query
-            echo "<meta http-equiv='refresh' content='5'>";
+            echo "<meta http-equiv='refresh' content='3.5'>";
           }
           ?>
           <br>
