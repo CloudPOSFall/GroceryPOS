@@ -7,28 +7,27 @@
 <html>
 
 <head>
-  <title>Product Document</title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Verification</title>
 
   <!--bootstrap css -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <!--our css -->
   <link rel="stylesheet" href="userStyle2.css">
-  <!--Scrollbar Custom css -->
+  <!--jquery scrollbar css -->
   <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
 
   <!--font awesome js -->
   <script defer src="js/solid.js"></script>
   <script defer src="js/fontawesome.js"></script>
 
+  <!--jquery -->
+  <script src="js/jquery-3.5.1.min.js"></script>
   <!-- bootstrap popper js-->
   <script src="js/popper.min.js"></script>
   <!-- bootstrap js -->
   <script src="js/bootstrap.min.js"></script>
-  <!--jquery -->
-  <script src="js/jquery-3.3.1.slim.min.js"></script>
-  <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-
 </head>
 
 <body>
@@ -51,8 +50,8 @@
       </div>
       </li>
       <li>
-      <a href="" style="font-size: 1em;"><strong>Current User </strong><svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+        <a href="employeePinLogin.php" style="font-size: 1em;"><?php if(isset($_SESSION['emp_fname'])&& !empty($_SESSION['emp_lname'])){ echo "" . $_SESSION['emp_fname'] . " " . $_SESSION['emp_lname'] . " ";} else{ echo "Current User";} ?><svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
           </svg></a>
       </li>
       <div class="justify-content-center" id="navline"></div>

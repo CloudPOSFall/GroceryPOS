@@ -50,7 +50,7 @@ if(!isset($_SESSION['sale'])){
     </div>
     <ul class="list-unstyled components">
       <div class="card" id="navcard">
-        <h5 class="text-center">Current User <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <h5 class="text-center"><?php if(isset($_SESSION['emp_fname'])&& !empty($_SESSION['emp_lname'])){ echo "" . $_SESSION['emp_fname'] . " " . $_SESSION['emp_lname'] . " ";} else{ echo "Current User";} ?><svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
           </svg></h5>
       </div>
