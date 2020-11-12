@@ -49,11 +49,19 @@ if(!isset($_SESSION['sale'])){
           MarketPOS</a></h1>
     </div>
     <ul class="list-unstyled components">
-      <div class="card" id="navcard">
-        <h5 class="text-center"><?php if(isset($_SESSION['emp_fname'])&& !empty($_SESSION['emp_lname'])){ echo "" . $_SESSION['emp_fname'] . " " . $_SESSION['emp_lname'] . " ";} else{ echo "Current User";} ?><svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-          </svg></h5>
-      </div>
+    <li>
+        <div id="usercard">
+          <a href="" style="font-size: 1em;"><?php if(isset($_SESSION['company_name'])&& !empty($_SESSION['company_name'])) {echo $_SESSION['company_name'];} else {echo 'Company Name';} ?></br>Choose Register <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+            </svg></a>
+        </div>
+      </li>
+      <li>
+        <li>
+        <a href="" style="font-size: 1em;"><?php if(isset($_SESSION['emp_fname'])&& !empty($_SESSION['emp_lname'])){ echo "" . $_SESSION['emp_fname'] . " " . $_SESSION['emp_lname'] . " ";} else{ echo "Current User";} ?><svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+            </svg></a>
+        </li>
       <li class="active">
       <li>
         <a href="accounthomeDraft.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-house-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

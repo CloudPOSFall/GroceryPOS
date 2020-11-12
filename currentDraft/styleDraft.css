@@ -1,3 +1,9 @@
+@import "fonts.css";
+
+body{
+  font-family: 'Poppins', sans-serif;
+}
+
 #upPad {
     padding-top: 60px;
 }
@@ -8,17 +14,41 @@
 	padding-left: 150px;
 }
 
-#fixedHeading{
-	font-family: 'Play', sans-serif;
+#brand{
+  text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.1);
+}
+#custombrand{
+  text-shadow: 2px 2px 4px whitesmoke;
 }
 
+#loginitems{
+  margin-top: 15%;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.v-divider{
+  margin-left:15px;
+  width:1px;
+  border-left:1px solid gray;
+ }
+
+#fixedHeading{
+
+  font-family: 'Poppins', sans-serif;
+}
 #leftPad {
 	padding-left: 500px;
 }
 
 .navbar {
+  font-family: 'Poppins', sans-serif;
   margin-bottom: 0;
   border-radius: 0;
+}
+
+.card-header{
+  margin-bottom: 50px;
+  line-height: .9rem;
 }
 
 .row.content {

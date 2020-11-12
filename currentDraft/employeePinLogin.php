@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Employee Verification</title>
+  <title>MarketPOS | Employee Login</title>
 
   <!--bootstrap css -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -47,7 +47,7 @@ document.getElementById("subbtn").onclick = function() {
 
 
       <div class="col-sm-4">
-        <div class="card text-center bg-light" style="margin-top: 50%; padding: 20px;">
+        <div class="card text-center bg-light" id="loginitems" style="margin-top: 50%; padding: 20px;">
           <br>
           <?php
           include_once('config.php');
@@ -92,8 +92,9 @@ document.getElementById("subbtn").onclick = function() {
           <br>
 
 
-          <div class="card m-auto" style="width: 270px; padding: 7px;">
-            <h1><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <div class="card-title" style="padding: 10px;">
+
+            <h1 id="brand"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1z" /></svg>
               <span style="color: #00b300">Market</span>POS</h1>
           </div>
@@ -119,15 +120,12 @@ document.getElementById("subbtn").onclick = function() {
                             echo 'type="button" data-toggle="popover" title="" data-placement="bottom" data-content="' . $msg . '"';
                           }
                         }  ?> id="login" name="login" style="height: 3em;" class="btn btn-success">Login</button>
-                <span class="align-middle"> or <a href="logout.php"> Logout</a></span></div>
+                <span class="align-middle" style="font-size: .8rem"> or <a href="logout.php"> Logout</a></span></div>
             </div>
           </form>
         </div>
 
 
-        <div class="col-sm-4 sidenav">
-
-        </div>
       </div>
     </div>
 

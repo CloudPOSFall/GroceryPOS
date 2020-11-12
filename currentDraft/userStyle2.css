@@ -21,6 +21,14 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 
+#brand{
+    text-shadow: 5px 5px 3px rgba(0, 0, 0, 0.1);
+  }
+
+#loginitems{
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+}
+
 #locnav{
     position: fixed;
 }

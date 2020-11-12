@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>Sales | MarketPOS</title>
+  <title>Sign Up | MarketPOS</title>
 
   <!--bootstrap css -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -30,12 +30,13 @@
 </head>
 
 <body>
-  
+
 
   <!-- Navigation Bar -->
+
   <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
     <div class="container-fluid">
-      <h3><a class="navbar-brand" href="indexDraft.php"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <h3 id="brand"><a class="navbar-brand" href="indexDraft.php"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1z" /></svg>
           <span style="color: #00b300">Market</span>POS</a></h3>
 
@@ -45,25 +46,29 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-        <ul class="navbar-nav ml-auto">
-
-          <li class="nav-item active">
-            <a class="nav-link" href="indexDraft.php">Home <span class="sr-only">(current)</span></a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <span class="navbar-text" style="margin-left: 30px;">
+            Customers
+          </span>
+          <div class="col v-divider"></div>
+          <li class="nav-item ml-auto">
+            <a class="nav-link" href="customerlogin.php">Login</a>
+          </li>
+          <li class="nav-item ml-auto">
+            <a class="nav-link" href="#">Sign Up</a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="customerlogin.php">Customer </a>
+        </ul>
+        <ul class="navbar-nav">
+          <span class="navbar-text">
+            Retail Services
+          </span>
+          <div class="col v-divider"></div>
+          <li class="nav-item ml-auto">
+            <a class="nav-link" href="loginDraft.php">Login</a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="employeePinLogin.php">Employee </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="loginDraft.php">Storelevel </a>
-          </li>
-
-          <li class="nav-item">
+          <li class="nav-item ml-auto active">
             <a class="nav-link" href="signupDraft.php">Sign Up</a>
           </li>
 
@@ -74,23 +79,23 @@
   </nav>
   <!-- End of Navigation Bar -->
 
+
   <div class="container-fluid text-center">
     <div class="row content">
-      <div class="col-sm-4 sidenav">
+      <div class="col-sm-4">
       </div>
 
 
       <div class="col-sm-4 text-left">
-        <div class="jumbotron">
+        <div class="card card-body bg-light" id="loginitems">
+          <div class="card-title text-center" style="padding:20px;">
+            <h1 id="brand"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1z" /></svg>
+              <span style="color: #00b300">Market</span>POS</h1>
 
-          <h1><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1z" /></svg>
-            <span style="color: #00b300">Market</span>POS</h1>
+            <p>Sign up for your free 14-day trial today!</p>
+          </div>
 
-          <p>Sign up for your free 14-day trial today!</p>
-        </div>
-
-        <div class="card card-body bg-light">
           <div class="form-group">
             <form class="form-horizontal" method="post" action="signupInsert.php">
               <div class="form-group">
@@ -100,16 +105,16 @@
                 <input name="lname" class="form-control" placeholder="Last Name">
               </div>
               <div class="form-group">
-                <input name="email" class="form-control" placeholder="Email Address">
+                <input type="email" name="email" class="form-control" placeholder="Email Address">
               </div>
               <div class="form-group">
-                <input name="phone" class="form-control" placeholder="Phone Number">
+                <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="phone" class="form-control" placeholder="Phone Number">
               </div>
               <div class="form-group">
                 <input name="company" class="form-control" placeholder="Company">
               </div>
               <div class="form-group">
-                <input name="pass" class="form-control" placeholder="Password">
+                <input type="password" name="pass" class="form-control" placeholder="Password">
               </div>
               <div class="form-group">
                 <select name="stores" class="form-control">
@@ -123,12 +128,10 @@
                 </select>
               </div>
               <div class="col text-center">
-                <button type="submit" class="btn-lg btn-primary">Get Started</button>
+                <button type="submit" class="btn-lg btn-success">Get Started</button>
               </div>
             </form>
           </div>
-        </div>
-        <div class="col-sm-4 sidenav">
         </div>
       </div>
     </div>

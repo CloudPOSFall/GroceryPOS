@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate credentials
     if (empty($email_err) && empty($password_err))
     {
-    $query = mysqli_query($conn,"SELECT ID,email,password,first_name,last_name,phone_number,rewards,street_address,city,state,zip_code FROM customer_info WHERE email = '$email' AND password = '$mypassword'");
+    $query = mysqli_query($conn,"SELECT * FROM customer_info WHERE email = '$email' AND password = '$mypassword'");
         while($numrows = mysqli_fetch_assoc($query))
         {
 			$first_name = $numrows["first_name"];
@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>Sales | MarketPOS</title>
+  <title>Customer Login| MarketPOS</title>
 
   <!--bootstrap css -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -88,9 +88,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <script src="js/jquery-3.3.1.slim.min.js"></script>
   <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
 
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<!-- Navigation Bar -->
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
     <div class="container-fluid">
-      <h3><a class="navbar-brand" href="indexDraft.php"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <h3 id="brand"><a class="navbar-brand" href="indexDraft.php"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1z" /></svg>
           <span style="color: #00b300">Market</span>POS</a></h3>
 
@@ -100,25 +102,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-        <ul class="navbar-nav ml-auto">
-
-          <li class="nav-item active">
-            <a class="nav-link" href="indexDraft.php">Home <span class="sr-only">(current)</span></a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <span class="navbar-text" style="margin-left: 30px;">
+            Customers
+          </span>
+          <div class="col v-divider"></div>
+          <li class="nav-item ml-auto active">
+            <a class="nav-link" href="customerlogin.php">Login</a>
+          </li>
+          <li class="nav-item ml-auto">
+            <a class="nav-link" href="#">Sign Up</a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="customerlogin.php">Customer </a>
+        </ul>
+        <ul class="navbar-nav">
+          <span class="navbar-text">
+            Retail Services
+          </span>
+          <div class="col v-divider"></div>
+          <li class="nav-item ml-auto">
+            <a class="nav-link" href="loginDraft.php">Login</a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="employeePinLogin.php">Employee </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="loginDraft.php">Storelevel </a>
-          </li>
-
-          <li class="nav-item">
+          <li class="nav-item ml-auto">
             <a class="nav-link" href="signupDraft.php">Sign Up</a>
           </li>
 
@@ -132,41 +138,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   <div class="container-fluid text-center">
     <div class="row content">
-      <div class="col-sm-4 sidenav">
+      <div class="col-sm-3 sidenav">
       </div>
 
 
-      <div class="col-sm-4 text-left">
-        <div class="jumbotron">
-          <h1><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1z" /></svg>
-            <span style="color: #00b300">Market</span>POS</h1>
-          <p>Please sign in to get started.</p>
-        </div>
-        <div class="card card-body bg-light">
-          <form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
-              <label for="email">Email</label>
-              <input type="text" class="form-control" placeholder="Enter email address" name="email" value="<?php echo $email; ?>">
-              <span class="help-block"><?php echo $email_err; ?></span>
-            </div>
-            <div class="form-group" <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>>
-              <label for="password">password</label>
-              <input type="text" class="form-control" placeholder="Password" name="password">
-              <span class="help-block"><?php echo $password_err; ?></span>
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="remember">
-              <label class="form-check-label" name="remember">Remember me</label>
-            </div>
-            <button type="submit" style="padding: 10px" class="btn-lg btn-success"> Log In</button>
-          </form>
+      <div class="col-sm-6 text-left">
+
+
+
+        <div class="card text-white bg-dark" id="loginitems" style="margin-top: 10%;">
+          <div class="card-header text-white bg-success">Customers Login</div><br>
+          <div class="card-title text-center">
+            <h1 id="brand"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1z" /></svg>
+              <span style="color: #00b300">Market</span>POS</h1>
+
+          </div><br>
+
+          <div class="card-body">
+            <form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+              <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
+                <label style="font-weight:500;" for="email">Email</label>
+                <input type="email" class="form-control" placeholder="Enter email address" name="email" value="<?php echo $email; ?>">
+                <span class="help-block"><?php echo $email_err; ?></span>
+              </div>
+              <div class="form-group" <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>>
+                <div class="form-row">
+                 <div class="col-8"> <label style="font-weight:500;" for="password">Password</label></div>
+                 <div class="col"><a style="font-size:.8em;" class="text-right" href="">Forgot Password?</a></div></div> 
+                <input type="password" class="form-control" placeholder="Password" name="password">
+                <span class="help-block"><?php echo $password_err; ?></span>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="remember">
+                <label class="form-check-label" name="remember">Remember me</label>
+              </div>
+
+              <div class="text-center">
+                <button type="submit" style="padding: 10px" class="btn-lg btn-success"> Log In</button></div><br>
+              <p>Don't have an account? <a href="#">Sign up now</a>.</p>
+            </form>
+          </div>
         </div>
       </div>
-      <div class="col-sm-4 sidenav">
-      </div>
-    </div>
-  </div>
 
   <footer class="container-fluid fixed-bottom">
   </footer>
