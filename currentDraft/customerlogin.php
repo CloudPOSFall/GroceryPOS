@@ -65,28 +65,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   <title>Customer Login| MarketPOS</title>
 
-  <!--bootstrap css -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+   <!--bootstrap css -->
+   <link rel="stylesheet" href="css/bootstrap.min.css">
   <!--our css -->
-  <link rel="stylesheet" href="styleDraft.css">
-  <!--jquery scrollbar css -->
+  <link rel="stylesheet" href="userStyle2.css">
+  <!--Scrollbar Custom css -->
   <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
 
   <!--font awesome js -->
   <script defer src="js/solid.js"></script>
   <script defer src="js/fontawesome.js"></script>
 
-</head>
-
-<body>
-
+  <!--jquery -->
+  <script src="js/jquery-3.5.1.min.js"></script>
+  <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
   <!-- bootstrap popper js-->
   <script src="js/popper.min.js"></script>
   <!-- bootstrap js -->
   <script src="js/bootstrap.min.js"></script>
-  <!--jquery -->
-  <script src="js/jquery-3.3.1.slim.min.js"></script>
-  <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+
+</head>
+
+<body>
+
+
 
 <!-- Navigation Bar -->
 

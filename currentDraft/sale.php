@@ -15,18 +15,27 @@ if(!isset($_SESSION['sale'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Sales | MarketPOS</title>
+    <title>New Sale | MarketPOS</title>
 
-    <!--bootstrap css -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!--our css -->
-    <link rel="stylesheet" href="userStyle2.css">
-    <!--Scrollbar Custom css -->
-    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+     <!--bootstrap css -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!--our css -->
+  <link rel="stylesheet" href="userStyle2.css">
+  <!--Scrollbar Custom css -->
+  <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
 
-    <!--font awesome js -->
-    <script defer src="js/solid.js"></script>
-    <script defer src="js/fontawesome.js"></script>
+  <!--font awesome js -->
+  <script defer src="js/solid.js"></script>
+  <script defer src="js/fontawesome.js"></script>
+
+  <!--jquery -->
+  <script src="js/jquery-3.5.1.min.js"></script>
+  <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+  <!-- bootstrap popper js-->
+  <script src="js/popper.min.js"></script>
+  <!-- bootstrap js -->
+  <script src="js/bootstrap.min.js"></script>
+
 
 </head>
 
