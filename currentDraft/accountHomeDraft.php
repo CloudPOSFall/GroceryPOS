@@ -1,24 +1,21 @@
 <?php
 include_once('config.php');
-if(isset($_SESSION['first_name']))
-{
- 	$fname = $_SESSION['first_name'];
-}else{
-	$fname = "First";
+if (isset($_SESSION['first_name'])) {
+  $fname = $_SESSION['first_name'];
+} else {
+  $fname = "First";
 }
-if(isset($_SESSION['first_name']))
-{
-	$lname = $_SESSION['last_name'];
-}else{
-	$lname = "Last";
+if (isset($_SESSION['first_name'])) {
+  $lname = $_SESSION['last_name'];
+} else {
+  $lname = "Last";
 }
 $format = '%s %s' . "<br>";
 $format1 = '%s' . "<br>";
-if(isset($_SESSION['company_name']))
-{
-	$company = $_SESSION['company_name'];
-}else{
-	$company = "Company";
+if (isset($_SESSION['company_name'])) {
+  $company = $_SESSION['company_name'];
+} else {
+  $company = "Company";
 }
 //echo sprintf($format2,$company);
 ?>
@@ -30,7 +27,7 @@ if(isset($_SESSION['company_name']))
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-+
+  +
   <title>Welcome | MarketPOS</title>
 
   <!--bootstrap css -->
@@ -62,13 +59,21 @@ if(isset($_SESSION['company_name']))
     <ul class="list-unstyled components">
       <li>
         <div id="usercard">
-          <a href="" style="font-size: 1em;"><?php if(isset($_SESSION['company_name'])&& !empty($_SESSION['company_name'])) {echo $_SESSION['company_name'];} else {echo 'Company Name';} ?></br>Choose Register <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <a href="" style="font-size: 1em;"><?php if (isset($_SESSION['company_name']) && !empty($_SESSION['company_name'])) {
+                                                echo $_SESSION['company_name'];
+                                              } else {
+                                                echo 'Company Name';
+                                              } ?></br>Choose Register <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
             </svg></a>
         </div>
       </li>
       <li>
-        <a href="employeePinLogin.php" style="font-size: 1em;"><?php if(isset($_SESSION['emp_fname'])&& !empty($_SESSION['emp_lname'])){ echo "" . $_SESSION['emp_fname'] . " " . $_SESSION['emp_lname'] . " ";} else{ echo "Current User";} ?><svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <a href="employeePinLogin.php" style="font-size: 1em;"><?php if (isset($_SESSION['emp_fname']) && !empty($_SESSION['emp_lname'])) {
+                                                                  echo "" . $_SESSION['emp_fname'] . " " . $_SESSION['emp_lname'] . " ";
+                                                                } else {
+                                                                  echo "Current User";
+                                                                } ?><svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
           </svg></a>
       </li>
@@ -117,15 +122,23 @@ if(isset($_SESSION['company_name']))
 
       </br></br></br></br>
       <li class="sidebar-footer">
-        <div class="text-center" id="usercard">
+        <div class="card text-center" id="footerbtn" style="background: #016923;">
           <a role="button" href="employeePinLogin.php"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z" />
             </svg> Switch User</a>
 
         </div>
+      </li>
 
+      <li>
+      <div class="card text-center" id="footerbtn" style="background: #016923;">
+      <a role="button" href="logout.php"> Logout</a>
+
+    </div>
       </li>
     </ul>
+   
+
     </div>
   </nav>
 
@@ -160,7 +173,7 @@ if(isset($_SESSION['company_name']))
         <img class="img-thumbnail" src="media/prof.png" style="height: 11rem;" alt="Card image cap" />
         <div class="card-body">
           <?php
-          echo sprintf($format,$fname,$lname);
+          echo sprintf($format, $fname, $lname);
           //echo sprintf($format1, $company);
           ?>
         </div>

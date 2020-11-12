@@ -166,6 +166,12 @@ a, a:hover, a:focus {
     border-radius: 5px;
 }
 
+#footerbtn{
+    background: #016923; 
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+
+}
+
 #pagecard{
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     width: 10rem;
