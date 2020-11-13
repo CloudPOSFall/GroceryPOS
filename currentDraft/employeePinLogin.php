@@ -8,7 +8,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
   header("Location: accountHomeDraft.php");
   exit;
 }
-
+?>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,46 +25,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
   <script defer src="js/solid.js"></script>
   <script defer src="js/fontawesome.js"></script>
 
-// Processing form data when form is submitted
-if (isset($_POST["submit"])) {
-  // Check if pin is empty
-  if (empty(trim($_POST["pin"]))) {
-    $pin_err = "Please enter pin.";
-  } else {
-    $pin = trim($_POST["pin"]);
-    $pin = mysqli_real_escape_string($conn, $pin);
-  }
-    // Validate credentials
-    if (empty($pin_err))
-    {
-    $query = mysqli_query($conn,"SELECT email, password, pin_number, first_name, last_name, user_id, phone_number, SSN, street_address, city, state, zip_code, start_date FROM employee_info WHERE pin_number = '$pin'");
-		$numrows = mysqli_num_rows($query);
-		if($numrows!=0)
-		{
-        	while($row = mysqli_fetch_assoc($query))
-        	{
-				$dpin = $row['pin_number'];
-				$first_name = $row['first_name'];
-				$first_name = mysqli_real_escape_string($conn,$first_name);
-    			$last_name =  $row['last_name'];
-            	$last_name = mysqli_real_escape_string($conn,$last_name);
-    		}
-		}
-		if($pin == $dpin)
-		{
-			session_start();
-			$_SESSION['first_name'] = $first_name;
-  			$_SESSION["last_name"] = $last_name;
-			header("Location: accountHomeDraft.php");
-			ob_end_flush();	
-		}else{
-			$pin_err = "Incorrect Pin!";
-		}
-	}else{
-		$pin_err = "Incorrect pin";
-	}   
-}
-</script> -->
+</script> 
 </head>
 
 <body>
@@ -92,12 +53,14 @@ if (isset($_POST["submit"])) {
               while ($row = mysqli_fetch_assoc($query)) {
                 $emp_fname = mysqli_real_escape_string($conn, $row['first_name']);
                 $emp_lname = mysqli_real_escape_string($conn, $row['last_name']);
+				$emp_company = mysqli_real_escape_string($conn,$row['company_name']);
               }
 
               session_start();
               $_SESSION["emp_id"] = $row['employee_id'];
               $_SESSION["emp_fname"] = $emp_fname;
               $_SESSION["emp_lname"] = $emp_lname;
+			  $_SESSION["emp_company"] = $emp_company;
               $_SESSION['timeout'] = time();
               header("Location: accountHomeDraft.php");
               ob_end_flush();

@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   // Validate credentials
   if (empty($email_err) && empty($password_err)) {
-    $query = mysqli_query($conn, "SELECT ID,email,password,first_name,last_name,company_name FROM storelevel_signup WHERE email = '$email' AND password = '$mypassword'");
+    $query = mysqli_query($conn, "SELECT * FROM customer_info WHERE email = '$email' AND password = '$mypassword'");
     $numrows = mysqli_num_rows($query);
     if ($numrows != 0) {
       while ($numrows = mysqli_fetch_assoc($query)) {

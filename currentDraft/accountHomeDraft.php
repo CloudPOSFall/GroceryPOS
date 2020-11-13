@@ -69,7 +69,7 @@ if (isset($_SESSION['company_name'])) {
     <ul class="list-unstyled components">
       <li>
         <div id="usercard">
-          <a href="" style="font-size: 1em;"><?php  if(isset($_SESSION['company_name'])&& !empty($_SESSION['company_name'])) {echo $_SESSION['company_name'];} else {echo 'Company Name';} ?></br>Choose Register <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <a href="" style="font-size: 1em;"><?php  if(isset($_SESSION['emp_company'])&& !empty($_SESSION['emp_company'])) {echo $_SESSION['emp_company'];} else {echo 'Company Name';} ?></br>Choose Register <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
             </svg></a>
         </div>
@@ -181,9 +181,12 @@ if (isset($_SESSION['company_name'])) {
         <img class="img-thumbnail" src="media/prof.png" style="height: 11rem;" alt="Card image cap" />
         <div class="card-body">
           <?php
-          echo sprintf($format, $fname, $lname);
-          //echo sprintf($format1, $company);
-          ?>
+          if (isset($_SESSION['emp_fname']) && !empty($_SESSION['emp_lname'])) {
+          		echo "" . $_SESSION['emp_fname'] . " " . $_SESSION['emp_lname'] . " ";
+          } else {
+                echo "Current User";                                                     
+		  } 
+		  ?>
         </div>
       </div>
     </div>
