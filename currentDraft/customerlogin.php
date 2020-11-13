@@ -1,15 +1,14 @@
 <?php
+include_once('config.php');
 // Initialize the session
 ob_start();
 // Check if the user is already logged in, if yes then redirect him to welcome page
-if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
-{
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
   header("Location: accountHomeDraft.php");
   exit;
 }
 
-// Include config file
-include_once "config.php";
+
 
 // Define variables and initialize with empty values
 $email = $password = "";
@@ -68,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    <!--bootstrap css -->
    <link rel="stylesheet" href="css/bootstrap.min.css">
   <!--our css -->
-  <link rel="stylesheet" href="userStyle2.css">
+  <link rel="stylesheet" href="styleDraft.css">
   <!--Scrollbar Custom css -->
   <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
 
@@ -107,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <span class="navbar-text" style="margin-left: 30px;">
-            Customers
+          Customers
           </span>
           <div class="col v-divider"></div>
           <li class="nav-item ml-auto active">
@@ -120,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </ul>
         <ul class="navbar-nav">
           <span class="navbar-text">
-            Retail Services
+          Retail Services
           </span>
           <div class="col v-divider"></div>
           <li class="nav-item ml-auto">
@@ -141,7 +140,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   <div class="container-fluid text-center">
     <div class="row content">
-      <div class="col-sm-3 sidenav">
+      <div class="col-sm-3">
       </div>
 
 
@@ -149,7 +148,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-        <div class="card text-white bg-dark" id="loginitems" style="margin-top: 10%;">
+        <div class="card text-white bg-dark" id="loginitems" style="margin-top: 50px;">
           <div class="card-header text-white bg-success">Customers Login</div><br>
           <div class="card-title text-center">
             <h1 id="brand"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
