@@ -13,11 +13,11 @@
       $VendorName = $_POST['name'];
       $VendorNumber = $_POST['number'];
       $VendorAddress = $_POST['addy'];
-      $CompanyCode = $_POST['code'];
       $Shipments = $_POST['ship'];
+      $CategoryCode = $_POST['code'];
 
-      $query = "insert into vendorinfo (vendor_name, vendor_number, vendor_address, company_code, shipments)
-              values ('$VendorName', '$VendorNumber', '$VendorAddress', '$CompanyCode', '$Shipments')";
+      $query = "insert into vendorinfo (vendor_name, vendor_number, vendor_address, shipments, category_code)
+              values ('$VendorName', '$VendorNumber', '$VendorAddress', '$Shipments', '$CategoryCode')";
       $result = mysqli_query($conn, $query);
 
       if($result)

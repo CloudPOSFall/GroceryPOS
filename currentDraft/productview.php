@@ -161,6 +161,7 @@ $result = mysqli_query($conn, $query);
                 <td> Product Type </td>
                 <td> Product Subtype </td>
                 <td> Unit Price </td>
+                <td> Cost </td>
                 <td> In Stock </td>
                 <td> </td>
               </tr>
@@ -181,7 +182,7 @@ $result = mysqli_query($conn, $query);
                     while ($row = mysqli_fetch_assoc($result)) {
                       echo "<tr><td>" . $row['product_id'] . "</td><td>"
                         . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['productSubType'] . "</td><td>"
-                        . $row['unit_price'] . "</td><td>" . $row['in_stock'] .
+                        . $row['unit_price'] . "</td><td>" . $row['cost'] . "</td><td>" . $row['in_stock'] .
                         "</td><td><a class='btn navbar-btn btn-dark' role='button' href='productdelete.php?Del="
                         . $row['product_id'] . "'>Delete</a></td><td><a class='btn navbar-btn btn-dark' role='button' href='productedit.php?Upd="
                         . $row['product_id'] . "'>Update</a></td></tr>";
@@ -193,7 +194,7 @@ $result = mysqli_query($conn, $query);
                   while ($row = mysqli_fetch_assoc($result)) {
                     echo "<tr><td>" . $row['product_id'] . "</td><td>"
                       . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['productSubType'] . "</td><td>"
-                      . $row['unit_price'] . "</td><td>" . $row['in_stock'] .
+                      . $row['unit_price'] . "</td><td>" . $row['cost'] . "</td><td>" . $row['in_stock'] .
                       "</td><td><a class='btn navbar-btn btn-dark' role='button' href='productdelete.php?Del="
                       . $row['product_id'] . "'>Delete</a></td><td><a class='btn navbar-btn btn-dark' role='button' href='productedit.php?Upd="
                       . $row['product_id'] . "'>Update</a></td></tr>";

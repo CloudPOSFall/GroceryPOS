@@ -167,8 +167,8 @@ $result = mysqli_query($conn, $query);
                 <td> City </td>
                 <td> State </td>
                 <td> Zip Code </td>
-                <td> Company Code </td>
                 <td> Shipments </td>
+                <td> Category Code </td>
               </tr>
 
 
@@ -186,9 +186,9 @@ $result = mysqli_query($conn, $query);
                     echo "<div>There are $queryResults results matching your search</div><br>";
                     while ($row = mysqli_fetch_assoc($result)) {
                       echo "<tr><td>" . $row['vendor_id'] . "</td><td>"
-                        . $row['vendor_name'] . "</td><td>" . $row['street_address'] . "</td><td>" . $row['city'] . "</td><td>" . $row['state'] . "</td><td>"
-                        . $row['zip_code'] . "</td><td>" . $row['company_code'] . "</td><td>" . $row['shipments'] . "</td><td><a class='btn navbar-btn btn-dark' role='button' href='vendordelete.php?Del='"
-                        . $row['vendor_id'] . "'>Delete</a></td></tr>";
+                      . $row['vendor_name'] . "</td><td>" . $row['street_address'] . "</td><td>" . $row['city'] . "</td><td>" . $row['state'] . "</td><td>"
+                      . $row['zip_code'] . "</td><td>" . $row['shipments'] . "</td><td>" . $row['category_code'] . "</td><td> <a class='btn navbar-btn btn-dark' role='button' href='vendordelete.php?Del='"
+                      . $row['vendor_id'] . "'>Delete</a></td></tr>";
                     }
                   } else {
                     echo "<div>There are no results matching your search</div>";
@@ -197,7 +197,7 @@ $result = mysqli_query($conn, $query);
                   while ($row = mysqli_fetch_assoc($result)) {
                     echo "<tr><td>" . $row['vendor_id'] . "</td><td>"
                     . $row['vendor_name'] . "</td><td>" . $row['street_address'] . "</td><td>" . $row['city'] . "</td><td>" . $row['state'] . "</td><td>"
-                    . $row['zip_code'] . "</td><td>" . $row['company_code'] . "</td><td>" . $row['shipments'] . "</td><td><a class='btn navbar-btn btn-dark' role='button' href='vendordelete.php?Del='"
+                    . $row['zip_code'] . "</td><td>" . $row['shipments'] . "</td><td>" . $row['category_code'] . "</td><td> <a class='btn navbar-btn btn-dark' role='button' href='vendordelete.php?Del='"
                     . $row['vendor_id'] . "'>Delete</a></td></tr>";
                   }
                 }

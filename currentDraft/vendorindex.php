@@ -168,12 +168,12 @@
               <input class="col-6"  type="text" placeholder=" Zip Code " name="zip" />
             </div>
             <div class="form-group row">
-              <label class="col-4"  for="Company Code">Company Code</label>
-              <input class="col-6"  type="number" placeholder=" Company Code " name="code" />
-            </div>
-            <div class="form-group row">
               <label class="col-4" for="Shipments" >Shipments</label>
               <input class="col-6" type="number" placeholder=" Shipments " name="ship" />
+            </div>
+            <div class="form-group row">
+              <label class="col-4"  for="Category Code">Categeory Code</label>
+              <input class="col-6"  type="number" placeholder=" Category Code " name="code" />
             </div>
             <div class="text-center"><button name="submit" class="btn-lg btn-primary"> Submit</button></div>
           </form>

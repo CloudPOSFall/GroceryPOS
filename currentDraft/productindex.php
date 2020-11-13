@@ -169,6 +169,10 @@
             <input class ="col-6" type = "text" placeholder="Unit Price " name="unit"/>
             </div>
             <div class = "form-group row">
+            <label class = "col-4" for = "Unit Price">Cost </label>
+            <input class ="col-6" type = "text" placeholder="Cost " name="cost"/>
+            </div>
+            <div class = "form-group row">
             <label class = "col-4" for = "In Stock">In Stock </label>
             <input class ="col-6" type = "text" placeholder="In Stock " name="stock"/>
             </div>
