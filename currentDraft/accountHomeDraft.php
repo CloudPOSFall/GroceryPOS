@@ -41,13 +41,13 @@ if (isset($_SESSION['company_name'])) {
   <script defer src="js/solid.js"></script>
   <script defer src="js/fontawesome.js"></script>
 
-    <!--jquery -->
-    <script src="js/jquery-3.5.1.min.js"></script>
-    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <!-- bootstrap popper js-->
-    <script src="js/popper.min.js"></script>
-    <!-- bootstrap js -->
-    <script src="js/bootstrap.min.js"></script>
+  <!--jquery -->
+  <script src="js/jquery-3.5.1.min.js"></script>
+  <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+  <!-- bootstrap popper js-->
+  <script src="js/popper.min.js"></script>
+  <!-- bootstrap js -->
+  <script src="js/bootstrap.min.js"></script>
 
 </head>
 
@@ -130,22 +130,24 @@ if (isset($_SESSION['company_name'])) {
 
       </br></br></br></br>
       <li class="sidebar-footer">
-        <div class="card text-center" id="footerbtn" style="background: #016923;">
+        <div class="text-center" id="usercard">
           <a role="button" href="employeePinLogin.php"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z" />
             </svg> Switch User</a>
 
         </div>
+
       </li>
-
       <li>
-      <div class="card text-center" id="footerbtn" style="background: #016923;">
-      <a role="button" href="logout.php"> Logout</a>
+        <div class="card text-center" id="footerbtn" style="background: #016923;">
+          <a role="button" href="logout.php"> Logout</a>
 
-    </div>
+
+        </div>
+
       </li>
     </ul>
-   
+
 
     </div>
   </nav>

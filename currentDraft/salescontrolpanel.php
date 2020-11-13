@@ -287,13 +287,6 @@ include_once('config.php');
 
   <!--END page content-->
 
-  <!-- bootstrap popper js-->
-  <script src="js/popper.min.js"></script>
-  <!-- bootstrap ja -->
-  <script src="js/bootstrap.min.js"></script>
-  <!--jquery -->
-  <script src="js/jquery-3.3.1.slim.min.js"></script>
-  <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
 
   <script type="text/javascript">
     $(document).ready(function () {

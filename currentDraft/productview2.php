@@ -9,7 +9,7 @@ include_once('config.php');
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>Customers | MarketPOS</title>
+  <title>View Products | MarketPOS</title>
 
   <!--bootstrap css -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -30,13 +30,10 @@ include_once('config.php');
   <!-- bootstrap js -->
   <script src="js/bootstrap.min.js"></script>
 
+
 </head>
 
 <body>
-
-
-
-
 
 
 
@@ -80,7 +77,7 @@ include_once('config.php');
               <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
             </svg></span> Home</a>
       </li>
-      <li>
+      <li class="active">
         <a href="salescontrolpanel.php">
           <span style="padding:5px;">
             <svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-credit-card-2-back" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -95,7 +92,7 @@ include_once('config.php');
               <path fill-rule="evenodd" d="M4.98 4a.5.5 0 0 0-.39.188L1.54 8H6a.5.5 0 0 1 .5.5 1.5 1.5 0 1 0 3 0A.5.5 0 0 1 10 8h4.46l-3.05-3.812A.5.5 0 0 0 11.02 4H4.98zm-1.17-.437A1.5 1.5 0 0 1 4.98 3h6.04a1.5 1.5 0 0 1 1.17.563l3.7 4.625a.5.5 0 0 1 .106.374l-.39 3.124A1.5 1.5 0 0 1 14.117 13H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .106-.374l3.7-4.625z" />
             </svg></span> Inventory</a>
       </li>
-      <li class="active">
+      <li>
         <a href="customercontrol.php">
           <span style="padding:5px;">
             <svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -119,10 +116,9 @@ include_once('config.php');
           <a role="button" href="employeePinLogin.php"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z" />
             </svg> Switch User</a>
-
         </div>
-
       </li>
+
       <li>
         <div class="card text-center" id="footerbtn" style="background: #016923;">
           <a role="button" href="logout.php"> Logout</a>
@@ -134,8 +130,6 @@ include_once('config.php');
     </ul>
     </div>
   </nav>
-
-
 
   <!--page content-->
   <div id="content">
@@ -152,118 +146,104 @@ include_once('config.php');
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="nav navbar-nav mr-auto">
-            <a class="navbar-brand" href="customercontrol.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1h7.956a.274.274 0 0 0 .014-.002l.008-.002c-.002-.264-.167-1.03-.76-1.72C13.688 10.629 12.718 10 11 10c-1.717 0-2.687.63-3.24 1.276-.593.69-.759 1.457-.76 1.72a1.05 1.05 0 0 0 .022.004zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10c-1.668.02-2.615.64-3.16 1.276C1.163 11.97 1 12.739 1 13h3c0-1.045.323-2.086.92-3zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
-              </svg> Customers</a>
+            <a class="navbar-brand" href="productview.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+              </svg> Products</a>
           </ul>
         </div>
       </div>
+    </nav><br>
+
+
+    <nav class="navbar navbar-light" id="salespanel">
+      <form class="form-inline" method="post" action="productview.php">
+        <div class="nav-item" style="padding: 8px">
+          <input class="form-control" name="product" placeholder="Search Product" aria-label="Search">
+          <button class="btn btn-dark navbar-btn" name="submit-search"> Look Up</button>
+        </div>
+
+        <div class="nav-item mr-auto">
+          <a class="btn navbar-btn btn-light" href="productindex.php" role="button"> New Product</a></div>
+      </form>
     </nav>
 
 
-    <!--control buttons-->
-    <div class="wrapper" id="controlscreen">
+    <div class="container justify-content-center" id="tablescreen">
 
-      <div class="card-deck">
-        <p>Customer Controls</p>
-        <div class="line"></div>
-        <a href="customerview.php">
-          <div class="card" id="pagecard">
-            <div class="card-body text-center">
-              <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
-                </svg></h5>
-              <p class="card-text">Customers</p>
+
+
+      <div class="col-12">
+        <div class="card mt-5 bg-light">
+          <table class="table table-bordered">
+            <tr>
+              <td> ID </td>
+              <td> Product Name </td>
+              <td> Product Type </td>
+              <td> Product Subtype </td>
+              <td> Unit Price </td>
+              <td> In Stock </td>
+              <td> </td>
+            </tr>
+
+            <?php include('pracCategory.php') ?>
+
+            <div class='card mt-5 bg-light'>
+              <?php
+
+              if (isset($_POST['submit-search'])) {
+                $search = mysqli_real_escape_string($conn, $_POST['product']);
+                $sql = "SELECT * FROM product_inventory WHERE productName LIKE '%$search%' OR productType LIKE '%$search%' OR productSubType LIKE '%$search%'";
+                $result = mysqli_query($conn, $sql);
+                $queryResults = mysqli_num_rows($result);
+
+                if ($queryResults > 0) {
+                  echo "<div>There are $queryResults results matching your search</div><br>";
+                  while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr><td>" . $row['product_id'] . "</td><td>"
+                      . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['productSubType'] . "</td><td>"
+                      . $row['unit_price'] . "</td><td>" . $row['in_stock'] .
+                      "</td><td><a class='btn navbar-btn btn-dark' role='button' href='productdelete.php?Del="
+                      . $row['product_id'] . "'>Delete</a></td><td><a class='btn navbar-btn btn-dark' role='button' href='productedit.php?Upd="
+                      . $row['product_id'] . "'>Update</a></td></tr>";
+                  }
+                } else {
+                  echo "<div>There are no results matching your search</div>";
+                }
+              } else {
+                while ($row = mysqli_fetch_assoc($result)) {
+                  echo "<tr><td>" . $row['product_id'] . "</td><td>"
+                    . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['productSubType'] . "</td><td>"
+                    . $row['unit_price'] . "</td><td>" . $row['in_stock'] .
+                    "</td><td><a class='btn navbar-btn btn-dark' role='button' href='productdelete.php?Del="
+                    . $row['product_id'] . "'>Delete</a></td><td><a class='btn navbar-btn btn-dark' role='button' href='productedit.php?Upd="
+                    . $row['product_id'] . "'>Update</a></td></tr>";
+                }
+              }
+
+              ?>
             </div>
-          </div>
-        </a>
 
-        <a href="customerindex.php">
-          <div class="card" id="pagecard">
-            <div class="card-body text-center">
-              <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10zM13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
-                </svg></h5>
-              <p class="card-text">New Customer</p>
-            </div>
-          </div>
-        </a>
-
-        <a href="customereditpage.php">
-          <div class="card" id="pagecard">
-            <div class="card-body text-center">
-              <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person-bounding-box" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z" />
-                  <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                </svg></h5>
-              <p class="card-text">Edit Customer</p>
-            </div>
-          </div>
-        </a>
-
-        <a href="#">
-          <div class="card" id="pagecard">
-            <div class="card-body text-center">
-              <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-intersect" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2V2zm5 10v2a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-2v5a2 2 0 0 1-2 2H5zm6-8H6a2 2 0 0 0-2 2v5H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v2z" />
-                </svg></h5>
-              <p class="card-text">Merge Accounts</p>
-            </div>
-          </div>
-        </a>
-
-      </div>
-
-
-      <div class="card-deck">
-        <p></p>
-        <p>Rewards & Gift Cards</p>
-        <div class="line"></div>
-        <a href="rewardspage.php">
-          <div class="card" id="pagecard">
-            <div class="card-body text-center">
-              <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-award" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M9.669.864L8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68L9.669.864zm1.196 1.193l-1.51-.229L8 1.126l-1.355.702-1.51.229-.684 1.365-1.086 1.072L3.614 6l-.25 1.506 1.087 1.072.684 1.365 1.51.229L8 10.874l1.356-.702 1.509-.229.684-1.365 1.086-1.072L12.387 6l.248-1.506-1.086-1.072-.684-1.365z" />
-                  <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z" />
-                </svg></h5>
-              <p class="card-text">Rewards</p>
-            </div>
-          </div>
-        </a>
-
-        <a href="giftcardspage.php">
-          <div class="card" id="pagecard">
-            <div class="card-body text-center">
-              <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-gift-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A2.968 2.968 0 0 1 3 2.506V2.5zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43a.522.522 0 0 0 .023.07zM9 3h2.932a.56.56 0 0 0 .023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0V3z" />
-                  <path d="M15 7v7.5a1.5 1.5 0 0 1-1.5 1.5H9V7h6zM2.5 16A1.5 1.5 0 0 1 1 14.5V7h6v9H2.5z" />
-                </svg></h5>
-              <p class="card-text">Gift Cards</p>
-            </div>
-          </div>
-        </a>
+          </table>
+        </div>
 
       </div>
 
 
     </div>
-  </div>
-
-  <!--END page content-->
-
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $("#sidebar").mCustomScrollbar({
-        theme: "minimal"
-      });
-
-      $('#sidebarCollapse').on('click', function() {
-        $('#sidebar, #content').toggleClass('active');
-        $('.collapse.in').toggleClass('in');
-        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-      });
-    });
-  </script>
 </body>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#sidebar").mCustomScrollbar({
+      theme: "minimal"
+    });
+
+    $('#sidebarCollapse').on('click', function() {
+      $('#sidebar, #content').toggleClass('active');
+      $('.collapse.in').toggleClass('in');
+      $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+    });
+  });
+</script>
 
 </html>
