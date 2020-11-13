@@ -1,5 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+include_once('config.php');
+// Initialize the session
+ob_start();
+// Check if the user is already logged in, if yes then redirect him to welcome page
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
+{
+  header("Location: accountHomeDraft.php");
+  exit;
+}
 
 <head>
   <meta charset="UTF-8">
@@ -17,23 +25,44 @@
   <script defer src="js/solid.js"></script>
   <script defer src="js/fontawesome.js"></script>
 
-  <!--jquery -->
-  <script src="js/jquery-3.5.1.min.js"></script>
-  <!-- bootstrap popper js-->
-  <script src="js/popper.min.js"></script>
-  <!-- bootstrap js -->
-  <script src="js/bootstrap.min.js"></script>
-
-
-
-  <script>
-    $(document).ready(function() {
-      $('[data-toggle="popover"]').popover({});
-    });
-  </script>
-  <!-- <script>
-document.getElementById("subbtn").onclick = function() {
-    document.getElementById("psubmit").submit();
+// Processing form data when form is submitted
+if (isset($_POST["submit"])) {
+  // Check if pin is empty
+  if (empty(trim($_POST["pin"]))) {
+    $pin_err = "Please enter pin.";
+  } else {
+    $pin = trim($_POST["pin"]);
+    $pin = mysqli_real_escape_string($conn, $pin);
+  }
+    // Validate credentials
+    if (empty($pin_err))
+    {
+    $query = mysqli_query($conn,"SELECT email, password, pin_number, first_name, last_name, user_id, phone_number, SSN, street_address, city, state, zip_code, start_date FROM employee_info WHERE pin_number = '$pin'");
+		$numrows = mysqli_num_rows($query);
+		if($numrows!=0)
+		{
+        	while($row = mysqli_fetch_assoc($query))
+        	{
+				$dpin = $row['pin_number'];
+				$first_name = $row['first_name'];
+				$first_name = mysqli_real_escape_string($conn,$first_name);
+    			$last_name =  $row['last_name'];
+            	$last_name = mysqli_real_escape_string($conn,$last_name);
+    		}
+		}
+		if($pin == $dpin)
+		{
+			session_start();
+			$_SESSION['first_name'] = $first_name;
+  			$_SESSION["last_name"] = $last_name;
+			header("Location: accountHomeDraft.php");
+			ob_end_flush();	
+		}else{
+			$pin_err = "Incorrect Pin!";
+		}
+	}else{
+		$pin_err = "Incorrect pin";
+	}   
 }
 </script> -->
 </head>

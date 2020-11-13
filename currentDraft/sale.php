@@ -1,10 +1,11 @@
 <?php
 include_once('config.php');
-
+session_start();
 if(!isset($_SESSION['sale'])){
     //If it doesn't, create an empty array.
     $_SESSION['customer'] = array();
 }
+var_dump($_SESSION['customer']);
 ?>
 
 <!DOCTYPE html>
@@ -181,6 +182,7 @@ if(!isset($_SESSION['sale'])){
                                 $_SESSION['customer']['lname'] = $crow['last_name'];
                                 echo "<form class='form-inline'><div class='card' style='padding: 8px'>" . $_SESSION['customer']['fname'] . " " . $_SESSION['customer']['lname'] . "</div>
                                 <div class='nav-item'><button href='sale.php' class='btn navbar-btn'> Remove</button></div></form>";
+								array_push($_SESSION['customer'],$_GET['Add']);
                             }
                         } 
                     }else {
