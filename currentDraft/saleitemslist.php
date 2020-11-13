@@ -144,7 +144,6 @@ if(!isset($_SESSION['sale'])){
             <table class="table table-bordered">
                 <tr>
                     <th class="col-1"></th>
-                    <th class="col-1">ID</th>
                     <th class="col-2">Description</th>
                     <th class="col-1">Quantity</th>
                     <th class="col-1">Price</th>
@@ -162,7 +161,7 @@ if(!isset($_SESSION['sale'])){
                     if ($queryResults > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo "<tr><td><form method='post' action='sale.php'><button class='btn navbar-btn btn-light' name='additem'>
-                            Add</button></td><td><input name='sproduct' size='1' value='". $row['product_id'] ."' readonly /></form></td><td>" .$row['productName']. "</td><td>" .$row['in_stock']. "</td><td>".$row['unit_price']. "</td><td>" .$row['productType'].
+                            Add</button></td><input name='sproduct' size='1' value='". $row['product_id'] ."' readonly hidden/></form><td>" .$row['productName']. "</td><td>" .$row['in_stock']. "</td><td>".$row['unit_price']. "</td><td>" .$row['productType'].
                             "</td><td>" .$row['productSubType']. "</td></tr>";
                         }
                     }else {
