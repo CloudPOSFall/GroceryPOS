@@ -185,7 +185,7 @@ include_once('config.php');
               <td> </td>
             </tr>
 
-            <?php include('pracCategory.php') ?>
+            <?php include('productForm.php') ?>
 
             <div class='card mt-5 bg-light'>
               <?php

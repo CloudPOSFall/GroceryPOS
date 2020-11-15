@@ -1,8 +1,10 @@
-
-
 <form method="get" type="button" action="<?php echo $_SERVER['PHP_SELF'];?>">
 
-    <?php include 'productview.php'; ?>   
+    <?php //include 'productview.php'; ?>
+
+
+
+
 
     Choose a Product Type:<?php include 'getProductByType.php'; ?>
     <br>
@@ -11,16 +13,16 @@
         if(isset($_GET['submit'])){
             $productType = $_GET['productType'];
     ?>
-    Choose a Product Sub Type
-    <?php
-            include 'getSubType.php';
-        }
-    ?>
+
+    Choose a Product Sub Type <?php include 'getSubType.php'; } ?>
+
+    <input type="submit" name="submit" value="Submit Form">
+    <br>
 
     <?php include 'productTypeWithTable.php'; ?>
     <brb>
 
+    
 
-    <input type="submit" name="submit" value="Submit Form"><br>
 
 </form>

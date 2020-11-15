@@ -17,8 +17,11 @@
     $tableCode .= "<tr> <th>Product Name</th> <th>Product Type</th> <th>Product Sub Type</th> <th>Price</th> <th>Add to Cart</th> </tr>";
 
     while($row = mysqli_fetch_assoc($result)) {
-        $tableCode .= "<tr> <th>".$row['productName']."</th> <th>".$row['productType']."</th> <th>".$row['productSubType']."</th><th>".$row['unit_price']."</th><th><input type='submit' name='submit' value='Add'></th> </tr>";
+        $tableCode .= "<tr> <th>".$row['productName']."</th> <th>".$row['productType']."</th> <th>"
+        .$row['productSubType']."</th><th>".$row['unit_price']."</th><th><input type='submit' name='addToCart' value='Add'></th> </tr>";
     }
+
+    //href='productedit.php?Upd="
 
     $tableCode .= "</table>";
     echo ($tableCode);
