@@ -6,23 +6,27 @@
 
     <?php include 'getProductByType.php'; ?>
 
-    <input type="submit" name="submit" value="Get This Category">
+    <!--<input type="submit" name="submit" value="Get This Category">-->
 
     <br>
 
     <?php 
         if(isset($_GET['submit'])){
-            //$productType = $_GET['productType'];
+            $productType = $_GET['productType'];
             include 'getSubType.php';
         }
     ?>
 
-    <input type="submit" name="submitsub" value="Get This Sub Category">
+    <!--<input type="submit" name="submitsub" value="Get This Sub Category">-->
 
     <?php 
-        if(isset($_GET['submitsub'])){
+        //if(isset($_GET['submitsub'])){
             include 'productTypeWithTable.php';
-        }
+        //}
     ?>
+    <brb>
+
+
+    <input type="submit" name="submit" value="Submit Form"><br>
 
 </form>

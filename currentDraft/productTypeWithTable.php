@@ -1,15 +1,15 @@
 <?php
     include_once('config.php');
-    session_start();
-
-    $_SESSION['cart'] = array();
-    $productId;
-
 
     $query;
-    if(isset($_GET['productType'])) {
+    if(isset($_GET['productSubType'])) {
+        $query = "SELECT * FROM product_inventory WHERE productSubType = '".$_GET['productSubType']."' AND in_stock != 0 ORDER BY productName";
+    }
+    else if(isset($_GET['productType'])) {
         $query = "SELECT * FROM product_inventory WHERE productType = '".$_GET['productType']."' AND in_stock != 0 ORDER BY productName";
-    } 
+    } else 
+        $query = "SELECT * FROM product_inventory WHERE in_stock != 0 ORDER BY productName";
+    
 
     $result = mysqli_query($conn, $query) or die("Execution Failed");
 
