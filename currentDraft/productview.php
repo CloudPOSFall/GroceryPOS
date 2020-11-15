@@ -166,7 +166,7 @@ $result = mysqli_query($conn, $query);
                 <td> </td>
               </tr>
 
-              <?php include('productForm.php.php') ?>
+              <?php include('productForm.php') ?>
 
               <div class='card mt-5 bg-light'>
                 <?php
