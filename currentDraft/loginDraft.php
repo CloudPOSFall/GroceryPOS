@@ -118,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <a class="nav-link" href="customerlogin.php">Login</a>
           </li>
           <li class="nav-item ml-auto">
-            <a class="nav-link" href="#">Sign Up</a>
+            <a class="nav-link" href="customersignup.php">Sign Up</a>
           </li>
 
         </ul>
@@ -132,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </li>
 
           <li class="nav-item ml-auto">
-            <a class="nav-link" href="signupDraft.php">Sign Up</a>
+            <a class="nav-link" href="question.php">Sign Up</a>
           </li>
 
         </ul>
@@ -183,7 +183,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
               <div class="text-center">
                 <button type="submit" style="padding: 10px" class="btn-lg btn-success"> Log In</button></div><br>
-              <p>Don't have an account? <a href="signupDraft.php">Sign up now</a>.</p>
+              <p>Don't have an account? <a href="question.php">Sign up now</a>.</p>
             </form>
           </div>
         </div>

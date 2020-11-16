@@ -14,22 +14,22 @@
       $State = $_POST['state'];
       $ZipCode = $_POST['zip'];
       $Company = $_POST['company'];
-      $Stores = $_POST['stores'];
-      $User = 1;
+      $User = 2;
 
-
-      $query = "INSERT into employee_info (email, password, first_name, last_name, phone_number, SSN, street_address, city, state, zip_code, company_name, number_of_stores, user_type)
-              values ('$Email', '$Password', '$FirstName', '$LastName', '$PhoneNumber', '$SSN', '$StreetAddress', '$City', '$State', '$ZipCode', '$Company', '$Stores', '$User')";
+      $query = "INSERT into employee_info (email, password, first_name, last_name, phone_number, SSN, street_address, city, state, zip_code, company_name, user_type)
+              values ('$Email', '$Password', '$FirstName', '$LastName', '$PhoneNumber', '$SSN', '$StreetAddress', '$City', '$State', '$ZipCode', '$Company', '$User')";
 
       $result = mysqli_query($conn, $query);
 
+      
+
       if($result)
       {
-          header("location:accountHomeDraft.php");
+        header("location:accountHomeDraft.php");
       }
       else
       {
         echo ' Please Check Your Query ';
       }
-  }
+    }
 ?>

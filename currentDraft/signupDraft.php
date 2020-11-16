@@ -56,7 +56,7 @@
             <a class="nav-link" href="customerlogin.php">Login</a>
           </li>
           <li class="nav-item ml-auto">
-            <a class="nav-link" href="#">Sign Up</a>
+            <a class="nav-link" href="customersignup.php">Sign Up</a>
           </li>
 
         </ul>
@@ -70,7 +70,7 @@
           </li>
 
           <li class="nav-item ml-auto active">
-            <a class="nav-link" href="signupDraft.php">Sign Up</a>
+            <a class="nav-link" href="question.php">Sign Up</a>
           </li>
 
         </ul>
@@ -98,7 +98,7 @@
           </div>
 
           <div class="form-group">
-            <form class="form-horizontal" method="post" action="signupInsert.php">
+            <form class="form-horizontal" method="post" action="employeesignupInsert.php">
               <div class="form-group">
                 <input name="fname" class="form-control" placeholder="First Name">
               </div>
@@ -109,24 +109,28 @@
                 <input type="email" name="email" class="form-control" placeholder="Email Address">
               </div>
               <div class="form-group">
-                <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="phone" class="form-control" placeholder="Phone Number">
+                <input type="password" name="password" class="form-control" placeholder="Create a Password">
               </div>
               <div class="form-group">
-                <input name="company" class="form-control" placeholder="Company">
+                <input type="tel" name="phone" class="form-control" placeholder="Phone Number">
               </div>
               <div class="form-group">
-                <input type="password" name="pass" class="form-control" placeholder="Password">
+                <input name="street" class="form-control" placeholder="Street Address">
               </div>
               <div class="form-group">
-                <select name="stores" class="form-control">
-                  <option selected>Number of locations</option>
-                  <option>0</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3-5</option>
-                  <option>5-10</option>
-                  <option>10+</option>
-                </select>
+                <input name="city" class="form-control" placeholder="City">
+              </div>
+              <div class="form-group">
+                <input name="state" class="form-control" placeholder="State">
+              </div>
+              <div class="form-group">
+                <input name="zip" class="form-control" placeholder="Zip Code">
+              </div>
+              <div class="form-group">
+                <input name="social" type="password" class="form-control" placeholder="SSN">
+              </div>
+              <div class="form-group">
+                <input name="company" class="form-control" placeholder="Company Name">
               </div>
               <div class="col text-center">
                 <button type="submit" class="btn-lg btn-success">Get Started</button>
