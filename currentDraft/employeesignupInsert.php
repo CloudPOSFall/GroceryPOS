@@ -1,5 +1,5 @@
 <?php
-include_once ('config.php');
+  include_once('config.php');
 
   if(isset($_POST['submit']))
   {
@@ -14,9 +14,10 @@ include_once ('config.php');
       $State = $_POST['state'];
       $ZipCode = $_POST['zip'];
       $Company = $_POST['company'];
+      $User = 2;
 
-      $query = "INSERT into employee_info (email, password, first_name, last_name, phone_number, SSN, street_address, city, state, zip_code, company_name)
-              values ('$Email', '$Password', '$FirstName', '$LastName', '$PhoneNumber', '$SSN', '$StreetAddress', '$City', '$State', '$ZipCode', '$Company')";
+      $query = "INSERT into employee_info (email, password, first_name, last_name, phone_number, SSN, street_address, city, state, zip_code, company_name, user_type)
+              values ('$Email', '$Password', '$FirstName', '$LastName', '$PhoneNumber', '$SSN', '$StreetAddress', '$City', '$State', '$ZipCode', '$Company', '$User')";
 
       $result = mysqli_query($conn, $query);
 
@@ -28,8 +29,7 @@ include_once ('config.php');
       }
       else
       {
-        header("location:signupDraft.php")
+        echo ' Please Check Your Query ';
       }
     }
-  }
 ?>

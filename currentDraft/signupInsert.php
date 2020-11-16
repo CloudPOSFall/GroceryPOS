@@ -1,5 +1,5 @@
 <?php
-include_once ('config.php');
+  include_once('config.php');
 
   if(isset($_POST['submit']))
   {
@@ -15,26 +15,21 @@ include_once ('config.php');
       $ZipCode = $_POST['zip'];
       $Company = $_POST['company'];
       $Stores = $_POST['stores'];
+      $User = 1;
 
-      $query = "INSERT into employee_info (email, password, first_name, last_name, phone_number, SSN, street_address, city, state, zip_code, company_name)
-              values ('$Email', '$Password', '$FirstName', '$LastName', '$PhoneNumber', '$SSN', '$StreetAddress', '$City', '$State', '$ZipCode', '$Company')";
+
+      $query = "INSERT into employee_info (email, password, first_name, last_name, phone_number, SSN, street_address, city, state, zip_code, company_name, number_of_stores, user_type)
+              values ('$Email', '$Password', '$FirstName', '$LastName', '$PhoneNumber', '$SSN', '$StreetAddress', '$City', '$State', '$ZipCode', '$Company', '$Stores', '$User')";
 
       $result = mysqli_query($conn, $query);
 
       if($result)
       {
-        $query1 = "INSERT into storelevel_signup (number_of_stores)
-                  values ('$Stores')";
-        $result1 = mysqli_query($conn, $query1);
-        
-        if($result1)
-        {
           header("location:accountHomeDraft.php");
-        }
       }
       else
       {
-        header("location:signupDraft.php");
+        echo ' Please Check Your Query ';
       }
-    }
+  }
 ?>

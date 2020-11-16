@@ -70,7 +70,7 @@
           </li>
 
           <li class="nav-item ml-auto active">
-            <a class="nav-link" href="signupDraft.php">Sign Up</a>
+            <a class="nav-link" href="question.php">Sign Up</a>
           </li>
 
         </ul>
@@ -112,7 +112,7 @@
                 <input type="password" name="password" class="form-control" placeholder="Create a Password">
               </div>
               <div class="form-group">
-                <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="phone" class="form-control" placeholder="Phone Number">
+                <input type="tel" name="phone" class="form-control" placeholder="Phone Number">
               </div>
               <div class="form-group">
                 <input name="street" class="form-control" placeholder="Street Address">
