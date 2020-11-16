@@ -1,8 +1,17 @@
-<?php
+<form method="get" type="button" action="<?php echo $_SERVER['PHP_SELF'];?>">
 
-    include_once('config.php');
+    <?php 
 
-    //$query = "SELECT DISTINCT productSubType FROM product_inventory WHERE productType = '".$productType."' ORDER BY productSubType";
+        echo ($tableCode);
 
-    echo('debug');
-?>
+        if(isset($_GET['addToCart'])) {
+
+            echo('debug');
+
+            $query = "UPDATE inventory_sales SET product_id = '".$_GET['addToCart']."'";
+            $result = mysqli_query($conn, $query) or die("Execution Failed");
+        }
+
+    ?>
+
+</form>

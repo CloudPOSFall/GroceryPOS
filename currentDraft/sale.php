@@ -215,6 +215,8 @@ var_dump($_SESSION['customer']);
         </nav>
 
     <div class="table-responsive">
+
+        
         <table class="table table-striped table-hove" id="salescontent">
             <thead>
                 <tr>
@@ -227,7 +229,7 @@ var_dump($_SESSION['customer']);
             </thead>
             <tbody>
 
-
+            <?php include('productForm.php') ?>
 
                 <?php
                 //if ($row['in_stock'] > 0){}
