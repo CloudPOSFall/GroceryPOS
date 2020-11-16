@@ -13,9 +13,10 @@ include_once ('config.php');
       $City = $_POST['city'];
       $State = $_POST['state'];
       $ZipCode = $_POST['zip'];
+      $Company = $_POST['company'];
 
-      $query = "insert into employee_info (email, password, first_name, last_name, phone_number, SSN, street_address, city, state, zip_code)
-              values ('$Email', '$Password', '$FirstName', '$LastName', '$PhoneNumber', '$SSN', '$StreetAddress', '$City', '$State', '$ZipCode')";
+      $query = "INSERT into employee_info (email, password, first_name, last_name, phone_number, SSN, street_address, city, state, zip_code, company_name)
+              values ('$Email', '$Password', '$FirstName', '$LastName', '$PhoneNumber', '$SSN', '$StreetAddress', '$City', '$State', '$ZipCode', '$Company')";
 
       $result = mysqli_query($conn, $query);
 

@@ -99,7 +99,7 @@
 
           <div class="form-group">
             <form class="form-horizontal" method="post" action="signupInsert.php">
-              <div class="form-group">
+            <div class="form-group">
                 <input name="fname" class="form-control" placeholder="First Name">
               </div>
               <div class="form-group">
@@ -109,13 +109,28 @@
                 <input type="email" name="email" class="form-control" placeholder="Email Address">
               </div>
               <div class="form-group">
+                <input type="password" name="password" class="form-control" placeholder="Create a Password">
+              </div>
+              <div class="form-group">
                 <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="phone" class="form-control" placeholder="Phone Number">
               </div>
               <div class="form-group">
-                <input name="company" class="form-control" placeholder="Company">
+                <input name="street" class="form-control" placeholder="Street Address">
               </div>
               <div class="form-group">
-                <input type="password" name="pass" class="form-control" placeholder="Password">
+                <input name="city" class="form-control" placeholder="City">
+              </div>
+              <div class="form-group">
+                <input name="state" class="form-control" placeholder="State">
+              </div>
+              <div class="form-group">
+                <input name="zip" class="form-control" placeholder="Zip Code">
+              </div>
+              <div class="form-group">
+                <input name="social" type="password" class="form-control" placeholder="SSN">
+              </div>
+              <div class="form-group">
+                <input name="company" class="form-control" placeholder="Company Name">
               </div>
               <div class="form-group">
                 <select name="stores" class="form-control">

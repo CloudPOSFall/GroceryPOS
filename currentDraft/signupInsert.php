@@ -1,36 +1,40 @@
 <?php
-  include_once ('config.php');
+include_once ('config.php');
 
-  if(!$conn)
+  if(isset($_POST['submit']))
   {
-    echo 'Not Connected To Server';
-  }
+      $Email = $_POST['email'];
+      $Password = $_POST['password'];
+      $FirstName = $_POST['fname'];
+      $LastName = $_POST['lname'];
+      $PhoneNumber = $_POST['phone'];
+      $SSN = $_POST['social'];
+      $StreetAddress = $_POST['street'];
+      $City = $_POST['city'];
+      $State = $_POST['state'];
+      $ZipCode = $_POST['zip'];
+      $Company = $_POST['company'];
+      $Stores = $_POST['stores'];
 
-  if(!mysqli_select_db($conn, 'marketpos-2'))
-  {
-    echo 'Database Not Selected';
-  }
+      $query = "INSERT into employee_info (email, password, first_name, last_name, phone_number, SSN, street_address, city, state, zip_code, company_name)
+              values ('$Email', '$Password', '$FirstName', '$LastName', '$PhoneNumber', '$SSN', '$StreetAddress', '$City', '$State', '$ZipCode', '$Company')";
 
-  $email = $_POST['email'];
-  $password = $_POST['pass'];
-  $fname = $_POST['fname'];
-  $lname = $_POST['lname'];
-  $phone = $_POST['phone'];
-  $numstores = $_POST['stores'];
-  $company = $_POST['company'];
+      $result = mysqli_query($conn, $query);
 
-  $sql = "INSERT INTO storelevel_signup (email, password, first_name, last_name, phone_number, number_of_stores, company_name)
-          VALUES ('$email', '$password', '$fname', '$lname', '$phone', '$numstores', '$company')";
-
-  if(!mysqli_query($conn, $sql))
-  {
-    echo 'Not Inserted';
-  }
-  else
-  {
-      header("location:accountHomeDraft.php");
-  }
-
-  
-
+      if($result)
+      {
+        $query1 = "INSERT into storelevel_signup (number_of_stores)
+                  values ('$Stores')";
+        $result1 = mysqli_query($conn, $query1);
+        
+        if($result1)
+        {
+          header("location:accountHomeDraft.php");
+        }
+      }
+      else
+      {
+        header("location:signupDraft.php");
+      }
+    }
 ?>
