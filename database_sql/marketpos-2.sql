@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 13, 2020 at 04:49 AM
+-- Generation Time: Nov 16, 2020 at 08:47 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -74,21 +74,23 @@ CREATE TABLE `employee_info` (
   `zip_code` int(11) NOT NULL,
   `start_date` date DEFAULT NULL,
   `company_name` varchar(50) NOT NULL,
-  `customer_id` int(11) DEFAULT NULL,
-  `ID` int(11) DEFAULT NULL
+  `number_of_stores` varchar(11) DEFAULT NULL,
+  `user_type` int(11) NOT NULL,
+  `customer_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `employee_info`
 --
 
-INSERT INTO `employee_info` (`employee_id`, `email`, `password`, `pin_number`, `first_name`, `last_name`, `user_id`, `phone_number`, `SSN`, `street_address`, `city`, `state`, `zip_code`, `start_date`, `company_name`, `customer_id`, `ID`) VALUES
-(13, 'johnnyfran20002@gmail.com', 'passwood', 231, 'Johnny', 'Tejada', 214564056, 6463214487, 756434736, '10005 Hawk Drive', 'Queens', 'NY', 11105, '2020-11-02', 'Walmart', 1, NULL),
-(14, 'tylerherro23@gmail.com', 'herro', 112, 'Tyler', 'Herro', 435678987, 3475436897, 123456789, '12th Street', 'New York', 'NY', 9873, '2019-07-01', 'Shop Rite', 2, NULL),
-(21, 'bronny45@hotmail.com', 'lebron', 112, 'Bronny', 'James', 112323454, 2124568745, 78234325, '21 Wood Street', 'Woodhaven', 'VT', 12321, '2019-03-02', 'Walmart', 3, NULL),
-(22, 'usher54@aim.com', 'usher', 555, 'Usher', 'Man', 345432345, 8454342212, 958674345, '76 Cross Street', 'Houston', 'NY', 85743, '2020-12-05', 'Walmart', NULL, NULL),
-(30, 'chrisbrown@gmail.com', 'pass', 111, 'Chris', 'Brown', 111111111, 7187654783, 746378273, '19 West Street', 'Denver', 'CL', 43454, '2019-07-03', 'Walmart', NULL, NULL),
-(31, 'kyrieirving2@hotmail.com', 'kyrie', 705, 'Kyrie', 'Irving', 123456789, 2129857843, 123456789, '71 2nd Ave', 'New York', 'NY', 12343, '2017-07-03', 'Tops', 4, NULL);
+INSERT INTO `employee_info` (`employee_id`, `email`, `password`, `pin_number`, `first_name`, `last_name`, `user_id`, `phone_number`, `SSN`, `street_address`, `city`, `state`, `zip_code`, `start_date`, `company_name`, `number_of_stores`, `user_type`, `customer_id`) VALUES
+(13, 'johnnyfran20002@gmail.com', 'passwood', 231, 'Johnny', 'Tejada', 214564056, 6463214487, 756434736, '10005 Hawk Drive', 'Queens', 'NY', 11105, '2020-11-02', 'Walmart', '3', 1, 1),
+(14, 'tylerherro23@gmail.com', 'herro', 112, 'Tyler', 'Herro', 435678987, 3475436897, 123456789, '12th Street', 'New York', 'NY', 9873, '2019-07-01', 'Shop Rite', NULL, 2, 2),
+(21, 'bronny45@hotmail.com', 'lebron', 112, 'Bronny', 'James', 112323454, 2124568745, 78234325, '21 Wood Street', 'Woodhaven', 'VT', 12321, '2019-03-02', 'Walmart', NULL, 2, 3),
+(22, 'usher54@aim.com', 'usher', 555, 'Usher', 'Man', 345432345, 8454342212, 958674345, '76 Cross Street', 'Houston', 'NY', 85743, '2020-12-05', 'Walmart', NULL, 2, NULL),
+(30, 'chrisbrown@gmail.com', 'pass', 111, 'Chris', 'Brown', 111111111, 7187654783, 746378273, '19 West Street', 'Denver', 'CL', 43454, '2019-07-03', 'Walmart', NULL, 2, NULL),
+(31, 'kyrieirving2@hotmail.com', 'kyrie', 705, 'Kyrie', 'Irving', 123456789, 2129857843, 123456789, '71 2nd Ave', 'New York', 'NY', 12343, '2017-07-03', 'Tops', '4', 1, 4),
+(32, 'georgemartin3432@gmail.com', 'mypassword', NULL, 'George', 'Martin', NULL, 2124545434, NULL, '256 97th Street', 'New York', 'NY', 10035, NULL, 'KeyFood', '3', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -156,14 +158,14 @@ CREATE TABLE `product_inventory` (
 --
 
 INSERT INTO `product_inventory` (`product_id`, `productName`, `productType`, `productSubType`, `unit_price`, `cost`, `in_stock`, `vendor_id`) VALUES
-(1, 'Dairy Pure', 'dairy', 'milk', 7.99, 0, 10, 1),
-(2, 'Horizon', 'dairy', 'milk', 8.99, 0, 3, 2),
-(3, 'Old Croc Chedder', 'dairy', 'cheese', 4.85, 0, 5, NULL),
-(4, 'Kerrygold Chedder', 'dairy', 'cheese', 8.99, 0, 65, NULL),
-(5, 'Dole Banana', 'produce', 'banana', 4.99, 0, 56, NULL),
-(6, 'Chiquita', 'produce', 'banana', 5.55, 0, 45, NULL),
-(7, 'Cherry', 'produce', 'tomato', 3.59, 0, 21, NULL),
-(8, 'Brandywine', 'produce', 'tomato', 5.99, 0, 2, NULL);
+(1, 'Dairy Pure', 'dairy', 'milk', 7.99, 8.99, 10, 1),
+(2, 'Horizon', 'dairy', 'milk', 8.99, 10.5, 3, 2),
+(3, 'Old Croc Chedder', 'dairy', 'cheese', 4.85, 5.89, 5, NULL),
+(4, 'Kerrygold Chedder', 'dairy', 'cheese', 8.99, 7.99, 65, NULL),
+(5, 'Dole Banana', 'produce', 'banana', 4.99, 6.5, 56, NULL),
+(6, 'Chiquita', 'produce', 'banana', 5.55, 7.99, 45, NULL),
+(7, 'Cherry', 'produce', 'tomato', 3.59, 4.99, 21, NULL),
+(8, 'Brandywine', 'produce', 'tomato', 5.99, 7.75, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -175,18 +177,6 @@ CREATE TABLE `rewards_table` (
   `RID` int(11) NOT NULL,
   `points` int(11) NOT NULL,
   `customer_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `storelevel_signup`
---
-
-CREATE TABLE `storelevel_signup` (
-  `ID` int(11) NOT NULL,
-  `number_of_stores` int(11) NOT NULL,
-  `user_type` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -310,8 +300,7 @@ ALTER TABLE `customer_info`
 --
 ALTER TABLE `employee_info`
   ADD PRIMARY KEY (`employee_id`),
-  ADD UNIQUE KEY `customer_id` (`customer_id`),
-  ADD UNIQUE KEY `ID` (`ID`);
+  ADD UNIQUE KEY `customer_id` (`customer_id`);
 
 --
 -- Indexes for table `gift_card`
@@ -341,12 +330,6 @@ ALTER TABLE `product_inventory`
 ALTER TABLE `rewards_table`
   ADD PRIMARY KEY (`RID`),
   ADD UNIQUE KEY `customer_id` (`customer_id`);
-
---
--- Indexes for table `storelevel_signup`
---
-ALTER TABLE `storelevel_signup`
-  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `tax_table`
@@ -390,7 +373,7 @@ ALTER TABLE `customer_info`
 -- AUTO_INCREMENT for table `employee_info`
 --
 ALTER TABLE `employee_info`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `gift_card`
@@ -415,12 +398,6 @@ ALTER TABLE `product_inventory`
 --
 ALTER TABLE `rewards_table`
   MODIFY `RID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `storelevel_signup`
---
-ALTER TABLE `storelevel_signup`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tax_table`
@@ -454,8 +431,7 @@ ALTER TABLE `zreport_system`
 -- Constraints for table `employee_info`
 --
 ALTER TABLE `employee_info`
-  ADD CONSTRAINT `employee_info_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`) ON DELETE NO ACTION ON UPDATE SET NULL,
-  ADD CONSTRAINT `employee_info_ibfk_2` FOREIGN KEY (`ID`) REFERENCES `storelevel_signup` (`ID`) ON DELETE NO ACTION ON UPDATE SET NULL;
+  ADD CONSTRAINT `employee_info_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
 
 --
 -- Constraints for table `gift_card`
