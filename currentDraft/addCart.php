@@ -8,10 +8,10 @@
 
             echo('debug: ');
             echo($_GET['addToCart']);
-            $query = "UPDATE inventory_sales SET product_id = '".$_GET['addToCart']."' ";
+            $query = "INSERT INTO inventory_sales (product_id) VALUE ('".$_GET['addToCart']."')";
+            
             $result = mysqli_query($conn, $query) or die(" Execution Failed");
         }
 
     ?>
-
 </form>
