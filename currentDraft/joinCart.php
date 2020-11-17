@@ -8,13 +8,15 @@
 
     $cartCode = "<table border='1' name='product'>";
     $cartCode .= "<tr> <th>Product Name</th> <th>Product Price</th> </tr>";
+    $total = 0.00;
 
     while($row = mysqli_fetch_assoc($result)) {
         $newCost = $row['qty'] * $row['cost'];
         $format = number_format($newCost, 2);
+        $total = $total + $format;
         $cartCode .= "<tr> <th>".$row['productName']."</th> <th>".$format." </th> </tr>";
     }
 
-    echo ($cartCode);
-
+    echo($cartCode);
+    echo($total);
 ?>
