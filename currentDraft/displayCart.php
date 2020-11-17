@@ -39,5 +39,5 @@
 
 
     include_once('config.php');
-    $query = "SELECT product_inventory.productName FROM product_inventory
+    $query = "SELECT product_inventory.productName FROM product_inventory";
 ?>
