@@ -56,7 +56,7 @@
             <a class="nav-link" href="customerlogin.php">Login</a>
           </li>
           <li class="nav-item ml-auto">
-            <a class="nav-link" href="#">Sign Up</a>
+            <a class="nav-link" href="customersignup.php">Sign Up</a>
           </li>
 
         </ul>
@@ -70,7 +70,7 @@
           </li>
 
           <li class="nav-item ml-auto active">
-            <a class="nav-link" href="question.php">Sign Up</a>
+            <a class="nav-link" href="AdminsignupDraft.php">Sign Up</a>
           </li>
 
         </ul>

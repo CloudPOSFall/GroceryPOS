@@ -15,7 +15,6 @@
 
     $tableCode = "<table border='1' name='product'>";
     $tableCode .= "<tr> <th>Product Name</th> <th>Product Type</th> <th>Product Sub Type</th> <th>Price</th> <th>Add to Cart</th> </tr>";
-    $data = [];
 
     while($row = mysqli_fetch_assoc($result)) {
         $tableCode .= "<tr> <th>".$row['productName']."</th> <th>".$row['productType']."</th> <th>"
