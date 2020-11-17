@@ -70,7 +70,7 @@
           </li>
 
           <li class="nav-item ml-auto">
-            <a class="nav-link" href="question.php">Sign Up</a>
+            <a class="nav-link" href="AdminsignupDraft.php">Sign Up</a>
           </li>
 
         </ul>

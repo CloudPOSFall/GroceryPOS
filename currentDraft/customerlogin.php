@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$_SESSION["email"] = $email;
 		$_SESSION["first_name"] = $first_name;
   		$_SESSION["last_name"] = $last_name;
-		header("Location: accountHomeDraft.php");
+		header("Location: customerHome.php");
 		ob_end_flush();		
 	}    
 }
@@ -127,7 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </li>
 
           <li class="nav-item ml-auto">
-            <a class="nav-link" href="question.php">Sign Up</a>
+            <a class="nav-link" href="AdminsignupDraft.php">Sign Up</a>
           </li>
 
         </ul>
