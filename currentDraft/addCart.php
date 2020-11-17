@@ -21,7 +21,9 @@
             $qupdate = "UPDATE inventory_sales SET qty = 1 WHERE $ID LIKE product_id";
             $rupdatezero = mysqli_query($conn,$qupdate);
         } 
-}
+    }
+
+    include('joinCart.php') 
 
     ?>
 </form>

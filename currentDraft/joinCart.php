@@ -1,3 +1,4 @@
+<br>
 <?php
 
     include_once('config.php');
@@ -20,3 +21,4 @@
     echo($cartCode);
     echo($total);
 ?>
+<br>

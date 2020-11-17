@@ -228,7 +228,8 @@ var_dump($_SESSION['customer']);
                 </tr>
             </thead>
             <tbody>
-
+            
+            
             <?php include('productForm.php') ?>
 
                 <?php
