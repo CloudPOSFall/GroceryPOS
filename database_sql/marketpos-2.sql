@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 17, 2020 at 05:09 AM
+-- Generation Time: Nov 17, 2020 at 05:19 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -154,22 +154,23 @@ CREATE TABLE `product_inventory` (
   `unit_price` float NOT NULL,
   `cost` float NOT NULL,
   `in_stock` int(11) NOT NULL,
-  `vendor_id` int(11) DEFAULT NULL
+  `vendor_id` int(11) DEFAULT NULL,
+  `OID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `product_inventory`
 --
 
-INSERT INTO `product_inventory` (`product_id`, `productName`, `productType`, `productSubType`, `unit_price`, `cost`, `in_stock`, `vendor_id`) VALUES
-(1, 'Dairy Pure', 'dairy', 'milk', 7.99, 8.99, 10, 1),
-(2, 'Horizon', 'dairy', 'milk', 8.99, 10.5, 3, 2),
-(3, 'Old Croc Chedder', 'dairy', 'cheese', 4.85, 5.89, 5, NULL),
-(4, 'Kerrygold Chedder', 'dairy', 'cheese', 8.99, 7.99, 65, NULL),
-(5, 'Dole Banana', 'produce', 'banana', 4.99, 6.5, 56, NULL),
-(6, 'Chiquita', 'produce', 'banana', 5.55, 7.99, 45, NULL),
-(7, 'Cherry', 'produce', 'tomato', 3.59, 4.99, 21, NULL),
-(8, 'Brandywine', 'produce', 'tomato', 5.99, 7.75, 2, NULL);
+INSERT INTO `product_inventory` (`product_id`, `productName`, `productType`, `productSubType`, `unit_price`, `cost`, `in_stock`, `vendor_id`, `OID`) VALUES
+(1, 'Dairy Pure', 'dairy', 'milk', 7.99, 8.99, 10, 1, NULL),
+(2, 'Horizon', 'dairy', 'milk', 8.99, 10.5, 3, 2, NULL),
+(3, 'Old Croc Chedder', 'dairy', 'cheese', 4.85, 5.89, 5, NULL, NULL),
+(4, 'Kerrygold Chedder', 'dairy', 'cheese', 8.99, 7.99, 65, NULL, NULL),
+(5, 'Dole Banana', 'produce', 'banana', 4.99, 6.5, 56, NULL, NULL),
+(6, 'Chiquita', 'produce', 'banana', 5.55, 7.99, 45, NULL, NULL),
+(7, 'Cherry', 'produce', 'tomato', 3.59, 4.99, 21, NULL, NULL),
+(8, 'Brandywine', 'produce', 'tomato', 5.99, 7.75, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -329,7 +330,8 @@ ALTER TABLE `order_info`
 --
 ALTER TABLE `product_inventory`
   ADD PRIMARY KEY (`product_id`),
-  ADD UNIQUE KEY `vendor_id` (`vendor_id`);
+  ADD UNIQUE KEY `vendor_id` (`vendor_id`),
+  ADD UNIQUE KEY `OID` (`OID`);
 
 --
 -- Indexes for table `rewards_table`
@@ -464,7 +466,8 @@ ALTER TABLE `order_info`
 -- Constraints for table `product_inventory`
 --
 ALTER TABLE `product_inventory`
-  ADD CONSTRAINT `product_inventory_ibfk_1` FOREIGN KEY (`vendor_id`) REFERENCES `vendorinfo` (`vendor_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `product_inventory_ibfk_1` FOREIGN KEY (`vendor_id`) REFERENCES `vendorinfo` (`vendor_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `product_inventory_ibfk_2` FOREIGN KEY (`OID`) REFERENCES `order_info` (`OID`) ON DELETE NO ACTION ON UPDATE SET NULL;
 
 --
 -- Constraints for table `rewards_table`
