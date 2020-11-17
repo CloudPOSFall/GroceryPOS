@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 16, 2020 at 08:47 PM
+-- Generation Time: Nov 17, 2020 at 05:09 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -20,6 +20,20 @@ SET time_zone = "+00:00";
 --
 -- Database: `marketpos-2`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart_table`
+--
+
+CREATE TABLE `cart_table` (
+  `sale_id` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `discount` varchar(50) NOT NULL,
+  `cart_purchase` tinyint(1) NOT NULL,
+  `product_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -116,25 +130,15 @@ INSERT INTO `gift_card` (`gift_id`, `promo_number`, `card_balance`, `ticket_id`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `inventory_sales`
+-- Table structure for table `order_info`
 --
 
-CREATE TABLE `inventory_sales` (
-  `ISID` int(11) NOT NULL,
-  `qty` int(11) NOT NULL,
-  `discount` varchar(50) NOT NULL,
-  `cart_purchase` tinyint(1) NOT NULL,
-  `product_id` int(11) DEFAULT NULL,
-  `ticket_id` int(11) DEFAULT NULL
+CREATE TABLE `order_info` (
+  `OID` int(11) NOT NULL,
+  `order_cost` int(11) NOT NULL,
+  `order_stock_amount` int(11) NOT NULL,
+  `product_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `inventory_sales`
---
-
-INSERT INTO `inventory_sales` (`ISID`, `qty`, `discount`, `cart_purchase`, `product_id`, `ticket_id`) VALUES
-(2, 1, '0.00', 0, 1, NULL),
-(3, 1, '0.00', 0, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -212,21 +216,18 @@ CREATE TABLE `ticket_system` (
   `ticket_id` int(11) NOT NULL,
   `date` date NOT NULL,
   `time` time NOT NULL,
+  `quantity` int(11) NOT NULL,
   `subtotal` float NOT NULL,
   `total` float NOT NULL,
+  `discount` float NOT NULL,
   `tax` float NOT NULL,
   `tax_rate` float NOT NULL,
+  `cart_purchase` tinyint(1) NOT NULL,
   `employee_id` int(11) DEFAULT NULL,
-  `customer_id` int(11) DEFAULT NULL
+  `customer_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `sale_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `ticket_system`
---
-
-INSERT INTO `ticket_system` (`ticket_id`, `date`, `time`, `subtotal`, `total`, `tax`, `tax_rate`, `employee_id`, `customer_id`) VALUES
-(1, '2020-07-12', '12:45:50', 9.99, 9.99, 1.23, 0.13, NULL, NULL),
-(2, '2020-11-09', '21:49:09', 7.99, 7.99, 0.25, 0.45, 13, NULL);
 
 -- --------------------------------------------------------
 
@@ -290,6 +291,13 @@ INSERT INTO `zreport_system` (`zreport_id`, `total_sales`, `transactions`, `new_
 --
 
 --
+-- Indexes for table `cart_table`
+--
+ALTER TABLE `cart_table`
+  ADD PRIMARY KEY (`sale_id`),
+  ADD UNIQUE KEY `product_id` (`product_id`);
+
+--
 -- Indexes for table `customer_info`
 --
 ALTER TABLE `customer_info`
@@ -310,12 +318,11 @@ ALTER TABLE `gift_card`
   ADD UNIQUE KEY `ticket_id` (`ticket_id`);
 
 --
--- Indexes for table `inventory_sales`
+-- Indexes for table `order_info`
 --
-ALTER TABLE `inventory_sales`
-  ADD PRIMARY KEY (`ISID`),
-  ADD UNIQUE KEY `product_id` (`product_id`),
-  ADD UNIQUE KEY `ticket_id` (`ticket_id`);
+ALTER TABLE `order_info`
+  ADD PRIMARY KEY (`OID`),
+  ADD UNIQUE KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `product_inventory`
@@ -343,7 +350,9 @@ ALTER TABLE `tax_table`
 ALTER TABLE `ticket_system`
   ADD PRIMARY KEY (`ticket_id`),
   ADD UNIQUE KEY `employee_id` (`employee_id`),
-  ADD UNIQUE KEY `customer_id` (`customer_id`);
+  ADD UNIQUE KEY `customer_id` (`customer_id`),
+  ADD UNIQUE KEY `product_id` (`product_id`),
+  ADD UNIQUE KEY `sale_id` (`sale_id`);
 
 --
 -- Indexes for table `vendorinfo`
@@ -364,6 +373,12 @@ ALTER TABLE `zreport_system`
 --
 
 --
+-- AUTO_INCREMENT for table `cart_table`
+--
+ALTER TABLE `cart_table`
+  MODIFY `sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `customer_info`
 --
 ALTER TABLE `customer_info`
@@ -382,10 +397,10 @@ ALTER TABLE `gift_card`
   MODIFY `gift_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `inventory_sales`
+-- AUTO_INCREMENT for table `order_info`
 --
-ALTER TABLE `inventory_sales`
-  MODIFY `ISID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `order_info`
+  MODIFY `OID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `product_inventory`
@@ -428,23 +443,22 @@ ALTER TABLE `zreport_system`
 --
 
 --
+-- Constraints for table `cart_table`
+--
+ALTER TABLE `cart_table`
+  ADD CONSTRAINT `cart_table_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE SET NULL ON UPDATE SET NULL;
+
+--
 -- Constraints for table `employee_info`
 --
 ALTER TABLE `employee_info`
   ADD CONSTRAINT `employee_info_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
 
 --
--- Constraints for table `gift_card`
+-- Constraints for table `order_info`
 --
-ALTER TABLE `gift_card`
-  ADD CONSTRAINT `gift_card_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `ticket_system` (`ticket_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
-
---
--- Constraints for table `inventory_sales`
---
-ALTER TABLE `inventory_sales`
-  ADD CONSTRAINT `inventory_sales_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `ticket_system` (`ticket_id`) ON DELETE NO ACTION ON UPDATE SET NULL,
-  ADD CONSTRAINT `inventory_sales_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE SET NULL ON UPDATE SET NULL;
+ALTER TABLE `order_info`
+  ADD CONSTRAINT `order_info_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
 
 --
 -- Constraints for table `product_inventory`
@@ -463,14 +477,15 @@ ALTER TABLE `rewards_table`
 --
 ALTER TABLE `ticket_system`
   ADD CONSTRAINT `ticket_system_ibfk_2` FOREIGN KEY (`employee_id`) REFERENCES `employee_info` (`employee_id`) ON DELETE NO ACTION ON UPDATE SET NULL,
-  ADD CONSTRAINT `ticket_system_ibfk_4` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+  ADD CONSTRAINT `ticket_system_ibfk_4` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`) ON DELETE NO ACTION ON UPDATE SET NULL,
+  ADD CONSTRAINT `ticket_system_ibfk_5` FOREIGN KEY (`sale_id`) REFERENCES `cart_table` (`sale_id`) ON DELETE SET NULL ON UPDATE SET NULL,
+  ADD CONSTRAINT `ticket_system_ibfk_6` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
 
 --
 -- Constraints for table `zreport_system`
 --
 ALTER TABLE `zreport_system`
   ADD CONSTRAINT `zreport_system_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `zreport_system_ibfk_2` FOREIGN KEY (`ticket_id`) REFERENCES `ticket_system` (`ticket_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `zreport_system_ibfk_3` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
