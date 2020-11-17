@@ -5,25 +5,27 @@
 
     $result = mysqli_query($conn, $query) or die("Execution Failed");
 
-    $data = [];
+    $id = array();
+    $qty = array(); 
 
     while($row = mysqli_fetch_assoc($result)) {
-        //echo($row['product_id']);
-        
-        if($row['product_id']){
-            echo("id:");
-            echo($row['product_id']);
-            echo(" ");
-
-
-        }
-        if($row['qty']){
-            echo("qty:");
-            echo($row['qty']);
-            echo(" ");
-
-
-        }
+        if($row['product_id'])
+            $id[] = $row['product_id'];
+        if($row['qty'])
+            $qty[] = $row['qty'];
     }
 
+    var_dump($id);
+?><br><?php var_dump($qty); ?><br>
+
+<?php
+    $name = array();
+    foreach($id as $value){
+        $assoc = "SELECT DISTINCT productName FROM product_inventory WHERE product_id = '".$value."' ";
+        $result = mysqli_query($conn, $assoc) or die("Execution failed");
+        $row = mysqli_fetch_assoc($result);
+        $name[] = $row;
+        
+    }
+    var_dump($name);
 ?>
