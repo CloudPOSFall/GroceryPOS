@@ -12,7 +12,7 @@
     $cartCode .= "<tr> <th>Product Name</th> <th>Product Price</th> </tr>";
 
     while($row = mysqli_fetch_assoc($result)) {
-        $cartCode .= "<tr> <th>".$row['productName']."</th> <th>".$row['unit_price']."</th> </tr>";
+        $cartCode .= "<tr> <th>".$row['productName']."</th> <th>".$row['cost']."</th> </tr>";
     }
 
     echo ($cartCode);
