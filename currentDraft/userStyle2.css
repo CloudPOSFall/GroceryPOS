@@ -15,6 +15,8 @@ p {
     margin-bottom: 0px;
 }
 
+
+
 a, a:hover, a:focus {
     color: inherit;
     text-decoration: none;
@@ -34,13 +36,6 @@ a, a:hover, a:focus {
 }
 
 #salespanel{
-    padding: 2px 2px;
-    margin-top: 30px;
-    margin-left: 0px;
-    overflow-y: scroll;
-}
-
-#dateSel{
     padding: 2px 2px;
     margin-top: 30px;
     margin-left: 0px;
@@ -86,6 +81,14 @@ a, a:hover, a:focus {
     margin-bottom: 20px;
 }
 
+#contentline {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px solid rgb(214, 214, 214);
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
 #payline {
     width: 100%;
     height: 1px;
@@ -108,6 +111,17 @@ a, a:hover, a:focus {
 .card-deck{
     margin-top: 30px;
     padding: 20px;
+}
+
+
+#dateSel{
+    margin-top: 30px;
+    z-index: 1151;
+}
+.date {
+    z-index: 1151;
+    position: absolute;
+    orientation: bottom;
 }
 
 /* ---------------------------------------------------
