@@ -3,8 +3,8 @@
 
     include_once('config.php');
 
-    $query = "SELECT product_inventory.productName, product_inventory.cost, inventory_sales.qty FROM product_inventory 
-              INNER JOIN inventory_sales ON product_inventory.product_id=inventory_sales.product_id";
+    $query = "SELECT product_inventory.productName, product_inventory.cost, cart_table.qty FROM product_inventory 
+              INNER JOIN cart_table ON product_inventory.product_id=cart_table.product_id";
     $result = mysqli_query($conn, $query) or die("Execution Failed");
 
     $cartCode = "<table border='1' name='product'>";
@@ -16,10 +16,11 @@
         $format = number_format($newCost, 2);
         $total = $total + $format;
         $cartCode .= "<tr> <th>".$row['productName']."</th> <th>".$row['qty']."</th> <th>".$format."</th> </tr>";
+        $newCost = 0.00;
     }
 
     echo($cartCode);
-    echo("Total Amount: ");
+    echo("Total Amount: $");
     echo($total);
 ?>
 <br>
