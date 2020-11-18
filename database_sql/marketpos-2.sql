@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 18, 2020 at 03:45 AM
+-- Generation Time: Nov 18, 2020 at 08:13 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cart_table` (
   `cart_id` int(11) NOT NULL,
-  `sale_id` int(11) DEFAULT NULL,
+  `sale_id` int(11) NOT NULL,
   `qty` int(11) NOT NULL,
   `discount` varchar(50) NOT NULL,
   `cart_purchase` tinyint(1) NOT NULL,
@@ -125,8 +125,8 @@ CREATE TABLE `gift_card` (
 --
 
 INSERT INTO `gift_card` (`gift_id`, `promo_number`, `card_balance`, `ticket_id`) VALUES
-(1, 2095, 10, 1),
-(2, 965, 20, 2);
+(1, 2095, 10, NULL),
+(2, 965, 20, NULL);
 
 -- --------------------------------------------------------
 
@@ -294,8 +294,8 @@ CREATE TABLE `zreport_system` (
 --
 
 INSERT INTO `zreport_system` (`zreport_id`, `total_sales`, `transactions`, `new_customers`, `opening_amount`, `closing_amount`, `short`, `cash_sales`, `cash_returns`, `drops`, `payouts`, `pay_ins`, `purchases`, `ticket_id`, `product_id`) VALUES
-(1, 45, 30, 12, 100, 732.18, 0, 47.36, 1.75, 0, 0, 0, 690, 2, NULL),
-(3, 1235, 120, 33, 200, 1200, 0, 698.99, 12, 0, 0, 0, 48, 1, NULL);
+(1, 45, 30, 12, 100, 732.18, 0, 47.36, 1.75, 0, 0, 0, 690, NULL, NULL),
+(3, 1235, 120, 33, 200, 1200, 0, 698.99, 12, 0, 0, 0, 48, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -378,8 +378,8 @@ ALTER TABLE `vendorinfo`
 --
 ALTER TABLE `zreport_system`
   ADD PRIMARY KEY (`zreport_id`),
-  ADD UNIQUE KEY `ticket_id` (`ticket_id`),
-  ADD UNIQUE KEY `product_id` (`product_id`);
+  ADD UNIQUE KEY `product_id` (`product_id`),
+  ADD UNIQUE KEY `ticket_id` (`ticket_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -460,13 +460,19 @@ ALTER TABLE `zreport_system`
 --
 ALTER TABLE `cart_table`
   ADD CONSTRAINT `cart_table_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE SET NULL ON UPDATE SET NULL,
-  ADD CONSTRAINT `cart_table_ibfk_3` FOREIGN KEY (`sale_id`) REFERENCES `ticket_system` (`sale_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+  ADD CONSTRAINT `cart_table_ibfk_3` FOREIGN KEY (`sale_id`) REFERENCES `ticket_system` (`sale_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `employee_info`
 --
 ALTER TABLE `employee_info`
   ADD CONSTRAINT `employee_info_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+
+--
+-- Constraints for table `gift_card`
+--
+ALTER TABLE `gift_card`
+  ADD CONSTRAINT `gift_card_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `ticket_system` (`ticket_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
 
 --
 -- Constraints for table `order_info`
@@ -500,7 +506,8 @@ ALTER TABLE `ticket_system`
 --
 ALTER TABLE `zreport_system`
   ADD CONSTRAINT `zreport_system_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `zreport_system_ibfk_3` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `zreport_system_ibfk_3` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `zreport_system_ibfk_4` FOREIGN KEY (`ticket_id`) REFERENCES `ticket_system` (`ticket_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
