@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 17, 2020 at 05:19 AM
+-- Generation Time: Nov 18, 2020 at 03:45 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -28,7 +28,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cart_table` (
-  `sale_id` int(11) NOT NULL,
+  `cart_id` int(11) NOT NULL,
+  `sale_id` int(11) DEFAULT NULL,
   `qty` int(11) NOT NULL,
   `discount` varchar(50) NOT NULL,
   `cart_purchase` tinyint(1) NOT NULL,
@@ -135,7 +136,7 @@ INSERT INTO `gift_card` (`gift_id`, `promo_number`, `card_balance`, `ticket_id`)
 
 CREATE TABLE `order_info` (
   `OID` int(11) NOT NULL,
-  `order_cost` int(11) NOT NULL,
+  `order_cost` float NOT NULL,
   `order_stock_amount` int(11) NOT NULL,
   `product_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -223,12 +224,21 @@ CREATE TABLE `ticket_system` (
   `discount` float NOT NULL,
   `tax` float NOT NULL,
   `tax_rate` float NOT NULL,
-  `cart_purchase` tinyint(1) NOT NULL,
+  `cart_purchase` tinyint(1) DEFAULT NULL,
+  `sale_id` int(11) DEFAULT NULL,
   `employee_id` int(11) DEFAULT NULL,
   `customer_id` int(11) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL,
-  `sale_id` int(11) DEFAULT NULL
+  `product_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ticket_system`
+--
+
+INSERT INTO `ticket_system` (`ticket_id`, `date`, `time`, `quantity`, `subtotal`, `total`, `discount`, `tax`, `tax_rate`, `cart_purchase`, `sale_id`, `employee_id`, `customer_id`, `product_id`) VALUES
+(1, '2020-11-16', '06:41:00', 2, 17.99, 17.99, 0, 5.34, 1.22, 0, NULL, 13, 3, 8),
+(4, '2020-11-16', '12:43:43', 1, 8.99, 9.95, 0, 2.25, 1.25, NULL, NULL, 14, 6, 7),
+(6, '2020-11-17', '12:03:51', 3, 21.34, 21.34, 5, 1.84, 0.45, NULL, NULL, 31, 2, 5);
 
 -- --------------------------------------------------------
 
@@ -295,8 +305,9 @@ INSERT INTO `zreport_system` (`zreport_id`, `total_sales`, `transactions`, `new_
 -- Indexes for table `cart_table`
 --
 ALTER TABLE `cart_table`
-  ADD PRIMARY KEY (`sale_id`),
-  ADD UNIQUE KEY `product_id` (`product_id`);
+  ADD PRIMARY KEY (`cart_id`),
+  ADD UNIQUE KEY `product_id` (`product_id`),
+  ADD KEY `sale_id` (`sale_id`);
 
 --
 -- Indexes for table `customer_info`
@@ -378,7 +389,7 @@ ALTER TABLE `zreport_system`
 -- AUTO_INCREMENT for table `cart_table`
 --
 ALTER TABLE `cart_table`
-  MODIFY `sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `customer_info`
@@ -426,7 +437,7 @@ ALTER TABLE `tax_table`
 -- AUTO_INCREMENT for table `ticket_system`
 --
 ALTER TABLE `ticket_system`
-  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `vendorinfo`
@@ -448,7 +459,8 @@ ALTER TABLE `zreport_system`
 -- Constraints for table `cart_table`
 --
 ALTER TABLE `cart_table`
-  ADD CONSTRAINT `cart_table_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE SET NULL ON UPDATE SET NULL;
+  ADD CONSTRAINT `cart_table_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE SET NULL ON UPDATE SET NULL,
+  ADD CONSTRAINT `cart_table_ibfk_3` FOREIGN KEY (`sale_id`) REFERENCES `ticket_system` (`sale_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
 
 --
 -- Constraints for table `employee_info`
@@ -481,7 +493,6 @@ ALTER TABLE `rewards_table`
 ALTER TABLE `ticket_system`
   ADD CONSTRAINT `ticket_system_ibfk_2` FOREIGN KEY (`employee_id`) REFERENCES `employee_info` (`employee_id`) ON DELETE NO ACTION ON UPDATE SET NULL,
   ADD CONSTRAINT `ticket_system_ibfk_4` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`) ON DELETE NO ACTION ON UPDATE SET NULL,
-  ADD CONSTRAINT `ticket_system_ibfk_5` FOREIGN KEY (`sale_id`) REFERENCES `cart_table` (`sale_id`) ON DELETE SET NULL ON UPDATE SET NULL,
   ADD CONSTRAINT `ticket_system_ibfk_6` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
 
 --
