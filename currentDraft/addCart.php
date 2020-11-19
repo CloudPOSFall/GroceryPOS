@@ -34,7 +34,7 @@
 </form>
 <br>
 <?php
-    echo(LargestId);
+
 
 ?>
 
