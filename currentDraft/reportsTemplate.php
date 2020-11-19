@@ -197,16 +197,16 @@ $result = mysqli_query($conn, $query);
           <ul class="pagination pt-3">
             <span class="text-muted px-3 pt-2"> # Results</span>
             <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
+              <a class="page-link text-dark" href="#" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
                 <span class="sr-only">Previous</span>
               </a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
             <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
+              <a class="page-link text-dark" href="#" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
                 <span class="sr-only">Next</span>
               </a>
@@ -225,10 +225,10 @@ $result = mysqli_query($conn, $query);
     <!--END date selector nav-->
 
 
-    <div class="wrapper">
+    <div class="wrapper" class="bg-white">
       <div class="row px-4 justify-content-center">
         <table class="table table-bordered table-hover mt-3" id="table" style="font-size:80%;">
-          <thead>
+          <thead class="bg-light">
             <tr>
               <th class="px-3"> ID </th>
               <th> Subtotal </th>
@@ -243,7 +243,7 @@ $result = mysqli_query($conn, $query);
               <th> Customer</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody >
 
             <!-- Retrieved SQL Data Goes Here Instead of empty tds -->
             <tr>
@@ -278,9 +278,9 @@ $result = mysqli_query($conn, $query);
 
       <div id="contentline"></div>
 
-      <div class="row px-4 justify-content-center">
-        <div class="px-2">
-          <table class="table-sm table-striped table-responsive" style="font-size:80%;">
+      <div class="row pl-3">
+        <div class="px-1">
+          <table class="table table-responsive" style="font-size:80%;">
             <thead>
 
             </thead>
@@ -304,39 +304,39 @@ $result = mysqli_query($conn, $query);
             </tbody>
           </table>
         </div>
-        <div class="px-2">
-          <table class="table-sm table-striped table-responsive" style="font-size:80%;">
+        <div class="px-1">
+          <table class="table table-responsive" style="font-size:80%;">
             <thead>
 
             </thead>
             <tbody>
               <tr>
-                <th style="padding-right: 30px;"> Taxed </th>
+                <th style="padding-right: 50px;"> Taxed </th>
                 <td class="text-right">$500</td>
               </tr>
               <tr>
-                <th style="padding-right: 30px;"> Untaxed </th>
+                <th style="padding-right: 50px;"> Untaxed </th>
                 <td class="text-right">$0</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div class="px-2">
-          <table class="table-sm table-striped table-responsive" style="font-size:80%;">
+        <div class="px-1">
+          <table class="table table-responsive" style="font-size:80%;">
             <thead>
 
             </thead>
             <tbody>
               <tr>
-                <th style="padding-right: 30px;"> Cost </th>
+                <th style="padding-right: 50px;"> Cost </th>
                 <td class="text-right">$200</td>
               </tr>
               <tr>
-                <th style="padding-right: 30px;"> Profit </th>
+                <th style="padding-right: 50px;"> Profit </th>
                 <td class="text-right">$423</td>
               </tr>
               <tr>
-                <th style="padding-right: 30px;"> Margin </th>
+                <th style="padding-right: 50px;"> Margin </th>
                 <td class="text-right">67.9%</td>
               </tr>
             </tbody>

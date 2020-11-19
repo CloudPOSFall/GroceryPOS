@@ -183,7 +183,7 @@ $result = mysqli_query($conn, $query);
     </div>
 
     <div class="container justify-content-center">
-      <div class="card bg-white'">
+      <div class="card bg-white" id="reportcard">
         <div class="card-header">
           <span style="font-weight:500;">Company Name - Location</span>
         </div>

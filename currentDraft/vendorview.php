@@ -160,10 +160,10 @@ $result = mysqli_query($conn, $query);
     </nav>
 
 
-    <div class="wrapper">
+    <div class="wrapper mt-3">
       <div class="row px-4 justify-content-center">
         <table class="table table-bordered table-hover">
-          <thead>
+          <thead class="bg-light">
             <tr>
               <td> ID </td>
               <td> Vendor Name </td>
@@ -177,7 +177,7 @@ $result = mysqli_query($conn, $query);
           </thead>
 
 
-
+          <tbody class="bg-white">
           <?php
 
           if (isset($_POST['submit-search'])) {
@@ -207,6 +207,7 @@ $result = mysqli_query($conn, $query);
           }
 
           ?>
+          </tbody>
         </table>
       </div>
     </div>

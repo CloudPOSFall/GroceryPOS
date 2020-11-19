@@ -196,16 +196,16 @@ $result = mysqli_query($conn, $query);
         <div class="modal fade" id="vendormodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-              <div class="modal-header">
+              <div class="modal-header bg-light">
                 <h6 class="modal-title" id="exampleModalLabel">Vendor Sales</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body bg-light">
+              <div class="modal-body">
                 <!-- Select Date -->
                 <div class="m-3">
-                  <div class="card m-auto" style="width: 20rem;">
+                  <div class="card border-0 m-auto">
 
                     <form class="form-horizontal mx-auto" method="post">
                       <div class="form-group">

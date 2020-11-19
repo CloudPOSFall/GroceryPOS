@@ -174,16 +174,12 @@ $result = mysqli_query($conn, $query);
             <a class="nav-item nav-link" href="#">Employees</a>
           </nav>
         </div>
-
         <div class="m-5">
-          <div class="card m-auto" style="width: 15rem;">
+          <div class="card m-auto" style="width: 15rem;" id="datecard">
           <div class="card-body text-center p-3">
             <form class="form-horizontal mx-auto" method="post" action="endofdaytemplate.php">
-              <div class="input-group form-inline" style="width: 220px; padding: 10px;">
-                <label class="control-label border bg-light" for="date"><span class="input-group-addon px-2"> Date </span></label>
-                <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text" />
-              </div>
-              <div class="text-center"><button class="btn btn-success px-5" name="submit" type="submit">View</button></div>
+                <input class="form-control mb-4" style="width: 200px" id="date" name="date" value="<?php echo date("m/d/Y") ?>" type="text" />
+              <div class="text-center"><button class="btn btn-success" style="width: 200px" name="submit" type="submit">View</button></div>
             </form>
             </div>
           </div>
