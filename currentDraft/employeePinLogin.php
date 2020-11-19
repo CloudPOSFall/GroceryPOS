@@ -33,6 +33,11 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
   <!-- bootstrap js -->
   <script src="js/bootstrap.min.js"></script>
 
+  <script>
+    $(document).ready(function() {
+      $('[data-toggle="popover"]').popover();
+    });
+  </script>
 </head>
 
 <body>
@@ -69,7 +74,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
               $_SESSION["emp_lname"] = $emp_lname;
               $_SESSION["emp_company"] = $emp_company;
               $_SESSION['timeout'] = time();
-              header("Location: accountHomeDraft.php");
+              header("Location: sale.php");
               ob_end_flush();
             } else {
               $msg = "Incorrect pin";
@@ -129,5 +134,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
     </div>
 
 </body>
+
+
 
 </html>
