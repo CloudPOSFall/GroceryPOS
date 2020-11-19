@@ -10,11 +10,13 @@
     $cartCode = "<table border='1' name='product'>";
     $cartCode .= "<tr> <th>Product Name</th> <th>Quantity</th> <th>Product Price</th> </tr>";
     $total = 0.00;
+    $qtyTotal = 0;
 
     while($row = mysqli_fetch_assoc($result)) {
         $newCost = $row['qty'] * $row['cost'];
         $format = number_format($newCost, 2);
         $total = $total + $format;
+        $qtyTotal = $qtyTotal + $row['qty'];
         $cartCode .= "<tr> <th>".$row['productName']."</th> <th>".$row['qty']."</th> <th>".$format."</th> </tr>";
         $newCost = 0.00;
     }
