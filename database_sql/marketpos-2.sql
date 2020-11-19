@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 18, 2020 at 08:13 PM
+-- Generation Time: Nov 19, 2020 at 01:04 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -29,12 +29,21 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cart_table` (
   `cart_id` int(11) NOT NULL,
-  `sale_id` int(11) NOT NULL,
+  `sale_id` int(11) DEFAULT NULL,
   `qty` int(11) NOT NULL,
   `discount` varchar(50) NOT NULL,
   `cart_purchase` tinyint(1) NOT NULL,
   `product_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cart_table`
+--
+
+INSERT INTO `cart_table` (`cart_id`, `sale_id`, `qty`, `discount`, `cart_purchase`, `product_id`) VALUES
+(5, 2, 1, '0', 1, 7),
+(6, 3, 3, '5', 1, 5),
+(7, 1, 2, '0', 1, 8);
 
 -- --------------------------------------------------------
 
@@ -217,6 +226,7 @@ INSERT INTO `tax_table` (`TTID`, `tax_year`, `state_tax`, `county_tax`, `city_ra
 CREATE TABLE `ticket_system` (
   `ticket_id` int(11) NOT NULL,
   `date` date NOT NULL,
+  `company_name` varchar(50) NOT NULL,
   `time` time NOT NULL,
   `quantity` int(11) NOT NULL,
   `subtotal` float NOT NULL,
@@ -225,7 +235,7 @@ CREATE TABLE `ticket_system` (
   `tax` float NOT NULL,
   `tax_rate` float NOT NULL,
   `cart_purchase` tinyint(1) DEFAULT NULL,
-  `sale_id` int(11) DEFAULT NULL,
+  `sale_id` int(11) NOT NULL,
   `employee_id` int(11) DEFAULT NULL,
   `customer_id` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL
@@ -235,10 +245,10 @@ CREATE TABLE `ticket_system` (
 -- Dumping data for table `ticket_system`
 --
 
-INSERT INTO `ticket_system` (`ticket_id`, `date`, `time`, `quantity`, `subtotal`, `total`, `discount`, `tax`, `tax_rate`, `cart_purchase`, `sale_id`, `employee_id`, `customer_id`, `product_id`) VALUES
-(1, '2020-11-16', '06:41:00', 2, 17.99, 17.99, 0, 5.34, 1.22, 0, NULL, 13, 3, 8),
-(4, '2020-11-16', '12:43:43', 1, 8.99, 9.95, 0, 2.25, 1.25, NULL, NULL, 14, 6, 7),
-(6, '2020-11-17', '12:03:51', 3, 21.34, 21.34, 5, 1.84, 0.45, NULL, NULL, 31, 2, 5);
+INSERT INTO `ticket_system` (`ticket_id`, `date`, `company_name`, `time`, `quantity`, `subtotal`, `total`, `discount`, `tax`, `tax_rate`, `cart_purchase`, `sale_id`, `employee_id`, `customer_id`, `product_id`) VALUES
+(1, '2020-11-16', 'Walmat', '06:41:00', 2, 17.99, 17.99, 0, 5.34, 1.22, 0, 1, 13, 3, 8),
+(4, '2020-11-16', 'Shop Rite', '12:43:43', 1, 8.99, 9.95, 0, 2.25, 1.25, 0, 2, 14, 6, 7),
+(6, '2020-11-17', 'Tops', '12:03:51', 3, 21.34, 21.34, 5, 1.84, 0.45, 1, 3, 31, 2, 5);
 
 -- --------------------------------------------------------
 
@@ -306,8 +316,7 @@ INSERT INTO `zreport_system` (`zreport_id`, `total_sales`, `transactions`, `new_
 --
 ALTER TABLE `cart_table`
   ADD PRIMARY KEY (`cart_id`),
-  ADD UNIQUE KEY `product_id` (`product_id`),
-  ADD KEY `sale_id` (`sale_id`);
+  ADD UNIQUE KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `customer_info`
@@ -364,8 +373,7 @@ ALTER TABLE `ticket_system`
   ADD PRIMARY KEY (`ticket_id`),
   ADD UNIQUE KEY `employee_id` (`employee_id`),
   ADD UNIQUE KEY `customer_id` (`customer_id`),
-  ADD UNIQUE KEY `product_id` (`product_id`),
-  ADD UNIQUE KEY `sale_id` (`sale_id`);
+  ADD UNIQUE KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `vendorinfo`
@@ -389,7 +397,7 @@ ALTER TABLE `zreport_system`
 -- AUTO_INCREMENT for table `cart_table`
 --
 ALTER TABLE `cart_table`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `customer_info`
@@ -459,8 +467,7 @@ ALTER TABLE `zreport_system`
 -- Constraints for table `cart_table`
 --
 ALTER TABLE `cart_table`
-  ADD CONSTRAINT `cart_table_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE SET NULL ON UPDATE SET NULL,
-  ADD CONSTRAINT `cart_table_ibfk_3` FOREIGN KEY (`sale_id`) REFERENCES `ticket_system` (`sale_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `cart_table_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
 -- Constraints for table `employee_info`
