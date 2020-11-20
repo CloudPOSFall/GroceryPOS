@@ -1,6 +1,7 @@
 <?php
 include_once('config.php');
-$query = "SELECT * FROM ticket_system, inventory sales";
+$date = date("Y-m-d", strtotime($_POST['date']));
+$query = "SELECT * FROM ticket_system, cart_inprogress, cart, product_inventory WHERE date = '$date'";
 $result = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
@@ -162,11 +163,14 @@ $result = mysqli_query($conn, $query);
     <div class="row pt-5 m-4">
       <div class="col text-center">
         <?php
+
         if(isset($_POST['submit'])){
-          $EODdate = $_POST['date'];
-          echo "<h4 class='pl-5'>End of Day - $EODdate </h4>";
-        }else
-          echo '<h4 class="pl-5">End of Day - MM/DD/YYYY</h4>';
+            echo "<h4 class='pl-5'>End of Day - ". $_POST['date'] ."</h4>";
+          }
+          else{
+            echo '<h4 class="pl-5">End of Day - No Date Added </h4>';
+          }
+        
         
         ?>
       </div>
@@ -195,20 +199,54 @@ $result = mysqli_query($conn, $query);
 
                 <!-- Retrieved SQL Data Goes Here -->
                 <tr>
+                <?php 
+                    
+                    $sum=0;
+                    $sql = "SELECT total FROM ticket_system WHERE date LIKE '$date'";
+                    $result = mysqli_query($conn, $sql);
+                    while ($row = mysqli_fetch_assoc($result)) {
+                    $sum += $row['total'];
+                    }
+                  
+                  ?>
                   <th class="pr-5"> Sales Total</th>
-                  <td class="text-right">$500</td>
+                  <td class="text-right">$<?php echo $sum ?></td>
                 </tr>
                 <tr>
+                <?php 
+                  $sum=0;
+                  $sql = "SELECT tax FROM ticket_system WHERE date LIKE '$date'";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                  $sum += $row['tax'];
+                  }
+                  ?>
                   <th class="pr-5"> Tax Total</th>
-                  <td class="text-right">$50</td>
+                  <td class="text-right">$<?php echo $sum?></td>
                 </tr>
                 <tr>
+                <?php 
+                   $sum=0;
+                   $sql = "SELECT cash FROM ticket_system WHERE date LIKE '$date'";
+                   $result = mysqli_query($conn, $sql);
+                   while ($row = mysqli_fetch_assoc($result)) {
+                   $sum += $row['cash'];
+                   }
+                  ?>
                   <th class="pr-5"> Cash </th>
-                  <td class="text-right">$200</td>
+                  <td class="text-right">$<?php echo $sum?></td>
                 </tr>
                 <tr>
+                <?php 
+                   $sum=0;
+                   $sql = "SELECT credit FROM ticket_system WHERE date LIKE '$date'";
+                   $result = mysqli_query($conn, $sql);
+                   while ($row = mysqli_fetch_assoc($result)) {
+                   $sum += $row['credit'];
+                   }
+                  ?>
                   <th class="pr-5"> Credit </th>
-                  <td class="text-right">$300</td>
+                  <td class="text-right">$<?php echo $sum?></td>
                 </tr>
 
               </tbody>
@@ -240,8 +278,15 @@ $result = mysqli_query($conn, $query);
                 <!-- Retrieved SQL Data Goes Here -->
 
                 <tr>
+                <?php 
+                   $sql = "SELECT quantity FROM ticket_system WHERE date LIKE '$date'";
+                   $result = mysqli_query($conn, $sql);
+                   while ($row = mysqli_fetch_assoc($result)) {
+                   $qty = $row['quantity'];
+                   }
+                  ?>
                   <th class="pr-5"> Products Sold </th>
-                  <td class="text-right">75</td>
+                  <td class="text-right"><?php echo $qty?></td>
                 </tr>
                 <tr>
                   <th class="pr-5"> First Invoice </th>
@@ -275,9 +320,20 @@ $result = mysqli_query($conn, $query);
 
                 <!-- Retrieved SQL Data Goes Here Instead of empty tds -->
                 <tr>
+                <?php 
+                   $sum=0;
+                   $cost=0;
+                   $dairy = 'dairy';
+                   $sql = "SELECT productType FROM product_inventory";
+                   $result = mysqli_query($conn, $sql);
+                   if($row['productType'] = $dairy)
+                   {
+                     $sum += 1;
+                   }
+                  ?>
                   <td class="text-left">Dairy</td>
-                  <td>30</td>
-                  <td>$120</td>
+                  <td><?php echo $sum ?></td>
+                  <td><?php echo $cost?></td>
                   <td>$70</td>
                   <td>$50</td>
                 </tr>
