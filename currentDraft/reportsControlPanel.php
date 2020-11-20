@@ -190,7 +190,7 @@ include_once('config.php');
                             <a href="reportTotalDraft.php" class="list-group-item list-group-item-action"><strong>Totals </strong> - Your basic sales report, lists all sales and totals them</a>
                             <a href="reportLinesDraft.php" class="list-group-item list-group-item-action"><strong>Lines </strong> - Lists all items and charges from sales</a>
                             <a href="#" class="list-group-item list-group-item-action"><strong>Margin Per Line</strong> - Shows total, cost, profit, and margin for every sales line</a>
-                            <a href="#" class="list-group-item list-group-item-action"><strong>Sales by Category</strong> - Compare categories, drill down to view subcategories</a>
+                            <a href="reportSaleByCategory.php" class="list-group-item list-group-item-action"><strong>Sales by Category</strong> - Compare categories, drill down to view subcategories</a>
                             <a href="#" class="list-group-item list-group-item-action"><strong>Sales Over Time</strong> - Sales over time grouped by time period</a>
                         </div>
                     </div>
@@ -203,7 +203,7 @@ include_once('config.php');
                         </div>
 
                         <div class="list-group">
-                            <a href="reportEndDayDraft.php" class="list-group-item list-group-item-action"><strong>End of Day </strong> - End of day summary report for each store location</a>
+                            <a href="eodDateNav.php" class="list-group-item list-group-item-action"><strong>End of Day </strong> - End of day summary report for each store location</a>
                             <a href="#" class="list-group-item list-group-item-action"><strong>Products </strong> - Roll-up reports on product sales</a>
                             <a href="#" class="list-group-item list-group-item-action"><strong>Customers</strong> - Roll-up reports on customers.</a>
                             <a href="#" class="list-group-item list-group-item-action"><strong>Employee Performance</strong> - View the performance of an employee(s) over a period of time</a>

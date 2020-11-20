@@ -199,8 +199,7 @@ $result = mysqli_query($conn, $query);
 
                 <!-- Retrieved SQL Data Goes Here -->
                 <tr>
-                <?php 
-                    
+                <?php
                     $sum=0;
                     $sql = "SELECT total FROM ticket_system WHERE date LIKE '$date'";
                     $result = mysqli_query($conn, $sql);
@@ -260,11 +259,11 @@ $result = mysqli_query($conn, $query);
                 <!-- Retrieved SQL Data Goes Here -->
                 <tr>
                   <th class="pr-5"> Refunds Total</th>
-                  <td class="text-right">$20</td>
+                  <td class="text-right">$0</td>
                 </tr>
                 <tr>
                   <th class="pr-5"> Returns </th>
-                  <td class="text-right">1</td>
+                  <td class="text-right">0</td>
                 </tr>
 
               </tbody>
@@ -279,6 +278,7 @@ $result = mysqli_query($conn, $query);
 
                 <tr>
                 <?php 
+                  $qty=0;
                    $sql = "SELECT quantity FROM ticket_system WHERE date LIKE '$date'";
                    $result = mysqli_query($conn, $sql);
                    while ($row = mysqli_fetch_assoc($result)) {
@@ -290,11 +290,11 @@ $result = mysqli_query($conn, $query);
                 </tr>
                 <tr>
                   <th class="pr-5"> First Invoice </th>
-                  <td class="text-right">10</td>
+                  <td class="text-right">0</td>
                 </tr>
                 <tr>
                   <th class="pr-5"> Last Invoice </th>
-                  <td class="text-right">51</td>
+                  <td class="text-right">0</td>
                 </tr>
 
               </tbody>
@@ -320,45 +320,34 @@ $result = mysqli_query($conn, $query);
 
                 <!-- Retrieved SQL Data Goes Here Instead of empty tds -->
                 <tr>
-                <?php 
-                   $sum=0;
-                   $cost=0;
-                   $dairy = 'dairy';
-                   $sql = "SELECT productType FROM product_inventory";
-                   $result = mysqli_query($conn, $sql);
-                   if($row['productType'] = $dairy)
-                   {
-                     $sum += 1;
-                   }
-                  ?>
                   <td class="text-left">Dairy</td>
-                  <td><?php echo $sum ?></td>
-                  <td><?php echo $cost?></td>
-                  <td>$70</td>
-                  <td>$50</td>
+                  <td>0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>$0</td>
                 </tr>
                 <tr>
                   <td class="text-left">Produce</td>
-                  <td>45</td>
-                  <td>$135</td>
-                  <td>$80</td>
-                  <td>$55</td>
+                  <td>0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>$0</td>
                 </tr>
                 <tr>
                   <td class="text-left">Poultry</td>
-                  <td>11</td>
-                  <td>$33</td>
-                  <td>$21</td>
-                  <td>$12</td>
+                  <td>0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>$0</td>
                 </tr>
               </tbody>
               <tfoot class="bg-white">
                 <tr>
                   <th class="pr-5 text-left"> Total: </th>
-                  <th> 86 </th>
-                  <th> $288 </th>
-                  <th> $171</th>
-                  <th> $117</th>
+                  <th> 0 </th>
+                  <th> $0 </th>
+                  <th> $0 </th>
+                  <th> $0 </th>
                 </tr>
               </tfoot>
 

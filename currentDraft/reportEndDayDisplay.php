@@ -185,36 +185,31 @@ $result = mysqli_query($conn, $query);
               <?php
 
               if (isset($_POST['submit-search'])) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                $today = date("Y-m-d");
-                $expire = $_POST['date'];
-                $today_dt = new DateTime($today);
-                $expire_dt = new DateTime($expire);
-                if($expire_dt < $today_dt)
-                {
-                    $Date = $expire_dt->format("m-d-Y");
+                $Date = date("Y-m-d", strtotime($_POST['date']));
                 $search = mysqli_real_escape_string($conn, $Date);
                 $sql = "SELECT * FROM ticket_system, product_inventory WHERE date LIKE '$search%'";
                 $result = mysqli_query($conn, $sql);
                 $queryResults = mysqli_num_rows($result);
+                echo "<div>There are $queryResults results matching your search</div><br>";
+                while ($row = mysqli_fetch_assoc($result)) {
                     if ($queryResults > 0) {
-                        echo "<div>There are $queryResults results matching your search</div><br>";
                         echo "<tr><td>" 
-                        . date('m/d/Y', $Date) . "</td><td>" . $row['time'] . "</td><td>" . $row['productName'] . "</td><td>" . $row['quantity'] .
+                        . $_POST['date'] . "</td><td>" . $row['company_name'] . "</td><td>" . $row['time'] . "</td><td>" . $row['productName'] . "</td><td>" . $row['quantity'] .
                          "</td><td>" . $row['subtotal'] . "</td><td>" . $row['total'] . "</td><td>" . $row['discount'] . "</td><td>"
                          . $row['tax'] . "</td><td>" . $row['cash'] . "</td><td>" . $row['credit'] . "</td><td>";
                     }
                     else {
                     echo "<div>There are no results matching your search</div>";
                     }
-                    }
-                    }
+                }
+                    
+                    
               }
                 else {
                 while ($row = mysqli_fetch_assoc($result)) {
-                $Date = strtotime($row['date']);
+                $Date = date("m-d-Y", strtotime($row['date']));
                   echo "<tr><td>" 
-                  . date('m/d/Y', $Date) . "</td><td>" . $row['company_name'] . "</td><td>" . $row['time'] . "</td><td>" . $row['productName'] . 
+                  . $Date . "</td><td>" . $row['company_name'] . "</td><td>" . $row['time'] . "</td><td>" . $row['productName'] . 
                   "</td><td>" . $row['quantity'] . "</td><td>" . $row['subtotal'] . "</td><td>" . $row['total'] .
                   "</td><td>" . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['cash'] . "</td><td>" . $row['credit'] . "</td><td>";
                 }

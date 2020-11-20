@@ -1,6 +1,6 @@
 <?php
 include_once('config.php');
-$query = "SELECT * FROM ticket_system, product_inventory";
+$query = "SELECT * FROM product_inventory, ticket_system";
 $result = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
@@ -152,8 +152,8 @@ $result = mysqli_query($conn, $query);
     <nav class="navbar navbar-light" id="dateSel">
     <form method="post">
       <div class="form-group"> 
-        <label class="control-label" for="date">Date</label>
-        <input class="form-control" name="date" pattern="YYYY-MM-DD" type="text">
+        <label class="control-label" for="product">Product Name</label>
+        <input class="form-control" name="product" type="text">
       </div>
       <div class="form-group">
         <button class="btn btn-primary " name="submit-search" type="submit">Submit</button>
@@ -168,14 +168,13 @@ $result = mysqli_query($conn, $query);
           <table class="table table-bordered" style="font-size:80%;">
             <thead>
               <tr>
-                <th class="col"> Date </th>
-                <th class="col"> Time</th>
                 <th class="col"> Product Name </th>
                 <th class="col"> Product Type</th>
                 <th class="col"> Product SubType </th>
+                <th class="col"> Date </th>
+                <th class="col"> Time</th>
                 <th class="col"> Subtotal </th>
                 <th class="col"> Total</th>
-                <th class="col"> Customer</th>
                 
               </tr>
             </thead>
@@ -183,8 +182,8 @@ $result = mysqli_query($conn, $query);
               <?php
 
               if (isset($_POST['submit-search'])) {
-                $search = mysqli_real_escape_string($conn, $_POST['date']);
-                $sql = "SELECT date, time, product_id, customer_id FROM ticket_system WHERE date LIKE '%$search%'";
+                $search = mysqli_real_escape_string($conn, $_POST['product']);
+                $sql = "SELECT * FROM product_inventory, ticket_system WHERE productName LIKE '%$search%'";
                 $result = mysqli_query($conn, $sql);
                 $queryResults = mysqli_num_rows($result);
 
@@ -192,9 +191,9 @@ $result = mysqli_query($conn, $query);
                   echo "<div>There are $queryResults results matching your search</div><br>";
                   while ($row = mysqli_fetch_assoc($result)) {
                     echo "<tr><td>" 
-                    . $row['date'] . "</td><td>" . $row['total'] . "</td><td>" . $row['subtotal'] . "</td><td>"
-                    . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['time'] . "</td><td><a class='btn btn-dark' 
-                    role='button' href='customerDetail.php?Detail=". $row['customer_id'] . "'>View</a>";
+                    . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['productSubType'] . 
+                    "</td><td>" . date("m-d-Y", strtotime($row['date'])) . "</td><td>" . $row['time'] . "</td><td>" . $row['subtotal'] . "</td><td>" 
+                    . $row['total'] . "</td><td>";
                   }
                 } else {
                   echo "<div>There are no results matching your search</div>";
@@ -202,10 +201,10 @@ $result = mysqli_query($conn, $query);
               }
               else {
                 while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<tr><td>" 
-                    . $row['date'] . "</td><td>" . $row['time'] . "</td><td>" . $row['productName'] . "</td><td>"
-                    . $row['productType'] . "</td><td>" . $row['productSubType'] . "</td><td>" . $row['subtotal'] . "</td><td>" . $row['total'] . 
-                    "</td><td><a class='btn btn-dark' role='button' href='customerDetail.php?Detail=". $row['customer_id'] . "'>View</a>";
+                  echo "<tr><td>" 
+                  . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['productSubType'] . 
+                  "</td><td>" . date("m-d-Y", strtotime($row['date'])) . "</td><td>" . $row['time'] . "</td><td>" . $row['subtotal'] . "</td><td>" 
+                  . $row['total'] . "</td><td>";
                 }
               }
 

@@ -1,13 +1,13 @@
 <?php
 include_once('config.php');
-$query = "SELECT date, company_name, time, productName, quantity, subtotal, total, discount, tax, sale_id, employee_id, customer_id FROM ticket_system, product_inventory";
+$query = "SELECT * FROM product_inventory, ticket_system";
 $result = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title>End Of Day Reports | MarketPOS</title>
+  <title>Sales By Category Reports | MarketPOS</title>
 
 
    <!--bootstrap css -->
@@ -152,12 +152,8 @@ $result = mysqli_query($conn, $query);
     <nav class="navbar navbar-light" id="dateSel">
     <form method="post">
       <div class="form-group"> 
-        <label class="control-label" for="comapany name">Company Name</label>
-        <input class="form-control" name="cnmae" type="text">
-      </div>
-      <div class="form-group"> 
-        <label class="control-label" for="date">Date</label>
-        <input class="form-control" name="date" pattern= "MM-DD-YYYY" type="text">
+        <label class="control-label" for="category">Product Category</label>
+        <input class="form-control" name="category" type="text">
       </div>
       <div class="form-group">
         <button class="btn btn-primary " name="submit-search" type="submit">Submit</button>
@@ -172,38 +168,31 @@ $result = mysqli_query($conn, $query);
           <table class="table table-bordered" style="font-size:80%;">
             <thead>
               <tr>
-                <th class="col"> Date </th>
-                <th class="col"> Company Name </th>
-                <th class="col"> Time </th>
+                <th class="col"> Product SubType </th>
                 <th class="col"> Product Name </th>
-                <th class="col"> Quantity </th>
+                <th class="col"> Product Type</th>
                 <th class="col"> Subtotal </th>
-                <th class="col"> Total </th>
-                <th class="col"> Discount </th>
-                <th class="col"> Tax </th>
-                <th class="col"> Sale ID </th>
-                <th class="col"> Employee </th>
-                <th class="col"> Customer </th>
+                <th class="col"> Total</th>
+                <th class="col"> Date </th>
+                <th class="col"> Time</th>
+                
               </tr>
             </thead>
             <tbody>
               <?php
 
               if (isset($_POST['submit-search'])) {
-                $search = mysqli_real_escape_string($conn, $_POST['date']);
-                $sql = "SELECT date, company_name time, productName, quantity, subtotal, total, discount, tax, sale_id, employee_id, customer_id FROM ticket_system, product_inventory WHERE date LIKE '%$search%'";
+                $search = mysqli_real_escape_string($conn, $_POST['category']);
+                $sql = "SELECT * FROM product_inventory, ticket_system WHERE productSubType LIKE '%$search%'";
                 $result = mysqli_query($conn, $sql);
                 $queryResults = mysqli_num_rows($result);
-
                 if ($queryResults > 0) {
                   echo "<div>There are $queryResults results matching your search</div><br>";
                   while ($row = mysqli_fetch_assoc($result)) {
                     echo "<tr><td>" 
-                    . $row['date'] . "</td><td>" . $row['time'] . "</td><td>" . $row['productName'] . "</td><td>" . $row['quantity'] . "</td><td>" . $row['subtotal'] . "</td><td>" . $row['total'] .
-                    "</td><td>" . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td><a class='btn btn-dark' 
-                    role='button' href='saleDetail.php?Detail=". $row['sale_id'] . "'>View</a></td><td><a class='btn btn-dark' 
-                    role='button' href='employeeDetail.php?Detail=". $row['employee_id'] . "'>View</a></td><td><a class='btn btn-dark' 
-                    role='button' href='customerDetail.php?Detail=". $row['customer_id'] . "'>View</a>";
+                    . $row['productSubType'] . "</td><td>" . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>"
+                    . $row['subtotal'] . "</td><td>" . $row['total'] . "</td><td>" . date("m-d-Y", strtotime($row['date'])) . "</td><td>" . $row['time'] . 
+                    "</td><td>";
                   }
                 } else {
                   echo "<div>There are no results matching your search</div>";
@@ -212,11 +201,9 @@ $result = mysqli_query($conn, $query);
               else {
                 while ($row = mysqli_fetch_assoc($result)) {
                   echo "<tr><td>" 
-                  . $row['date'] . "</td><td>" . $row['company_name'] . "</td><td>" . $row['time'] . "</td><td>" . $row['productName'] . "</td><td>" . $row['quantity'] . "</td><td>" . $row['subtotal'] . "</td><td>" . $row['total'] .
-                  "</td><td>" . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td><a class='btn btn-dark' 
-                  role='button' href='saleDetail.php?Detail=". $row['sale_id'] . "'>View</a></td><td><a class='btn btn-dark' 
-                  role='button' href='employeeDetail.php?Detail=". $row['employee_id'] . "'>View</a></td><td><a class='btn btn-dark' 
-                  role='button' href='customerDetail.php?Detail=". $row['customer_id'] . "'>View</a>";
+                  . $row['productSubType'] . "</td><td>" . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>"
+                  . $row['subtotal'] . "</td><td>" . $row['total'] . "</td><td>" . date("m-d-Y", strtotime($row['date'])) . "</td><td>" . $row['time'] . 
+                  "</td><td>";
                 }
               }
 

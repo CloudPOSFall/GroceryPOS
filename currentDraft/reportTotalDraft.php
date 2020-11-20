@@ -174,43 +174,43 @@ $result = mysqli_query($conn, $query);
                 <th class="col"> Subtotal </th>
                 <th class="col"> Discounts </th>
                 <th class="col"> Tax </th>
-                <th class="col"> Customer</th>
-                <th class="col"> Employee</th>
+                <th class="col"> Cash</th>
+                <th class="col"> Credit</th>
+                <th class="col"> Sale Details</th>
                 
               </tr>
             </thead>
             <tbody>
               <?php
-
+    
               if (isset($_POST['submit-search'])) {
-                $search = mysqli_real_escape_string($conn, $_POST['date']);
-                $sql = "SELECT * FROM ticket_system WHERE date LIKE '%$search%'";
-                $result = mysqli_query($conn, $sql);
-                $queryResults = mysqli_num_rows($result);
-
+              $Date = date("Y-m-d", strtotime($_POST['date']));
+              $search = mysqli_real_escape_string($conn, $Date);
+              $sql = "SELECT * FROM ticket_syste WHERE date LIKE '$search%'";
+              $result = mysqli_query($conn, $sql);
+              $queryResults = mysqli_num_rows($result);
+              echo "<div>There are $queryResults results matching your search</div><br>";
+              while ($row = mysqli_fetch_assoc($result)) {
                 if ($queryResults > 0) {
-                  echo "<div>There are $queryResults results matching your search</div><br>";
-                  while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<tr><td>" 
-                    . $row['date'] . "</td><td>" . $row['total'] . "</td><td>" . $row['subtotal'] . "</td><td>"
-                    . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['time'] . "</td><td><a class='btn btn-dark' 
-                    role='button' href='customerDetail.php?Detail=". $row['customer_id'] . "'>View</a></td><td><a class='btn btn-dark' 
-                    role='button' href='employeeDetail.php?Detail=". $row['employee_id'] . "'>View</a>";
-                  }
-                } else {
+                  echo "<tr><td>" 
+                  . $_POST['date'] . "</td><td>" . $row['time'] . "</td><td>" . $row['total'] . "</td><td>" . $row['subtotal'] . "</td><td>"
+                  . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['cash'] . "</td><td>" . $row['credit'] . "</td><td><a class='btn btn-dark' 
+                  role='button' href='saleDetail.php?Detail=". $row['ticket_id'] . "'>View</a>";
+                }
+                else {
                   echo "<div>There are no results matching your search</div>";
+                 }
                 }
               }
               else {
                 while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<tr><td>" 
-                    . $row['date'] . "</td><td>" . $row['time']  . "</td><td>" . $row['total'] . "</td><td>" . $row['subtotal'] . "</td><td>"
-                    . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td><a class='btn btn-dark' 
-                    role='button' href='customerDetail.php?Detail=". $row['customer_id'] . "'>View</a></td><td><a class='btn btn-dark' 
-                    role='button' href='employeeDetail.php?Detail=". $row['employee_id'] . "'>View</a>";
+                  $Date = date("m-d-Y", strtotime($row['date']));
+                  echo "<tr><td>" 
+                  . $Date . "</td><td>" . $row['time'] . "</td><td>" . $row['total'] . "</td><td>" . $row['subtotal'] . "</td><td>"
+                  . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['cash'] . "</td><td>" . $row['credit'] . "</td><td><a class='btn btn-dark' 
+                  role='button' href='saleDetail.php?Detail=". $row['ticket_id'] . "'>View</a>";
                 }
               }
-
               ?>
             </tbody>
           </table>
