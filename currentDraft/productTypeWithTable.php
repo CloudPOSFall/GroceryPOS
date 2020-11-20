@@ -23,8 +23,5 @@
     }
     $tableCode .= "</table>";
     //echo ($tableCode);
-
-
-    //var_dump($data);
     //include('addCart.php');
 ?>

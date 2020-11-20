@@ -3,8 +3,8 @@
 
     include_once('config.php');
 
-    $query = "SELECT product_inventory.productName, product_inventory.cost, cart_table.qty FROM product_inventory 
-              INNER JOIN cart_table ON product_inventory.product_id=cart_table.product_id";
+    $query = "SELECT product_inventory.productName, product_inventory.cost, cart.qty FROM product_inventory 
+              INNER JOIN cart ON product_inventory.product_id=cart.product_id";
     $result = mysqli_query($conn, $query) or die("Execution Failed");
 
     $cartCode = "<table border='1' name='product'>";
