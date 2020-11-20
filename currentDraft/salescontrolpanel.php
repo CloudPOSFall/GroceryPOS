@@ -101,7 +101,7 @@ include_once('config.php');
       </li>
       <?php
       if (isset($_SESSION['emp_type'])) {
-        if ($_SESSION['emp_type'] = 1) {
+        if ($_SESSION['emp_type'] == 1) {
 
           echo "
         <li>

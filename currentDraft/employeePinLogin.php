@@ -74,7 +74,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
 
               session_start();
               $_SESSION["emp_id"] = $row['employee_id'];
-              $_SESSION["emp_perm"] = $emp_type;
+              $_SESSION["emp_type"] = $emp_type;
               $_SESSION["emp_fname"] = $emp_fname;
               $_SESSION["emp_lname"] = $emp_lname;
               $_SESSION["emp_company"] = $emp_company;
