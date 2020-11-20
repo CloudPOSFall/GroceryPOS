@@ -36,22 +36,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   // Validate credentials
   if (empty($email_err) && empty($password_err)) {
-    $query = mysqli_query($conn, "SELECT * FROM customer_info WHERE email = '$email' AND password = '$mypassword'");
+    $query = mysqli_query($conn, "SELECT * FROM employee_info WHERE email = '$email' AND password = '$mypassword'");
     $numrows = mysqli_num_rows($query);
     if ($numrows != 0) {
-      while ($numrows = mysqli_fetch_assoc($query)) {
-        $first_name = $numrows["first_name"];
-        $first_name = mysqli_real_escape_string($conn, $first_name);
-        $last_name =  $numrows["last_name"];
-        $last_name = mysqli_real_escape_string($conn, $last_name);
-        $company_name = $numrows["company_name"];
-        $company_name = mysqli_real_escape_string($conn, $company_name);
+      while ($row = mysqli_fetch_assoc($query)) {
+        $emp_fname = $row["first_name"];
+        $emp_fname = mysqli_real_escape_string($conn, $emp_fname);
+        $emp_lname =  $row["last_name"];
+        $emp_lname = mysqli_real_escape_string($conn, $emp_lname);
+        $emp_company = $row["company_name"];
+        $emp_company = mysqli_real_escape_string($conn, $emp_company);
+        $emp_type = $row['user_type'];
+        $emp_type = mysqli_real_escape_string($conn, $row['user_type']);
       }
       session_start();
-      $_SESSION["email"] = $email;
-      $_SESSION["first_name"] = $first_name;
-      $_SESSION["last_name"] = $last_name;
-      $_SESSION["company_name"] = $company_name;
+      
+      $_SESSION["emp_id"] = $row['employee_id'];
+      $_SESSION["emp_type"] = $emp_type;
+      $_SESSION["emp_fname"] = $emp_fname;
+      $_SESSION["emp_lname"] = $emp_lname;
+      $_SESSION["emp_company"] = $emp_company;
+      $_SESSION['timeout'] = time();
       header("Location: accountHomeDraft.php");
       ob_end_flush();
     } else {
@@ -96,7 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 
 
-<!-- Navigation Bar -->
+  <!-- Navigation Bar -->
   <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
     <div class="container-fluid">
       <h3 id="brand"><a class="navbar-brand" href="indexDraft.php"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -111,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <span class="navbar-text" style="margin-left: 30px;">
-          Customers
+            Customers
           </span>
           <div class="col v-divider"></div>
           <li class="nav-item ml-auto">
@@ -124,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </ul>
         <ul class="navbar-nav">
           <span class="navbar-text">
-          Retail Services
+            Retail Services
           </span>
           <div class="col v-divider"></div>
           <li class="nav-item ml-auto active">
@@ -171,8 +176,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               </div>
               <div class="form-group" <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>>
                 <div class="form-row">
-                 <div class="col-8"> <label style="font-weight:500;" for="password">Password</label></div>
-                 <div class="col"><a style="font-size:.8em;" class="text-right" href="">Forgot Password?</a></div></div> 
+                  <div class="col-8"> <label style="font-weight:500;" for="password">Password</label></div>
+                  <div class="col"><a style="font-size:.8em;" class="text-right" href="">Forgot Password?</a></div>
+                </div>
                 <input type="password" class="form-control" placeholder="Password" name="password">
                 <span class="help-block"><?php echo $password_err; ?></span>
               </div>

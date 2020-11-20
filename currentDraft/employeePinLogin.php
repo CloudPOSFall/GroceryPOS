@@ -63,13 +63,19 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
             $numrows = mysqli_num_rows($query);
             if ($numrows == 1) {
               while ($row = mysqli_fetch_assoc($query)) {
+                $emp_fname = $row["first_name"];
                 $emp_fname = mysqli_real_escape_string($conn, $row['first_name']);
+                $emp_lname =  $row["last_name"];
                 $emp_lname = mysqli_real_escape_string($conn, $row['last_name']);
+                $emp_company = $row["company_name"];
                 $emp_company = mysqli_real_escape_string($conn, $row['company_name']);
+                $emp_type = $row['user_type'];
+                $emp_type = mysqli_real_escape_string($conn, $row['user_type']);
               }
 
               session_start();
               $_SESSION["emp_id"] = $row['employee_id'];
+              $_SESSION["emp_type"] = $emp_type;
               $_SESSION["emp_fname"] = $emp_fname;
               $_SESSION["emp_lname"] = $emp_lname;
               $_SESSION["emp_company"] = $emp_company;
