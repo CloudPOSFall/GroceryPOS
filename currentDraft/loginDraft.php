@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $emp_company = mysqli_real_escape_string($conn, $emp_company);
         $emp_type = $row['user_type'];
       }
-      session_start();
+      
       
       $_SESSION["emp_id"] = $row['employee_id'];
       $_SESSION["emp_type"] = $emp_type;

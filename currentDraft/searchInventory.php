@@ -1,7 +1,7 @@
 <?php 
     // connection to database
     include_once('config.php');
-    session_start();
+    
 
     class Product {
         public $qrCode;

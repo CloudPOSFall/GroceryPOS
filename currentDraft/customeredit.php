@@ -1,6 +1,5 @@
 <?php
 include_once('config.php');
-session_start();
 if (isset($_GET['Upd'])) {
   $findID = $_GET['Upd'];
   $query = "SELECT * FROM customer_info WHERE customer_id LIKE '%$findID%'";
