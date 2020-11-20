@@ -24,7 +24,7 @@
            
         }
 
-        function set_modelname($modeName) {
+        function set_modelname($modelName) {
             $this->modelName = $modelName; 
         }
 

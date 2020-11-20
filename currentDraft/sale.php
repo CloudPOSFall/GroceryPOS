@@ -1,6 +1,5 @@
 <?php
 include_once('config.php');
-session_start();
 if(!isset($_SESSION['sale'])){
     //If it doesn't, create an empty array.
     $_SESSION['customer'] = array();

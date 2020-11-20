@@ -147,7 +147,7 @@ include_once('config.php');
 
     </div>
   </nav>
-<!--END nav sidebar-->
+  <!--END nav sidebar-->
 
   <!--page content-->
   <div id="content">
@@ -239,7 +239,7 @@ include_once('config.php');
         <p></p>
         <p>Register Controls</p>
         <div class="line"></div>
-        <a class="btn" href="#">
+        <a class="btn" href="#" data-toggle="modal" data-target="#pickreg">
           <div class="card" id="pagecard">
             <div class="card-body text-center">
               <span class="card-text">
@@ -266,7 +266,7 @@ include_once('config.php');
           </div>
         </a>
 
-        <a class="btn" href="#">
+        <a class="btn" href="#" data-toggle="modal" data-target="#switchreg">
           <div class="card" id="pagecard">
             <div class="card-body text-center">
               <span class="card-text">
@@ -298,6 +298,190 @@ include_once('config.php');
     </div>
   </div>
 
+  <!-- Modals -->
+  <div class="modal fade" id="pickreg" tabindex="-1" role="dialog" aria-labelledby="pickreg" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header h-25">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="card-deck mb-5">
+            <p></p>
+            <span style="font-weight: 400">Choose A Register</span>
+            <div class="line"></div>
+            <div class="container mb-5 ml-4">
+              <a class="btn" href="#" data-toggle="modal" data-target="#openreg" data-dismiss="modal">
+                <div class="card" id="pagecard">
+                  <div class="card-body text-center">
+                    <span class="card-text">
+                      <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-archive-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
+                        </svg></h5>
+                      Register 1
+                    </span>
+                  </div>
+                </div>
+              </a>
+
+              <a class="btn" href="#" data-toggle="modal" data-target="#openreg" data-dismiss="modal">
+                <div class="card" id="pagecard">
+                  <div class="card-body text-center">
+                    <span class="card-text">
+                      <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-archive-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
+                        </svg></h5>
+                      Register 2
+                    </span>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="openreg" tabindex="-1" role="dialog" aria-labelledby="openreg" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="modal-title" id="exampleModalLongTitle">Open Register</span>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="container text-center">
+            <span style="font-weight: 400">Opening Count</span>
+            <div class="row">
+              <div class="col">
+
+              </div>
+              <div class="col-4">
+                <form class="form-inline" id="openform">
+                  <div class="input-group mb-2">
+                    <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $100 </span></label>
+                    <input type="text" maxlength="3" class="form-control w-25" placeholder="">
+                  </div>
+                  <div class="input-group mb-2">
+                    <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $50 </span></label>
+                    <input type="text" maxlength="3" class="form-control w-25" placeholder="">
+                  </div>
+                  <div class="input-group mb-2">
+                    <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $20 </span></label>
+                    <input type="text" maxlength="3" class="form-control w-25" placeholder="">
+                  </div>
+                  <div class="input-group mb-2">
+                    <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $10 </span></label>
+                    <input type="text" maxlength="3" class="form-control w-25" placeholder="">
+                  </div>
+                  <div class="input-group mb-2">
+                    <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $5 </span></label>
+                    <input type="text" maxlength="3" class="form-control w-25" placeholder="">
+                  </div>
+                  <div class="input-group mb-2">
+                    <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $1 </span></label>
+                    <input type="text" maxlength="3" class="form-control w-25" placeholder="">
+                  </div>
+                  <div class="input-group mb-2">
+                    <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 25¢ </span></label>
+                    <input type="text" maxlength="3" class="form-control w-25" placeholder="">
+                  </div>
+                  <div class="input-group mb-2">
+                    <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 10¢ </span></label>
+                    <input type="text" maxlength="3" class="form-control w-25" placeholder="">
+                  </div>
+                  <div class="input-group mb-2">
+                    <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 5¢ </span></label>
+                    <input type="text" maxlength="3" class="form-control w-25" placeholder="">
+                  </div>
+                  <div class="input-group mb-2">
+                    <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 1¢ </span></label>
+                    <input type="text" maxlength="3" class="form-control w-25" placeholder="">
+                  </div>
+                  <div class="input-group mb-2">
+                    <label class="control-label border bg-white" style="width:55px"><span class="input-group-addon px-2"> Total </span></label>
+                    <input type="text" maxlength="3" class="form-control w-50" value="$    .  " readonly>
+                  </div>
+
+
+              </div>
+            </div>
+
+          </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal">Submit Count</button>
+          <button type="button" class="btn btn-dark" data-dismiss="modal">Cancel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="switchreg" tabindex="-1" role="dialog" aria-labelledby="switchreg" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header h-25">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="card-deck mb-5">
+            <p></p>
+            <span style="font-weight: 400">Choose A Register</span>
+            <div class="line"></div>
+            <div class="container mb-5 ml-4">
+              <a class="btn" href="#" data-toggle="modal" data-target="#regopen" data-dismiss="modal">
+                <div class="card" id="pagecard">
+                  <div class="card-body text-center">
+                    <span class="card-text">
+                      <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-archive-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
+                        </svg></h5>
+                      Register 1
+                    </span>
+                  </div>
+                </div>
+              </a>
+
+              <a class="btn" href="#" data-toggle="modal" data-target="#regopen" data-dismiss="modal">
+                <div class="card" id="pagecard">
+                  <div class="card-body text-center">
+                    <span class="card-text">
+                      <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-archive-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
+                        </svg></h5>
+                      Register 2
+                    </span>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
   <!--END page content-->
 
 
@@ -312,7 +496,19 @@ include_once('config.php');
         $('.collapse.in').toggleClass('in');
         $('a[aria-expanded=true]').attr('aria-expanded', 'false');
       });
+
+
+      $('#myModal').on('shown.bs.modal', function() {
+        $('#myInput').trigger('focus')
+      });
     });
+
+    $('#openreg').on('hidden.bs.modal', function() {
+      $(this)
+        .find("input,textarea,select")
+        .val('')
+        .end();
+    })
 
 
     $(document).ready(function() {
