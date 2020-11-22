@@ -170,18 +170,21 @@ var_dump($_SESSION['customer']);
 
         <nav class="navbar navbar-light" style="background-color: #a1b6a8;" id="salespanel">
                     <?php
-                    if (isset($_GET['Add'])) {
-                        $ID = $_GET['Add'];
+					$first = $last = "";
+                    if (isset($_SESSION['id'])) {
+                        $ID = $_SESSION['id'];
                         $cQuery = "SELECT * FROM customer_info WHERE customer_id LIKE '%$ID%'";
                         $cResult = mysqli_query($conn, $cQuery);
                         $cQueryRes= mysqli_num_rows($cResult);
                         if ($cQueryRes > 0) {
                             while ($crow = mysqli_fetch_assoc($cResult)) {
-                                $_SESSION['customer']['fname'] = $crow['first_name'];
-                                $_SESSION['customer']['lname'] = $crow['last_name'];
-                                echo "<form class='form-inline'><div class='card' style='padding: 8px'>" . $_SESSION['customer']['fname'] . " " . $_SESSION['customer']['lname'] . "</div>
-                                <div class='nav-item'><button href='sale.php' class='btn navbar-btn'> Remove</button></div></form>";
-								array_push($_SESSION['customer'],$_GET['Add']);
+                                $first = $crow['first_name'];
+								$first = mysqli_real_escape_string($conn,$first);
+                                $last = $crow['last_name'];
+								$last = mysqli_real_escape_string($conn,$last);
+								$setButton .="<form class='form-inline'><div 
+								class='card' style='padding: 8px'>" . $first . " " . $last . "</div>
+                                <div class='nav-item'><button href='index.php' class='btn navbar-btn'> Remove</button></div></form>";
                             }
                         } 
                     }else {
@@ -190,8 +193,8 @@ var_dump($_SESSION['customer']);
                         <input class='form-control col-5' name='customer' placeholder='Search Customers' aria-label='Search'>
                         <button class='btn btn-dark navbar-btn' name='sale-search'> Look Up</button></div></form>";
                     }
+					echo $setButton;
                     ?>
-                
                 
                 <div class="nav-item"><button class="btn navbar-btn"> New</button></div>
             

@@ -1,4 +1,4 @@
-<?php
+<strong><?php
 include_once('config.php');
 $query = "SELECT * FROM customer_info";
 $result = mysqli_query($conn, $query);
@@ -207,8 +207,24 @@ $result = mysqli_query($conn, $query);
               $result = mysqli_query($conn, $sql);
               $queryResults = mysqli_num_rows($result);
 
-              if ($queryResults > 0) {
-                echo "<div class='row mt-3'>There are $queryResults results matching your search</div><br>";
+                if ($queryResults > 0) {
+                  echo "<div>There are $queryResults results matching your search</div><br>";
+                  while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr><td>" . $row['customer_id'] . "</td><td>"
+                    . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
+                    . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
+                    . $row['email'] . "</td><td>"  . $row['rewards'] .
+                    "</td><td><a class='btn btn-dark' role='button' href='sale.php'
+                    >Attach</a></td><td><a class='btn btn-dark' role='button' href='customeredit.php?Upd="
+                    . $row['customer_id'] . "'>Update</a></td></tr>";
+					  
+                  }
+                } else {
+                  echo "<div>There are no results matching your search</div>";
+                }
+              }
+              
+              else {
                 while ($row = mysqli_fetch_assoc($result)) {
                   echo "<tr><td>" . $row['customer_id'] . "</td><td>"
                     . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
@@ -221,21 +237,11 @@ $result = mysqli_query($conn, $query);
               } else {
                 echo "<div class='row mt-3'>There are no results matching your search</div>";
               }
-            } else {
-              while ($row = mysqli_fetch_assoc($result)) {
-                echo "<tr><td>" . $row['customer_id'] . "</td><td>"
-                  . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
-                  . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
-                  . $row['email'] . "</td><td class='text-center'>"  . $row['rewards'] .
-                  "</td><td><a class='btn-sm btn-dark' role='button' href='customerdelete.php?Del="
-                  . $row['customer_id'] . "'>Delete</a></td><td><a class='btn-sm btn-dark' role='button' href='customeredit.php?Upd="
-                  . $row['customer_id'] . "'>Update</a></td></tr>";
-              }
-            }
-
-            ?>
-          </tbody>
-        </table>
+					$_SESSION['id'] = $row['customer_id'];
+              ?>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
@@ -257,3 +263,4 @@ $result = mysqli_query($conn, $query);
 </script>
 
 </html>
+</strong>
