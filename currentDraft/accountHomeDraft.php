@@ -17,7 +17,9 @@ if (isset($_SESSION['company_name'])) {
 } else {
   $company = "Company";
 }
-//echo sprintf($format2,$company);
+$_SESSION["init"] += 1;
+
+
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +29,7 @@ if (isset($_SESSION['company_name'])) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  +
+  
   <title>Welcome | MarketPOS</title>
 
   <!--bootstrap css -->
@@ -48,12 +50,10 @@ if (isset($_SESSION['company_name'])) {
   <script src="js/popper.min.js"></script>
   <!-- bootstrap js -->
   <script src="js/bootstrap.min.js"></script>
-
+  <script src="js/jquery.toaster.js"></script>
 </head>
 
-<body>
-
-
+<body>  
 
   <!--nav sidebar-->
   <nav id="sidebar">
@@ -169,8 +169,15 @@ if (isset($_SESSION['company_name'])) {
 
   <!--page content-->
   <div id="content">
+
+
+<?php
+
+
+    ?>
+
     <!--location navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="locnav">
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="locnav">
       <div class="container-fluid">
 
         <button type="button" id="sidebarCollapse" class="btn btn-success">
@@ -187,8 +194,7 @@ if (isset($_SESSION['company_name'])) {
           </ul>
         </div>
       </div>
-    </nav>
-
+    </nav> -->
 
     <!--control buttons-->
 
@@ -291,6 +297,11 @@ if (isset($_SESSION['company_name'])) {
           $('.collapse.in').toggleClass('in');
           $('a[aria-expanded=true]').attr('aria-expanded', 'false');
         });
+        <?php 
+        if($_SESSION['init']==1){
+        echo "$.toaster({ priority : 'success', title : 'Success', message : 'Welcome, " . $_SESSION['emp_fname'] ."' })";
+        }
+        ?>
       });
     </script>
 </body>

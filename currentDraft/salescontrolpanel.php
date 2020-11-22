@@ -53,7 +53,12 @@ include_once('config.php');
                                                 echo $_SESSION['emp_company'];
                                               } else {
                                                 echo 'Company Name';
-                                              } ?></br>Choose Register <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                              } ?></br>
+            <?php if (isset($_SESSION['register']) && !empty($_SESSION['register'])) {
+              echo $_SESSION['register'];
+            } else {
+              echo 'Choose Register';
+            } ?> <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
             </svg></a>
         </div>
@@ -348,8 +353,7 @@ include_once('config.php');
     </div>
   </div>
 
-
-  <div class="modal fade" id="openreg" tabindex="-1" role="dialog" aria-labelledby="openreg" aria-hidden="true">
+  <div class="modal" id="openreg" tabindex="-1" role="dialog" aria-labelledby="openreg" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -430,6 +434,7 @@ include_once('config.php');
     </div>
   </div>
 
+
   <div class="modal fade" id="switchreg" tabindex="-1" role="dialog" aria-labelledby="switchreg" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -444,31 +449,32 @@ include_once('config.php');
             <span style="font-weight: 400">Choose A Register</span>
             <div class="line"></div>
             <div class="container mb-5 ml-4">
-              <a class="btn" href="#" data-toggle="modal" data-target="#regopen" data-dismiss="modal">
-                <div class="card" id="pagecard">
-                  <div class="card-body text-center">
-                    <span class="card-text">
-                      <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-archive-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd" d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
-                        </svg></h5>
-                      Register 1
-                    </span>
+                <a role="button" class="btn" type="submit" name="reg1" data-toggle="modal" data-target="#regopen" data-dismiss="modal">
+                  <div class="card" id="pagecard">
+                    <div class="card-body text-center">
+                      <span class="card-text">
+                        <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-archive-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
+                          </svg></h5>
+                        Register 1
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </a>
+                </a>
 
-              <a class="btn" href="#" data-toggle="modal" data-target="#regopen" data-dismiss="modal">
-                <div class="card" id="pagecard">
-                  <div class="card-body text-center">
-                    <span class="card-text">
-                      <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-archive-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd" d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
-                        </svg></h5>
-                      Register 2
-                    </span>
+                <a type="button" class="btn" name="reg2" data-toggle="modal" data-target="#regopen" data-dismiss="modal" onclick="regswitch()">
+                  <div class="card" id="pagecard">
+                    <div class="card-body text-center">
+                      <span class="card-text">
+                        <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-archive-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
+                          </svg></h5>
+                        Register 2
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </a>
+                </a>
+            
             </div>
 
 
@@ -498,7 +504,7 @@ include_once('config.php');
       });
 
 
-      $('#myModal').on('shown.bs.modal', function() {
+      $('#openreg', '#pickreg', '#switchreg').on('shown.bs.modal', function() {
         $('#myInput').trigger('focus')
       });
     });
@@ -521,6 +527,18 @@ include_once('config.php');
         }
       );
     });
+
+
+function regswitch() {
+  var request = new XMLHttpRequest();
+  request.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      alert(this.responseText);
+    }
+  };
+  request.open("GET", "ajax_request.php", true);
+  request.send();
+}
   </script>
 </body>
 

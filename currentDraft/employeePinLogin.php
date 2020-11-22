@@ -2,11 +2,7 @@
 include_once('config.php');
 // Initialize the session
 ob_start();
-// Check if the user is already logged in, if yes then redirect him to welcome page
-if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-  header("Location: accountHomeDraft.php");
-  exit;
-}
+
 ?>
 
 <head>
@@ -32,6 +28,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
   <script src="js/popper.min.js"></script>
   <!-- bootstrap js -->
   <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.toaster.js"></script>
 
   <script>
     $(document).ready(function() {
@@ -77,7 +74,9 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
               $_SESSION["emp_fname"] = $emp_fname;
               $_SESSION["emp_lname"] = $emp_lname;
               $_SESSION["emp_company"] = $emp_company;
+              $_SESSION["init"] = 1;
               $_SESSION['timeout'] = time();
+
               header("Location: accountHomeDraft.php");
               ob_end_flush();
             } else {
@@ -113,7 +112,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
                                                                         ?>" method="post">
             <div class="row justify-content-center" style="padding: 10px;">
               <div class="form-group">
-                <input name="pin" style="font-size: 1.5em" maxlength="4" size="6" class="form-control" <?php if (!isset($_POST["login"])) {
+                <input type="password" name="pin" style="font-size: 1.5em" maxlength="4" size="6" class="form-control" <?php if (!isset($_POST["login"])) {
                                                                                                           echo 'placeholder="PIN"';
                                                                                                         } else echo 'value="' . $pin . '"' ?>>
               </div>
@@ -138,7 +137,6 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
     </div>
 
 </body>
-
 
 
 </html>
