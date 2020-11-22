@@ -189,9 +189,9 @@ include_once('config.php');
                         <div class="list-group">
                             <a href="reportTotalDraft.php" class="list-group-item list-group-item-action"><strong>Totals </strong> - Your basic sales report, lists all sales and totals them</a>
                             <a href="reportLinesDraft.php" class="list-group-item list-group-item-action"><strong>Lines </strong> - Lists all items and charges from sales</a>
-                            <a href="#" class="list-group-item list-group-item-action"><strong>Margin Per Line</strong> - Shows total, cost, profit, and margin for every sales line</a>
+                            <a href="reportMargin.php" class="list-group-item list-group-item-action"><strong>Margin Per Line</strong> - Shows total, cost, profit, and margin for every sales line</a>
                             <a href="reportSaleByCategory.php" class="list-group-item list-group-item-action"><strong>Sales by Category</strong> - Compare categories, drill down to view subcategories</a>
-                            <a href="#" class="list-group-item list-group-item-action"><strong>Sales Over Time</strong> - Sales over time grouped by time period</a>
+                            <a href="reportOverTime.php" class="list-group-item list-group-item-action"><strong>Sales Over Time</strong> - Sales over time grouped by time period</a>
                         </div>
                     </div>
                 </div>

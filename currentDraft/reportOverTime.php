@@ -1,13 +1,13 @@
 <?php
 include_once('config.php');
-$query = "SELECT * FROM product_inventory, ticket_system";
+$query = "SELECT * FROM ticket_system, product_inventory";
 $result = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title>Lines Reports | MarketPOS</title>
+  <title>Total Reports | MarketPOS</title>
 
 
    <!--bootstrap css -->
@@ -152,8 +152,8 @@ $result = mysqli_query($conn, $query);
     <nav class="navbar navbar-light" id="dateSel">
     <form method="post">
       <div class="form-group"> 
-        <label class="control-label" for="product">Product Name</label>
-        <input class="form-control" name="product" type="text">
+        <label class="control-label" for="time">Time</label>
+        <input class="form-control" name="time" placeholder= "HH:MM:SS"; type="text">
       </div>
       <div class="form-group">
         <button class="btn btn-primary " name="submit-search" type="submit">Submit</button>
@@ -168,47 +168,50 @@ $result = mysqli_query($conn, $query);
           <table class="table table-bordered" style="font-size:80%;">
             <thead>
               <tr>
-                <th class="col"> Product Name </th>
-                <th class="col"> Product Type</th>
-                <th class="col"> Product SubType </th>
-                <th class="col"> Sale </th>
+                <th class="col"> Time </th>
                 <th class="col"> Date </th>
-                <th class="col"> Time</th>
+                <th class="col"> Item </th>
+                <th class="col"> Quantity</th>
                 <th class="col"> Subtotal </th>
-                <th class="col"> Total</th>
+                <th class="col"> Total </th>
+                <th class="col"> Discount </th>
+                <th class="col"> Tax </th>
+                <th class="col"> Cash </th>
+                <th class="col"> Credit </th>
                 
               </tr>
             </thead>
             <tbody>
               <?php
-
+    
               if (isset($_POST['submit-search'])) {
-                $search = mysqli_real_escape_string($conn, $_POST['product']);
-                $sql = "SELECT * FROM product_inventory, ticket_system WHERE productName LIKE '%$search%'";
-                $result = mysqli_query($conn, $sql);
-                $queryResults = mysqli_num_rows($result);
-
+              $search = mysqli_real_escape_string($conn, $_POST['time']);
+              $sql = "SELECT * FROM ticket_system, product_inventory WHERE time LIKE '$search%'";
+              $result = mysqli_query($conn, $sql);
+              $queryResults = mysqli_num_rows($result);
+              echo "<div>There are $queryResults results matching your search</div><br>";
+              while ($row = mysqli_fetch_assoc($result)) {
+                $Date = date("m-d-Y", strtotime($row['date']));
                 if ($queryResults > 0) {
-                  echo "<div>There are $queryResults results matching your search</div><br>";
-                  while ($row = mysqli_fetch_assoc($result)) {
                     echo "<tr><td>" 
-                    . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['productSubType'] . "</td><td>" . $row['ticket_id'] . "</td><td>"
-                    . date("m-d-Y", strtotime($row['date'])) . "</td><td>" . $row['time'] . "</td><td>" . $row['subtotal'] . "</td><td>" 
-                    . $row['total'] . "</td><td>";
+                    . $row['time'] . "</td><td>" . $Date . "</td><td>" . $row['productName'] . "</td><td>" . $row['quantity'] . "</td><td>"
+                    . $row['subtotal'] . "</td><td>" . $row['total'] . "</td><td>" . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>"
+                    . $row['cash'] . "</td><td>" . $row['credit'] . "</td><td>";
                   }
-                } else {
+                else {
                   echo "<div>There are no results matching your search</div>";
+                 }
                 }
               }
               else {
                 while ($row = mysqli_fetch_assoc($result)) {
+                    $Date = date("m-d-Y", strtotime($row['date']));
                   echo "<tr><td>" 
-                  . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['productSubType'] . "</td><td>" . $row['ticket_id'] . "</td><td>"
-                  . date("m-d-Y", strtotime($row['date'])) . "</td><td>" . $row['time'] . "</td><td>" . $row['subtotal'] . "</td><td>" 
-                  . $row['total'] . "</td><td>";
+                  . $row['time'] . "</td><td>" . $Date . "</td><td>" . $row['productName'] . "</td><td>" . $row['quantity'] . "</td><td>"
+                  . $row['subtotal'] . "</td><td>" . $row['total'] . "</td><td>" . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>"
+                  . $row['cash'] . "</td><td>" . $row['credit'] . "</td><td>";
                 }
               }
-
               ?>
             </tbody>
           </table>

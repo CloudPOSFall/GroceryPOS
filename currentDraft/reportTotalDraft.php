@@ -152,8 +152,8 @@ $result = mysqli_query($conn, $query);
     <nav class="navbar navbar-light" id="dateSel">
     <form method="post">
       <div class="form-group"> 
-        <label class="control-label" for="date">Date</label>
-        <input class="form-control" name="date" pattern="YYYY-MM-DD" type="text">
+        <label class="control-label" for="sale">Sale</label>
+        <input class="form-control" name="sale" type="text">
       </div>
       <div class="form-group">
         <button class="btn btn-primary " name="submit-search" type="submit">Submit</button>
@@ -168,6 +168,7 @@ $result = mysqli_query($conn, $query);
           <table class="table table-bordered" style="font-size:80%;">
             <thead>
               <tr>
+                <th class="col"> Sale </th>
                 <th class="col"> Date </th>
                 <th class="col"> Time </th>
                 <th class="col"> Total</th>
@@ -184,16 +185,16 @@ $result = mysqli_query($conn, $query);
               <?php
     
               if (isset($_POST['submit-search'])) {
-              $Date = date("Y-m-d", strtotime($_POST['date']));
-              $search = mysqli_real_escape_string($conn, $Date);
-              $sql = "SELECT * FROM ticket_syste WHERE date LIKE '$search%'";
+              $search = mysqli_real_escape_string($conn, $_POST['sale']);
+              $sql = "SELECT * FROM ticket_system WHERE ticket_id LIKE '$search%'";
               $result = mysqli_query($conn, $sql);
               $queryResults = mysqli_num_rows($result);
               echo "<div>There are $queryResults results matching your search</div><br>";
               while ($row = mysqli_fetch_assoc($result)) {
                 if ($queryResults > 0) {
+                  $Date = date("m-d-Y", strtotime($row['date']));
                   echo "<tr><td>" 
-                  . $_POST['date'] . "</td><td>" . $row['time'] . "</td><td>" . $row['total'] . "</td><td>" . $row['subtotal'] . "</td><td>"
+                  . $row['ticket_id'] . "</td><td>" . $Date . "</td><td>" . $row['time'] . "</td><td>" . $row['total'] . "</td><td>" . $row['subtotal'] . "</td><td>"
                   . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['cash'] . "</td><td>" . $row['credit'] . "</td><td><a class='btn btn-dark' 
                   role='button' href='saleDetail.php?Detail=". $row['ticket_id'] . "'>View</a>";
                 }
@@ -206,7 +207,7 @@ $result = mysqli_query($conn, $query);
                 while ($row = mysqli_fetch_assoc($result)) {
                   $Date = date("m-d-Y", strtotime($row['date']));
                   echo "<tr><td>" 
-                  . $Date . "</td><td>" . $row['time'] . "</td><td>" . $row['total'] . "</td><td>" . $row['subtotal'] . "</td><td>"
+                  . $row['ticket_id'] . "</td><td>" . $Date . "</td><td>" . $row['time'] . "</td><td>" . $row['total'] . "</td><td>" . $row['subtotal'] . "</td><td>"
                   . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['cash'] . "</td><td>" . $row['credit'] . "</td><td><a class='btn btn-dark' 
                   role='button' href='saleDetail.php?Detail=". $row['ticket_id'] . "'>View</a>";
                 }
