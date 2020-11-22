@@ -1,6 +1,7 @@
 <?php
 include_once('config.php');
-$query = "SELECT * FROM ticket_system, inventory sales";
+$date = date("Y-m-d", strtotime($_POST['date']));
+$query = "SELECT * FROM ticket_system, cart_inprogress, cart, product_inventory WHERE date = '$date'";
 $result = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
@@ -158,193 +159,207 @@ $result = mysqli_query($conn, $query);
       </div>
     </nav>
     <!--END location navbar-->
-    <br>
+<div class="container">
+    <div class="row pt-5 m-4">
+      <div class="col text-center">
+        <?php
 
-    <!--date selector nav-->
-    <script>
-      $('.datepicker').datepicker();
-    </script>
-
-    <div id="dateSel" style="margin-top: 10px;">
-      <nav class="navbar navbar-light">
-        <form class="form-inline" method="post">
-          <div class="form-group">
-            <div class="form-group">
-              <div class="input-group" style="width: 220px; padding: 10px;">
-                <label class="control-label border bg-light" for="start"><span class="input-group-addon px-2"> Start </span></label>
-                <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text" />
-              </div>
-            </div>
-
-
-            <div class="form-group">
-              <div class="input-group" style="width: 220px; padding: 10px;">
-                <label class="control-label border bg-light" for="end"><span class="align-middle px-2"> End </span></label>
-                <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text" />
-              </div>
-            </div>
-
-            <div class="input-group-addon">
-              <button class="btn btn-success" name="submit" type="submit">Submit</button>
-            </div>
-
-          </div>
-        </form>
-      </nav>
-
-
-      <nav class="navbar bg-light">
-          <ul class="pagination pt-3">
-            <span class="text-muted px-3 pt-2"> # Results</span>
-            <li class="page-item">
-              <a class="page-link text-dark" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only">Previous</span>
-              </a>
-            </li>
-            <li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link text-dark" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">Next</span>
-              </a>
-            </li>
-          </ul>
+        if(isset($_POST['submit'])){
+            echo "<h4 class='pl-5'>End of Day - ". $_POST['date'] ."</h4>";
+          }
+          else{
+            echo '<h4 class="pl-5">End of Day - No Date Added </h4>';
+          }
         
-          <button class="btn btn-dark" onclick="window.print()"><svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-printer" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        
+        ?>
+      </div>
+                                             
+      <button class="btn btn-dark" onclick="window.print()"><svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-printer" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path d="M11 2H5a1 1 0 0 0-1 1v2H3V3a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2h-1V3a1 1 0 0 0-1-1zm3 4H2a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1v1H2a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1z" />
           <path fill-rule="evenodd" d="M11 9H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zM5 8a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H5z" />
           <path d="M3 7.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z" />
         </svg>
       </button>
-      </nav>
+      
 
     </div>
-    <!--END date selector nav-->
-
-
-    <div class="wrapper" class="bg-white">
-      <div class="row px-4 justify-content-center">
-        <table class="table table-bordered table-hover mt-3" id="table" style="font-size:80%;">
-          <thead class="bg-light">
-            <tr>
-              <th class="px-3"> ID </th>
-              <th> Subtotal </th>
-              <th> Discounts </th>
-              <th> Tax </th>
-              <th> Total</th>
-              <th> Cost </th>
-              <th> Profit</th>
-              <th> Margin </th>
-              <th> Time </th>
-              <th> Date </th>
-              <th> Customer</th>
-            </tr>
-          </thead>
-          <tbody >
-
-            <!-- Retrieved SQL Data Goes Here Instead of empty tds -->
-            <tr>
-              <th></th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th></th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div id="contentline"></div>
-
-      <div class="row pl-3">
-        <div class="px-1">
-          <table class="table table-responsive" style="font-size:80%;">
-            <thead>
-
-            </thead>
-            <tbody>
-              <tr>
-                <th style="padding-right: 30px;"> Subtotal </th>
-                <td class="text-right">$500</td>
-              </tr>
-              <tr>
-                <th style="padding-right: 30px;"> Discounts </th>
-                <td class="text-right">$0</td>
-              </tr>
-              <tr>
-                <th style="padding-right: 30px;"> Tax </th>
-                <td class="text-right">$123</td>
-              </tr>
-              <tr>
-                <th style="padding-right: 30px;"> Total </th>
-                <td class="text-right">$623</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="px-1">
-          <table class="table table-responsive" style="font-size:80%;">
-            <thead>
-
-            </thead>
-            <tbody>
-              <tr>
-                <th style="padding-right: 50px;"> Taxed </th>
-                <td class="text-right">$500</td>
-              </tr>
-              <tr>
-                <th style="padding-right: 50px;"> Untaxed </th>
-                <td class="text-right">$0</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="px-1">
-          <table class="table table-responsive" style="font-size:80%;">
-            <thead>
-
-            </thead>
-            <tbody>
-              <tr>
-                <th style="padding-right: 50px;"> Cost </th>
-                <td class="text-right">$200</td>
-              </tr>
-              <tr>
-                <th style="padding-right: 50px;"> Profit </th>
-                <td class="text-right">$423</td>
-              </tr>
-              <tr>
-                <th style="padding-right: 50px;"> Margin </th>
-                <td class="text-right">67.9%</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
     </div>
 
+    <div class="container justify-content-center">
+      <div class="card bg-white" id="reportcard">
+        <div class="card-header">
+          <span style="font-weight:500;">Company Name - Location</span>
+        </div>
+        <div class="row px-4 justify-content-center">
+          <div class="col">
+            <table class="table mt-3" id="table" style="font-size:80%;">
+
+              <tbody>
+
+                <!-- Retrieved SQL Data Goes Here -->
+                <tr>
+                <?php
+                    $sum=0;
+                    $sql = "SELECT total FROM ticket_system WHERE date LIKE '$date'";
+                    $result = mysqli_query($conn, $sql);
+                    while ($row = mysqli_fetch_assoc($result)) {
+                    $sum += $row['total'];
+                    }
+                  
+                  ?>
+                  <th class="pr-5"> Sales Total</th>
+                  <td class="text-right">$<?php echo $sum ?></td>
+                </tr>
+                <tr>
+                <?php 
+                  $sum=0;
+                  $sql = "SELECT tax FROM ticket_system WHERE date LIKE '$date'";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                  $sum += $row['tax'];
+                  }
+                  ?>
+                  <th class="pr-5"> Tax Total</th>
+                  <td class="text-right">$<?php echo $sum?></td>
+                </tr>
+                <tr>
+                <?php 
+                   $sum=0;
+                   $sql = "SELECT cash FROM ticket_system WHERE date LIKE '$date'";
+                   $result = mysqli_query($conn, $sql);
+                   while ($row = mysqli_fetch_assoc($result)) {
+                   $sum += $row['cash'];
+                   }
+                  ?>
+                  <th class="pr-5"> Cash </th>
+                  <td class="text-right">$<?php echo $sum?></td>
+                </tr>
+                <tr>
+                <?php 
+                   $sum=0;
+                   $sql = "SELECT credit FROM ticket_system WHERE date LIKE '$date'";
+                   $result = mysqli_query($conn, $sql);
+                   while ($row = mysqli_fetch_assoc($result)) {
+                   $sum += $row['credit'];
+                   }
+                  ?>
+                  <th class="pr-5"> Credit </th>
+                  <td class="text-right">$<?php echo $sum?></td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <div class="col">
+            <table class="table mt-3" id="table" style="font-size:80%;">
+
+              <tbody>
+
+                <!-- Retrieved SQL Data Goes Here -->
+                <tr>
+                  <th class="pr-5"> Refunds Total</th>
+                  <td class="text-right">$0</td>
+                </tr>
+                <tr>
+                  <th class="pr-5"> Returns </th>
+                  <td class="text-right">0</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <div class="col">
+            <table class="table mt-3" id="table" style="font-size:80%;">
+
+              <tbody>
+
+                <!-- Retrieved SQL Data Goes Here -->
+
+                <tr>
+                <?php 
+                  $qty=0;
+                   $sql = "SELECT quantity FROM ticket_system WHERE date LIKE '$date'";
+                   $result = mysqli_query($conn, $sql);
+                   while ($row = mysqli_fetch_assoc($result)) {
+                   $qty = $row['quantity'];
+                   }
+                  ?>
+                  <th class="pr-5"> Products Sold </th>
+                  <td class="text-right"><?php echo $qty?></td>
+                </tr>
+                <tr>
+                  <th class="pr-5"> First Invoice </th>
+                  <td class="text-right">0</td>
+                </tr>
+                <tr>
+                  <th class="pr-5"> Last Invoice </th>
+                  <td class="text-right">0</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="contentline"></div>
+
+        <div class="row px-4 mt-3 justify-content-center">
+          <div class="col">
+            <table class="table table-striped text-center" id="table" style="font-size:80%;">
+              <thead>
+                <tr>
+                  <th class="pr-5 text-left"> Category </th>
+                  <th> Quantity </th>
+                  <th> Retail Total </th>
+                  <th> Cost Total</th>
+                  <th> Profit Total</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <!-- Retrieved SQL Data Goes Here Instead of empty tds -->
+                <tr>
+                  <td class="text-left">Dairy</td>
+                  <td>0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                </tr>
+                <tr>
+                  <td class="text-left">Produce</td>
+                  <td>0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                </tr>
+                <tr>
+                  <td class="text-left">Poultry</td>
+                  <td>0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                  <td>$0</td>
+                </tr>
+              </tbody>
+              <tfoot class="bg-white">
+                <tr>
+                  <th class="pr-5 text-left"> Total: </th>
+                  <th> 0 </th>
+                  <th> $0 </th>
+                  <th> $0 </th>
+                  <th> $0 </th>
+                </tr>
+              </tfoot>
+
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
 
 
 
@@ -365,18 +380,6 @@ $result = mysqli_query($conn, $query);
     });
   });
 
-  $(document).ready(function() {
-    var date_input = $('input[name="date"]'); //our date input has the name "date"
-    var container = $('#dateSel form').length > 0 ? $('#dateSel form').parent() : "body";
-    var options = {
-      format: 'mm/dd/yyyy',
-      todayHighlight: true,
-      autoSize: true,
-      autoclose: true,
-      orientation: "top",
-    };
-    date_input.datepicker(options);
-  })
 </script>
 
 </html>

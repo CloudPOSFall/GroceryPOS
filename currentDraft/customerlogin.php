@@ -44,7 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     		$last_name =  $numrows["last_name"];
             $last_name = mysqli_real_escape_string($conn,$last_name);
     	}
-		session_start();
 		$_SESSION["email"] = $email;
 		$_SESSION["first_name"] = $first_name;
   		$_SESSION["last_name"] = $last_name;

@@ -1,11 +1,9 @@
 <?php
 include_once('config.php');
-session_start();
-if(isset($_SESSION['first_name']))
-{
- 	$fname = $_SESSION['first_name'];
-}else{
-	$fname = "First";
+if (isset($_SESSION['first_name'])) {
+  $fname = $_SESSION['first_name'];
+} else {
+  $fname = "First";
 }
 if (isset($_SESSION['first_name'])) {
   $lname = $_SESSION['last_name'];
@@ -69,7 +67,11 @@ if (isset($_SESSION['company_name'])) {
     <ul class="list-unstyled components">
       <li>
         <div id="usercard">
-          <a href="" style="font-size: 1em;"><?php  if(isset($_SESSION['emp_company'])&& !empty($_SESSION['emp_company'])) {echo $_SESSION['emp_company'];} else {echo 'Company Name';} ?></br>Choose Register <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <a href="" style="font-size: 1em;"><?php if (isset($_SESSION['emp_company']) && !empty($_SESSION['emp_company'])) {
+                                                echo $_SESSION['emp_company'];
+                                              } else {
+                                                echo 'Company Name';
+                                              } ?></br>Choose Register <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
             </svg></a>
         </div>
@@ -115,15 +117,32 @@ if (isset($_SESSION['company_name'])) {
               <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
             </svg></span> Customers</a>
       </li>
-      <li>
-        <a href="reportsControlPanel.php">
-          <span style="padding:5px;">
-            <svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-clipboard-data" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-              <path fill-rule="evenodd" d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-              <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z" />
-            </svg></span> Reports</a>
-      </li>
+
+      <?php
+      if (isset($_SESSION['emp_type'])) {
+
+        if ($_SESSION['emp_type'] == 1) {
+
+          echo "
+        <li>
+            <a href='employeecontrol.php'>
+              <span style='padding:5px;'>
+              <svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-file-person-fill' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+              <path fill-rule='evenodd' d='M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z'/>
+            </svg></span> Employees</a>
+          </li>
+          <li>
+            <a href='reportsControlPanel.php'>
+              <span style='padding:5px;'>
+                <svg width='.8em' height='.8em' viewBox='0 0 16 16' class='bi bi-clipboard-data' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+                  <path fill-rule='evenodd' d='M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z' />
+                  <path fill-rule='evenodd' d='M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z' />
+                  <path d='M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z' />
+                </svg></span> Reports</a>
+          </li>";
+        }
+      }
+      ?>
 
 
       </br></br></br></br>
@@ -139,11 +158,9 @@ if (isset($_SESSION['company_name'])) {
       <li>
         <div class="card text-center" id="footerbtn" style="background: #016923;">
           <a role="button" href="logout.php"> Logout</a>
-
-
         </div>
-
       </li>
+
     </ul>
 
 
@@ -182,11 +199,11 @@ if (isset($_SESSION['company_name'])) {
         <div class="card-body">
           <?php
           if (isset($_SESSION['emp_fname']) && !empty($_SESSION['emp_lname'])) {
-          		echo "" . $_SESSION['emp_fname'] . " " . $_SESSION['emp_lname'] . " ";
+            echo "" . $_SESSION['emp_fname'] . " " . $_SESSION['emp_lname'] . " ";
           } else {
-                echo "Current User";                                                     
-		  } 
-		  ?>
+            echo "Current User";
+          }
+          ?>
         </div>
       </div>
     </div>

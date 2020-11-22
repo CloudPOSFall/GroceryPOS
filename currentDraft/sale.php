@@ -1,6 +1,5 @@
 <?php
 include_once('config.php');
-session_start();
 if(!isset($_SESSION['sale'])){
     //If it doesn't, create an empty array.
     $_SESSION['customer'] = array();
@@ -228,7 +227,8 @@ var_dump($_SESSION['customer']);
                 </tr>
             </thead>
             <tbody>
-
+            
+            
             <?php include('productForm.php') ?>
 
                 <?php
@@ -269,14 +269,6 @@ var_dump($_SESSION['customer']);
     
     <!--END page content-->
 
-    <!-- bootstrap popper js-->
-    <script src="js/popper.min.js"></script>
-    <!-- bootstrap ja -->
-    <script src="js/bootstrap.min.js"></script>
-    <!--jquery -->
-    <script src="js/jquery-3.3.1.slim.min.js"></script>
-    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-
     <script type="text/javascript">
         $(document).ready(function () {
             $("#sidebar").mCustomScrollbar({
@@ -288,6 +280,7 @@ var_dump($_SESSION['customer']);
                 $('.collapse.in').toggleClass('in');
                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
             });
+
 
              // event begins when the user releases the key
             $('#search').keyup(function() {

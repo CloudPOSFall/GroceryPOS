@@ -7,7 +7,9 @@ $db = "marketpos-2";
 $debug = "false";
 
 $conn = mysqli_connect($server, $dbusername, $password, $db);
+if (!isset($_SESSION)){
 session_start();
+}
 
 if($conn->connect_error){
 	die('Could not connect: ' . $conn-> connect_error);

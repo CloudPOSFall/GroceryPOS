@@ -3,12 +3,12 @@ include_once('config.php');
 // Initialize the session
 ob_start();
 // Check if the user is already logged in, if yes then redirect him to welcome page
-if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
-{
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
   header("Location: accountHomeDraft.php");
   exit;
 }
 ?>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +25,19 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
   <script defer src="js/solid.js"></script>
   <script defer src="js/fontawesome.js"></script>
 
-</script> 
+  <!--jquery -->
+  <script src="js/jquery-3.5.1.min.js"></script>
+  <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+  <!-- bootstrap popper js-->
+  <script src="js/popper.min.js"></script>
+  <!-- bootstrap js -->
+  <script src="js/bootstrap.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      $('[data-toggle="popover"]').popover();
+    });
+  </script>
 </head>
 
 <body>
@@ -51,16 +63,20 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
             $numrows = mysqli_num_rows($query);
             if ($numrows == 1) {
               while ($row = mysqli_fetch_assoc($query)) {
+                $emp_fname = $row["first_name"];
                 $emp_fname = mysqli_real_escape_string($conn, $row['first_name']);
+                $emp_lname =  $row["last_name"];
                 $emp_lname = mysqli_real_escape_string($conn, $row['last_name']);
-				$emp_company = mysqli_real_escape_string($conn,$row['company_name']);
+                $emp_company = $row["company_name"];
+                $emp_company = mysqli_real_escape_string($conn, $row['company_name']);
+                $emp_type = $row['user_type'];
               }
 
-              session_start();
               $_SESSION["emp_id"] = $row['employee_id'];
+              $_SESSION["emp_type"] = $emp_type;
               $_SESSION["emp_fname"] = $emp_fname;
               $_SESSION["emp_lname"] = $emp_lname;
-			  $_SESSION["emp_company"] = $emp_company;
+              $_SESSION["emp_company"] = $emp_company;
               $_SESSION['timeout'] = time();
               header("Location: accountHomeDraft.php");
               ob_end_flush();
@@ -122,5 +138,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
     </div>
 
 </body>
+
+
 
 </html>

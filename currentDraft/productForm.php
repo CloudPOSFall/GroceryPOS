@@ -23,3 +23,7 @@
 </form>
 
 <?php include('addCart.php'); ?>
+
+<form action="finalSale.php">
+    <input type="submit" value="Finalize Sale" />
+</form>

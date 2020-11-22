@@ -1,7 +1,7 @@
 <?php 
     // connection to database
     include_once('config.php');
-    session_start();
+    
 
     class Product {
         public $qrCode;
@@ -24,7 +24,7 @@
            
         }
 
-        function set_modelname($modeName) {
+        function set_modelname($modelName) {
             $this->modelName = $modelName; 
         }
 

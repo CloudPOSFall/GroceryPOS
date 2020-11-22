@@ -15,6 +15,8 @@ p {
     margin-bottom: 0px;
 }
 
+
+
 a, a:hover, a:focus {
     color: inherit;
     text-decoration: none;
@@ -34,13 +36,6 @@ a, a:hover, a:focus {
 }
 
 #salespanel{
-    padding: 2px 2px;
-    margin-top: 30px;
-    margin-left: 0px;
-    overflow-y: scroll;
-}
-
-#dateSel{
     padding: 2px 2px;
     margin-top: 30px;
     margin-left: 0px;
@@ -73,6 +68,20 @@ a, a:hover, a:focus {
     padding: 8px;
 }
 
+#salesmodal{
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+#reportnav a.active {
+    background: #016923;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+#reportlist{
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+}
+
 .navbar-btn {
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     outline: none !important;
@@ -84,6 +93,14 @@ a, a:hover, a:focus {
     height: 1px;
     border-bottom: 1px solid #ddd;
     margin-bottom: 20px;
+}
+
+#contentline {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px solid rgb(214, 214, 214);
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 #payline {
@@ -104,10 +121,37 @@ a, a:hover, a:focus {
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
+#vendormodal{
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+}
+
 
 .card-deck{
     margin-top: 30px;
     padding: 20px;
+}
+
+.card-body{
+    margin-top: 7px;
+}
+
+#dateSel{
+    margin-top: 30px;
+    z-index: 1151;
+}
+.date {
+    z-index: 1151;
+    position: absolute;
+    orientation: bottom;
+}
+
+
+.pagination {
+    color: black;
+}
+
+#reportcard{
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
 }
 
 /* ---------------------------------------------------
@@ -124,6 +168,7 @@ a, a:hover, a:focus {
     background: #016923; 
     color: #fff;
     transition: all 0.3s;
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
 }
 
 #sidebar.active {
@@ -186,6 +231,11 @@ a, a:hover, a:focus {
     width: 8.2rem;
     font-size: .71rem;
     font-weight: 500;
+
+}
+
+#datecard{
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
 }
 
 a[data-toggle="collapse"] {

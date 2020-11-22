@@ -157,194 +157,94 @@ $result = mysqli_query($conn, $query);
         </div>
       </div>
     </nav>
-    <!--END location navbar-->
-    <br>
 
     <!--date selector nav-->
     <script>
       $('.datepicker').datepicker();
     </script>
 
-    <div id="dateSel" style="margin-top: 10px;">
-      <nav class="navbar navbar-light">
-        <form class="form-inline" method="post">
-          <div class="form-group">
-            <div class="form-group">
-              <div class="input-group" style="width: 220px; padding: 10px;">
-                <label class="control-label border bg-light" for="start"><span class="input-group-addon px-2"> Start </span></label>
-                <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text" />
-              </div>
-            </div>
+    <!--END location navbar-->
+    <div class="container">
+      <div class="card bg-light mt-5">
+        <div>
+          <nav class="nav nav-pills nav-justified" id="reportnav">
+            <a class="nav-item nav-link" href="eodDateNav.php">End of Day</a>
+            <a class="nav-item nav-link active" href="eodProdNav.php">Products</a>
+            <a class="nav-item nav-link" href="#">Customers</a>
+            <a class="nav-item nav-link" href="#">Employees</a>
+          </nav>
+        </div>
 
-
-            <div class="form-group">
-              <div class="input-group" style="width: 220px; padding: 10px;">
-                <label class="control-label border bg-light" for="end"><span class="align-middle px-2"> End </span></label>
-                <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text" />
-              </div>
-            </div>
-
-            <div class="input-group-addon">
-              <button class="btn btn-success" name="submit" type="submit">Submit</button>
-            </div>
-
+        <div class="container w-75 m-auto py-5">
+          <div class="list-group" id="reportlist">
+            <a href="#" class="list-group-item list-group-item-action"><span class="font-weight-bold">Sales History </span>
+              <p class="py-1">View Sell-Thru, Margin Percent, 1 Week Analysis, 4 Week Analysis of a product</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#vendormodal"><span class="font-weight-bold">Vendor Sales</span>
+              <p class="py-1">View quantities you have sold from each vendor.</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action"><span class="font-weight-bold">Brand Sales</span>
+              <p class="py-1">View quantities you have sold from each brand.</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action"><span class="font-weight-bold">Product Sales</span>
+              <p class="py-1">View products you have sold by date range.</p>
+            </a>
           </div>
-        </form>
-      </nav>
-
-
-      <nav class="navbar bg-light">
-          <ul class="pagination pt-3">
-            <span class="text-muted px-3 pt-2"> # Results</span>
-            <li class="page-item">
-              <a class="page-link text-dark" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only">Previous</span>
-              </a>
-            </li>
-            <li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link text-dark" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">Next</span>
-              </a>
-            </li>
-          </ul>
-        
-          <button class="btn btn-dark" onclick="window.print()"><svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-printer" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path d="M11 2H5a1 1 0 0 0-1 1v2H3V3a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2h-1V3a1 1 0 0 0-1-1zm3 4H2a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1v1H2a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1z" />
-          <path fill-rule="evenodd" d="M11 9H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zM5 8a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H5z" />
-          <path d="M3 7.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z" />
-        </svg>
-      </button>
-      </nav>
-
-    </div>
-    <!--END date selector nav-->
-
-
-    <div class="wrapper" class="bg-white">
-      <div class="row px-4 justify-content-center">
-        <table class="table table-bordered table-hover mt-3" id="table" style="font-size:80%;">
-          <thead class="bg-light">
-            <tr>
-              <th class="px-3"> ID </th>
-              <th> Subtotal </th>
-              <th> Discounts </th>
-              <th> Tax </th>
-              <th> Total</th>
-              <th> Cost </th>
-              <th> Profit</th>
-              <th> Margin </th>
-              <th> Time </th>
-              <th> Date </th>
-              <th> Customer</th>
-            </tr>
-          </thead>
-          <tbody >
-
-            <!-- Retrieved SQL Data Goes Here Instead of empty tds -->
-            <tr>
-              <th></th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th></th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div id="contentline"></div>
-
-      <div class="row pl-3">
-        <div class="px-1">
-          <table class="table table-responsive" style="font-size:80%;">
-            <thead>
-
-            </thead>
-            <tbody>
-              <tr>
-                <th style="padding-right: 30px;"> Subtotal </th>
-                <td class="text-right">$500</td>
-              </tr>
-              <tr>
-                <th style="padding-right: 30px;"> Discounts </th>
-                <td class="text-right">$0</td>
-              </tr>
-              <tr>
-                <th style="padding-right: 30px;"> Tax </th>
-                <td class="text-right">$123</td>
-              </tr>
-              <tr>
-                <th style="padding-right: 30px;"> Total </th>
-                <td class="text-right">$623</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
-        <div class="px-1">
-          <table class="table table-responsive" style="font-size:80%;">
-            <thead>
 
-            </thead>
-            <tbody>
-              <tr>
-                <th style="padding-right: 50px;"> Taxed </th>
-                <td class="text-right">$500</td>
-              </tr>
-              <tr>
-                <th style="padding-right: 50px;"> Untaxed </th>
-                <td class="text-right">$0</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="px-1">
-          <table class="table table-responsive" style="font-size:80%;">
-            <thead>
+        <!-- Modal -->
+        <div class="modal fade" id="vendormodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header bg-light">
+                <h6 class="modal-title" id="exampleModalLabel">Vendor Sales</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <!-- Select Date -->
+                <div class="m-3">
+                  <div class="card border-0 m-auto">
 
-            </thead>
-            <tbody>
-              <tr>
-                <th style="padding-right: 50px;"> Cost </th>
-                <td class="text-right">$200</td>
-              </tr>
-              <tr>
-                <th style="padding-right: 50px;"> Profit </th>
-                <td class="text-right">$423</td>
-              </tr>
-              <tr>
-                <th style="padding-right: 50px;"> Margin </th>
-                <td class="text-right">67.9%</td>
-              </tr>
-            </tbody>
-          </table>
+                    <form class="form-horizontal mx-auto" method="post">
+                      <div class="form-group">
+                        <div class="form-group">
+                          <div class="input-group form-inline" style="width: 220px; padding: 10px;">
+                            <label class="control-label border bg-light" for="start"><span class="input-group-addon px-2"> Start </span></label>
+                            <input class="form-control" id="vdate1" name="date" placeholder="MM/DD/YYY" type="text" />
+                          </div>
+                        </div>
+
+
+                        <div class="form-group">
+                          <div class="input-group form-inline" style="width: 220px; padding: 10px;">
+                            <label class="control-label border bg-light" for="end"><span class="align-middle px-2"> End </span></label>
+                            <input class="form-control" id="vdate2" name="date" placeholder="MM/DD/YYY" type="text" />
+                          </div>
+                        </div>
+
+                        <div class="input-group-addon text-center">
+                          <button class="btn btn-success" name="submit" type="submit">Submit</button>
+                        </div>
+
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <!--END Select Date -->
+              </div>
+            </div>
+          </div>
         </div>
+        <!--END Modal -->
+
       </div>
     </div>
 
+
+
+  </div>
 
 
 
@@ -363,7 +263,13 @@ $result = mysqli_query($conn, $query);
       $('.collapse.in').toggleClass('in');
       $('a[aria-expanded=true]').attr('aria-expanded', 'false');
     });
+
+    $('#myModal').on('shown.bs.modal', function() {
+      $('#myInput').trigger('focus')
+    });
   });
+
+
 
   $(document).ready(function() {
     var date_input = $('input[name="date"]'); //our date input has the name "date"
@@ -373,7 +279,7 @@ $result = mysqli_query($conn, $query);
       todayHighlight: true,
       autoSize: true,
       autoclose: true,
-      orientation: "top",
+      orientation: "top right",
     };
     date_input.datepicker(options);
   })
