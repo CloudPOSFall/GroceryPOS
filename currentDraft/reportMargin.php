@@ -1,13 +1,13 @@
 <?php
 include_once('config.php');
-$query = "SELECT * FROM product_inventory, ticket_system";
+$query = "SELECT * FROM ticket_system";
 $result = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title>Lines Reports | MarketPOS</title>
+  <title>Total Reports | MarketPOS</title>
 
 
    <!--bootstrap css -->
@@ -152,8 +152,8 @@ $result = mysqli_query($conn, $query);
     <nav class="navbar navbar-light" id="dateSel">
     <form method="post">
       <div class="form-group"> 
-        <label class="control-label" for="product">Product Name</label>
-        <input class="form-control" name="product" type="text">
+        <label class="control-label" for="date">Date</label>
+        <input class="form-control" name="date" type="text">
       </div>
       <div class="form-group">
         <button class="btn btn-primary " name="submit-search" type="submit">Submit</button>
@@ -168,47 +168,42 @@ $result = mysqli_query($conn, $query);
           <table class="table table-bordered" style="font-size:80%;">
             <thead>
               <tr>
-                <th class="col"> Product Name </th>
-                <th class="col"> Product Type</th>
-                <th class="col"> Product SubType </th>
-                <th class="col"> Sale </th>
+                <th class="col"> Sales </th>
                 <th class="col"> Date </th>
-                <th class="col"> Time</th>
-                <th class="col"> Subtotal </th>
+                <th class="col"> Time </th>
                 <th class="col"> Total</th>
+                <th class="col"> Profit </th>
+                <th class="col"> Margin </th>
                 
               </tr>
             </thead>
             <tbody>
               <?php
-
+    
               if (isset($_POST['submit-search'])) {
-                $search = mysqli_real_escape_string($conn, $_POST['product']);
-                $sql = "SELECT * FROM product_inventory, ticket_system WHERE productName LIKE '%$search%'";
-                $result = mysqli_query($conn, $sql);
-                $queryResults = mysqli_num_rows($result);
-
+              $Date = date("Y-m-d", strtotime($_POST['date']));
+              $search = mysqli_real_escape_string($conn, $Date);
+              $sql = "SELECT * FROM ticket_system WHERE date LIKE '$search%'";
+              $result = mysqli_query($conn, $sql);
+              $queryResults = mysqli_num_rows($result);
+              echo "<div>There are $queryResults results matching your search</div><br>";
+              while ($row = mysqli_fetch_assoc($result)) {
                 if ($queryResults > 0) {
-                  echo "<div>There are $queryResults results matching your search</div><br>";
-                  while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<tr><td>" 
-                    . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['productSubType'] . "</td><td>" . $row['ticket_id'] . "</td><td>"
-                    . date("m-d-Y", strtotime($row['date'])) . "</td><td>" . $row['time'] . "</td><td>" . $row['subtotal'] . "</td><td>" 
-                    . $row['total'] . "</td><td>";
-                  }
-                } else {
+                  echo "<tr><td>" 
+                  . $row['ticket_id'] . "</td><td>" . $row['date'] . "</td><td>" . $row['time'] . "</td><td>" . $row['total'] . "</td><td>";
+                }
+                else {
                   echo "<div>There are no results matching your search</div>";
+                 }
                 }
               }
               else {
                 while ($row = mysqli_fetch_assoc($result)) {
+                  $Date = date("m-d-Y", strtotime($row['date']));
                   echo "<tr><td>" 
-                  . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['productSubType'] . "</td><td>" . $row['ticket_id'] . "</td><td>"
-                  . date("m-d-Y", strtotime($row['date'])) . "</td><td>" . $row['time'] . "</td><td>" . $row['subtotal'] . "</td><td>" 
-                  . $row['total'] . "</td><td>";
+                  . $row['ticket_id'] . "</td><td>" . $row['date'] . "</td><td>" . $row['time'] . "</td><td>" . $row['total'] . "</td><td>";
                 }
               }
-
               ?>
             </tbody>
           </table>

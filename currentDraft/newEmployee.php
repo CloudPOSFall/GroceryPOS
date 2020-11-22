@@ -1,23 +1,20 @@
 <?php
-include_once('config.php');
-$query = "SELECT * FROM product_inventory, ticket_system";
-$result = mysqli_query($conn, $query);
+  include_once ('config.php');
 ?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title>Lines Reports | MarketPOS</title>
+  <title>Add Employee | MarketPOS</title>
 
 
-   <!--bootstrap css -->
-   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!--bootstrap css -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
   <!--our css -->
   <link rel="stylesheet" href="userStyle2.css">
   <!--Scrollbar Custom css -->
   <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
-  <!--bootstrap css -->
-  <link rel="stylesheet" href="css/bootstrap-datepicker3.css">
 
   <!--font awesome js -->
   <script defer src="js/solid.js"></script>
@@ -30,16 +27,16 @@ $result = mysqli_query($conn, $query);
   <script src="js/popper.min.js"></script>
   <!-- bootstrap js -->
   <script src="js/bootstrap.min.js"></script>
-  <!-- bootstrap datepicker -->
-  <script src="js/bootstrap-datepicker.min.js"></script>
 
+
+</head>
 
 </head>
 
 <body>
 
-          <!--nav sidebar-->
-          <nav id="sidebar">
+ <!--nav sidebar-->
+ <nav id="sidebar">
         <div class="sidebar-header bg-dark">
             <h1><span><a class="navbar-brand relative-top" href="indexDraft.php"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1z" />
@@ -60,8 +57,8 @@ $result = mysqli_query($conn, $query);
                         <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
                     </svg></a>
             </li>
-        <div class="justify-content-center" id="navline"></div>
-       
+            <div class="justify-content-center" id="navline"></div>
+
             <li>
                 <a href="accounthomeDraft.php">
                     <span style="padding:5px;">
@@ -93,6 +90,14 @@ $result = mysqli_query($conn, $query);
                         </svg></span> Customers</a>
             </li>
             <li class="active">
+                <a href='employeecontrol.php'>
+                    <span style='padding:5px;'>
+                        <svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-file-person-fill' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+                            <path fill-rule='evenodd' d='M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z'/>
+                        </svg></span> Employees</a>
+          </li>
+            </li>
+            <li>
                 <a href="reportsControlPanel.php">
                     <span style="padding:5px;">
                         <svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-clipboard-data" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -102,21 +107,22 @@ $result = mysqli_query($conn, $query);
                         </svg></span> Reports</a>
             </li>
 
-        
-        </br></br></br></br>
-        <li class="sidebar-footer">
-            <div class="text-center" id="usercard">
-               <a role="button" href="employeePinLogin.php"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+
+            </br></br></br></br>
+            <li class="sidebar-footer">
+                <div class="text-center" id="usercard">
+                    <a role="button" href="employeePinLogin.php"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z" />
                         </svg> Switch User</a>
-                
-            </div>
-        
-    </li>
+
+                </div>
+
+            </li>
         </ul>
         </div>
     </nav>
-  <!--END nav sidebar-->
+    <!--END nav sidebar-->
+
 
   <!--page content-->
   <div id="content">
@@ -124,98 +130,89 @@ $result = mysqli_query($conn, $query);
 
     <!--location navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="locnav">
-            <div class="container-fluid">
+      <div class="container-fluid">
 
-                <button type="button" id="sidebarCollapse" class="btn btn-success">
-                    <i class="fas fa-align-left"></i>
-                </button>
-
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="nav navbar-nav mr-auto">
-                        <a class="navbar-brand" href="reportscontrolpanel.php">
-                            <svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-clipboard-data" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                                <path fill-rule="evenodd" d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-                                <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z" />
-                            </svg> Reports</a>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-<!--END location navbar-->
+        <button type="button" id="sidebarCollapse" class="btn btn-success">
+          <i class="fas fa-align-left"></i>
+        </button>
 
 
-<!--date selector nav-->
-<script>$('.datepicker').datepicker();</script>
-
-    <nav class="navbar navbar-light" id="dateSel">
-    <form method="post">
-      <div class="form-group"> 
-        <label class="control-label" for="product">Product Name</label>
-        <input class="form-control" name="product" type="text">
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary " name="submit-search" type="submit">Submit</button>
-      </div>
-     </form>
-    </nav>
-<!--END date selector nav-->
-
-    <div class="container justify-content-center" id="tablescreen">
-      <div class="col-12">
-        <div class="card mt-5 bg-light">
-          <table class="table table-bordered" style="font-size:80%;">
-            <thead>
-              <tr>
-                <th class="col"> Product Name </th>
-                <th class="col"> Product Type</th>
-                <th class="col"> Product SubType </th>
-                <th class="col"> Sale </th>
-                <th class="col"> Date </th>
-                <th class="col"> Time</th>
-                <th class="col"> Subtotal </th>
-                <th class="col"> Total</th>
-                
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-
-              if (isset($_POST['submit-search'])) {
-                $search = mysqli_real_escape_string($conn, $_POST['product']);
-                $sql = "SELECT * FROM product_inventory, ticket_system WHERE productName LIKE '%$search%'";
-                $result = mysqli_query($conn, $sql);
-                $queryResults = mysqli_num_rows($result);
-
-                if ($queryResults > 0) {
-                  echo "<div>There are $queryResults results matching your search</div><br>";
-                  while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<tr><td>" 
-                    . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['productSubType'] . "</td><td>" . $row['ticket_id'] . "</td><td>"
-                    . date("m-d-Y", strtotime($row['date'])) . "</td><td>" . $row['time'] . "</td><td>" . $row['subtotal'] . "</td><td>" 
-                    . $row['total'] . "</td><td>";
-                  }
-                } else {
-                  echo "<div>There are no results matching your search</div>";
-                }
-              }
-              else {
-                while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<tr><td>" 
-                  . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['productSubType'] . "</td><td>" . $row['ticket_id'] . "</td><td>"
-                  . date("m-d-Y", strtotime($row['date'])) . "</td><td>" . $row['time'] . "</td><td>" . $row['subtotal'] . "</td><td>" 
-                  . $row['total'] . "</td><td>";
-                }
-              }
-
-              ?>
-            </tbody>
-          </table>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="nav navbar-nav mr-auto">
+            <a class="navbar-brand" href="productindex.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-person-bounding-box" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z" />
+                <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+              </svg> Add New Employee</a>
+          </ul>
         </div>
       </div>
+    </nav>
 
+
+    <div class="container justify-content-center">
+      <div class="card card-body bg-light" style="width: 35rem;" id="formscreen">
+
+        <div class="card-body">
+          <form action="employeeinfoinsert.php" method="post">
+            <div class = "form-group row">
+            <label class = "col-4" for = "First Name">First Name </label>
+                    <input class ="col-6" type = "text" placeholder=" First Name " name="fname"/>
+            </div>
+            <div class = "form-group row">
+            <label class = "col-4" for = "Last Name">Last Name </label>
+            <input class ="col-6" type = "text" placeholder="Last Name " name="lname"/>
+            </div>
+              <div class = "form-group row">
+            <label class = "col-4" for = "Email">Email </label>
+            <input class ="col-6" type = "email" placeholder="Email " name="email"/>
+            </div>
+            <div class = "form-group row">
+            <label class = "col-4" for = "Password">Create a Password </label>
+            <input class ="col-6" type = "password" placeholder="Password " name="password"/>
+            </div>
+            <div class = "form-group row">
+            <label class = "col-4" for = "Phone Number">Phone Number </label>
+            <input class ="col-6" type = "tel" placeholder="Phone Number " name="phone"/>
+            </div>
+            <div class = "form-group row">
+            <label class = "col-4" for = "Street Address">Street Address </label>
+            <input class ="col-6" type = "text" placeholder="Street Address " name="street"/>
+            </div>
+            <div class = "form-group row">
+            <label class = "col-4" for = "City">City </label>
+            <input class ="col-6" type = "text" placeholder="City " name="city"/>
+            </div>
+            <div class = "form-group row">
+            <label class = "col-4" for = "State">State </label>
+            <input class ="col-6" type = "text" placeholder="State " name="state"/>
+            </div>
+            <div class = "form-group row">
+            <label class = "col-4" for = "Zip Code">Zip Code </label>
+            <input class ="col-6" type = "text" placeholder="Zip Code " name="zip"/>
+            </div>
+            <div class = "form-group row">
+            <label class = "col-4" for = "SSN">SSN </label>
+            <input class ="col-6" type = "password" placeholder="SSN " name="ssn"/>
+            </div>
+            <div class = "form-group row">
+            <label class = "col-4" for = "Company Name">Company Name </label>
+            <input class ="col-6" type = "text" placeholder="Company Name " name="code"/>
+            </div>
+            <div class = "form-group row">
+            <label class = "col-4" for = "Pin Number">Pin Number </label>
+            <input class ="col-6" type = "text" placeholder="Pin Number " name="pnum"/>
+            </div>
+            <div class="text-center"><button name="submit" class="btn-lg btn-primary"> Submit</button></div>
+          </form>
+        </div>
+      </div>
     </div>
+
+  </div>
+  </div>
+
+
+
 </body>
 
 <script type="text/javascript">
@@ -230,20 +227,6 @@ $result = mysqli_query($conn, $query);
       $('a[aria-expanded=true]').attr('aria-expanded', 'false');
     });
   });
-
-  $(document).ready(function(){
-      var date_input=$('input[name="date"]'); //our date input has the name "date"
-      var container=$('#dateSel form').length>0 ? $('#dateSel form').parent() : "body";
-      var options={
-        format: 'mm/dd/yyyy',
-        container: container,
-        todayHighlight: true,
-        autoclose: true,
-        placement:"bottom"
-      };
-      date_input.datepicker(options);
-    })
-
 </script>
 
 </html>
