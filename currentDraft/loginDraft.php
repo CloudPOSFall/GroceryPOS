@@ -55,6 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $_SESSION["emp_fname"] = $emp_fname;
       $_SESSION["emp_lname"] = $emp_lname;
       $_SESSION["emp_company"] = $emp_company;
+      $_SESSION["loggedin"] = true;
+      $_SESSION["init"] = 0;
       $_SESSION['timeout'] = time();
       header("Location: accountHomeDraft.php");
       ob_end_flush();
