@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 20, 2020 at 12:58 AM
+-- Generation Time: Nov 22, 2020 at 09:06 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -36,6 +36,15 @@ CREATE TABLE `cart` (
   `product_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`cart_id`, `CID`, `qty`, `discount`, `cart_purchase`, `product_id`) VALUES
+(26, 1, 3, '0', 1, 1),
+(27, 2, 2, '0', 1, 2),
+(28, 3, 5, '10', 0, 6);
+
 -- --------------------------------------------------------
 
 --
@@ -44,9 +53,18 @@ CREATE TABLE `cart` (
 
 CREATE TABLE `cart_inprogress` (
   `CID` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `ticket_id` int(11) NOT NULL
+  `customer_id` int(11) DEFAULT NULL,
+  `ticket_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cart_inprogress`
+--
+
+INSERT INTO `cart_inprogress` (`CID`, `customer_id`, `ticket_id`) VALUES
+(1, 4, 1),
+(2, 2, 2),
+(3, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -102,7 +120,7 @@ CREATE TABLE `employee_info` (
   `start_date` date DEFAULT NULL,
   `company_name` varchar(50) NOT NULL,
   `number_of_stores` varchar(11) DEFAULT NULL,
-  `user_type` int(11) NOT NULL,
+  `user_type` int(11) DEFAULT NULL,
   `customer_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -117,7 +135,8 @@ INSERT INTO `employee_info` (`employee_id`, `email`, `password`, `pin_number`, `
 (22, 'usher54@aim.com', 'usher', 555, 'Usher', 'Man', 345432345, 8454342212, 958674345, '76 Cross Street', 'Houston', 'NY', 85743, '2020-12-05', 'Walmart', NULL, 2, NULL),
 (30, 'chrisbrown@gmail.com', 'pass', 111, 'Chris', 'Brown', 111111111, 7187654783, 746378273, '19 West Street', 'Denver', 'CL', 43454, '2019-07-03', 'Walmart', NULL, 2, NULL),
 (31, 'kyrieirving2@hotmail.com', 'kyrie', 705, 'Kyrie', 'Irving', 123456789, 2129857843, 123456789, '71 2nd Ave', 'New York', 'NY', 12343, '2017-07-03', 'Tops', '4', 1, 4),
-(32, 'georgemartin3432@gmail.com', 'mypassword', NULL, 'George', 'Martin', NULL, 2124545434, NULL, '256 97th Street', 'New York', 'NY', 10035, NULL, 'KeyFood', '3', 1, NULL);
+(32, 'georgemartin3432@gmail.com', 'mypassword', NULL, 'George', 'Martin', NULL, 2124545434, NULL, '256 97th Street', 'New York', 'NY', 10035, NULL, 'KeyFood', '3', 1, NULL),
+(34, 'bobgz@gmail.com', 'secret', 888, 'Bob', 'Gomez', NULL, 8457631279, 764571465, '7 Grand St', 'New Paltz', 'NY', 12561, NULL, 'Walmart', NULL, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -188,6 +207,73 @@ INSERT INTO `product_inventory` (`product_id`, `productName`, `productType`, `pr
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `register_closing_amount`
+--
+
+CREATE TABLE `register_closing_amount` (
+  `CRID` int(11) NOT NULL,
+  `$100` int(11) NOT NULL,
+  `$50` int(11) NOT NULL,
+  `$20` int(11) NOT NULL,
+  `$10` int(11) NOT NULL,
+  `$5` int(11) NOT NULL,
+  `$1` int(11) NOT NULL,
+  `quarters` int(11) NOT NULL,
+  `dimes` int(11) NOT NULL,
+  `pennies` int(11) NOT NULL,
+  `total` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `register_open_amount`
+--
+
+CREATE TABLE `register_open_amount` (
+  `RID` int(11) NOT NULL,
+  `$100` int(11) NOT NULL,
+  `$50` int(11) NOT NULL,
+  `$20` int(11) NOT NULL,
+  `$10` int(11) NOT NULL,
+  `$5` int(11) NOT NULL,
+  `$1` int(11) NOT NULL,
+  `quarters` int(11) NOT NULL,
+  `dimes` int(11) NOT NULL,
+  `nickels` int(11) NOT NULL,
+  `pennies` int(11) NOT NULL,
+  `total` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `report_system`
+--
+
+CREATE TABLE `report_system` (
+  `report_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `total_sales` int(11) NOT NULL,
+  `new_customers` int(11) NOT NULL,
+  `opening_amount` float NOT NULL,
+  `closing_amount` float NOT NULL,
+  `deposited_cash` float NOT NULL,
+  `cash_sales` float NOT NULL,
+  `cash_returns` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `report_system`
+--
+
+INSERT INTO `report_system` (`report_id`, `date`, `total_sales`, `new_customers`, `opening_amount`, `closing_amount`, `deposited_cash`, `cash_sales`, `cash_returns`) VALUES
+(1, '0000-00-00', 45, 12, 100, 732.18, 0, 47.36, 1.75),
+(3, '0000-00-00', 1235, 33, 200, 1200, 0, 698.99, 12);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `rewards_table`
 --
 
@@ -236,11 +322,20 @@ CREATE TABLE `ticket_system` (
   `total` float NOT NULL,
   `discount` float NOT NULL,
   `tax` float NOT NULL,
-  `tax_rate` float NOT NULL,
-  `cash` float NOT NULL,
-  `credit` float NOT NULL,
+  `tax_rate` float DEFAULT NULL,
+  `cash` float DEFAULT NULL,
+  `credit` float DEFAULT NULL,
   `cart_purchase` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ticket_system`
+--
+
+INSERT INTO `ticket_system` (`ticket_id`, `date`, `company_name`, `time`, `quantity`, `subtotal`, `total`, `discount`, `tax`, `tax_rate`, `cash`, `credit`, `cart_purchase`) VALUES
+(1, '2020-11-18', 'Walmart', '18:59:48', 3, 16.95, 16.95, 0, 1.39, 1.11, 0, 16.95, 1),
+(2, '2020-11-18', 'Walmart', '01:16:15', 2, 10.25, 10.25, 0, 1.75, 0.23, 5, 5.25, 1),
+(3, '2020-11-20', 'Shop Rite', '01:20:10', 5, 45.65, 45.65, 10, 5.45, 1.23, 0, 45.65, 0);
 
 -- --------------------------------------------------------
 
@@ -266,38 +361,6 @@ CREATE TABLE `vendorinfo` (
 INSERT INTO `vendorinfo` (`vendor_id`, `vendor_name`, `street_address`, `city`, `state`, `zip_code`, `shipments`, `category_code`) VALUES
 (1, 'Tide', '2212 3rd Ave', 'New York', 'NY', 10035, 22, 1),
 (2, 'Post', '5303 4th Ave', 'Brooklyn', 'NY', 11220, 9, 2);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `zreport_system`
---
-
-CREATE TABLE `zreport_system` (
-  `zreport_id` int(11) NOT NULL,
-  `total_sales` int(11) NOT NULL,
-  `transactions` int(11) NOT NULL,
-  `new_customers` int(11) NOT NULL,
-  `opening_amount` float NOT NULL,
-  `closing_amount` float NOT NULL,
-  `short` float NOT NULL,
-  `cash_sales` float NOT NULL,
-  `cash_returns` float NOT NULL,
-  `drops` float NOT NULL,
-  `payouts` float NOT NULL,
-  `pay_ins` float NOT NULL,
-  `purchases` int(11) NOT NULL,
-  `ticket_id` int(11) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `zreport_system`
---
-
-INSERT INTO `zreport_system` (`zreport_id`, `total_sales`, `transactions`, `new_customers`, `opening_amount`, `closing_amount`, `short`, `cash_sales`, `cash_returns`, `drops`, `payouts`, `pay_ins`, `purchases`, `ticket_id`, `product_id`) VALUES
-(1, 45, 30, 12, 100, 732.18, 0, 47.36, 1.75, 0, 0, 0, 690, NULL, NULL),
-(3, 1235, 120, 33, 200, 1200, 0, 698.99, 12, 0, 0, 0, 48, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -355,6 +418,28 @@ ALTER TABLE `product_inventory`
   ADD UNIQUE KEY `OID` (`OID`);
 
 --
+-- Indexes for table `register_closing_amount`
+--
+ALTER TABLE `register_closing_amount`
+  ADD PRIMARY KEY (`CRID`),
+  ADD UNIQUE KEY `total` (`total`);
+
+--
+-- Indexes for table `register_open_amount`
+--
+ALTER TABLE `register_open_amount`
+  ADD PRIMARY KEY (`RID`),
+  ADD UNIQUE KEY `total` (`total`);
+
+--
+-- Indexes for table `report_system`
+--
+ALTER TABLE `report_system`
+  ADD PRIMARY KEY (`report_id`),
+  ADD KEY `opening_amount` (`opening_amount`),
+  ADD KEY `CRID` (`closing_amount`);
+
+--
 -- Indexes for table `rewards_table`
 --
 ALTER TABLE `rewards_table`
@@ -380,14 +465,6 @@ ALTER TABLE `vendorinfo`
   ADD PRIMARY KEY (`vendor_id`);
 
 --
--- Indexes for table `zreport_system`
---
-ALTER TABLE `zreport_system`
-  ADD PRIMARY KEY (`zreport_id`),
-  ADD UNIQUE KEY `product_id` (`product_id`),
-  ADD UNIQUE KEY `ticket_id` (`ticket_id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -395,13 +472,13 @@ ALTER TABLE `zreport_system`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `cart_inprogress`
 --
 ALTER TABLE `cart_inprogress`
-  MODIFY `CID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `CID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `customer_info`
@@ -413,7 +490,7 @@ ALTER TABLE `customer_info`
 -- AUTO_INCREMENT for table `employee_info`
 --
 ALTER TABLE `employee_info`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `gift_card`
@@ -434,6 +511,24 @@ ALTER TABLE `product_inventory`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `register_closing_amount`
+--
+ALTER TABLE `register_closing_amount`
+  MODIFY `CRID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `register_open_amount`
+--
+ALTER TABLE `register_open_amount`
+  MODIFY `RID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `report_system`
+--
+ALTER TABLE `report_system`
+  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `rewards_table`
 --
 ALTER TABLE `rewards_table`
@@ -449,19 +544,13 @@ ALTER TABLE `tax_table`
 -- AUTO_INCREMENT for table `ticket_system`
 --
 ALTER TABLE `ticket_system`
-  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `vendorinfo`
 --
 ALTER TABLE `vendorinfo`
   MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `zreport_system`
---
-ALTER TABLE `zreport_system`
-  MODIFY `zreport_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -511,14 +600,6 @@ ALTER TABLE `product_inventory`
 --
 ALTER TABLE `rewards_table`
   ADD CONSTRAINT `rewards_table_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
-
---
--- Constraints for table `zreport_system`
---
-ALTER TABLE `zreport_system`
-  ADD CONSTRAINT `zreport_system_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `zreport_system_ibfk_3` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `zreport_system_ibfk_4` FOREIGN KEY (`ticket_id`) REFERENCES `ticket_system` (`ticket_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
