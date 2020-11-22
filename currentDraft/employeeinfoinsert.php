@@ -1,30 +1,24 @@
 <?php
-include_once ('config.php');
+include_once('config.php');
 
   if(isset($_POST['submit']))
   {
-    if(empty($_POST['fname']) || empty($_POST['lname']) || empty($_POST['id']) || empty($_POST['number']) || empty($_POST['ssn']) || empty($_POST['street']) ||
-     empty($_POST['city']) || empty($_POST['state']) || empty($_POST['zip']) || empty($_POST['start']))
-    {
-      echo ' Please Fill in the Blanks ';
-    }
-    else
-    {
+      $Email = $_POST['email'];
+      $Password = $_POST['password'];
+      $Pin = $_POST['pnum'];
       $FirstName = $_POST['fname'];
-      $MiddleIniial = $_POST['mi'];
       $LastName = $_POST['lname'];
-      $UserID = $_POST['id'];
-      $PhoneNumber = $_POST['number'];
+      $PhoneNumber = $_POST['phone'];
       $SSN = $_POST['ssn'];
       $StreetAddress = $_POST['street'];
       $City = $_POST['city'];
       $State = $_POST['state'];
       $ZipCode = $_POST['zip'];
-      $StartDate = $_POST['start'];
-      $EndDate = $_POST['end'];
+      $Company = $_POST['code'];
+      
 
-      $query = "insert into employee_info (first_name, middle_initial, last_name, user_id, phone_number, SSN, street_address, city, state, zip_code, start_date, end_date)
-              values ('$FirstName', '$MiddleIniial', '$LastName', '$UserID', '$PhoneNumber', '$SSN', '$StreetAddress', '$City', '$State', '$ZipCode', '$StartDate', '$EndDate')";
+      $query = "INSERT into employee_info (email, password, pin_number, first_name, last_name, phone_number, SSN, street_address, city, state, zip_code, company_name, user_type)
+              VALUES ('$Email', '$Password', '$Pin', '$FirstName', '$LastName', '$PhoneNumber', '$SSN', '$StreetAddress', '$City', '$State', '$ZipCode', '$Company', '2')";
 
       $result = mysqli_query($conn, $query);
 
@@ -32,12 +26,11 @@ include_once ('config.php');
 
       if($result)
       {
-        header("location:employeeinfoview.php");
+        header("location:employeecontrol.php");
       }
       else
       {
         echo " Please Check Your Query";
       }
     }
-  }
 ?>
