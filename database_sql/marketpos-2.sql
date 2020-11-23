@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 23, 2020 at 06:58 AM
+-- Generation Time: Nov 23, 2020 at 09:41 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -149,7 +149,7 @@ CREATE TABLE `gift_card` (
   `promo_number` double NOT NULL,
   `card_balance` float NOT NULL,
   `ticket_id` int(11) DEFAULT NULL,
-  `customer_id` int(11) NOT NULL
+  `customer_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -157,8 +157,8 @@ CREATE TABLE `gift_card` (
 --
 
 INSERT INTO `gift_card` (`gift_id`, `promo_number`, `card_balance`, `ticket_id`, `customer_id`) VALUES
-(1, 2095, 10, NULL, 0),
-(2, 965, 20, NULL, 0);
+(1, 2095, 10, NULL, NULL),
+(2, 965, 20, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -196,8 +196,8 @@ CREATE TABLE `product_inventory` (
 --
 
 INSERT INTO `product_inventory` (`product_id`, `productName`, `productType`, `productSubType`, `unit_price`, `cost`, `in_stock`, `vendor_id`, `OID`) VALUES
-(1, 'Dairy Pure', 'dairy', 'milk', 7.99, 8.99, 10, 1, NULL),
-(2, 'Horizon', 'dairy', 'milk', 8.99, 10.5, 3, 2, NULL),
+(1, 'Dairy Pure', 'dairy', 'milk', 7.99, 8.99, 10, NULL, NULL),
+(2, 'Horizon', 'dairy', 'milk', 8.99, 10.5, 3, NULL, NULL),
 (3, 'Old Croc Chedder', 'dairy', 'cheese', 4.85, 5.89, 5, NULL, NULL),
 (4, 'Kerrygold Chedder', 'dairy', 'cheese', 8.99, 7.99, 65, NULL, NULL),
 (5, 'Dole Banana', 'produce', 'banana', 4.99, 6.5, 56, NULL, NULL),
@@ -208,42 +208,14 @@ INSERT INTO `product_inventory` (`product_id`, `productName`, `productType`, `pr
 -- --------------------------------------------------------
 
 --
--- Table structure for table `register_closing_amount`
+-- Table structure for table `registers_table`
 --
 
-CREATE TABLE `register_closing_amount` (
-  `CRID` int(11) NOT NULL,
-  `$100` int(11) NOT NULL,
-  `$50` int(11) NOT NULL,
-  `$20` int(11) NOT NULL,
-  `$10` int(11) NOT NULL,
-  `$5` int(11) NOT NULL,
-  `$1` int(11) NOT NULL,
-  `quarters` int(11) NOT NULL,
-  `dimes` int(11) NOT NULL,
-  `pennies` int(11) NOT NULL,
-  `total` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `register_open_amount`
---
-
-CREATE TABLE `register_open_amount` (
+CREATE TABLE `registers_table` (
   `RID` int(11) NOT NULL,
-  `$100` int(11) NOT NULL,
-  `$50` int(11) NOT NULL,
-  `$20` int(11) NOT NULL,
-  `$10` int(11) NOT NULL,
-  `$5` int(11) NOT NULL,
-  `$1` int(11) NOT NULL,
-  `quarters` int(11) NOT NULL,
-  `dimes` int(11) NOT NULL,
-  `nickels` int(11) NOT NULL,
-  `pennies` int(11) NOT NULL,
-  `total` int(11) NOT NULL
+  `open_total` float NOT NULL,
+  `close_total` float NOT NULL,
+  `employee_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -257,20 +229,32 @@ CREATE TABLE `report_system` (
   `date` date NOT NULL,
   `total_sales` int(11) NOT NULL,
   `new_customers` int(11) NOT NULL,
-  `opening_amount` float NOT NULL,
-  `closing_amount` float NOT NULL,
+  `RID` int(11) DEFAULT NULL,
   `deposited_cash` float NOT NULL,
-  `cash_sales` float NOT NULL,
-  `cash_returns` float NOT NULL
+  `loss` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `report_system`
 --
 
-INSERT INTO `report_system` (`report_id`, `date`, `total_sales`, `new_customers`, `opening_amount`, `closing_amount`, `deposited_cash`, `cash_sales`, `cash_returns`) VALUES
-(1, '0000-00-00', 45, 12, 100, 732.18, 0, 47.36, 1.75),
-(3, '0000-00-00', 1235, 33, 200, 1200, 0, 698.99, 12);
+INSERT INTO `report_system` (`report_id`, `date`, `total_sales`, `new_customers`, `RID`, `deposited_cash`, `loss`) VALUES
+(1, '0000-00-00', 45, 12, NULL, 0, 0),
+(3, '0000-00-00', 1235, 33, NULL, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `return_table`
+--
+
+CREATE TABLE `return_table` (
+  `RTID` int(11) NOT NULL,
+  `ticket_id` int(11) DEFAULT NULL,
+  `date` date NOT NULL,
+  `time` time NOT NULL,
+  `refunds` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -280,8 +264,6 @@ INSERT INTO `report_system` (`report_id`, `date`, `total_sales`, `new_customers`
 
 CREATE TABLE `rewards_table` (
   `RID` int(11) NOT NULL,
-  `total_spent` float NOT NULL,
-  `annual_spent` float NOT NULL,
   `points` int(11) NOT NULL,
   `customer_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -405,7 +387,7 @@ ALTER TABLE `employee_info`
 --
 ALTER TABLE `gift_card`
   ADD PRIMARY KEY (`gift_id`),
-  ADD UNIQUE KEY `ticket_id` (`ticket_id`),
+  ADD KEY `ticket_id` (`ticket_id`),
   ADD KEY `customer_id` (`customer_id`);
 
 --
@@ -420,30 +402,29 @@ ALTER TABLE `order_info`
 --
 ALTER TABLE `product_inventory`
   ADD PRIMARY KEY (`product_id`),
-  ADD UNIQUE KEY `vendor_id` (`vendor_id`),
-  ADD UNIQUE KEY `OID` (`OID`);
+  ADD KEY `OID` (`OID`),
+  ADD KEY `vendor_id` (`vendor_id`);
 
 --
--- Indexes for table `register_closing_amount`
+-- Indexes for table `registers_table`
 --
-ALTER TABLE `register_closing_amount`
-  ADD PRIMARY KEY (`CRID`),
-  ADD UNIQUE KEY `total` (`total`);
-
---
--- Indexes for table `register_open_amount`
---
-ALTER TABLE `register_open_amount`
+ALTER TABLE `registers_table`
   ADD PRIMARY KEY (`RID`),
-  ADD UNIQUE KEY `total` (`total`);
+  ADD KEY `employee_id` (`employee_id`);
 
 --
 -- Indexes for table `report_system`
 --
 ALTER TABLE `report_system`
   ADD PRIMARY KEY (`report_id`),
-  ADD KEY `opening_amount` (`opening_amount`),
-  ADD KEY `CRID` (`closing_amount`);
+  ADD KEY `RID` (`RID`);
+
+--
+-- Indexes for table `return_table`
+--
+ALTER TABLE `return_table`
+  ADD PRIMARY KEY (`RTID`),
+  ADD KEY `ticket_id` (`ticket_id`);
 
 --
 -- Indexes for table `rewards_table`
@@ -519,15 +500,9 @@ ALTER TABLE `product_inventory`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `register_closing_amount`
+-- AUTO_INCREMENT for table `registers_table`
 --
-ALTER TABLE `register_closing_amount`
-  MODIFY `CRID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `register_open_amount`
---
-ALTER TABLE `register_open_amount`
+ALTER TABLE `registers_table`
   MODIFY `RID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -535,6 +510,12 @@ ALTER TABLE `register_open_amount`
 --
 ALTER TABLE `report_system`
   MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `return_table`
+--
+ALTER TABLE `return_table`
+  MODIFY `RTID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `rewards_table`
@@ -588,7 +569,8 @@ ALTER TABLE `employee_info`
 -- Constraints for table `gift_card`
 --
 ALTER TABLE `gift_card`
-  ADD CONSTRAINT `gift_card_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `ticket_system` (`ticket_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+  ADD CONSTRAINT `gift_card_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `ticket_system` (`ticket_id`) ON DELETE NO ACTION ON UPDATE SET NULL,
+  ADD CONSTRAINT `gift_card_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
 
 --
 -- Constraints for table `order_info`
@@ -600,8 +582,26 @@ ALTER TABLE `order_info`
 -- Constraints for table `product_inventory`
 --
 ALTER TABLE `product_inventory`
-  ADD CONSTRAINT `product_inventory_ibfk_1` FOREIGN KEY (`vendor_id`) REFERENCES `vendorinfo` (`vendor_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `product_inventory_ibfk_2` FOREIGN KEY (`OID`) REFERENCES `order_info` (`OID`) ON DELETE NO ACTION ON UPDATE SET NULL;
+  ADD CONSTRAINT `product_inventory_ibfk_1` FOREIGN KEY (`OID`) REFERENCES `order_info` (`OID`) ON DELETE NO ACTION ON UPDATE SET NULL,
+  ADD CONSTRAINT `product_inventory_ibfk_2` FOREIGN KEY (`vendor_id`) REFERENCES `vendorinfo` (`vendor_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+
+--
+-- Constraints for table `registers_table`
+--
+ALTER TABLE `registers_table`
+  ADD CONSTRAINT `registers_table_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee_info` (`employee_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+
+--
+-- Constraints for table `report_system`
+--
+ALTER TABLE `report_system`
+  ADD CONSTRAINT `report_system_ibfk_1` FOREIGN KEY (`RID`) REFERENCES `registers_table` (`RID`) ON DELETE NO ACTION ON UPDATE SET NULL;
+
+--
+-- Constraints for table `return_table`
+--
+ALTER TABLE `return_table`
+  ADD CONSTRAINT `return_table_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `ticket_system` (`ticket_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
 
 --
 -- Constraints for table `rewards_table`
