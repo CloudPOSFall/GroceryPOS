@@ -1,11 +1,21 @@
 <form method="get" type="button" action="<?php echo $_SERVER['PHP_SELF'];?>">
 
     <?php 
+<<<<<<< Updated upstream
 
     echo ($tableCode);
 
     if(isset($_GET['addToCart'])) {
         $query = "SELECT * FROM cart WHERE product_id = '".$_GET['addToCart']."'";
+=======
+    
+    echo($tableCode);
+    
+    if(isset($_GET['addToCart']))
+     {
+        $ID = $_GET['addToCart'];
+        $query = "SELECT * FROM cart WHERE product_id LIKE $ID";
+>>>>>>> Stashed changes
         $result = mysqli_query($conn,$query);
         $rows = mysqli_num_rows($result);
 

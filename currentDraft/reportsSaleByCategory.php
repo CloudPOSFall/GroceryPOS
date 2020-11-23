@@ -1,6 +1,6 @@
 <?php
 include_once('config.php');
-$sql = "SELECT * FROM ticket_system";
+$sql = "SELECT * FROM ticket_system, product_inventory";
 $result = mysqli_query($conn, $sql);
 ?>
 <!DOCTYPE html>
@@ -230,14 +230,8 @@ $result = mysqli_query($conn, $sql);
         <table class="table table-bordered table-hover mt-3" id="table" style="font-size:80%;">
           <thead class="bg-light">
             <tr>
-              <th class="px-3"> ID </th>
-              <th> Subtotal </th>
-              <th> Discounts </th>
-              <th> Tax </th>
-              <th> Total</th>
-              <th> Cost </th>
-              <th> Profit</th>
-              <th> Margin </th>
+              <th class="px-3"> Sale ID </th>
+              <th> Product SubType </th>
               <th> Time </th>
               <th> Date </th>
               <th> Customer</th>
@@ -250,13 +244,13 @@ $result = mysqli_query($conn, $sql);
     $DateBegin = date('Y-m-d', strtotime($_POST['sdate']));
     $DateEnd = date('Y-m-d', strtotime($_POST['edate']));
     $search = mysqli_real_escape_string($conn, $DateBegin);
-    $sql = "SELECT * FROM ticket_system WHERE date LIKE '$search%'";
+    $sql = "SELECT * FROM ticket_system, product_inventory WHERE date LIKE '$search%'";
     $result = mysqli_query($conn, $sql);
     while ($row = mysqli_fetch_assoc($result)) {
     if (($row['date'] >= $DateBegin) && ($row['date'] <= $DateEnd)){
         echo "<tr><td>" 
-        . $row['ticket_id'] . "</td><td>". $row['subtotal'] . "</td><td>" . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['total'] . "</td><td>" . "</td><td>" 
-        . "</td><td>" . "</td><td>" . $row['time'] . "</td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td><a class='btn btn-dark' 
+        . $row['ticket_id'] . "</td><td>". $row['productSubType'] . "</td><td>" 
+        . $row['time'] . "</td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td><a class='btn btn-dark' 
         role='button' href='customerDetail.php?Detail=". $row['customer_id'] . "'>View</a>";
       }
       }
@@ -370,13 +364,13 @@ $result = mysqli_query($conn, $sql);
     <?php
     }
     else {
-      $query = "SELECT * FROM ticket_system";
+      $query = "SELECT * FROM ticket_system, product_inventory";
       $result = mysqli_query($conn, $query);
       while ($row = mysqli_fetch_assoc($result)) {
         $Date = date("m-d-Y", strtotime($row['date']));
         echo "<tr><td>" 
-        . $row['ticket_id'] . "</td><td>". $row['subtotal'] . "</td><td>" . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['total'] . "</td><td>" . "</td><td>" 
-        . "</td><td>" . "</td><td>" . $row['time'] . "</td><td>" . $Date . "</td><td><a class='btn btn-dark' 
+        . $row['ticket_id'] . "</td><td>". $row['productSubType'] . "</td><td>" 
+        . $row['time'] . "</td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td><a class='btn btn-dark' 
         role='button' href='customerDetail.php?Detail=". $row['customer_id'] . "'>View</a>";
       }
     }
@@ -487,12 +481,6 @@ $result = mysqli_query($conn, $sql);
         </div>
       </div>
     </div>
-
-
-
-
-
-
 
 </body>
 
