@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 24, 2020 at 06:39 AM
+-- Generation Time: Nov 24, 2020 at 10:52 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -43,7 +43,11 @@ CREATE TABLE `cart` (
 INSERT INTO `cart` (`cart_id`, `CID`, `qty`, `discount`, `cart_purchase`, `product_id`) VALUES
 (26, 1, 3, '0', 1, 1),
 (27, 2, 2, '0', 1, 2),
-(28, 3, 5, '10', 0, 6);
+(28, 3, 5, '10', 0, 6),
+(29, 4, 2, '0', 1, 9),
+(30, 4, 2, '0', 1, 4),
+(31, 4, 1, '0', 0, 1),
+(32, 4, 1, '0', 0, 5);
 
 -- --------------------------------------------------------
 
@@ -64,7 +68,8 @@ CREATE TABLE `cart_inprogress` (
 INSERT INTO `cart_inprogress` (`CID`, `customer_id`, `ticket_id`) VALUES
 (1, 4, 1),
 (2, 2, 2),
-(3, 1, 3);
+(3, 1, 3),
+(4, 7, 4);
 
 -- --------------------------------------------------------
 
@@ -200,11 +205,12 @@ INSERT INTO `product_inventory` (`product_id`, `productName`, `productType`, `pr
 (1, 'Dairy Pure', 'dairy', 'milk', 8.99, 6.99, 10, 1, NULL),
 (2, 'Horizon', 'dairy', 'milk', 10.45, 8.99, 3, 1, NULL),
 (3, 'Old Croc Chedder', 'dairy', 'cheese', 7.89, 5.15, 5, 1, NULL),
-(4, 'Kerrygold Chedder', 'dairy', 'cheese', 12.99, 10.99, 65, 1, NULL),
+(4, 'Kerrygold Chedder', 'dairy', 'cheese', 9.99, 6.99, 65, 1, NULL),
 (5, 'Dole Banana', 'produce', 'banana', 4.99, 3.45, 56, 1, NULL),
 (6, 'Chiquita', 'produce', 'banana', 8.95, 6.99, 45, 1, NULL),
 (7, 'Cherry', 'produce', 'tomato', 5.59, 3.99, 21, 1, NULL),
-(8, 'Brandywine', 'produce', 'tomato', 8.99, 5.75, 2, 1, NULL);
+(8, 'Brandywine', 'produce', 'tomato', 8.99, 5.75, 2, 1, NULL),
+(9, 'Perdue - Sht Cuts Grlld Ital Chic Strip', 'poultry', 'chicken ', 7.49, 6.99, 7, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -213,7 +219,7 @@ INSERT INTO `product_inventory` (`product_id`, `productName`, `productType`, `pr
 --
 
 CREATE TABLE `registers_table` (
-  `RID` int(11) NOT NULL,
+  `register_id` int(11) NOT NULL,
   `open_total` float NOT NULL,
   `close_total` float NOT NULL,
   `employee_id` int(11) DEFAULT NULL
@@ -230,7 +236,7 @@ CREATE TABLE `report_system` (
   `date` date NOT NULL,
   `total_sales` int(11) NOT NULL,
   `new_customers` int(11) NOT NULL,
-  `RID` int(11) DEFAULT NULL,
+  `register_id` int(11) DEFAULT NULL,
   `deposited_cash` float NOT NULL,
   `loss` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -239,9 +245,9 @@ CREATE TABLE `report_system` (
 -- Dumping data for table `report_system`
 --
 
-INSERT INTO `report_system` (`report_id`, `date`, `total_sales`, `new_customers`, `RID`, `deposited_cash`, `loss`) VALUES
-(1, '0000-00-00', 45, 12, NULL, 0, 0),
-(3, '0000-00-00', 1235, 33, NULL, 0, 0);
+INSERT INTO `report_system` (`report_id`, `date`, `total_sales`, `new_customers`, `register_id`, `deposited_cash`, `loss`) VALUES
+(1, '2020-11-20', 45, 12, NULL, 0, 0),
+(3, '2020-11-21', 1235, 33, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -256,6 +262,13 @@ CREATE TABLE `return_table` (
   `time` time NOT NULL,
   `refunds` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `return_table`
+--
+
+INSERT INTO `return_table` (`RTID`, `ticket_id`, `date`, `time`, `refunds`) VALUES
+(1, 1, '2020-11-20', '21:21:59', 1.25);
 
 -- --------------------------------------------------------
 
@@ -289,8 +302,7 @@ CREATE TABLE `tax_table` (
 --
 
 INSERT INTO `tax_table` (`TTID`, `tax_year`, `state_tax`, `county_tax`, `city_rate`, `tax_rate`) VALUES
-(1, 2020, 1.14, 0.23, 2.25, 2.25),
-(2, 2019, 2.45, 1.19, 2.25, 2.25);
+(1, 2020, 0.04, 0.04, 0.08, 0.08);
 
 -- --------------------------------------------------------
 
@@ -300,18 +312,18 @@ INSERT INTO `tax_table` (`TTID`, `tax_year`, `state_tax`, `county_tax`, `city_ra
 
 CREATE TABLE `ticket_system` (
   `ticket_id` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `company_name` varchar(50) NOT NULL,
-  `time` time NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `subtotal` float NOT NULL,
-  `total` float NOT NULL,
-  `discount` float NOT NULL,
-  `tax` float NOT NULL,
+  `date` date DEFAULT NULL,
+  `company_name` varchar(50) DEFAULT NULL,
+  `time` time DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `subtotal` float DEFAULT NULL,
+  `total` float DEFAULT NULL,
+  `discount` float DEFAULT NULL,
+  `tax` float DEFAULT NULL,
   `tax_rate` float DEFAULT NULL,
   `cash` float DEFAULT NULL,
   `credit` float DEFAULT NULL,
-  `cart_purchase` tinyint(1) NOT NULL,
+  `cart_purchase` tinyint(1) DEFAULT NULL,
   `customer_id` int(11) DEFAULT NULL,
   `employee_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -321,9 +333,10 @@ CREATE TABLE `ticket_system` (
 --
 
 INSERT INTO `ticket_system` (`ticket_id`, `date`, `company_name`, `time`, `quantity`, `subtotal`, `total`, `discount`, `tax`, `tax_rate`, `cash`, `credit`, `cart_purchase`, `customer_id`, `employee_id`) VALUES
-(1, '2020-11-18', 'Walmart', '18:59:48', 3, 7.99, 7.99, 0, 1.39, 1.11, 0, 16.95, 1, 4, 8),
-(2, '2020-11-18', 'Walmart', '01:16:15', 2, 10.25, 10.25, 0, 1.75, 0.23, 5, 5.25, 1, 2, 5),
-(3, '2020-11-20', 'Shop Rite', '01:20:10', 5, 45.65, 45.65, 10, 5.45, 1.23, 0, 45.65, 0, 1, 3);
+(1, '2020-11-18', 'Walmart', '18:59:48', 3, 26.97, 26.97, 0, 2.16, 0.08, 0, 26.97, 1, 4, 8),
+(2, '2020-11-18', 'Walmart', '01:16:15', 2, 20.91, 20.91, 0, 1.67, 0.08, 5, 15.91, 1, 2, 5),
+(3, '2020-11-20', 'Shop Rite', '01:20:10', 5, 34.75, 34.75, 10, 2.78, 0.08, 34.75, 0, 0, 1, 3),
+(4, '2020-11-24', 'Tops', '16:01:22', 6, 48.94, 48.94, 0, 3.92, 0.08, 40, 8.94, 1, 7, 8);
 
 -- --------------------------------------------------------
 
@@ -411,7 +424,7 @@ ALTER TABLE `product_inventory`
 -- Indexes for table `registers_table`
 --
 ALTER TABLE `registers_table`
-  ADD PRIMARY KEY (`RID`),
+  ADD PRIMARY KEY (`register_id`),
   ADD KEY `employee_id` (`employee_id`);
 
 --
@@ -419,7 +432,7 @@ ALTER TABLE `registers_table`
 --
 ALTER TABLE `report_system`
   ADD PRIMARY KEY (`report_id`),
-  ADD KEY `RID` (`RID`);
+  ADD KEY `register_id` (`register_id`);
 
 --
 -- Indexes for table `return_table`
@@ -463,13 +476,13 @@ ALTER TABLE `vendorinfo`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `cart_inprogress`
 --
 ALTER TABLE `cart_inprogress`
-  MODIFY `CID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `CID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `customer_info`
@@ -499,13 +512,13 @@ ALTER TABLE `order_info`
 -- AUTO_INCREMENT for table `product_inventory`
 --
 ALTER TABLE `product_inventory`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `registers_table`
 --
 ALTER TABLE `registers_table`
-  MODIFY `RID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `register_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `report_system`
@@ -517,7 +530,7 @@ ALTER TABLE `report_system`
 -- AUTO_INCREMENT for table `return_table`
 --
 ALTER TABLE `return_table`
-  MODIFY `RTID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `RTID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `rewards_table`
@@ -597,7 +610,7 @@ ALTER TABLE `registers_table`
 -- Constraints for table `report_system`
 --
 ALTER TABLE `report_system`
-  ADD CONSTRAINT `report_system_ibfk_1` FOREIGN KEY (`RID`) REFERENCES `registers_table` (`RID`) ON DELETE NO ACTION ON UPDATE SET NULL;
+  ADD CONSTRAINT `report_system_ibfk_1` FOREIGN KEY (`register_id`) REFERENCES `registers_table` (`register_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
 
 --
 -- Constraints for table `return_table`
