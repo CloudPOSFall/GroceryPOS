@@ -15,7 +15,7 @@
       $ZipCode = $_POST['zip'];
       $Company = $_POST['company'];
       $Stores = $_POST['stores'];
-      $User = 1;
+      $User = '1';
 
 
       $query = "INSERT into employee_info (email, password, first_name, last_name, phone_number, SSN, street_address, city, state, zip_code, company_name, number_of_stores, user_type)

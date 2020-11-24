@@ -1,5 +1,5 @@
 <?php
-  include_once ('config.php');
+  include_once('config.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -127,7 +127,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="nav navbar-nav mr-auto">
-            <a class="navbar-brand" href="vendorindex.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-plus-circle-fill"
+            <a class="navbar-brand" href="vendorview.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-plus-circle-fill"
                   fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd"
                     d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
@@ -144,12 +144,12 @@
         <div class="card-body">
           <form action="vendorinsert.php" method="post">
             <div class="form-group row">
-              <label class="col-4"  for="Vendor Name ">Vendor Name </label>
-              <input class="col-6"  type="text" placeholder=" Vendor Name " name="name" />
+              <label class="col-4"  for="Company Name ">Company Name </label>
+              <input class="col-6"  type="text" placeholder=" Company Name " name="name" />
             </div>
             <div class="form-group row">
-              <label class="col-4"  for="Vendor Number">Vendor Number </label>
-              <input class="col-6"  type="number" placeholder=" Vendor Number " name="number" />
+              <label class="col-4"  for="Department">Department </label>
+              <input class="col-6"  type="text" placeholder=" Department " name="department" />
             </div>
             <div class="form-group row">
               <label class="col-4"  for="Street Address">Street Address </label>
@@ -168,12 +168,16 @@
               <input class="col-6"  type="text" placeholder=" Zip Code " name="zip" />
             </div>
             <div class="form-group row">
-              <label class="col-4" for="Shipments" >Shipments</label>
-              <input class="col-6" type="number" placeholder=" Shipments " name="ship" />
+              <label class="col-4"  for="Phone Number">Phone Number</label>
+              <input class="col-6"  type="tel" placeholder=" Phone Number " name="phone" />
             </div>
             <div class="form-group row">
-              <label class="col-4"  for="Category Code">Categeory Code</label>
-              <input class="col-6"  type="number" placeholder=" Category Code " name="code" />
+              <label class="col-4"  for="Fax Number">Fax Number</label>
+              <input class="col-6"  type="tel" placeholder=" Fax Number " name="fax" />
+            </div>
+            <div class="form-group row">
+              <label class="col-4"  for="Email">Email</label>
+              <input class="col-6"  type="email" placeholder=" Email " name="email" />
             </div>
             <div class="text-center"><button name="submit" class="btn-lg btn-primary"> Submit</button></div>
           </form>

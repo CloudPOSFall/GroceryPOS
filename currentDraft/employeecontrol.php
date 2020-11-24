@@ -181,7 +181,7 @@ include_once('config.php');
       <div class="card-deck">
         <p>Employee Controls</p>
         <div class="line"></div>
-        <a class="btn" href="#">
+        <a class="btn" href="employeeview.php">
           <div class="card" id="pagecard">
             <div class="card-body text-center">
               <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

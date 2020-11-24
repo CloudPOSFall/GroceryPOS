@@ -1,19 +1,17 @@
 <?php
 include_once('config.php');
-if (isset($_GET['Upd'])) {
-  $findID = $_GET['Upd'];
-  $query = "SELECT * FROM customer_info WHERE customer_id LIKE '%$findID%'";
-  $result = mysqli_query($conn, $query);
-  $row = mysqli_fetch_assoc($result);
-}
+$query = "SELECT * FROM product_inventory";
+$result = mysqli_query($conn, $query);
 ?>
-
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title>Edit Customer | MarketPOS</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+  <title>Assets | MarketPOS</title>
 
   <!--bootstrap css -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -38,6 +36,12 @@ if (isset($_GET['Upd'])) {
 
 <body>
 
+
+
+
+
+
+
   <!--nav sidebar-->
   <nav id="sidebar">
     <div class="sidebar-header bg-dark">
@@ -50,8 +54,8 @@ if (isset($_GET['Upd'])) {
     <ul class="list-unstyled components">
       <li>
         <div id="usercard">
-          <a href="" style="font-size: 1em;"><?php if (isset($_SESSION['company_name']) && !empty($_SESSION['company_name'])) {
-                                                echo $_SESSION['company_name'];
+          <a href="" style="font-size: 1em;"><?php if (isset($_SESSION['emp_company']) && !empty($_SESSION['emp_company'])) {
+                                                echo $_SESSION['emp_company'];
                                               } else {
                                                 echo 'Company Name';
                                               } ?></br>Choose Register <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -93,23 +97,40 @@ if (isset($_GET['Upd'])) {
               <path fill-rule="evenodd" d="M4.98 4a.5.5 0 0 0-.39.188L1.54 8H6a.5.5 0 0 1 .5.5 1.5 1.5 0 1 0 3 0A.5.5 0 0 1 10 8h4.46l-3.05-3.812A.5.5 0 0 0 11.02 4H4.98zm-1.17-.437A1.5 1.5 0 0 1 4.98 3h6.04a1.5 1.5 0 0 1 1.17.563l3.7 4.625a.5.5 0 0 1 .106.374l-.39 3.124A1.5 1.5 0 0 1 14.117 13H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .106-.374l3.7-4.625z" />
             </svg></span> Inventory</a>
       </li>
-      <li class="active">
+      <li>
         <a href="customercontrol.php">
           <span style="padding:5px;">
             <svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
             </svg></span> Customers</a>
       </li>
-      <li>
-        <a href="reportsControlPanel.php">
-          <span style="padding:5px;">
-            <svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-clipboard-data" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-              <path fill-rule="evenodd" d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-              <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z" />
-            </svg></span> Reports</a>
-      </li>
+     
 
+      <li>
+            <a href='employeecontrol.php'>
+              <span style='padding:5px;'>
+              <svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-file-person-fill' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+              <path fill-rule='evenodd' d='M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z'/>
+            </svg></span> Employees</a>
+          </li>
+
+          <?php
+          if (isset($_SESSION['emp_type'])) {
+            if ($_SESSION['emp_type'] == 1) {
+    
+              echo "
+          <li class=active>
+            <a href='reportsControlPanel.php'>
+              <span style='padding:5px;'>
+                <svg width='.8em' height='.8em' viewBox='0 0 16 16' class='bi bi-clipboard-data' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+                  <path fill-rule='evenodd' d='M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z' />
+                  <path fill-rule='evenodd' d='M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z' />
+                  <path d='M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z' />
+                </svg></span> Reports</a>
+          </li>";
+        }
+      }
+      ?>
 
       </br></br></br></br>
       <li class="sidebar-footer">
@@ -121,10 +142,15 @@ if (isset($_GET['Upd'])) {
         </div>
 
       </li>
+      <li>
+        <div class="card text-center" id="footerbtn" style="background: #016923;">
+          <a role="button" href="logout.php"> Logout</a>
+        </div>
+      </li>
     </ul>
     </div>
   </nav>
-  <!--END nav sidebar-->
+ <!--END nav sidebar-->
 
   <!--page content-->
   <div id="content">
@@ -141,66 +167,76 @@ if (isset($_GET['Upd'])) {
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="nav navbar-nav mr-auto">
-            <a class="navbar-brand" href="customerview.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <a class="navbar-brand" href="reportsAssets.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
-              </svg> Customers</a>
+              </svg> Assets</a>
           </ul>
         </div>
       </div>
     </nav>
 
 
-    <div class="container justify-content-center">
+    <nav class="navbar navbar-light" id="salespanel">
+      <form class="form-inline" method="post" action="reportsAssets.php">
+        <div class="nav-item" style="padding: 8px">
+          <input class="form-control" name="product" placeholder="Search Inventory" aria-label="Search">
+          <button class="btn btn-dark navbar-btn" name="submit-search"> Look Up</button>
+        </div>
 
-      <div class="card card-body bg-light" style="width: 35rem;" id="formscreen">
-        <form action="" method="post">
-          <div class="form-group row">
-            <label class="col-4" for="id">Customer ID: </label>
-            <input type="text" value=" <?php echo $findID ?> " name="id" readonly />
-          </div>
-          <div class="form-group row">
-            <label class="col-4" for="Email">Email</label>
-            <input type="text" value=" <?php echo $row['email'] ?> " name="email" />
-          </div>
-          <div class="form-group row">
-            <label class="col-4" for="Password">Password</label>
-            <input type="password" value=" <?php echo $row['password'] ?> " name="password" />
-          </div>
-          <div class="form-group row">
-            <label class="col-4" for="First Name">First Name</label>
-            <input type="text" value=" <?php echo $row['first_name'] ?> " name="fname" />
-          </div>
-          <div class="form-group row">
-            <label class="col-4" for="Last Name">Last Name</label>
-            <input type="text" value=" <?php echo $row['last_name'] ?> " name="lname" />
-          </div>
-          <div class="form-group row">
-            <label class="col-4" for="Phone Number">Phone Number</label>
-            <input type="tel" value=" <?php echo $row['phone_number'] ?> " name="number" />
-          </div>
-          <div class="form-group row">
-            <label class="col-4" for="Street">Street</label>
-            <input type="text" value=" <?php echo $row['street_address'] ?> " name="street" />
-          </div>
-          <div class="form-group row">
-            <label class="col-4" for="City">City</label>
-            <input type="text" value=" <?php echo $row['city'] ?> " name="city" />
-          </div>
-          <div class="form-group row">
-            <label class="col-4" for="State">State</label>
-            <input type="text" value=" <?php echo $row['state'] ?> " name="state" />
-          </div>
-          <div class="form-group row">
-            <label class="col-4" for="Zip Code">Zip Code</label>
-            <input type="text" value=" <?php echo $row['zip_code'] ?> " name="zip" />
-          </div>
-          <div class="form-group row">
-            <label class="col-4" for="Rewards">Rewards </label>
-            <input type="text" value=" <?php echo $row['rewards'] ?> " name="rewards" step="1" />
-          </div>
-          <div class="text-center"><button type="submit" name="update" class="btn-lg btn-primary"> Update</button></div>
-        </form>
+        <div class="nav-item mr-auto">
+          <a class="btn navbar-btn btn-light" href="productindex.php" role="button"> New Inventory</a></div>
+      </form>
+    </nav>
+
+
+
+    <div class="wrapper mt-3">
+      <div class="row px-4 justify-content-center">
+        <table class="table table-bordered table-hover mt-3 table-responsive" style="font-size:80%;">
+          <thead class="bg-light">
+            <tr>
+              <th> Inventory ID</th>
+              <th> Product Name </th>
+              <th> Product Type </th>
+              <th> Product SubType </th>
+              <th> Cost </th>
+              <th> Unit Price </th>
+              <th> Vendor ID </th>
+              <th> </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white">
+            <?php
+
+            if (isset($_POST['submit-search'])) {
+              $search = mysqli_real_escape_string($conn, $_POST['product']);
+              $sql = "SELECT * FROM product_inventory WHERE productName LIKE '%$search%' OR productType LIKE '%$search%' OR productSubType LIKE '%$search%' OR vendor_id LIKE '%$search%'";
+              $result = mysqli_query($conn, $sql);
+              $queryResults = mysqli_num_rows($result);
+
+              if ($queryResults > 0) {
+                echo "<div class='row mt-3'>There are $queryResults results matching your search</div><br>";
+                while ($row = mysqli_fetch_assoc($result)) {
+                  echo "<tr><td>" . $row['product_id'] . "</td><td>"
+                    . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['productSubType'] . "</td><td>" 
+                    . $row['cost'] . "</td><td>" . $row['Unit Price'] . "</td><td>" . $row['vendor_id'] . "</td><td>";
+                }
+              } else {
+                echo "<div class='row mt-3'>There are no results matching your search</div>";
+              }
+            } else {
+              while ($row = mysqli_fetch_assoc($result)) {
+                echo "<tr><td>" . $row['product_id'] . "</td><td>"
+                    . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['productSubType'] . "</td><td>" 
+                    . $row['cost'] . "</td><td>" . $row['unit_price'] . "</td><td>" . $row['vendor_id'] . "</td><td>";
+                }
+            }
+
+            ?>
+          </tbody>
+        </table>
       </div>
+    </div>
 
 
 </body>
@@ -220,28 +256,3 @@ if (isset($_GET['Upd'])) {
 </script>
 
 </html>
-
-<?php
-if (isset($_POST['update'])) {
-
-  $id = $_POST['id'];
-  $Email = $_POST['email'];
-  $FirstName = $_POST['fname'];
-  $LastName = $_POST['lname'];
-  $PhoneNumber = $_POST['number'];
-  $Rewards = $_POST['rewards'];
-  $Street = $_POST['street'];
-  $City = $_POST['city'];
-  $State = $_POST['state'];
-  $Zip = $_POST['zip'];
-
-  $query = "UPDATE customer_info SET email = '$Email', first_name = '$FirstName', last_name = '$LastName', phone_number = '$PhoneNumber', rewards = '$Rewards', street_address = '$Street', city = '$City', state = '$State', zip_code = '$Zip' WHERE customer_id = '$id' ";
-  $result = mysqli_query($conn, $query);
-
-  if ($result) {
-    header("location:customerview.php");
-  } else {
-    echo ' Please Check Your Query ';
-  }
-}
-?>
