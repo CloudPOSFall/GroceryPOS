@@ -298,7 +298,7 @@ $result = mysqli_query($conn, $sql);
                   }
                   ?>
                     <th style="padding-right: 30px;"> Discounts </th>
-                    <td class="text-right">$<? echo $sum; ?></td>
+                    <td class="text-right">$<?php echo $sum; ?></td>
                   </tr>
                   <tr>
                   <?php 
@@ -322,7 +322,7 @@ $result = mysqli_query($conn, $sql);
                   }
                   ?>
                     <th style="padding-right: 30px;"> Total </th>
-                    <td class="text-right">$<? echo $sum ?></td>
+                    <td class="text-right">$<?php echo $sum ?></td>
                   </tr>
                 </tbody>
               </table>
@@ -367,20 +367,8 @@ $result = mysqli_query($conn, $sql);
             </div>
           </div>
         </div>
-    <?php
-    }
-    else {
-      $query = "SELECT * FROM ticket_system";
-      $result = mysqli_query($conn, $query);
-      while ($row = mysqli_fetch_assoc($result)) {
-        $Date = date("m-d-Y", strtotime($row['date']));
-        echo "<tr><td>" 
-        . $row['ticket_id'] . "</td><td>". $row['subtotal'] . "</td><td>" . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['total'] . "</td><td>" . "</td><td>" 
-        . "</td><td>" . "</td><td>" . $row['time'] . "</td><td>" . $Date . "</td><td><a class='btn btn-dark' 
-        role='button' href='customerDetail.php?Detail=". $row['customer_id'] . "'>View</a>";
-      }
-    }
-    ?>
+
+
             <!-- Retrieved SQL Data Goes Here Instead of empty tds -->
             
           </tbody>
@@ -418,7 +406,7 @@ $result = mysqli_query($conn, $sql);
                   }
                   ?>
                     <th style="padding-right: 30px;"> Discounts </th>
-                    <td class="text-right">$<? echo $sum; ?></td>
+                    <td class="text-right">$<?php echo $sum; ?></td>
                   </tr>
                   <tr>
                   <?php 
@@ -442,7 +430,7 @@ $result = mysqli_query($conn, $sql);
                   }
                   ?>
                     <th style="padding-right: 30px;"> Total </th>
-                    <td class="text-right">$<? echo $sum ?></td>
+                    <td class="text-right">$<?php echo $sum ?></td>
                   </tr>
             </tbody>
           </table>
@@ -517,10 +505,9 @@ $result = mysqli_query($conn, $sql);
       todayHighlight: true,
       autoSize: true,
       autoclose: true,
-      orientation: "top",
+      orientation: "top right",
     };
     date_input.datepicker(options);
   })
 </script>
-
 </html>

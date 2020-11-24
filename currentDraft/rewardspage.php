@@ -226,6 +226,7 @@ include_once('config.php');
                 }
                 $total += $trow['total'];
               }
+              //echo "$date";
               echo "
                   <tr>
                   <td>" . $row['first_name'] . " " . $row['last_name'] . "</td>

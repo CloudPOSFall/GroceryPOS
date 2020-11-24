@@ -212,7 +212,7 @@ $result = mysqli_query($conn, $query);
                         <div class="form-group">
                           <div class="input-group form-inline" style="width: 220px; padding: 10px;">
                             <label class="control-label border bg-light" for="start"><span class="input-group-addon px-2"> Start </span></label>
-                            <input class="form-control" id="vdate1" name="date" placeholder="MM/DD/YYY" type="text" />
+                            <input class="form-control" id="vdate1" name="sdate" placeholder="MM/DD/YYY" type="text" />
                           </div>
                         </div>
 
@@ -220,7 +220,7 @@ $result = mysqli_query($conn, $query);
                         <div class="form-group">
                           <div class="input-group form-inline" style="width: 220px; padding: 10px;">
                             <label class="control-label border bg-light" for="end"><span class="align-middle px-2"> End </span></label>
-                            <input class="form-control" id="vdate2" name="date" placeholder="MM/DD/YYY" type="text" />
+                            <input class="form-control" id="vdate2" name="edate" placeholder="MM/DD/YYY" type="text" />
                           </div>
                         </div>
 
@@ -263,26 +263,21 @@ $result = mysqli_query($conn, $query);
       $('.collapse.in').toggleClass('in');
       $('a[aria-expanded=true]').attr('aria-expanded', 'false');
     });
-
-    $('#myModal').on('shown.bs.modal', function() {
-      $('#myInput').trigger('focus')
-    });
   });
 
-
-
   $(document).ready(function() {
-    var date_input = $('input[name="date"]'); //our date input has the name "date"
+    var sdate_input = $('input[name="sdate"]');
+    var edate_input = $('input[name="edate"]'); //our date input has the name "date"
     var container = $('#dateSel form').length > 0 ? $('#dateSel form').parent() : "body";
     var options = {
       format: 'mm/dd/yyyy',
       todayHighlight: true,
       autoSize: true,
       autoclose: true,
-      orientation: "top right",
+      orientation: "top",
     };
-    date_input.datepicker(options);
+    sdate_input.datepicker(options);
+    edate_input.datepicker(options);
   })
 </script>
-
 </html>

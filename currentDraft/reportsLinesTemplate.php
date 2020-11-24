@@ -575,7 +575,8 @@ INNER JOIN ticket_system ON product_inventory.product_id=cart.product_id";-->
   });
 
   $(document).ready(function() {
-    var date_input = $('input[name="date"]'); //our date input has the name "date"
+    var sdate_input = $('input[name="sdate"]');
+    var edate_input = $('input[name="edate"]'); //our date input has the name "date"
     var container = $('#dateSel form').length > 0 ? $('#dateSel form').parent() : "body";
     var options = {
       format: 'mm/dd/yyyy',
@@ -584,7 +585,8 @@ INNER JOIN ticket_system ON product_inventory.product_id=cart.product_id";-->
       autoclose: true,
       orientation: "top",
     };
-    date_input.datepicker(options);
+    sdate_input.datepicker(options);
+    edate_input.datepicker(options);
   })
 </script>
 
