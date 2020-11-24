@@ -1,23 +1,21 @@
 <?php
-  include_once ('config.php');
+  include_once('config.php');
 
 
   if(isset($_POST['submit']))
   {
-    if(empty($_POST['name']) || empty($_POST['number']) || empty($_POST['addy']) || empty($_POST['code']) || empty($_POST['ship']))
-    {
-      echo ' Please Fill in the Blanks ';
-    }
-    else
-    {
-      $VendorName = $_POST['name'];
-      $VendorNumber = $_POST['number'];
-      $VendorAddress = $_POST['addy'];
-      $Shipments = $_POST['ship'];
-      $CategoryCode = $_POST['code'];
+      $Company = $_POST['name'];
+      $Dept = $_POST['department'];
+      $StreetAddress = $_POST['street'];
+      $City = $_POST['city'];
+      $State = $_POST['state'];
+      $Zip = $_POST['zip'];
+      $Phone = $_POST['phone'];
+      $Fax = $_POST['fax'];
+      $Email = $_POST['email'];
 
-      $query = "insert into vendorinfo (vendor_name, vendor_number, vendor_address, shipments, category_code)
-              values ('$VendorName', '$VendorNumber', '$VendorAddress', '$Shipments', '$CategoryCode')";
+      $query = "INSERT into vendorinfo (company_name, department, street_address, city, state, zip_code, phone_number, fax_number, email)
+              values ('$Company', '$Dept', '$StreetAddress', '$City', '$State', '$Zip', '$Phone', '$Fax', '$Email')";
       $result = mysqli_query($conn, $query);
 
       if($result)
@@ -29,7 +27,6 @@
         echo ' Please Check Your Query ';
       }
     }
-  }
 ?>
 
 <!DOCTYPE html>

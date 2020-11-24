@@ -225,7 +225,7 @@ include_once('config.php');
 
 
                         <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action"><strong>Assets </strong> - Your current inventory</a>
+                            <a href="reportsAssets.php" class="list-group-item list-group-item-action"><strong>Assets </strong> - Your current inventory</a>
                             <a href="#" class="list-group-item list-group-item-action"><strong>Received </strong> - All the inventory you've received during a time period</a>
                             <a href="#" class="list-group-item list-group-item-action"><strong>History </strong> - Look back in time and see how much inventory you had</a>
                             <a href="#" class="list-group-item list-group-item-action"><strong>Inv. by Category </strong> - Asset reports that let you compare totals for each category</a>
