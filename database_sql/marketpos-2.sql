@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 23, 2020 at 09:41 PM
+-- Generation Time: Nov 24, 2020 at 06:39 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -95,7 +95,8 @@ INSERT INTO `customer_info` (`customer_id`, `email`, `password`, `first_name`, `
 (2, 'tylerherro23@gmail.com', 'password', 'Tyler', 'Herro', 3475436578, 90, '12th Street', 'New York', 'NY', 9874),
 (3, 'bronny45@hotmail.com', 'lebron', 'Bronny', 'James', 2124567656, 44, '21 Wood Street', 'Woodhaven', 'VT', 7384),
 (4, 'kyrieirving2@hotmail.com', 'kyrie', 'Kyrie', 'Irving', 2123434567, 14, '74 2nd Ave', 'New York', 'NY', 12343),
-(6, 'michaelj23@gmail.com', 'jordan', 'Michael', 'Jordan', 2125468796, 44, '14th Street', 'Chicago ', 'IL', 76854);
+(6, 'michaelj23@gmail.com', 'jordan', 'Michael', 'Jordan', 2125468796, 44, '14th Street', 'Chicago ', 'IL', 76854),
+(7, 'cp3@yahoo.com', 'phzsuns', 'Chris', 'Paul', 8452341004, 0, '346 Broad St', 'Los Angeles', 'CA', 90212);
 
 -- --------------------------------------------------------
 
@@ -196,14 +197,14 @@ CREATE TABLE `product_inventory` (
 --
 
 INSERT INTO `product_inventory` (`product_id`, `productName`, `productType`, `productSubType`, `unit_price`, `cost`, `in_stock`, `vendor_id`, `OID`) VALUES
-(1, 'Dairy Pure', 'dairy', 'milk', 7.99, 8.99, 10, NULL, NULL),
-(2, 'Horizon', 'dairy', 'milk', 8.99, 10.5, 3, NULL, NULL),
-(3, 'Old Croc Chedder', 'dairy', 'cheese', 4.85, 5.89, 5, NULL, NULL),
-(4, 'Kerrygold Chedder', 'dairy', 'cheese', 8.99, 7.99, 65, NULL, NULL),
-(5, 'Dole Banana', 'produce', 'banana', 4.99, 6.5, 56, NULL, NULL),
-(6, 'Chiquita', 'produce', 'banana', 5.55, 7.99, 45, NULL, NULL),
-(7, 'Cherry', 'produce', 'tomato', 3.59, 4.99, 21, NULL, NULL),
-(8, 'Brandywine', 'produce', 'tomato', 5.99, 7.75, 2, NULL, NULL);
+(1, 'Dairy Pure', 'dairy', 'milk', 8.99, 6.99, 10, 1, NULL),
+(2, 'Horizon', 'dairy', 'milk', 10.45, 8.99, 3, 1, NULL),
+(3, 'Old Croc Chedder', 'dairy', 'cheese', 7.89, 5.15, 5, 1, NULL),
+(4, 'Kerrygold Chedder', 'dairy', 'cheese', 12.99, 10.99, 65, 1, NULL),
+(5, 'Dole Banana', 'produce', 'banana', 4.99, 3.45, 56, 1, NULL),
+(6, 'Chiquita', 'produce', 'banana', 8.95, 6.99, 45, 1, NULL),
+(7, 'Cherry', 'produce', 'tomato', 5.59, 3.99, 21, 1, NULL),
+(8, 'Brandywine', 'produce', 'tomato', 8.99, 5.75, 2, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -320,7 +321,7 @@ CREATE TABLE `ticket_system` (
 --
 
 INSERT INTO `ticket_system` (`ticket_id`, `date`, `company_name`, `time`, `quantity`, `subtotal`, `total`, `discount`, `tax`, `tax_rate`, `cash`, `credit`, `cart_purchase`, `customer_id`, `employee_id`) VALUES
-(1, '2020-11-18', 'Walmart', '18:59:48', 3, 16.95, 16.95, 0, 1.39, 1.11, 0, 16.95, 1, 4, 8),
+(1, '2020-11-18', 'Walmart', '18:59:48', 3, 7.99, 7.99, 0, 1.39, 1.11, 0, 16.95, 1, 4, 8),
 (2, '2020-11-18', 'Walmart', '01:16:15', 2, 10.25, 10.25, 0, 1.75, 0.23, 5, 5.25, 1, 2, 5),
 (3, '2020-11-20', 'Shop Rite', '01:20:10', 5, 45.65, 45.65, 10, 5.45, 1.23, 0, 45.65, 0, 1, 3);
 
@@ -332,22 +333,23 @@ INSERT INTO `ticket_system` (`ticket_id`, `date`, `company_name`, `time`, `quant
 
 CREATE TABLE `vendorinfo` (
   `vendor_id` int(11) NOT NULL,
-  `vendor_name` varchar(50) NOT NULL,
+  `company_name` varchar(50) NOT NULL,
+  `department` varchar(100) NOT NULL,
   `street_address` varchar(50) NOT NULL,
   `city` varchar(50) NOT NULL,
   `state` varchar(2) NOT NULL,
   `zip_code` int(11) NOT NULL,
-  `shipments` int(11) NOT NULL,
-  `category_code` int(11) NOT NULL
+  `phone_number` double NOT NULL,
+  `fax_number` double NOT NULL,
+  `email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `vendorinfo`
 --
 
-INSERT INTO `vendorinfo` (`vendor_id`, `vendor_name`, `street_address`, `city`, `state`, `zip_code`, `shipments`, `category_code`) VALUES
-(1, 'Tide', '2212 3rd Ave', 'New York', 'NY', 10035, 22, 1),
-(2, 'Post', '5303 4th Ave', 'Brooklyn', 'NY', 11220, 9, 2);
+INSERT INTO `vendorinfo` (`vendor_id`, `company_name`, `department`, `street_address`, `city`, `state`, `zip_code`, `phone_number`, `fax_number`, `email`) VALUES
+(1, 'Krasdale Foods Inc', 'Frozen and Dairy', '400 Food Center Dr', 'Bronx', 'NY', 10474, 7183781100, 9146975200, 'web-inquiries@krasdalefoods.com');
 
 --
 -- Indexes for dumped tables
@@ -473,7 +475,7 @@ ALTER TABLE `cart_inprogress`
 -- AUTO_INCREMENT for table `customer_info`
 --
 ALTER TABLE `customer_info`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `employee_info`
@@ -539,7 +541,7 @@ ALTER TABLE `ticket_system`
 -- AUTO_INCREMENT for table `vendorinfo`
 --
 ALTER TABLE `vendorinfo`
-  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
