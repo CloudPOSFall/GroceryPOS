@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 22, 2020 at 09:06 PM
+-- Generation Time: Nov 23, 2020 at 09:41 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -129,14 +129,14 @@ CREATE TABLE `employee_info` (
 --
 
 INSERT INTO `employee_info` (`employee_id`, `email`, `password`, `pin_number`, `first_name`, `last_name`, `user_id`, `phone_number`, `SSN`, `street_address`, `city`, `state`, `zip_code`, `start_date`, `company_name`, `number_of_stores`, `user_type`, `customer_id`) VALUES
-(13, 'johnnyfran20002@gmail.com', 'passwood', 231, 'Johnny', 'Tejada', 214564056, 6463214487, 756434736, '10005 Hawk Drive', 'Queens', 'NY', 11105, '2020-11-02', 'Walmart', '3', 1, 1),
-(14, 'tylerherro23@gmail.com', 'herro', 112, 'Tyler', 'Herro', 435678987, 3475436897, 123456789, '12th Street', 'New York', 'NY', 9873, '2019-07-01', 'Shop Rite', NULL, 2, 2),
-(21, 'bronny45@hotmail.com', 'lebron', 112, 'Bronny', 'James', 112323454, 2124568745, 78234325, '21 Wood Street', 'Woodhaven', 'VT', 12321, '2019-03-02', 'Walmart', NULL, 2, 3),
-(22, 'usher54@aim.com', 'usher', 555, 'Usher', 'Man', 345432345, 8454342212, 958674345, '76 Cross Street', 'Houston', 'NY', 85743, '2020-12-05', 'Walmart', NULL, 2, NULL),
-(30, 'chrisbrown@gmail.com', 'pass', 111, 'Chris', 'Brown', 111111111, 7187654783, 746378273, '19 West Street', 'Denver', 'CL', 43454, '2019-07-03', 'Walmart', NULL, 2, NULL),
-(31, 'kyrieirving2@hotmail.com', 'kyrie', 705, 'Kyrie', 'Irving', 123456789, 2129857843, 123456789, '71 2nd Ave', 'New York', 'NY', 12343, '2017-07-03', 'Tops', '4', 1, 4),
-(32, 'georgemartin3432@gmail.com', 'mypassword', NULL, 'George', 'Martin', NULL, 2124545434, NULL, '256 97th Street', 'New York', 'NY', 10035, NULL, 'KeyFood', '3', 1, NULL),
-(34, 'bobgz@gmail.com', 'secret', 888, 'Bob', 'Gomez', NULL, 8457631279, 764571465, '7 Grand St', 'New Paltz', 'NY', 12561, NULL, 'Walmart', NULL, 2, NULL);
+(1, 'johnnyfran20002@gmail.com', 'passwood', 231, 'Johnny', 'Tejada', 214564056, 6463214487, 756434736, '10005 Hawk Drive', 'Queens', 'NY', 11105, '2020-11-02', 'Walmart', '3', 1, 1),
+(2, 'tylerherro23@gmail.com', 'herro', 112, 'Tyler', 'Herro', 435678987, 3475436897, 123456789, '12th Street', 'New York', 'NY', 9873, '2019-07-01', 'Shop Rite', NULL, 2, 2),
+(3, 'bronny45@hotmail.com', 'lebron', 112, 'Bronny', 'James', 112323454, 2124568745, 78234325, '21 Wood Street', 'Woodhaven', 'VT', 12321, '2019-03-02', 'Walmart', NULL, 2, 3),
+(4, 'usher54@aim.com', 'usher', 555, 'Usher', 'Man', 345432345, 8454342212, 958674345, '76 Cross Street', 'Houston', 'NY', 85743, '2020-12-05', 'Walmart', NULL, 2, NULL),
+(5, 'chrisbrown@gmail.com', 'pass', 111, 'Chris', 'Brown', 111111111, 7187654783, 746378273, '19 West Street', 'Denver', 'CL', 43454, '2019-07-03', 'Walmart', NULL, 2, NULL),
+(6, 'kyrieirving2@hotmail.com', 'kyrie', 705, 'Kyrie', 'Irving', 123456789, 2129857843, 123456789, '71 2nd Ave', 'New York', 'NY', 12343, '2017-07-03', 'Tops', '4', 1, 4),
+(7, 'georgemartin3432@gmail.com', 'mypassword', NULL, 'George', 'Martin', NULL, 2124545434, NULL, '256 97th Street', 'New York', 'NY', 10035, NULL, 'KeyFood', '3', 1, NULL),
+(8, 'bobgz@gmail.com', 'secret', 888, 'Bob', 'Gomez', NULL, 8457631279, 764571465, '7 Grand St', 'New Paltz', 'NY', 12561, NULL, 'Walmart', NULL, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -148,16 +148,17 @@ CREATE TABLE `gift_card` (
   `gift_id` int(11) NOT NULL,
   `promo_number` double NOT NULL,
   `card_balance` float NOT NULL,
-  `ticket_id` int(11) DEFAULT NULL
+  `ticket_id` int(11) DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `gift_card`
 --
 
-INSERT INTO `gift_card` (`gift_id`, `promo_number`, `card_balance`, `ticket_id`) VALUES
-(1, 2095, 10, NULL),
-(2, 965, 20, NULL);
+INSERT INTO `gift_card` (`gift_id`, `promo_number`, `card_balance`, `ticket_id`, `customer_id`) VALUES
+(1, 2095, 10, NULL, NULL),
+(2, 965, 20, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -195,8 +196,8 @@ CREATE TABLE `product_inventory` (
 --
 
 INSERT INTO `product_inventory` (`product_id`, `productName`, `productType`, `productSubType`, `unit_price`, `cost`, `in_stock`, `vendor_id`, `OID`) VALUES
-(1, 'Dairy Pure', 'dairy', 'milk', 7.99, 8.99, 10, 1, NULL),
-(2, 'Horizon', 'dairy', 'milk', 8.99, 10.5, 3, 2, NULL),
+(1, 'Dairy Pure', 'dairy', 'milk', 7.99, 8.99, 10, NULL, NULL),
+(2, 'Horizon', 'dairy', 'milk', 8.99, 10.5, 3, NULL, NULL),
 (3, 'Old Croc Chedder', 'dairy', 'cheese', 4.85, 5.89, 5, NULL, NULL),
 (4, 'Kerrygold Chedder', 'dairy', 'cheese', 8.99, 7.99, 65, NULL, NULL),
 (5, 'Dole Banana', 'produce', 'banana', 4.99, 6.5, 56, NULL, NULL),
@@ -207,42 +208,14 @@ INSERT INTO `product_inventory` (`product_id`, `productName`, `productType`, `pr
 -- --------------------------------------------------------
 
 --
--- Table structure for table `register_closing_amount`
+-- Table structure for table `registers_table`
 --
 
-CREATE TABLE `register_closing_amount` (
-  `CRID` int(11) NOT NULL,
-  `$100` int(11) NOT NULL,
-  `$50` int(11) NOT NULL,
-  `$20` int(11) NOT NULL,
-  `$10` int(11) NOT NULL,
-  `$5` int(11) NOT NULL,
-  `$1` int(11) NOT NULL,
-  `quarters` int(11) NOT NULL,
-  `dimes` int(11) NOT NULL,
-  `pennies` int(11) NOT NULL,
-  `total` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `register_open_amount`
---
-
-CREATE TABLE `register_open_amount` (
+CREATE TABLE `registers_table` (
   `RID` int(11) NOT NULL,
-  `$100` int(11) NOT NULL,
-  `$50` int(11) NOT NULL,
-  `$20` int(11) NOT NULL,
-  `$10` int(11) NOT NULL,
-  `$5` int(11) NOT NULL,
-  `$1` int(11) NOT NULL,
-  `quarters` int(11) NOT NULL,
-  `dimes` int(11) NOT NULL,
-  `nickels` int(11) NOT NULL,
-  `pennies` int(11) NOT NULL,
-  `total` int(11) NOT NULL
+  `open_total` float NOT NULL,
+  `close_total` float NOT NULL,
+  `employee_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -256,20 +229,32 @@ CREATE TABLE `report_system` (
   `date` date NOT NULL,
   `total_sales` int(11) NOT NULL,
   `new_customers` int(11) NOT NULL,
-  `opening_amount` float NOT NULL,
-  `closing_amount` float NOT NULL,
+  `RID` int(11) DEFAULT NULL,
   `deposited_cash` float NOT NULL,
-  `cash_sales` float NOT NULL,
-  `cash_returns` float NOT NULL
+  `loss` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `report_system`
 --
 
-INSERT INTO `report_system` (`report_id`, `date`, `total_sales`, `new_customers`, `opening_amount`, `closing_amount`, `deposited_cash`, `cash_sales`, `cash_returns`) VALUES
-(1, '0000-00-00', 45, 12, 100, 732.18, 0, 47.36, 1.75),
-(3, '0000-00-00', 1235, 33, 200, 1200, 0, 698.99, 12);
+INSERT INTO `report_system` (`report_id`, `date`, `total_sales`, `new_customers`, `RID`, `deposited_cash`, `loss`) VALUES
+(1, '0000-00-00', 45, 12, NULL, 0, 0),
+(3, '0000-00-00', 1235, 33, NULL, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `return_table`
+--
+
+CREATE TABLE `return_table` (
+  `RTID` int(11) NOT NULL,
+  `ticket_id` int(11) DEFAULT NULL,
+  `date` date NOT NULL,
+  `time` time NOT NULL,
+  `refunds` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -325,17 +310,19 @@ CREATE TABLE `ticket_system` (
   `tax_rate` float DEFAULT NULL,
   `cash` float DEFAULT NULL,
   `credit` float DEFAULT NULL,
-  `cart_purchase` tinyint(1) NOT NULL
+  `cart_purchase` tinyint(1) NOT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `employee_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `ticket_system`
 --
 
-INSERT INTO `ticket_system` (`ticket_id`, `date`, `company_name`, `time`, `quantity`, `subtotal`, `total`, `discount`, `tax`, `tax_rate`, `cash`, `credit`, `cart_purchase`) VALUES
-(1, '2020-11-18', 'Walmart', '18:59:48', 3, 16.95, 16.95, 0, 1.39, 1.11, 0, 16.95, 1),
-(2, '2020-11-18', 'Walmart', '01:16:15', 2, 10.25, 10.25, 0, 1.75, 0.23, 5, 5.25, 1),
-(3, '2020-11-20', 'Shop Rite', '01:20:10', 5, 45.65, 45.65, 10, 5.45, 1.23, 0, 45.65, 0);
+INSERT INTO `ticket_system` (`ticket_id`, `date`, `company_name`, `time`, `quantity`, `subtotal`, `total`, `discount`, `tax`, `tax_rate`, `cash`, `credit`, `cart_purchase`, `customer_id`, `employee_id`) VALUES
+(1, '2020-11-18', 'Walmart', '18:59:48', 3, 16.95, 16.95, 0, 1.39, 1.11, 0, 16.95, 1, 4, 8),
+(2, '2020-11-18', 'Walmart', '01:16:15', 2, 10.25, 10.25, 0, 1.75, 0.23, 5, 5.25, 1, 2, 5),
+(3, '2020-11-20', 'Shop Rite', '01:20:10', 5, 45.65, 45.65, 10, 5.45, 1.23, 0, 45.65, 0, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -400,7 +387,8 @@ ALTER TABLE `employee_info`
 --
 ALTER TABLE `gift_card`
   ADD PRIMARY KEY (`gift_id`),
-  ADD UNIQUE KEY `ticket_id` (`ticket_id`);
+  ADD KEY `ticket_id` (`ticket_id`),
+  ADD KEY `customer_id` (`customer_id`);
 
 --
 -- Indexes for table `order_info`
@@ -414,30 +402,29 @@ ALTER TABLE `order_info`
 --
 ALTER TABLE `product_inventory`
   ADD PRIMARY KEY (`product_id`),
-  ADD UNIQUE KEY `vendor_id` (`vendor_id`),
-  ADD UNIQUE KEY `OID` (`OID`);
+  ADD KEY `OID` (`OID`),
+  ADD KEY `vendor_id` (`vendor_id`);
 
 --
--- Indexes for table `register_closing_amount`
+-- Indexes for table `registers_table`
 --
-ALTER TABLE `register_closing_amount`
-  ADD PRIMARY KEY (`CRID`),
-  ADD UNIQUE KEY `total` (`total`);
-
---
--- Indexes for table `register_open_amount`
---
-ALTER TABLE `register_open_amount`
+ALTER TABLE `registers_table`
   ADD PRIMARY KEY (`RID`),
-  ADD UNIQUE KEY `total` (`total`);
+  ADD KEY `employee_id` (`employee_id`);
 
 --
 -- Indexes for table `report_system`
 --
 ALTER TABLE `report_system`
   ADD PRIMARY KEY (`report_id`),
-  ADD KEY `opening_amount` (`opening_amount`),
-  ADD KEY `CRID` (`closing_amount`);
+  ADD KEY `RID` (`RID`);
+
+--
+-- Indexes for table `return_table`
+--
+ALTER TABLE `return_table`
+  ADD PRIMARY KEY (`RTID`),
+  ADD KEY `ticket_id` (`ticket_id`);
 
 --
 -- Indexes for table `rewards_table`
@@ -456,7 +443,9 @@ ALTER TABLE `tax_table`
 -- Indexes for table `ticket_system`
 --
 ALTER TABLE `ticket_system`
-  ADD PRIMARY KEY (`ticket_id`);
+  ADD PRIMARY KEY (`ticket_id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `employee_id` (`employee_id`);
 
 --
 -- Indexes for table `vendorinfo`
@@ -511,15 +500,9 @@ ALTER TABLE `product_inventory`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `register_closing_amount`
+-- AUTO_INCREMENT for table `registers_table`
 --
-ALTER TABLE `register_closing_amount`
-  MODIFY `CRID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `register_open_amount`
---
-ALTER TABLE `register_open_amount`
+ALTER TABLE `registers_table`
   MODIFY `RID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -527,6 +510,12 @@ ALTER TABLE `register_open_amount`
 --
 ALTER TABLE `report_system`
   MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `return_table`
+--
+ALTER TABLE `return_table`
+  MODIFY `RTID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `rewards_table`
@@ -580,7 +569,8 @@ ALTER TABLE `employee_info`
 -- Constraints for table `gift_card`
 --
 ALTER TABLE `gift_card`
-  ADD CONSTRAINT `gift_card_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `ticket_system` (`ticket_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+  ADD CONSTRAINT `gift_card_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `ticket_system` (`ticket_id`) ON DELETE NO ACTION ON UPDATE SET NULL,
+  ADD CONSTRAINT `gift_card_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
 
 --
 -- Constraints for table `order_info`
@@ -592,14 +582,39 @@ ALTER TABLE `order_info`
 -- Constraints for table `product_inventory`
 --
 ALTER TABLE `product_inventory`
-  ADD CONSTRAINT `product_inventory_ibfk_1` FOREIGN KEY (`vendor_id`) REFERENCES `vendorinfo` (`vendor_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `product_inventory_ibfk_2` FOREIGN KEY (`OID`) REFERENCES `order_info` (`OID`) ON DELETE NO ACTION ON UPDATE SET NULL;
+  ADD CONSTRAINT `product_inventory_ibfk_1` FOREIGN KEY (`OID`) REFERENCES `order_info` (`OID`) ON DELETE NO ACTION ON UPDATE SET NULL,
+  ADD CONSTRAINT `product_inventory_ibfk_2` FOREIGN KEY (`vendor_id`) REFERENCES `vendorinfo` (`vendor_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+
+--
+-- Constraints for table `registers_table`
+--
+ALTER TABLE `registers_table`
+  ADD CONSTRAINT `registers_table_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee_info` (`employee_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+
+--
+-- Constraints for table `report_system`
+--
+ALTER TABLE `report_system`
+  ADD CONSTRAINT `report_system_ibfk_1` FOREIGN KEY (`RID`) REFERENCES `registers_table` (`RID`) ON DELETE NO ACTION ON UPDATE SET NULL;
+
+--
+-- Constraints for table `return_table`
+--
+ALTER TABLE `return_table`
+  ADD CONSTRAINT `return_table_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `ticket_system` (`ticket_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
 
 --
 -- Constraints for table `rewards_table`
 --
 ALTER TABLE `rewards_table`
   ADD CONSTRAINT `rewards_table_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+
+--
+-- Constraints for table `ticket_system`
+--
+ALTER TABLE `ticket_system`
+  ADD CONSTRAINT `ticket_system_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`) ON DELETE SET NULL ON UPDATE NO ACTION,
+  ADD CONSTRAINT `ticket_system_ibfk_2` FOREIGN KEY (`employee_id`) REFERENCES `employee_info` (`employee_id`) ON DELETE SET NULL ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
