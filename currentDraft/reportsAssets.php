@@ -196,9 +196,11 @@ $result = mysqli_query($conn, $query);
           <thead class="bg-light">
             <tr>
               <th> Inventory ID</th>
+              <th> Brand </th>
+              <th> Description </th>
               <th> Product Name </th>
               <th> Product Type </th>
-              <th> Product SubType </th>
+              <th> Category </th>
               <th> Vendor ID </th>
               <th> </th>
             </tr>
@@ -216,7 +218,8 @@ $result = mysqli_query($conn, $query);
                 echo "<div class='row mt-3'>There are $queryResults results matching your search</div><br>";
                 while ($row = mysqli_fetch_assoc($result)) {
                   echo "<tr><td>" . $row['product_id'] . "</td><td>"
-                    . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['productSubType'] . "</td><td>" . $row['vendor_id'] . "</td><td>";
+                    . $row['brand'] . "</td><td>" . $row['description'] . "</td><td>" . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>"
+                    . $row['productSubType'] . "</td><td>" . $row['vendor_id'] . "</td><td>";
                 }
               } else {
                 echo "<div class='row mt-3'>There are no results matching your search</div>";
@@ -224,8 +227,8 @@ $result = mysqli_query($conn, $query);
             } else {
               while ($row = mysqli_fetch_assoc($result)) {
                 echo "<tr><td>" . $row['product_id'] . "</td><td>"
-                    . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['productSubType'] . "</td><td>" 
-                    . $row['vendor_id'] . "</td><td>";
+                    . $row['brand'] . "</td><td>" . $row['description'] . "</td><td>" . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>"
+                    . $row['productSubType'] . "</td><td>" . $row['vendor_id'] . "</td><td>";
                 }
             }
 
