@@ -35,15 +35,26 @@
         <?php
                 echo('Change: $');
                 echo($formatted);
+                $CID = $_SESSION['CID'];
         ?>
+        
+        <br>
 
     <input type='submit' name='finalSale' value="Complete Sale">
     <?php
                 if(isset($_GET['finalSale'])) {
 
-                    $query = "UPDATE ticket_system SET quantity ='".$qtyTotal."', subtotal ='".$subTotal."', total ='".$total."', 
-                            tax ='".$tax."' WHERE cart_purchase = 1 ";
-                    $result = mysqli_query($conn, $query) or die("Execution Failed");
+                    //$query = "UPDATE ticket_system SET quantity ='".$qtyTotal."', subtotal ='".$subTotal."', total ='".$total."', 
+                            //tax ='".$tax."' WHERE cart_purchase = 1 ";
+                    //$result = mysqli_query($conn, $query) or die("Execution Failed");
+
+                    //$query = "UPDATE cart_inprogress SET ticket";
+
+                    
+                    $query = "INSERT INTO ticket_system (quantity, subtotal, total, tax) VALUES ('$qtyTotal', '$subTotal', '$total', '$tax')";
+                    $result = mysqli_query($conn, $query) or die("Ticket Failed");
+                    
+
 
                 }
             }

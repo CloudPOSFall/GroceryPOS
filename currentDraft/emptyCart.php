@@ -6,6 +6,7 @@
     if($rows > 0){
     } else {
         if(isset($_GET['addToCart'])) {
+            // 
             $query = "INSERT INTO cart_inprogress (customer_id, ticket_id) VALUES (NULL, NULL)";
             $result = mysqli_query($conn, $query) or die(" Execution Failed inprog");
 
