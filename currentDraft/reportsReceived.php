@@ -1,15 +1,15 @@
 <?php
 include_once('config.php');
-$query = "SELECT ticket_system.*, product_inventory.cost, product_inventory.unit_price FROM ticket_system 
-          LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN cart ON 
-          cart_inprogress.CID=cart.CID LEFT JOIN product_inventory ON cart.product_id=product_inventory.product_id";
-$result = mysqli_query($conn, $query); 
+$query = "SELECT order_info.*, product_inventory.* FROM order_info
+      LEFT JOIN product_inventory ON order_info.product_id=product_inventory.product_id";
+$result = mysqli_query($conn, $query);
+    
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title>Reports | MarketPOS</title>
+  <title>Received Inventory Reports | MarketPOS</title>
 
 
   <!--bootstrap css -->
@@ -226,348 +226,62 @@ $result = mysqli_query($conn, $query);
     </div>
     <!--END date selector nav-->
 
+    <!--$sql = "SELECT product_inventory.productName, product_inventory.productType, ticket_system.time, ticket_system.date FROM product_inventory 
+INNER JOIN ticket_system ON product_inventory.product_id=cart.product_id";-->
 
     <div class="wrapper" class="bg-white">
       <div class="row px-4 justify-content-center">
         <table class="table table-bordered table-hover mt-3" id="table" style="font-size:80%;">
           <thead class="bg-light">
             <tr>
-              <th class="px-3"> Sale ID </th>
-              <th> Time </th>
-              <th> Subtotal </th>
-              <th> Total</th>
-              <th> Discounts </th>
-              <th> Tax </th>
+              <th class="px-3"> Order ID </th>
+              <th> Order Date </th>
+              <th> Product Name </th>
+              <th> Product Type </th>
+              <th> Stock Amount Ordered </th>
               <th> Cost </th>
-              <th> Profit</th>
-              <th> Margin </th>
-              <th> Date </th>
-              <th> Customer</th>
+              <th> </th>
             </tr>
           </thead>
-          <tbody >
+          <tbody>
           <?php
-    
     if (isset($_POST['submit'])) {
     $DateBegin = date('Y-m-d', strtotime($_POST['sdate']));
     $DateEnd = date('Y-m-d', strtotime($_POST['edate']));
     $search = mysqli_real_escape_string($conn, $DateBegin);
     while ($row = mysqli_fetch_assoc($result)) {
     if (($row['date'] >= $DateBegin) && ($row['date'] <= $DateEnd)){
-      $profit = $row['unit_price'] - $row['cost'];
-      $operation = ($profit/$row['unit_price']) * 100;
-      $margin = number_format($operation, 2, '.', '');
         echo "<tr><td>" 
-        . $row['ticket_id'] . "</td><td>". $row['time'] . "</td><td>" . $row['total'] . "</td><td>" . $row['subtotal']
-        . "</td><td>" . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['cost'] . "</td><td>" 
-        . $profit . "</td><td>" . $margin . "% </td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td><a class='btn btn-dark' 
-        role='button' href='customerDetail.php?Detail=". $row['customer_id'] . "'>View</a>";
+        . $row['order_id'] . "</td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td>" . $row['productName'] . "</td><td>"
+        . $row['productType'] . "</td><td>" . $row['stock_amount'] . "</td><td>" . $row['cost'] . "</td><td>";
       }
       }
         ?>
                 <!-- Retrieved SQL Data Goes Here Instead of empty tds -->
                 
-              </tbody>
+                </tbody>
             </table>
           </div>
     
-          <div id="contentline"></div>
-    
-          <div class="row pl-3">
-            <div class="px-1">
-              <table class="table table-responsive" style="font-size:80%;">
-                <thead>
-    
-                </thead>
-                <tbody>
-                  <tr>
-                  <?php 
-                  $sum=0;
-                  $sql = "SELECT subtotal FROM ticket_system WHERE date BETWEEN '$DateBegin' and '$DateEnd'";
-                  $result = mysqli_query($conn, $sql);
-                  while ($row = mysqli_fetch_assoc($result)) {
-                       $sum += $row['subtotal'];
-                  }
-                  ?>
-                    <th style="padding-right: 30px;"> Subtotal </th>
-                    <td class="text-right">$<?php echo $sum; ?></td>
-                  </tr>
-                  <tr>
-                  <?php 
-                  $sum=0;
-                  $sql = "SELECT discount FROM ticket_system WHERE date BETWEEN '$DateBegin' and '$DateEnd'";
-                  $result = mysqli_query($conn, $sql);
-                  while ($row = mysqli_fetch_assoc($result)) {
-                  $sum += $row['discount'];
-                  }
-                  ?>
-                    <th style="padding-right: 30px;"> Discounts </th>
-                    <td class="text-right">$<? echo $sum; ?></td>
-                  </tr>
-                  <tr>
-                  <?php 
-                  $sum=0;
-                  $sql = "SELECT tax FROM ticket_system WHERE date BETWEEN '$DateBegin' and '$DateEnd'";
-                  $result = mysqli_query($conn, $sql);
-                  while ($row = mysqli_fetch_assoc($result)) {
-                  $sum += $row['tax'];
-                  }
-                  ?>
-                    <th style="padding-right: 30px;"> Tax </th>
-                    <td class="text-right">$<?php echo $sum; ?></td>
-                  </tr>
-                  <tr>
-                  <?php 
-                  $sum=0;
-                  $sql = "SELECT total FROM ticket_system WHERE date BETWEEN '$DateBegin' and '$DateEnd'";
-                  $result = mysqli_query($conn, $sql);
-                  while ($row = mysqli_fetch_assoc($result)) {
-                  $sum += $row['total'];
-                  }
-                  ?>
-                    <th style="padding-right: 30px;"> Total </th>
-                    <td class="text-right">$<? echo $sum ?></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="px-1">
-              <table class="table table-responsive" style="font-size:80%;">
-                <thead>
-    
-                </thead>
-                <tbody>
-                  <tr>
-                    <th style="padding-right: 50px;"> Taxed </th>
-                    <td class="text-right">$0</td>
-                  </tr>
-                  <tr>
-                    <th style="padding-right: 50px;"> Untaxed </th>
-                    <td class="text-right">$0</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="px-1">
-              <table class="table table-responsive" style="font-size:80%;">
-                <thead>
-    
-                </thead>
-                <tbody>
-              <tr>
-              <?php
-              $sum=0;
-              $sql = "SELECT ticket_system.*, product_inventory.cost, product_inventory.unit_price FROM ticket_system 
-                        LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN cart ON 
-                        cart_inprogress.CID=cart.CID LEFT JOIN product_inventory ON cart.product_id=product_inventory.product_id
-                        WHERE date BETWEEN '$DateBegin' and '$DateEnd'";
-              $result = mysqli_query($conn, $sql);
-              while ($row = mysqli_fetch_assoc($result)) {
-                      $sum += $row['cost'];
-                }
-              ?>
-                <th style="padding-right: 50px;"> Cost </th>
-                <td class="text-right">$<?php echo $sum; ?></td>
-              </tr>
-              <tr>
-              <?php
-              $sum=0;
-              $sql = "SELECT ticket_system.*, product_inventory.cost, product_inventory.unit_price FROM ticket_system 
-                        LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN cart ON 
-                        cart_inprogress.CID=cart.CID LEFT JOIN product_inventory ON cart.product_id=product_inventory.product_id
-                        WHERE date BETWEEN '$DateBegin' and '$DateEnd'";
-              $result = mysqli_query($conn, $sql);
-              while ($row = mysqli_fetch_assoc($result)) {
-                $profit = $row['unit_price'] - $row['cost'];
-                      $sum += $profit;
-                }
-              ?>
-                <th style="padding-right: 50px;"> Profit </th>
-                <td class="text-right">$<?php echo $sum; ?></td>
-              </tr>
-              <tr>
-              <?php
-              $sum=0;
-              $sql = "SELECT ticket_system.*, product_inventory.cost, product_inventory.unit_price FROM ticket_system 
-                        LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN cart ON 
-                        cart_inprogress.CID=cart.CID LEFT JOIN product_inventory ON cart.product_id=product_inventory.product_id
-                        WHERE date BETWEEN '$DateBegin' and '$DateEnd'";
-              $result = mysqli_query($conn, $sql);
-              while ($row = mysqli_fetch_assoc($result)) {
-                $operation = ($profit/$row['unit_price']) * 100;
-                $margin = number_format($operation, 2, '.', '');
-                      $sum += $margin;
-                }
-              ?>
-                <th style="padding-right: 50px;"> Margin </th>
-                <td class="text-right"><?php echo $sum; ?>%</td>
-              </tr>
-            </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+          <div id="contentline"></div>   
     <?php
     }
     else {
       while ($row = mysqli_fetch_assoc($result)) {
         $Date = date("m-d-Y", strtotime($row['date']));
-        $profit = $row['unit_price'] - $row['cost'];
-        $operation = ($profit/$row['unit_price']) * 100;
-        $margin = number_format($operation, 2, '.', '');
         echo "<tr><td>" 
-        . $row['ticket_id'] . "</td><td>". $row['time'] . "</td><td>" . $row['total'] . "</td><td>" . $row['subtotal']
-        . "</td><td>" . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['cost'] . "</td><td>" 
-        . $profit . "</td><td>" . $margin . "% </td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td><a class='btn btn-dark' 
-        role='button' href='customerDetail.php?Detail=". $row['customer_id'] . "'>View</a>";
+        . $row['order_id'] . "</td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td>" . $row['productName'] . "</td><td>"
+        . $row['productType'] . "</td><td>" . $row['stock_amount'] . "</td><td>" . $row['cost'] . "</td><td>";
       }
     }
     ?>
             <!-- Retrieved SQL Data Goes Here Instead of empty tds -->
             
-          </tbody>
+            </tbody>
         </table>
       </div>
 
       <div id="contentline"></div>
-
-      <div class="row pl-3">
-        <div class="px-1">
-          <table class="table table-responsive" style="font-size:80%;">
-            <thead>
-
-            </thead>
-            <tbody>
-              <tr>
-              <?php 
-                  $sum=0;
-                  $sql = "SELECT * FROM ticket_system";
-                  $result = mysqli_query($conn, $sql);
-                  while ($row = mysqli_fetch_assoc($result)) {
-                  $sum += $row['subtotal'];
-                  }
-                  ?>
-                    <th style="padding-right: 30px;"> Subtotal </th>
-                    <td class="text-right">$<?php echo $sum; ?></td>
-                  </tr>
-                  <tr>
-                  <?php 
-                  $sum=0;
-                  $sql = "SELECT * FROM ticket_system";
-                  $result = mysqli_query($conn, $sql);
-                  while ($row = mysqli_fetch_assoc($result)) {
-                  $sum += $row['discount'];
-                  }
-                  ?>
-                    <th style="padding-right: 30px;"> Discounts </th>
-                    <td class="text-right">$<? echo $sum; ?></td>
-                  </tr>
-                  <tr>
-                  <?php 
-                  $sum=0;
-                  $sql = "SELECT * FROM ticket_system";
-                  $result = mysqli_query($conn, $sql);
-                  while ($row = mysqli_fetch_assoc($result)) {
-                  $sum += $row['tax'];
-                  }
-                  ?>
-                    <th style="padding-right: 30px;"> Tax </th>
-                    <td class="text-right">$<?php echo $sum; ?></td>
-                  </tr>
-                  <tr>
-                  <?php 
-                  $sum=0;
-                  $sql = "SELECT * FROM ticket_system";
-                  $result = mysqli_query($conn, $sql);
-                  while ($row = mysqli_fetch_assoc($result)) {
-                  $sum += $row['total'];
-                  }
-                  ?>
-                    <th style="padding-right: 30px;"> Total </th>
-                    <td class="text-right">$<? echo $sum; ?></td>
-                  </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="px-1">
-          <table class="table table-responsive" style="font-size:80%;">
-            <thead>
-
-            </thead>
-            <tbody>
-              <tr>
-                <th style="padding-right: 50px;"> Taxed </th>
-                <td class="text-right">$0</td>
-              </tr>
-              <tr>
-                <th style="padding-right: 50px;"> Untaxed </th>
-                <td class="text-right">$0</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="px-1">
-          <table class="table table-responsive" style="font-size:80%;">
-            <thead>
-
-            </thead>
-            <tbody>
-              <tr>
-              <?php
-              $sum=0;
-              $sql = "SELECT ticket_system.*, product_inventory.cost, product_inventory.unit_price FROM ticket_system 
-                        LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN cart ON 
-                        cart_inprogress.CID=cart.CID LEFT JOIN product_inventory ON cart.product_id=product_inventory.product_id";
-              $result = mysqli_query($conn, $sql);
-              while ($row = mysqli_fetch_assoc($result)) {
-                      $sum += $row['cost'];
-                }
-              ?>
-                <th style="padding-right: 50px;"> Cost </th>
-                <td class="text-right">$<?php echo $sum; ?></td>
-              </tr>
-              <tr>
-              <?php
-              $sum=0;
-              $sql = "SELECT ticket_system.*, product_inventory.cost, product_inventory.unit_price FROM ticket_system 
-                        LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN cart ON 
-                        cart_inprogress.CID=cart.CID LEFT JOIN product_inventory ON cart.product_id=product_inventory.product_id";
-              $result = mysqli_query($conn, $sql);
-              while ($row = mysqli_fetch_assoc($result)) {
-                $profit = $row['unit_price'] - $row['cost'];
-                      $sum += $profit;
-                }
-              ?>
-                <th style="padding-right: 50px;"> Profit </th>
-                <td class="text-right">$<?php echo $sum; ?></td>
-              </tr>
-              <tr>
-              <?php
-              $sum=0;
-              $sql = "SELECT ticket_system.*, product_inventory.cost, product_inventory.unit_price FROM ticket_system 
-                        LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN cart ON 
-                        cart_inprogress.CID=cart.CID LEFT JOIN product_inventory ON cart.product_id=product_inventory.product_id";
-              $result = mysqli_query($conn, $sql);
-              while ($row = mysqli_fetch_assoc($result)) {
-                $operation = ($profit/$row['unit_price']) * 100;
-                $margin = number_format($operation, 2, '.', '');
-                      $sum += $margin;
-                }
-              ?>
-                <th style="padding-right: 50px;"> Margin </th>
-                <td class="text-right"><?php echo $sum; ?>%</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-
-
-
-
-
 
 </body>
 
