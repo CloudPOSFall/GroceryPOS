@@ -2,11 +2,11 @@
     include_once('config.php');
 
     $query;
-    if(isset($_GET['productSubType'])) {
-        $query = "SELECT * FROM product_inventory WHERE productSubType = '".$_GET['productSubType']."' AND in_stock != 0 ORDER BY productName";
+    if(isset($_POST['productSubType'])) {
+        $query = "SELECT * FROM product_inventory WHERE productSubType = '".$_POST['productSubType']."' AND in_stock != 0 ORDER BY productName";
     }
-    else if(isset($_GET['productType'])) {
-        $query = "SELECT * FROM product_inventory WHERE productType = '".$_GET['productType']."' AND in_stock != 0 ORDER BY productName";
+    else if(isset($_POST['productType'])) {
+        $query = "SELECT * FROM product_inventory WHERE productType = '".$_POST['productType']."' AND in_stock != 0 ORDER BY productName";
     } else 
         $query = "SELECT * FROM product_inventory WHERE in_stock != 0 ORDER BY productName";
     

@@ -5,7 +5,7 @@
 
 <br>
 
-<form method="get" type="button" action="<?php echo $_SERVER['PHP_SELF'];?>">
+<form method="post" type="button" action="<?php echo $_SERVER['PHP_SELF'];?>">
 
     Choose a Payment Type:
     <select name="payment">
@@ -29,8 +29,8 @@
             $subTotal = $total;
             $total = $total + $tax;
 
-            if(isset($_GET['change'])) {
-                $change = $_GET['cash'] - $subTotal;
+            if(isset($_POST['change'])) {
+                $change = $_POST['cash'] - $subTotal;
                 $formatted = number_format($change, 2);
     ?>
     <br>
@@ -45,7 +45,7 @@
     <input type='submit' name='final' value="Complete Sale"/>
 </form>
     <?php
-                if(isset($_GET['final'])) {
+                if(isset($_POST['final'])) {
                     $CID = $_SESSION['CID'];
 
                     //$query = "UPDATE ticket_system SET quantity ='".$qtyTotal."', subtotal ='".$subTotal."', total ='".$total."', 

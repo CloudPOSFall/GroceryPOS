@@ -9,7 +9,7 @@
 
     while($row = mysqli_fetch_assoc($result)) {
         $isSelected = "";
-        if(isset($_GET['productSubType']) && $_GET['productSubType'] == $row['productSubType']) {
+        if(isset($_POST['productSubType']) && $_POST['productSubType'] == $row['productSubType']) {
             $isSelected = "selected";
         }
         $tableCode .= "<option value= ".$row['productSubType']." ".$isSelected.">".$row['productSubType']. "</option> \n ";
