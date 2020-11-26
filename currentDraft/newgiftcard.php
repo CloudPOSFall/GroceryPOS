@@ -1,16 +1,16 @@
 <?php
-  include_once('config.php');
+include_once('config.php');
 ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title>Add Employee | MarketPOS</title>
+  <title>Add Gift Card | MarketPOS</title>
 
 
-  <!--bootstrap css -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+   <!--bootstrap css -->
+   <link rel="stylesheet" href="css/bootstrap.min.css">
   <!--our css -->
   <link rel="stylesheet" href="userStyle2.css">
   <!--Scrollbar Custom css -->
@@ -31,12 +31,10 @@
 
 </head>
 
-</head>
-
 <body>
 
- <!--nav sidebar-->
- <nav id="sidebar">
+          <!--nav sidebar-->
+          <nav id="sidebar">
         <div class="sidebar-header bg-dark">
             <h1><span><a class="navbar-brand relative-top" href="indexDraft.php"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1z" />
@@ -57,8 +55,8 @@
                         <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
                     </svg></a>
             </li>
-            <div class="justify-content-center" id="navline"></div>
-
+        <div class="justify-content-center" id="navline"></div>
+       
             <li>
                 <a href="accounthomeDraft.php">
                     <span style="padding:5px;">
@@ -82,20 +80,12 @@
                             <path fill-rule="evenodd" d="M4.98 4a.5.5 0 0 0-.39.188L1.54 8H6a.5.5 0 0 1 .5.5 1.5 1.5 0 1 0 3 0A.5.5 0 0 1 10 8h4.46l-3.05-3.812A.5.5 0 0 0 11.02 4H4.98zm-1.17-.437A1.5 1.5 0 0 1 4.98 3h6.04a1.5 1.5 0 0 1 1.17.563l3.7 4.625a.5.5 0 0 1 .106.374l-.39 3.124A1.5 1.5 0 0 1 14.117 13H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .106-.374l3.7-4.625z" />
                         </svg></span> Inventory</a>
             </li>
-            <li>
+            <li class="active">
                 <a href="customercontrol.php">
                     <span style="padding:5px;">
                         <svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
                         </svg></span> Customers</a>
-            </li>
-            <li class="active">
-                <a href='employeecontrol.php'>
-                    <span style='padding:5px;'>
-                        <svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-file-person-fill' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-                            <path fill-rule='evenodd' d='M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z'/>
-                        </svg></span> Employees</a>
-          </li>
             </li>
             <li>
                 <a href="reportsControlPanel.php">
@@ -107,22 +97,21 @@
                         </svg></span> Reports</a>
             </li>
 
-
-            </br></br></br></br>
-            <li class="sidebar-footer">
-                <div class="text-center" id="usercard">
-                    <a role="button" href="employeePinLogin.php"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        
+        </br></br></br></br>
+        <li class="sidebar-footer">
+            <div class="text-center" id="usercard">
+               <a role="button" href="employeePinLogin.php"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z" />
                         </svg> Switch User</a>
-
-                </div>
-
-            </li>
+                
+            </div>
+        
+    </li>
         </ul>
         </div>
     </nav>
-    <!--END nav sidebar-->
-
+  <!--END nav sidebar-->
 
   <!--page content-->
   <div id="content">
@@ -139,10 +128,10 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="nav navbar-nav mr-auto">
-            <a class="navbar-brand" href="employeeview.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-person-bounding-box" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <a class="navbar-brand" href="newgiftcard.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-person-bounding-box" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z" />
                 <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-              </svg> Add New Employee</a>
+              </svg> Add New Gift Card</a>
           </ul>
         </div>
       </div>
@@ -152,55 +141,21 @@
     <div class="container justify-content-center">
       <div class="card card-body bg-light" style="width: 35rem;" id="formscreen">
 
+        <!--  <div class="form-group row">
+              <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+              </div>
+            </div> -->
         <div class="card-body">
-          <form action="employeeinfoinsert.php" method="post">
-            <div class = "form-group row">
-            <label class = "col-4" for = "First Name">First Name </label>
-                    <input class ="col-6" type = "text" placeholder=" First Name " name="fname"/>
+          <form action="giftcardinsert.php" method="post">
+            <div class="form-group row">
+              <label class="col-4" for="Promo Code">Promo Code</label>
+              <input class="col-6" type="text" placeholder=" Promo Code " name="promo" />
             </div>
-            <div class = "form-group row">
-            <label class = "col-4" for = "Last Name">Last Name </label>
-            <input class ="col-6" type = "text" placeholder="Last Name " name="lname"/>
-            </div>
-              <div class = "form-group row">
-            <label class = "col-4" for = "Email">Email </label>
-            <input class ="col-6" type = "email" placeholder="Email " name="email"/>
-            </div>
-            <div class = "form-group row">
-            <label class = "col-4" for = "Password">Create a Password </label>
-            <input class ="col-6" type = "password" placeholder="Password " name="password"/>
-            </div>
-            <div class = "form-group row">
-            <label class = "col-4" for = "Phone Number">Phone Number </label>
-            <input class ="col-6" type = "tel" placeholder="Phone Number " name="phone"/>
-            </div>
-            <div class = "form-group row">
-            <label class = "col-4" for = "Street Address">Street Address </label>
-            <input class ="col-6" type = "text" placeholder="Street Address " name="street"/>
-            </div>
-            <div class = "form-group row">
-            <label class = "col-4" for = "City">City </label>
-            <input class ="col-6" type = "text" placeholder="City " name="city"/>
-            </div>
-            <div class = "form-group row">
-            <label class = "col-4" for = "State">State </label>
-            <input class ="col-6" type = "text" placeholder="State " name="state"/>
-            </div>
-            <div class = "form-group row">
-            <label class = "col-4" for = "Zip Code">Zip Code </label>
-            <input class ="col-6" type = "text" placeholder="Zip Code " name="zip"/>
-            </div>
-            <div class = "form-group row">
-            <label class = "col-4" for = "SSN">SSN </label>
-            <input class ="col-6" type = "password" placeholder="SSN " name="ssn"/>
-            </div>
-            <div class = "form-group row">
-            <label class = "col-4" for = "Company Name">Company Name </label>
-            <input class ="col-6" type = "text" placeholder="Company Name " name="code"/>
-            </div>
-            <div class = "form-group row">
-            <label class = "col-4" for = "Pin Number">Pin Number </label>
-            <input class ="col-6" type = "text" placeholder="Pin Number " name="pnum"/>
+            <div class="form-group row">
+              <label class="col-4" for="Card Balance">Card Balance</label>
+              <input class="col-6" type="number" placeholder=" Card Balance " name="balance" />
             </div>
             <div class="text-center"><button name="submit" class="btn-lg btn-primary"> Submit</button></div>
           </form>

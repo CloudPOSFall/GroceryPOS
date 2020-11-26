@@ -194,7 +194,7 @@ include_once('config.php');
             </div>
           </div>
         </a>
-        <a class="btn" href="#">
+        <a class="btn" href="categoryview.php">
           <div class="card" id="pagecard">
             <div class="card-body text-center">
               <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-layout-three-columns" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -206,7 +206,7 @@ include_once('config.php');
           </div>
         </a>
 
-        <a class="btn" href="#">
+        <a class="btn" href="brandsview.php">
           <div class="card" id="pagecard">
             <div class="card-body text-center">
               <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-globe2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

@@ -11,7 +11,7 @@ $result = mysqli_query($conn, $query);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>Assets | MarketPOS</title>
+  <title>Assets Inventory Reports | MarketPOS</title>
 
   <!--bootstrap css -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -196,11 +196,11 @@ $result = mysqli_query($conn, $query);
           <thead class="bg-light">
             <tr>
               <th> Inventory ID</th>
+              <th> Brand </th>
+              <th> Description </th>
               <th> Product Name </th>
               <th> Product Type </th>
-              <th> Product SubType </th>
-              <th> Cost </th>
-              <th> Unit Price </th>
+              <th> Category </th>
               <th> Vendor ID </th>
               <th> </th>
             </tr>
@@ -218,8 +218,8 @@ $result = mysqli_query($conn, $query);
                 echo "<div class='row mt-3'>There are $queryResults results matching your search</div><br>";
                 while ($row = mysqli_fetch_assoc($result)) {
                   echo "<tr><td>" . $row['product_id'] . "</td><td>"
-                    . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['productSubType'] . "</td><td>" 
-                    . $row['cost'] . "</td><td>" . $row['Unit Price'] . "</td><td>" . $row['vendor_id'] . "</td><td>";
+                    . $row['brand'] . "</td><td>" . $row['description'] . "</td><td>" . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>"
+                    . $row['productSubType'] . "</td><td>" . $row['vendor_id'] . "</td><td>";
                 }
               } else {
                 echo "<div class='row mt-3'>There are no results matching your search</div>";
@@ -227,8 +227,8 @@ $result = mysqli_query($conn, $query);
             } else {
               while ($row = mysqli_fetch_assoc($result)) {
                 echo "<tr><td>" . $row['product_id'] . "</td><td>"
-                    . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['productSubType'] . "</td><td>" 
-                    . $row['cost'] . "</td><td>" . $row['unit_price'] . "</td><td>" . $row['vendor_id'] . "</td><td>";
+                    . $row['brand'] . "</td><td>" . $row['description'] . "</td><td>" . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>"
+                    . $row['productSubType'] . "</td><td>" . $row['vendor_id'] . "</td><td>";
                 }
             }
 

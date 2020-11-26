@@ -1,6 +1,6 @@
 <?php
 include_once('config.php');
-$query = "SELECT * FROM orders_ticket";
+$query = "SELECT * FROM product_inventory";
 $result = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
@@ -11,7 +11,7 @@ $result = mysqli_query($conn, $query);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>Purchase Orders | MarketPOS</title>
+  <title>Inventory by Category Reports | MarketPOS</title>
 
   <!--bootstrap css -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -90,7 +90,7 @@ $result = mysqli_query($conn, $query);
               <path d="M11 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1zM1 9h14v2H1V9z" /></svg>
           </span> Sales</a>
       </li>
-      <li class=active>
+      <li>
         <a href="inventorycontrol.php">
           <span style="padding:5px;">
             <svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-inbox-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -119,7 +119,7 @@ $result = mysqli_query($conn, $query);
             if ($_SESSION['emp_type'] == 1) {
     
               echo "
-          <li>
+          <li class=active>
             <a href='reportsControlPanel.php'>
               <span style='padding:5px;'>
                 <svg width='.8em' height='.8em' viewBox='0 0 16 16' class='bi bi-clipboard-data' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
@@ -167,9 +167,9 @@ $result = mysqli_query($conn, $query);
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="nav navbar-nav mr-auto">
-            <a class="navbar-brand" href="inventorycontrol.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <a class="navbar-brand" href="reportsControlPanel.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
-              </svg> Purchase Orders</a>
+              </svg> Inventory by Category</a>
           </ul>
         </div>
       </div>
@@ -177,14 +177,14 @@ $result = mysqli_query($conn, $query);
 
 
     <nav class="navbar navbar-light" id="salespanel">
-      <form class="form-inline" method="post" action="purchaseorders.php">
+      <form class="form-inline" method="post" action="reportsInvbyCategory.php">
         <div class="nav-item" style="padding: 8px">
-          <input class="form-control" name="order" placeholder="Search Order Detail" aria-label="Search">
+          <input class="form-control" name="product" placeholder="Search Category" aria-label="Search">
           <button class="btn btn-dark navbar-btn" name="submit-search"> Look Up</button>
         </div>
 
         <div class="nav-item mr-auto">
-          <a class="btn navbar-btn btn-light" href="neworder.php" role="button"> New Order</a></div>
+          <a class="btn navbar-btn btn-light" href="productindex.php" role="button"> New Inventory</a></div>
       </form>
     </nav>
 
@@ -195,19 +195,14 @@ $result = mysqli_query($conn, $query);
         <table class="table table-bordered table-hover mt-3 table-responsive" style="font-size:80%;">
           <thead class="bg-light">
             <tr>
-              <th> Order ID</th>
-              <th> Date </th>
-              <th> Time </th>
-              <th> Brand </th>
+              <th> Inventory ID</th>
+              <th> Product Type </th>
+              <th> Product Brand </th>
               <th> Description </th>
               <th> Product Name </th>
-              <th> Product Type </th>
-              <th> Quantity </th>
-              <th> Subtotal </th>
-              <th> Total </th>
-              <th> Discount </th>
-              <th> Tax </th>
-              <th> Status </th>
+              <th> Product SubType </th>
+              <th> Cost </th>
+              <th> Unit Price </th>
               <th> Vendor ID </th>
               <th> </th>
             </tr>
@@ -217,29 +212,25 @@ $result = mysqli_query($conn, $query);
 
             if (isset($_POST['submit-search'])) {
               $search = mysqli_real_escape_string($conn, $_POST['product']);
-              $sql = "SELECT * FROM orders_ticket WHERE productName LIKE '%$search%' OR productType LIKE '%$search%' OR productSubType LIKE '%$search%' OR vendor_id LIKE '%$search%'";
+              $sql = "SELECT * FROM product_inventory WHERE productName LIKE '%$search%' OR productType LIKE '%$search%' OR productSubType LIKE '%$search%' OR vendor_id LIKE '%$search%'";
               $result = mysqli_query($conn, $sql);
               $queryResults = mysqli_num_rows($result);
 
               if ($queryResults > 0) {
                 echo "<div class='row mt-3'>There are $queryResults results matching your search</div><br>";
                 while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<tr><td>" . $row['OTID'] . "</td><td>"
-                    . $row['date'] . "</td><td>" . $row['time'] . "</td><td>" . $row['brand'] . "</td><td>" . $row['description'] . "</td><td>"
-                    . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['quantity'] . "</td><td>" . $row['subtotal'] . "</td><td>"
-                    . $row['total'] . "</td><td>" . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['status'] . "</td><td>"
-                    . $row['vendor_id'] . "</td><td>";
+                  echo "<tr><td>" . $row['product_id'] . "</td><td>"
+                    . $row['productType'] . "</td><td>" . $row['brand'] . "</td><td>" . $row['description'] . "</td><td>" . $row['productName'] . "</td><td>" . $row['productSubType'] . "</td><td>"
+                    . $row['cost'] . "</td><td>" . $row['unit_price'] . "</td><td>". $row['vendor_id'] . "</td><td>";
                 }
               } else {
                 echo "<div class='row mt-3'>There are no results matching your search</div>";
               }
             } else {
               while ($row = mysqli_fetch_assoc($result)) {
-                echo "<tr><td>" . $row['OTID'] . "</td><td>"
-                    . $row['date'] . "</td><td>" . $row['time'] . "</td><td>" . $row['brand'] . "</td><td>" . $row['description'] . "</td><td>"
-                    . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['quantity'] . "</td><td>" . $row['subtotal'] . "</td><td>"
-                    . $row['total'] . "</td><td>" . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['status'] . "</td><td>"
-                    . $row['vendor_id'] . "</td><td>";
+                echo "<tr><td>" . $row['product_id'] . "</td><td>"
+                    . $row['productType'] . "</td><td>" . $row['brand'] . "</td><td>" . $row['description'] . "</td><td>" . $row['productName'] . "</td><td>" . $row['productSubType'] . "</td><td>"
+                    . $row['cost'] . "</td><td>" . $row['unit_price'] . "</td><td>". $row['vendor_id'] . "</td><td>";
                 }
             }
 

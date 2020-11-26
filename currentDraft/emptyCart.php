@@ -16,10 +16,7 @@
             while($row = mysqli_fetch_assoc($result)) {
                 $CID = $row['CID']; 
             }
-            echo($CID);
             $_SESSION['CID'] = $CID;
-            $query = "INSERT INTO cart (product_id, qty, CID) VALUES ('".$_GET['addToCart']."', 1, $CID)";
-            $result = mysqli_query($conn, $query) or die(" Execution Failed addCart");
         }
     }
 ?>

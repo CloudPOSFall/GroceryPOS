@@ -14,7 +14,7 @@
       $State = $_POST['state'];
       $ZipCode = $_POST['zip'];
 
-      $query = "insert into customer_info (email, password, first_name, last_name, phone_number, rewards, street_address, city, state, zip_code)
+      $query = "INSERT into customer_info (email, password, first_name, last_name, phone_number, rewards, street_address, city, state, zip_code)
               values ('$Email', '$Password', '$FirstName', '$LastName', '$PhoneNumber', '$Rewards', '$StreetAddress', '$City', '$State', '$ZipCode')";
       $result = mysqli_query($conn, $query);
 

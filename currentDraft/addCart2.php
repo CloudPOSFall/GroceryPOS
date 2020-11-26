@@ -5,60 +5,36 @@
     echo ($tableCode);
     include('emptyCart.php');
     $CID = $_SESSION['CID'];
-    $query = "SELECT product_id FROM cart";
-    $result = mysqli_query($conn, $query) or die(" Execution Failed add2Cart");
-    $rows = mysqli_num_rows($result);
-    if($rows > 0){
-        // records exist
-        /*if(isset($_GET['addToCart'])) {
-            $query = "SELECT * FROM cart WHERE product_id = '".$_GET['addToCart']."'";
-            $result = mysqli_query($conn,$query);
-            $rows = mysqli_num_rows($result);
-            if($rows > 0) {
-                $update = "UPDATE cart SET qty = qty + 1 WHERE product_id = '".$_GET['addToCart']."'";
-                $result = mysqli_query($conn,$update);
-            } else {
-                $query = "INSERT INTO cart (product_id, qty, CID) VALUE ('".$_GET['addToCart']."', 1, $CID)";
-                $result = mysqli_query($conn, $query) or die(" Execution Failed addCart");
-            }*/ 
-        
-    } else {
-        // no records exist
-        //if(isset($_GET['addToCart'])) {
-        //    $query = "INSERT INTO cart_inprogress (customer_id, ticket_id) VALUES (NULL, NULL)";
-        //    $result = mysqli_query($conn, $query) or die(" Execution Failed inprog");
-
-        //    $query = "SELECT CID FROM cart_inprogress WHERE customer_id IS NULL";
-        //    $result = mysqli_query($conn, $query) or die(" Execution Failed null address");
-        //    $row = mysqli_num_rows($result);
-        //    $CID = "";
-        //    while($row = mysqli_fetch_assoc($result)) {
-        //        $CID = $row['CID']; 
-        //    }
-        //    echo($CID);
-
-        //    $query = "INSERT INTO cart (product_id, qty, CID) VALUES ('".$_GET['addToCart']."', 1, $CID)";
-        //    $result = mysqli_query($conn, $query) or die(" Execution Failed addCart");
-        //}
+    if(isset($_GET['addToCart'])) {
+        $query = "SELECT * FROM cart WHERE product_id = '".$_GET['addToCart']."'";
+        $result = mysqli_query($conn,$query);
+        $rows = mysqli_num_rows($result);
+        if($rows > 0) {
+            $update = "UPDATE cart SET qty = qty + 1 WHERE product_id = '".$_GET['addToCart']."'";
+            $result = mysqli_query($conn,$update);
+            $selection = "SELECT cart.CID, cart.qty, cart.product_id FROM cart WHERE product_id = '".$_GET['addToCart']."'";
+            $result = mysqli_query($conn,$selection);
+            while ($row = mysqli_fetch_assoc($result)) {
+                $CID1 = $row['CID'];
+                $qty = $row['qty'];
+                $product = $row['product_id'];
+                }
+            $sql = "INSERT INTO item_list (CID, qty, product_id) VALUES ('$CID1', '$qty','$product')";
+            $result = mysqli_query($conn,$sql);
+        } else {
+            $query = "INSERT INTO cart (product_id, qty, CID) VALUE ('".$_GET['addToCart']."', '1', $CID)";
+            $result = mysqli_query($conn, $query) or die(" Execution Failed addCart");
+            $selection = "SELECT cart.CID, cart.qty, cart.product_id FROM cart WHERE product_id = '".$_GET['addToCart']."'";
+            $result = mysqli_query($conn,$selection);
+            while ($row = mysqli_fetch_assoc($result)) {
+                $CID1 = $row['CID'];
+                $qty = $row['qty'];
+                $product = $row['product_id'];
+                }
+            $sql = "INSERT INTO item_list (CID, qty, product_id) VALUES ('$CID1', '$qty','$product')";
+            $result = mysqli_query($conn,$sql);
+        }
     }
-
-
-
-
-        //$query = "SELECT * FROM cart WHERE product_id = '".$_GET['addToCart']."'";
-        //$result = mysqli_query($conn,$query);
-        //$rows = mysqli_num_rows($result);
-
-        //if($rows > 0){
-        //    $update = "UPDATE cart SET qty = qty + 1 WHERE product_id = '".$_GET['addToCart']."'";
-        //    $result = mysqli_query($conn,$update);
-        //}else{
-        //    $query = "INSERT INTO cart (product_id) VALUE ('".$_GET['addToCart']."')";
-        //    $result = mysqli_query($conn, $query) or die(" Execution Failed addCart");
-
-        //    $qupdate = "UPDATE cart SET qty = 1 WHERE product_id = '".$_GET['addToCart']."'";
-        //    $rupdatezero = mysqli_query($conn,$qupdate);
-        //} 
     include('joinCart.php'); 
 
     ?>
