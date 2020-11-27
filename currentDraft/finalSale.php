@@ -14,7 +14,6 @@
         <option value="Cash">Cash</option>
         <option value="Credit">Credit</option>
     </select> <input type="submit" name ="submit" value="Payment Type"> <br>
-
         <!-- Input for money recieved -->
         <br>Cash Amount: <input type="text" name="cash">
         <input type='submit' name='change' value="Get Change"/><br>
@@ -29,11 +28,15 @@
             $row = mysqli_fetch_assoc($result);
             while($row = mysqli_fetch_assoc($result)) {
                 $tax = $row['tax_rate'];
+                $formatted = number_format($tax, 2);
+                $tax = $formatted;
             }
             // subtotal saved
             $subTotal = $total;
             // new total is subtotal plus tax
             $total = $total + $tax;
+            $credit = 0;
+            $cash = 0;
             // trigger to get back change
             if(isset($_POST['change'])) {
                 $change = $_POST['cash'] - $subTotal;
@@ -46,8 +49,8 @@
                 echo('Change: $');
                 echo($formatted);
             }
-        ?>
         
+        ?>
     <br>
     <!-- Finalize Sale -->
     <input type='submit' name='final' value="Complete Sale"/>
@@ -58,9 +61,12 @@
     if(isset($_POST['final'])) {
         // cart ID retrieved from cookie data
         $CID = $_SESSION['CID'];
+
         // create new ticket for sale
-        $query = "INSERT INTO ticket_system (ticket_id, quantity, subtotal, total, tax) VALUES ('$CID', '$qtyTotal', '$subTotal', '$total', '$tax')";
+        $query = "INSERT INTO ticket_system (ticket_id, date, time, quantity, subtotal, total, tax, cash, credit)
+                    VALUES ('$CID', CURRENT_DATE(), CURRENT_TIME(), '$qtyTotal', '$subTotal', '$total', '$tax', '$cash', '$credit')";
         $result = mysqli_query($conn, $query) or die("Ticket Failed");
+        
         // link new ticket to our cart in progress
         $update = "UPDATE cart_inprogress SET ticket_id = '$CID' WHERE CID='$CID'";
         $result = mysqli_query($conn, $update) or die("Insert Failed");
