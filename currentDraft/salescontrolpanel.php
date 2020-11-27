@@ -432,47 +432,47 @@ if (isset($_POST['selectreg'])) {
                   <div>
                     <div class="input-group mb-2">
                       <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $100 </span></label>
-                      <input type="number" maxlength="3" class="form-control w-25" placeholder="">
+                      <input type="number" maxlength="3" onblur="findTotal()"  name="bills" class="form-control w-25" placeholder="">
                     </div>
                     <div class="input-group mb-2">
                       <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $50 </span></label>
-                      <input type="number" maxlength="3" class="form-control w-25" placeholder="">
+                      <input type="number" maxlength="3" onblur="findTotal()"  name="bills"  class="form-control w-25" placeholder="">
                     </div>
                     <div class="input-group mb-2">
                       <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $20 </span></label>
-                      <input type="number" maxlength="3" class="form-control w-25" placeholder="">
+                      <input type="number" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
                     </div>
                     <div class="input-group mb-2">
                       <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $10 </span></label>
-                      <input type="number" maxlength="3" class="form-control w-25" placeholder="">
+                      <input type="number" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
                     </div>
                     <div class="input-group mb-2">
                       <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $5 </span></label>
-                      <input type="number" maxlength="3" class="form-control w-25" placeholder="">
+                      <input type="number" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
                     </div>
                     <div class="input-group mb-2">
                       <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $1 </span></label>
-                      <input type="number" maxlength="3" class="form-control w-25" placeholder="">
+                      <input type="number" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
                     </div>
                     <div class="input-group mb-2">
                       <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 25¢ </span></label>
-                      <input type="number" maxlength="3" class="form-control w-25" placeholder="">
+                      <input type="number" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
                     </div>
                     <div class="input-group mb-2">
                       <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 10¢ </span></label>
-                      <input type="number" maxlength="3" class="form-control w-25" placeholder="">
+                      <input type="number" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
                     </div>
                     <div class="input-group mb-2">
                       <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 5¢ </span></label>
-                      <input type="number" maxlength="3" class="form-control w-25" placeholder="">
+                      <input type="number" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
                     </div>
                     <div class="input-group mb-2">
                       <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 1¢ </span></label>
-                      <input type="number" maxlength="3" class="form-control w-25" placeholder="">
+                      <input type="number" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
                     </div>
                     <div class="input-group mb-2">
                       <label class="control-label border bg-white" style="width:55px"><span class="input-group-addon px-2"> Total </span></label>
-                      <input name="opensum" type="text" maxlength="3" class="form-control w-50" value="100" readonly>
+                      <input name="opensum" id="total" type="text" maxlength="3" class="form-control w-50" value="0" readonly>
                     </div>
                   </div>
               </div>
@@ -579,6 +579,7 @@ if (isset($_POST['selectreg'])) {
 
 
   <script type="text/javascript">
+  //scrollbar
     $(document).ready(function() {
       $("#sidebar").mCustomScrollbar({
         theme: "minimal"
@@ -590,20 +591,22 @@ if (isset($_POST['selectreg'])) {
         $('a[aria-expanded=true]').attr('aria-expanded', 'false');
       });
 
-
+//open modals
       $('#openreg', '#pickreg', '#switchreg').on('shown.bs.modal', function() {
         $('#myInput').trigger('focus')
       });
     });
 
-    $('#openreg').on('hidden.bs.modal', function() {
+
+//clear modal input fields on close
+    /* $('#openreg').on('hidden.bs.modal', function() {
       $(this)
         .find("input,textarea,select")
         .val('')
         .end();
-    })
+    }) */
 
-
+//control panel buttons hoverable shadow
     $(document).ready(function() {
       $(".card").hover(
         function() {
@@ -627,9 +630,9 @@ if (isset($_POST['selectreg'])) {
       request.send();
     }
 
+//method to open switch reg modal from other pages
     (function() {
       'use strict';
-
       function remoteModal(idModal) {
         var vm = this;
         vm.modal = $(idModal);
@@ -662,10 +665,65 @@ if (isset($_POST['selectreg'])) {
       Window.prototype.remoteModal = remoteModal;
     })();
 
-
     $(function() {
       window.remoteModal('#switchreg');
     });
+
+//add up input fields in open reg
+    function findTotal(){
+    var arr = document.getElementsByName('bills');
+    var tot=0;
+    for(var i=0;i<arr.length;i++){
+      var subtot=0;
+        if(parseInt(arr[i].value)){
+            var item = parseInt(arr[i].value);
+          switch(i) {
+            case 0:
+              subtot = item * 100;
+            break;
+
+            case 1:
+              subtot = item * 50;
+            break;
+
+            case 2:
+              subtot = item * 20;
+            break;
+
+            case 3:
+              subtot = item * 10;
+            break;
+
+            case 4:
+              subtot = item * 5;
+            break;
+
+            case 5:
+              subtot = item * 1;
+            break;
+
+            case 6:
+              subtot = item * .25;
+            break;
+
+            case 7:
+              subtot = item * .10;
+            break;
+
+            case 8:
+              subtot = item * .05;
+            break;
+            
+            case 9:
+              subtot = item * .01;
+            break;
+          }
+        }
+        tot += subtot;
+    }
+    document.getElementById('total').value = tot;
+}
+
   </script>
 </body>
 
