@@ -1,73 +1,73 @@
 <?php
+    // display completed cart with saved variables
      include('joinCart.php');
      
 ?>
 
 <br>
+<!-- form to reload page with correct change -->
+<form method="post" type="button" action="<?php echo $_SERVER['PHP_SELF'];?>">
 
-<form method="get" type="button" action="<?php echo $_SERVER['PHP_SELF'];?>">
-
+    <!-- Option to choose a payment type -->
     Choose a Payment Type:
     <select name="payment">
         <option value="Cash">Cash</option>
         <option value="Credit">Credit</option>
     </select> <input type="submit" name ="submit" value="Payment Type"> <br>
 
+        <!-- Input for money recieved -->
         <br>Cash Amount: <input type="text" name="cash">
         <input type='submit' name='change' value="Get Change"/><br>
 
     <?php
+            // initializing tax and discount data
             $tax = 0;
             $discount = 0;
+            // tax selected for our region
             $query = "SELECT tax_rate FROM tax_table WHERE TTID=1";
             $result = mysqli_query($conn, $query) or die("Execution Failed");
             $row = mysqli_fetch_assoc($result);
             while($row = mysqli_fetch_assoc($result)) {
                 $tax = $row['tax_rate'];
             }
-
+            // subtotal saved
             $subTotal = $total;
+            // new total is subtotal plus tax
             $total = $total + $tax;
-
-            if(isset($_GET['change'])) {
-                $change = $_GET['cash'] - $subTotal;
+            // trigger to get back change
+            if(isset($_POST['change'])) {
+                $change = $_POST['cash'] - $subTotal;
                 $formatted = number_format($change, 2);
     ?>
     <br>
         <?php
+
+                // output change
                 echo('Change: $');
                 echo($formatted);
             }
         ?>
         
-        <br>
-
+    <br>
+    <!-- Finalize Sale -->
     <input type='submit' name='final' value="Complete Sale"/>
 </form>
-    <?php
-                if(isset($_GET['final'])) {
-                    $CID = $_SESSION['CID'];
 
-                    //$query = "UPDATE ticket_system SET quantity ='".$qtyTotal."', subtotal ='".$subTotal."', total ='".$total."', 
-                            //tax ='".$tax."' WHERE cart_purchase = 1 ";
-                    //$result = mysqli_query($conn, $query) or die("Execution Failed");
+<?php
+    // triggered when finalize sale button is clicked
+    if(isset($_POST['final'])) {
+        // cart ID retrieved from cookie data
+        $CID = $_SESSION['CID'];
+        // create new ticket for sale
+        $query = "INSERT INTO ticket_system (ticket_id, quantity, subtotal, total, tax) VALUES ('$CID', '$qtyTotal', '$subTotal', '$total', '$tax')";
+        $result = mysqli_query($conn, $query) or die("Ticket Failed");
+        // link new ticket to our cart in progress
+        $update = "UPDATE cart_inprogress SET ticket_id = '$CID' WHERE CID='$CID'";
+        $result = mysqli_query($conn, $update) or die("Insert Failed");
 
-                    //$query = "UPDATE cart_inprogress SET ticket";
-
-                    $query = "INSERT INTO ticket_system (ticket_id, quantity, subtotal, total, tax) VALUES ('$CID', '$qtyTotal', '$subTotal', '$total', '$tax')";
-                    $result = mysqli_query($conn, $query) or die("Ticket Failed");
-                    
-                    $update = "UPDATE cart_inprogress SET ticket_id = '$CID' WHERE CID='$CID'";
-                    $result = mysqli_query($conn, $update) or die("Insert Failed");
-
-                    if($result)
-                    {
-                        header("location:salescontrolpanel.php");
-                    }
-                    
-                }
-
-
-                
-            
-    ?>
+        // send user back to the sale page
+        if($result) 
+            header("location:salescontrolpanel.php");
+        
+    }             
+?>
