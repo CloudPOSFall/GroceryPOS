@@ -1,5 +1,32 @@
 <?php
 include_once('config.php');
+//this can reset the auto increment when all registers are cleared out
+//mysqli_query($conn, "ALTER TABLE registers_table AUTO_INCREMENT = 1");
+
+if (isset($_POST['submitcount'])) {
+  $opentotal = $_POST['opensum'];
+  $employeeid = $_SESSION['emp_id'];
+  //$regRadio = $_POST['reg_radio'];
+
+  $query = "INSERT into registers_table (open_total, employee_id)
+          values ($opentotal, (SELECT employee_id from employee_info where employee_id = $employeeid))";
+
+  $result = mysqli_query($conn, $query);
+
+  if ($result) {
+    $register = mysqli_insert_id($conn);
+    $_SESSION['register'] = $register;
+  } else {
+    echo "Please Check Your Query";
+  }
+
+}
+
+//if switch reg is pushed
+if (isset($_POST['selectreg'])) {
+  $register = $_POST['register'];
+  $_SESSION['register'] = $register;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -49,13 +76,13 @@ include_once('config.php');
     <ul class="list-unstyled components">
       <li>
         <div id="usercard">
-          <a href="" style="font-size: 1em;"><?php if (isset($_SESSION['emp_company']) && !empty($_SESSION['emp_company'])) {
-                                                echo $_SESSION['emp_company'];
-                                              } else {
-                                                echo 'Company Name';
-                                              } ?></br>
-            <?php if (isset($_SESSION['register']) && !empty($_SESSION['register'])) {
-              echo $_SESSION['register'];
+          <a data-toggle="modal" data-target="#switchreg" style="font-size: 1em;"><?php if (isset($_SESSION['emp_company']) && !empty($_SESSION['emp_company'])) {
+                                                                                    echo $_SESSION['emp_company'];
+                                                                                  } else {
+                                                                                    echo 'Company Name';
+                                                                                  } ?></br>
+            <?php if (isset($_SESSION['register'])) {
+              echo "Register " . $_SESSION['register'];
             } else {
               echo 'Choose Register';
             } ?> <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -244,7 +271,7 @@ include_once('config.php');
         <p></p>
         <p>Register Controls</p>
         <div class="line"></div>
-        <a class="btn" href="#" data-toggle="modal" data-target="#pickreg">
+        <a class="btn" href="#" data-toggle="modal" data-target="#openreg">
           <div class="card" id="pagecard">
             <div class="card-body text-center">
               <span class="card-text">
@@ -304,7 +331,7 @@ include_once('config.php');
   </div>
 
   <!-- Modals -->
-  <div class="modal fade" id="pickreg" tabindex="-1" role="dialog" aria-labelledby="pickreg" aria-hidden="true">
+  <!-- <div class="modal fade" id="pickreg" tabindex="-1" role="dialog" aria-labelledby="pickreg" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header h-25">
@@ -351,9 +378,9 @@ include_once('config.php');
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
-  <div class="modal" id="openreg" tabindex="-1" role="dialog" aria-labelledby="openreg" aria-hidden="true">
+  <div class="modal fade" id="openreg" tabindex="-1" role="dialog" aria-labelledby="openreg" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -363,62 +390,93 @@ include_once('config.php');
           </button>
         </div>
         <div class="modal-body">
-
           <div class="container text-center">
             <span style="font-weight: 400">Opening Count</span>
             <div class="row">
-              <div class="col">
-
+              <div class="col mt-5 pt-5">
+                
+              <?php
+/*               $select = "SELECT reg_num FROM registers_table WHERE close_total is NULL";
+              $result = mysqli_query($conn, $select);
+              $numrows = mysqli_num_rows($result);
+              $regArray = array(1,2,3);
+              if ($numrows != 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                  $opencheck = in_array($row['reg_num'], $regArray);
+                  if ($opencheck){
+                    unset($regArray[$row['reg_num']]);
+                  }
+                }
+                  if (!empty($regArray)){
+                    echo '
+                    <legend class="col-form-label mt-5 pt-5">Open which register?</legend>
+                      <div class="col-sm-10">';
+                      foreach($regArray as $reg){
+                        echo '
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="regradio" id="radio'. $reg .'" value="'. $reg .'">
+                            <label class="form-check-label">
+                              Register ' . $reg .'
+                            </label>
+                          </div>';
+                      }
+                    echo '</div>';
+                  }else{
+                    echo 'All your registers are open';
+                  }
+              }  */
+              ?>
               </div>
-              <div class="col-4">
-                <form class="form-inline" id="openform">
-                  <div class="input-group mb-2">
-                    <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $100 </span></label>
-                    <input type="text" maxlength="3" class="form-control w-25" placeholder="">
+              <div id="bills" class="col-4">
+                <form class="form-inline" method="post" action="salescontrolpanel.php">
+                  <div>
+                    <div class="input-group mb-2">
+                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $100 </span></label>
+                      <input type="number" maxlength="3" class="form-control w-25" placeholder="">
+                    </div>
+                    <div class="input-group mb-2">
+                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $50 </span></label>
+                      <input type="number" maxlength="3" class="form-control w-25" placeholder="">
+                    </div>
+                    <div class="input-group mb-2">
+                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $20 </span></label>
+                      <input type="number" maxlength="3" class="form-control w-25" placeholder="">
+                    </div>
+                    <div class="input-group mb-2">
+                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $10 </span></label>
+                      <input type="number" maxlength="3" class="form-control w-25" placeholder="">
+                    </div>
+                    <div class="input-group mb-2">
+                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $5 </span></label>
+                      <input type="number" maxlength="3" class="form-control w-25" placeholder="">
+                    </div>
+                    <div class="input-group mb-2">
+                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $1 </span></label>
+                      <input type="number" maxlength="3" class="form-control w-25" placeholder="">
+                    </div>
+                    <div class="input-group mb-2">
+                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 25¢ </span></label>
+                      <input type="number" maxlength="3" class="form-control w-25" placeholder="">
+                    </div>
+                    <div class="input-group mb-2">
+                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 10¢ </span></label>
+                      <input type="number" maxlength="3" class="form-control w-25" placeholder="">
+                    </div>
+                    <div class="input-group mb-2">
+                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 5¢ </span></label>
+                      <input type="number" maxlength="3" class="form-control w-25" placeholder="">
+                    </div>
+                    <div class="input-group mb-2">
+                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 1¢ </span></label>
+                      <input type="number" maxlength="3" class="form-control w-25" placeholder="">
+                    </div>
+                    <div class="input-group mb-2">
+                      <label class="control-label border bg-white" style="width:55px"><span class="input-group-addon px-2"> Total </span></label>
+                      <input name="opensum" type="text" maxlength="3" class="form-control w-50" value="100" readonly>
+                    </div>
                   </div>
-                  <div class="input-group mb-2">
-                    <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $50 </span></label>
-                    <input type="text" maxlength="3" class="form-control w-25" placeholder="">
-                  </div>
-                  <div class="input-group mb-2">
-                    <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $20 </span></label>
-                    <input type="text" maxlength="3" class="form-control w-25" placeholder="">
-                  </div>
-                  <div class="input-group mb-2">
-                    <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $10 </span></label>
-                    <input type="text" maxlength="3" class="form-control w-25" placeholder="">
-                  </div>
-                  <div class="input-group mb-2">
-                    <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $5 </span></label>
-                    <input type="text" maxlength="3" class="form-control w-25" placeholder="">
-                  </div>
-                  <div class="input-group mb-2">
-                    <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $1 </span></label>
-                    <input type="text" maxlength="3" class="form-control w-25" placeholder="">
-                  </div>
-                  <div class="input-group mb-2">
-                    <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 25¢ </span></label>
-                    <input type="text" maxlength="3" class="form-control w-25" placeholder="">
-                  </div>
-                  <div class="input-group mb-2">
-                    <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 10¢ </span></label>
-                    <input type="text" maxlength="3" class="form-control w-25" placeholder="">
-                  </div>
-                  <div class="input-group mb-2">
-                    <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 5¢ </span></label>
-                    <input type="text" maxlength="3" class="form-control w-25" placeholder="">
-                  </div>
-                  <div class="input-group mb-2">
-                    <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 1¢ </span></label>
-                    <input type="text" maxlength="3" class="form-control w-25" placeholder="">
-                  </div>
-                  <div class="input-group mb-2">
-                    <label class="control-label border bg-white" style="width:55px"><span class="input-group-addon px-2"> Total </span></label>
-                    <input type="text" maxlength="3" class="form-control w-50" value="$    .  " readonly>
-                  </div>
-
-
               </div>
+
             </div>
 
           </div>
@@ -426,7 +484,7 @@ include_once('config.php');
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-dismiss="modal">Submit Count</button>
+          <button type="submit" name="submitcount" class="btn btn-success">Submit Count</button>
           <button type="button" class="btn btn-dark" data-dismiss="modal">Cancel</button>
           </form>
         </div>
@@ -439,50 +497,79 @@ include_once('config.php');
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header h-25">
+          <span style="font-weight: 400">Switch Register</span>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <div class="card-deck mb-5">
-            <p></p>
+          <div class="container text-center">
             <span style="font-weight: 400">Choose A Register</span>
-            <div class="line"></div>
-            <div class="container mb-5 ml-4">
-                <a role="button" class="btn" type="submit" name="reg1" data-toggle="modal" data-target="#regopen" data-dismiss="modal">
-                  <div class="card" id="pagecard">
-                    <div class="card-body text-center">
-                      <span class="card-text">
-                        <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-archive-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
-                          </svg></h5>
-                        Register 1
-                      </span>
-                    </div>
-                  </div>
-                </a>
+            <div class="form-inline justify-content-center">
 
-                <a type="button" class="btn" name="reg2" data-toggle="modal" data-target="#regopen" data-dismiss="modal" onclick="regswitch()">
+              <?php
+              $query = "SELECT * FROM registers_table WHERE close_total is NULL";
+              $result = mysqli_query($conn, $query);
+
+              $numrows = mysqli_num_rows($result);
+              if ($numrows != 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                  echo
+                    '<form class="p-3" method="post" action="salescontrolpanel.php">
+                  <button name="selectreg" class="btn">
                   <div class="card" id="pagecard">
                     <div class="card-body text-center">
                       <span class="card-text">
                         <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-archive-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
                           </svg></h5>
-                        Register 2
-                      </span>
+                        Register ' . $row['register_id'] . '
+                       </span>
                     </div>
                   </div>
-                </a>
-            
+                </button>
+                <input name="register" size="1" value="' . $row['register_id'] . '" hidden readonly/>
+                </form>';
+                }
+              } else {
+                echo '<span style="font-weight: 400">Please Open A Register</span>';
+              }
+              ?>
+
+              <!-- <a role="button" class="btn" type="submit" name="reg1" data-toggle="modal" data-target="#regopen" data-dismiss="modal">
+                <div class="card" id="pagecard">
+                  <div class="card-body text-center">
+                    <span class="card-text">
+                      <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-archive-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
+                        </svg></h5>
+                      Register 1
+                    </span>
+                  </div>
+                </div>
+              </a>
+
+              <a type="button" class="btn" name="reg2" data-toggle="modal" data-target="#regopen" data-dismiss="modal" onclick="regswitch()">
+                <div class="card" id="pagecard">
+                  <div class="card-body text-center">
+                    <span class="card-text">
+                      <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-archive-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
+                        </svg></h5>
+                      Register 2
+                    </span>
+                  </div>
+                </div>
+              </a> -->
             </div>
-
-
           </div>
-
         </div>
+
+
+
       </div>
     </div>
+  </div>
   </div>
 
 
@@ -529,16 +616,56 @@ include_once('config.php');
     });
 
 
-function regswitch() {
-  var request = new XMLHttpRequest();
-  request.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      alert(this.responseText);
+    function regswitch() {
+      var request = new XMLHttpRequest();
+      request.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          alert(this.responseText);
+        }
+      };
+      request.open("GET", "ajax_request.php", true);
+      request.send();
     }
-  };
-  request.open("GET", "ajax_request.php", true);
-  request.send();
-}
+
+    (function() {
+      'use strict';
+
+      function remoteModal(idModal) {
+        var vm = this;
+        vm.modal = $(idModal);
+
+        if (vm.modal.length == 0) {
+          return false;
+        }
+
+        if (window.location.hash == idModal) {
+          openModal();
+        }
+
+        var services = {
+          open: openModal,
+          close: closeModal
+        };
+
+        return services;
+
+        // method to open modal
+        function openModal() {
+          vm.modal.modal('show');
+        }
+
+        // method to close modal
+        function closeModal() {
+          vm.modal.modal('hide');
+        }
+      }
+      Window.prototype.remoteModal = remoteModal;
+    })();
+
+
+    $(function() {
+      window.remoteModal('#switchreg');
+    });
   </script>
 </body>
 

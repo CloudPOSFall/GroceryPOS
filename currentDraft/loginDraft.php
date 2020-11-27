@@ -40,6 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $numrows = mysqli_num_rows($query);
     if ($numrows != 0) {
       while ($row = mysqli_fetch_assoc($query)) {
+        $emp_id = $row['employee_id'];
         $emp_fname = $row["first_name"];
         $emp_fname = mysqli_real_escape_string($conn, $emp_fname);
         $emp_lname =  $row["last_name"];
@@ -50,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       }
       
       
-      $_SESSION["emp_id"] = $row['employee_id'];
+      $_SESSION["emp_id"] = $emp_id;
       $_SESSION["emp_type"] = $emp_type;
       $_SESSION["emp_fname"] = $emp_fname;
       $_SESSION["emp_lname"] = $emp_lname;
