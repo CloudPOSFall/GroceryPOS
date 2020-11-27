@@ -67,7 +67,10 @@
 
         // send user back to the sale page
         if($result) 
+        {
+            $sql = "DELETE FROM cart";
+            $result = mysqli_query($conn, $sql) or die("Insert Failed");
             header("location:salescontrolpanel.php");
-        
+        }
     }             
 ?>

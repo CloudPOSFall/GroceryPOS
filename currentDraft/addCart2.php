@@ -6,10 +6,11 @@
     echo ($tableCode);
     // functionality for an initially empty cart
     include('emptyCart.php');
-    // Take current cart in progress id from cookie data
-    $CID = $_SESSION['CID'];
+
     // Trigger for when an item gets added to cart from tableCode
     if(isset($_POST['addToCart'])) {
+        // Take current cart in progress id from cookie data
+        $CID = $_SESSION['CID'];
         // Search for items that match the selected product
         $query = "SELECT * FROM cart WHERE product_id = '".$_POST['addToCart']."'";
         $result = mysqli_query($conn,$query);
@@ -52,7 +53,3 @@
     include('joinCart.php'); 
     ?>
 </form>
-<br>
-<?php
-
-?>
