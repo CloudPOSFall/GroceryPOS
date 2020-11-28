@@ -1,13 +1,13 @@
 <?php
 include_once('config.php');
-$query = "SELECT * FROM customer_info";
+$query = "SELECT * FROM ticket_system";
 $result = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title>View Customers | MarketPOS</title>
+<title>Returns | MarketPOS</title>
 
 
   <!--bootstrap css -->
@@ -21,21 +21,20 @@ $result = mysqli_query($conn, $query);
   <script defer src="js/solid.js"></script>
   <script defer src="js/fontawesome.js"></script>
 
-  <!--jquery -->
-  <script src="js/jquery-3.5.1.min.js"></script>
-  <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-  <!-- bootstrap popper js-->
-  <script src="js/popper.min.js"></script>
-  <!-- bootstrap js -->
-  <script src="js/bootstrap.min.js"></script>
-
+    <!--jquery -->
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- bootstrap popper js-->
+    <script src="js/popper.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
 
 </head>
 
 <body>
 
-  <!--nav sidebar-->
-  <nav id="sidebar">
+<!--nav sidebar-->
+<nav id="sidebar">
     <div class="sidebar-header bg-dark">
       <h1><span><a class="navbar-brand relative-top" href="indexDraft.php"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1z" />
@@ -115,18 +114,12 @@ $result = mysqli_query($conn, $query);
             </svg> Switch User</a>
 
         </div>
-        <li>
-        <div class="card text-center" id="footerbtn" style="background: #016923;">
-          <a role="button" href="logout.php"> Logout</a>
-        </div>
-      </li>
 
       </li>
     </ul>
     </div>
   </nav>
   <!--END nav sidebar-->
-
   <!--page content-->
   <div id="content">
 
@@ -142,9 +135,9 @@ $result = mysqli_query($conn, $query);
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="nav navbar-nav mr-auto">
-            <a class="navbar-brand" href="customerview.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <a class="navbar-brand" href="salecontrolpanel.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
-              </svg> Customers</a>
+              </svg> Returns</a>
           </ul>
         </div>
       </div>
@@ -152,36 +145,26 @@ $result = mysqli_query($conn, $query);
 
 
     <nav class="navbar navbar-light" id="salespanel">
-      <form class="form-inline" method="post" action="customerview.php">
+      <form class="form-inline" method="post" action="return.php">
         <div class="nav-item" style="padding: 8px">
-          <input class="form-control" name="customer" placeholder="Search Customers" aria-label="Search">
+          <input class="form-control" name="ticket" placeholder="Search Ticket" aria-label="Search">
           <button class="btn btn-dark navbar-btn" name="submit-search"> Look Up</button>
         </div>
-
-        <div class="nav-item mr-auto">
-          <a class="btn navbar-btn btn-light" href="customerindex.php" role="button"> New Customer</a></div>
-      </form>
+        </form>
     </nav>
-
-
-
     <div class="wrapper mt-3">
       <div class="row px-4 justify-content-center">
         <table class="table table-bordered table-hover mt-3 table-responsive" style="font-size:80%;">
           <thead class="bg-light">
           <tr>
-              <th> ID </th>
-              <th> First Name </th>
-              <th> Last Name </th>
-              <th> Street </th>
-              <th> City</th>
-              <th> State</th>
-              <th> Zip </th>
-              <th> Phone Number </th>
-              <th> Email </th>
-              <th> Rewards </th>
-              <th> Delete </th>
-              <th> Update </th>
+              <th> Ticket ID </th>
+              <th> Brand </th>
+              <th> Description </th>
+              <th> Product Name </th>
+              <th> Product Type</th>
+              <th> Sale Quantity</th>
+              <th> Price </th>
+              <th> Return </th>
               <th> </th>
             </tr>
           </thead>
@@ -189,54 +172,24 @@ $result = mysqli_query($conn, $query);
             <?php
 
             if (isset($_POST['submit-search'])) {
-              $search = mysqli_real_escape_string($conn, $_POST['customer']);
-              $sql = "SELECT * FROM customer_info WHERE first_name LIKE '%$search%' OR last_name LIKE '%$search%' OR phone_number LIKE '%$search%' OR email LIKE '%$search%'";
-              $result = mysqli_query($conn, $sql);
-              $queryResults = mysqli_num_rows($result);
+                $search = mysqli_real_escape_string($conn, $_POST['ticket']);
+                $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
+                        LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
+                        cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
+                        WHERE ticket_system.ticket_id LIKE '%$search%'";
+                $result = mysqli_query($conn, $sql);
+                $queryResults = mysqli_num_rows($result);
 
-              if ($queryResults > 0) {
+                if ($queryResults > 0) {
                 echo "<div class='row mt-3'>There are $queryResults results matching your search</div><br>";
                 while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<tr><td>" . $row['customer_id'] . "</td><td>"
-                    . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
-                    . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
-                    . $row['email'] . "</td><td class='text-center'>"  . $row['rewards'] .
-                    "</td><td><a class='btn-sm btn-dark' role='button' href='customerdelete.php?Del="
-                    . $row['customer_id'] . "'>Remove</a></td><td><a class='btn-sm btn-dark' role='button' href='customeredit.php?Upd="
-                    . $row['customer_id'] . "'>Select</a></td></tr>";
+                  echo "<tr><td>" . $row['ticket_id'] . "</td><td>"
+                    . $row['brand'] . "</td><td>" . $row['description'] . "</td><td>" . $row['productName'] . "</td><td>"
+                    . $row['productType'] . "</td><td>" . $row['qty'] . "</td><td>" . $row['unit_price'] . "</td><td><a class='btn-sm btn-dark' role='button' href='completereturn.php?Ret="
+                    . $row['product_id'] . "'>Select</a></td><td>";
                 }
               } else {
                 echo "<div class='row mt-3'>There are no results matching your search</div>";
-              }
-            } else if (isset($_POST['sale-search'])) {
-              $search = mysqli_real_escape_string($conn, $_POST['customer']);
-              $sql = "SELECT * FROM customer_info WHERE first_name LIKE '%$search%' OR last_name LIKE '%$search%' OR phone_number LIKE '%$search%' OR email LIKE '%$search%'";
-              $result = mysqli_query($conn, $sql);
-              $queryResults = mysqli_num_rows($result);
-
-              if ($queryResults > 0) {
-                echo "<div class='row mt-3'>There are $queryResults results matching your search</div><br>";
-                while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<tr><td>" . $row['customer_id'] . "</td><td>"
-                    . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
-                    . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
-                    . $row['email'] . "</td><td class='text-center'>"  . $row['rewards'] .
-                    "</td><td><a class='btn-sm btn-dark' role='button' href='sale.php?Add="
-                    . $row['customer_id'] . "'>Attach</a></td><td><a class='btn-sm btn-dark' role='button' href='customeredit.php?Upd="
-                    . $row['customer_id'] . "'>Update</a></td></tr>";
-                }
-              } else {
-                echo "<div class='row mt-3'>There are no results matching your search</div>";
-              }
-            } else {
-              while ($row = mysqli_fetch_assoc($result)) {
-                echo "<tr><td>" . $row['customer_id'] . "</td><td>"
-                  . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
-                  . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
-                  . $row['email'] . "</td><td class='text-center'>"  . $row['rewards'] .
-                  "</td><td><a class='btn-sm btn-dark' role='button' href='customerdelete.php?Del="
-                  . $row['customer_id'] . "'>Remove</a></td><td><a class='btn-sm btn-dark' role='button' href='customeredit.php?Upd="
-                  . $row['customer_id'] . "'>Edit</a></td></tr>";
               }
             }
 
@@ -245,8 +198,6 @@ $result = mysqli_query($conn, $query);
         </table>
       </div>
     </div>
-
-
 </body>
 
 <script type="text/javascript">
