@@ -1,6 +1,7 @@
 <?php
 include_once('config.php');
-$query = "SELECT * FROM orders_ticket";
+$query = "SELECT orders_ticket.*, product_inventory.* FROM orders_ticket LEFT JOIN orders
+ON orders_ticket.OTID=orders.OTID LEFT JOIN product_inventory ON orders.product_id=product_inventory.product_id";
 $result = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
@@ -217,15 +218,17 @@ $result = mysqli_query($conn, $query);
 
             if (isset($_POST['submit-search'])) {
               $search = mysqli_real_escape_string($conn, $_POST['product']);
-              $sql = "SELECT * FROM orders_ticket WHERE productName LIKE '%$search%' OR productType LIKE '%$search%' OR productSubType LIKE '%$search%' OR vendor_id LIKE '%$search%'";
-              $result = mysqli_query($conn, $sql);
+              $query = "SELECT orders_ticket.*, product_inventory.* FROM orders_ticket LEFT JOIN orders
+              ON orders_ticket.OTID=orders.OTID LEFT JOIN product_inventory ON orders.product_id=product_inventory.product_id
+              WHERE productName LIKE '%$search%' OR productType LIKE '%$search%' OR order_id LIKE '%$search%' OR vendor_id LIKE '%$search%'";
+              $result = mysqli_query($conn, $query);
               $queryResults = mysqli_num_rows($result);
 
               if ($queryResults > 0) {
                 echo "<div class='row mt-3'>There are $queryResults results matching your search</div><br>";
                 while ($row = mysqli_fetch_assoc($result)) {
                   echo "<tr><td>" . $row['OTID'] . "</td><td>"
-                    . $row['date'] . "</td><td>" . $row['time'] . "</td><td>" . $row['brand'] . "</td><td>" . $row['description'] . "</td><td>"
+                    . date('m-d-Y', strtotime($row['date'])) . "</td><td>" . $row['time'] . "</td><td>" . $row['brand'] . "</td><td>" . $row['description'] . "</td><td>"
                     . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['quantity'] . "</td><td>" . $row['subtotal'] . "</td><td>"
                     . $row['total'] . "</td><td>" . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['status'] . "</td><td>"
                     . $row['vendor_id'] . "</td><td>";
@@ -236,7 +239,7 @@ $result = mysqli_query($conn, $query);
             } else {
               while ($row = mysqli_fetch_assoc($result)) {
                 echo "<tr><td>" . $row['OTID'] . "</td><td>"
-                    . $row['date'] . "</td><td>" . $row['time'] . "</td><td>" . $row['brand'] . "</td><td>" . $row['description'] . "</td><td>"
+                    . date('m-d-Y', strtotime($row['date'])) . "</td><td>" . $row['time'] . "</td><td>" . $row['brand'] . "</td><td>" . $row['description'] . "</td><td>"
                     . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['quantity'] . "</td><td>" . $row['subtotal'] . "</td><td>"
                     . $row['total'] . "</td><td>" . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['status'] . "</td><td>"
                     . $row['vendor_id'] . "</td><td>";
