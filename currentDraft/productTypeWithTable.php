@@ -18,7 +18,7 @@
     $result = mysqli_query($conn, $query) or die("Execution Failed");
 
     // generation of table code
-    $tableCode = "<table border='1' name='product'>";
+    $tableCode = "<table class='table' name='product'>";
     // generation of table headers
     $tableCode .= "<tr> <th>Product Name</th> <th>Product Type</th> <th>Product Sub Type</th> <th>Price</th> <th>Add to Cart</th> </tr>";
 
