@@ -1,7 +1,7 @@
 <?php
 include_once('config.php');
-$query = "SELECT order_info.*, product_inventory.* FROM order_info
-      LEFT JOIN product_inventory ON order_info.product_id=product_inventory.product_id";
+$query = "SELECT orders_ticket.*, orders.*, product_inventory.* FROM orders_ticket LEFT JOIN orders
+      ON orders_ticket.OTID=orders.OTID LEFT JOIN product_inventory ON orders.product_id=product_inventory.product_id";
 $result = mysqli_query($conn, $query);
     
 ?>
@@ -252,7 +252,7 @@ INNER JOIN ticket_system ON product_inventory.product_id=cart.product_id";-->
     while ($row = mysqli_fetch_assoc($result)) {
     if (($row['date'] >= $DateBegin) && ($row['date'] <= $DateEnd)){
         echo "<tr><td>" 
-        . $row['order_id'] . "</td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td>" . $row['productName'] . "</td><td>"
+        . $row['OTID'] . "</td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td>" . $row['productName'] . "</td><td>"
         . $row['productType'] . "</td><td>" . $row['stock_amount'] . "</td><td>" . $row['cost'] . "</td><td>";
       }
       }
@@ -270,7 +270,7 @@ INNER JOIN ticket_system ON product_inventory.product_id=cart.product_id";-->
       while ($row = mysqli_fetch_assoc($result)) {
         $Date = date("m-d-Y", strtotime($row['date']));
         echo "<tr><td>" 
-        . $row['order_id'] . "</td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td>" . $row['productName'] . "</td><td>"
+        . $row['OTID'] . "</td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td>" . $row['productName'] . "</td><td>"
         . $row['productType'] . "</td><td>" . $row['stock_amount'] . "</td><td>" . $row['cost'] . "</td><td>";
       }
     }
