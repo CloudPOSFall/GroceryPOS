@@ -59,14 +59,12 @@
 
                     
                     
-                    $query = "UPDATE orders_ticket SET date = CURRENT_DATE(), time = CURRENT_TIME(), quantity = '$qtyTotal', subtotal = '$subTotal', total = '$total', tax = '$tax' WHERE OTID = '$OTID'";
+                    $query = "UPDATE orders_ticket SET date = CURRENT_DATE(), time = CURRENT_TIME(), quantity = '$qtyTotal', subtotal = '$subTotal', 
+                    total = '$total', tax = '$tax', status = '0' WHERE OTID = '$OTID'";
                     $result = mysqli_query($conn, $query) or die("Order Ticket Failed");
 
                     if($result)
                     {
-                        //$query = "INSERT INTO orders (cost) VALUES (NULL)";
-                        //$result = mysqli_query($conn, $query) or die(" Execution Failed orders insert on finalize");
-
                         header("location:purchaseorders.php");
                     }
                     
