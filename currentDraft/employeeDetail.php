@@ -1,7 +1,7 @@
 <?php
 include_once('config.php');
-if (isset($_GET['Detail'])) {
-    $findID = $_GET['Detail'];
+if (isset($_GET['Empl'])) {
+    $findID = $_GET['Empl'];
     $query = "SELECT * FROM employee_info WHERE employee_id LIKE '%$findID%'";
     $result = mysqli_query($conn, $query);
 ?>
@@ -162,7 +162,7 @@ if (isset($_GET['Detail'])) {
               <?php
 
                 while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<tr><td>" . $row['customer_id'] . "</td><td>"
+                  echo "<tr><td>" . $row['employee_id'] . "</td><td>"
                     . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['phone_number'] . "</td><td>"
                     . $row['company_name'] . "</td><td>" . $row['user_id'] . "</td><td>";
                 }

@@ -236,7 +236,7 @@ if (isset($_POST['selectreg'])) {
           </div>
         </a>
 
-        <a class="btn" href="#">
+        <a class="btn" href="return.php">
           <div class="card" id="pagecard">
             <div class="card-body text-center">
               <span class="card-text">
@@ -249,7 +249,7 @@ if (isset($_POST['selectreg'])) {
           </div>
         </a>
 
-        <a class="btn" href="#">
+        <a class="btn" href="saleshistory.php">
           <div class="card" id="pagecard">
             <div class="card-body text-center">
               <span class="card-text">

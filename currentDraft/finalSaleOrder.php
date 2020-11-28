@@ -57,26 +57,14 @@
                 if(isset($_GET['final'])) {
                     $OTID = $_SESSION['OTID'];
 
-                    //$query = "UPDATE ticket_system SET quantity ='".$qtyTotal."', subtotal ='".$subTotal."', total ='".$total."', 
-                            //tax ='".$tax."' WHERE cart_purchase = 1 ";
-                    //$result = mysqli_query($conn, $query) or die("Execution Failed");
-
-                    //$query = "UPDATE cart_inprogress SET ticket";
                     
-                    $query = "SELECT tax_rate FROM tax_table WHERE TTID=1";
-                    $result = mysqli_query($conn, $query) or die("Execution Failed");
-                    $row = mysqli_fetch_assoc($result);
-                    while($row = mysqli_fetch_assoc($result)) {
-                        $tax = $row['tax_rate'];
-                    }
-                    $query = "UPDATE orders_ticket SET date = CURRENT_DATE(), time = CURRENT_TIME(), quantity = '$qtyTotal', subtotal = '$subTotal', total = '$total', tax = '$tax' WHERE OTID = '$OTID'";
+                    
+                    $query = "UPDATE orders_ticket SET date = CURRENT_DATE(), time = CURRENT_TIME(), quantity = '$qtyTotal', subtotal = '$subTotal', 
+                    total = '$total', tax = '$tax', status = '0' WHERE OTID = '$OTID'";
                     $result = mysqli_query($conn, $query) or die("Order Ticket Failed");
 
                     if($result)
                     {
-                        //$query = "INSERT INTO orders (cost) VALUES (NULL)";
-                        //$result = mysqli_query($conn, $query) or die(" Execution Failed orders insert on finalize");
-
                         header("location:purchaseorders.php");
                     }
                     
