@@ -8,7 +8,7 @@
     $result = mysqli_query($conn, $query) or die("Execution Failed");
 
     // completed cart is initialized
-    $cartCode = "<table border='1' name='product'>";
+    $cartCode = "<table class='table' name='product'>";
     $cartCode .= "<tr> <th>Product Name</th> <th>Quantity</th> <th>Product Price</th> </tr>";
     // initializing total and quantity
     $total = 0.00;

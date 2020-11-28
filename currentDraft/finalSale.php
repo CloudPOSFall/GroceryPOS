@@ -1,7 +1,7 @@
+<br>
 <?php
     // display completed cart with saved variables
      include('joinCart.php');
-     
 ?>
 
 <br>
@@ -51,9 +51,10 @@
             }
         
         ?>
-    <br>
+    <br><br>
     <!-- Finalize Sale -->
     <input type='submit' name='final' value="Complete Sale"/>
+    <br><bR>
 </form>
 
 <?php
