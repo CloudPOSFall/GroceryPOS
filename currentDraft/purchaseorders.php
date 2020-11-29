@@ -1,6 +1,6 @@
 <?php
 include_once('config.php');
-$query = "SELECT orders_ticket.*, product_inventory.* FROM orders_ticket LEFT JOIN orders
+$query = "SELECT orders_ticket.*, orders.*, product_inventory.* FROM orders_ticket LEFT JOIN orders
 ON orders_ticket.OTID=orders.OTID LEFT JOIN product_inventory ON orders.product_id=product_inventory.product_id";
 $result = mysqli_query($conn, $query);
 ?>
@@ -229,7 +229,7 @@ $result = mysqli_query($conn, $query);
                 while ($row = mysqli_fetch_assoc($result)) {
                   echo "<tr><td>" . $row['OTID'] . "</td><td>"
                     . date('m-d-Y', strtotime($row['date'])) . "</td><td>" . $row['time'] . "</td><td>" . $row['brand'] . "</td><td>" . $row['description'] . "</td><td>"
-                    . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['quantity'] . "</td><td>" . $row['subtotal'] . "</td><td>"
+                    . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['stock_amount'] . "</td><td>" . $row['subtotal'] . "</td><td>"
                     . $row['total'] . "</td><td>" . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['status'] . "</td><td>"
                     . $row['vendor_id'] . "</td><td>";
                 }
@@ -240,7 +240,7 @@ $result = mysqli_query($conn, $query);
               while ($row = mysqli_fetch_assoc($result)) {
                 echo "<tr><td>" . $row['OTID'] . "</td><td>"
                     . date('m-d-Y', strtotime($row['date'])) . "</td><td>" . $row['time'] . "</td><td>" . $row['brand'] . "</td><td>" . $row['description'] . "</td><td>"
-                    . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['quantity'] . "</td><td>" . $row['subtotal'] . "</td><td>"
+                    . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['stock_amount'] . "</td><td>" . $row['subtotal'] . "</td><td>"
                     . $row['total'] . "</td><td>" . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['status'] . "</td><td>"
                     . $row['vendor_id'] . "</td><td>";
                 }
