@@ -23,18 +23,20 @@
             $tax = 0;
             $discount = 0;
             // tax selected for our region
-            $query = "SELECT tax_rate FROM tax_table WHERE TTID=1";
+            $query = "SELECT tax_rate FROM tax_table WHERE TTID='1'";
             $result = mysqli_query($conn, $query) or die("Execution Failed");
-            $row = mysqli_fetch_assoc($result);
             while($row = mysqli_fetch_assoc($result)) {
-                $tax = $row['tax_rate'];
-                $formatted = number_format($tax, 2);
-                $tax = $formatted;
+                $taxrate = $row['tax_rate'];
+                $formatted = number_format($taxrate, 2);
+                $taxrate = $formatted;
             }
             // subtotal saved
             $subTotal = $total;
             // new total is subtotal plus tax
-            $total = $total + $tax;
+            $total = $total + ($total * $taxrate);
+            $total = number_format($total, 2);
+            $tax = $total * $taxrate;
+            $tax = number_format($tax, 2);
             $credit = 0;
             $cash = 0;
             // trigger to get back change
@@ -64,8 +66,8 @@
         $CID = $_SESSION['CID'];
 
         // create new ticket for sale
-        $query = "INSERT INTO ticket_system (ticket_id, date, time, quantity, subtotal, total, tax, cash, credit)
-                    VALUES ('$CID', CURRENT_DATE(), CURRENT_TIME(), '$qtyTotal', '$subTotal', '$total', '$tax', '$cash', '$credit')";
+        $query = "INSERT INTO ticket_system (ticket_id, date, time, quantity, subtotal, total, tax, tax_rate, cash, credit)
+                    VALUES ('$CID', CURRENT_DATE(), CURRENT_TIME(), '$qtyTotal', '$subTotal', '$total', '$tax', '$taxrate', '$total', '$credit')";
         $result = mysqli_query($conn, $query) or die("Ticket Failed");
         
         // link new ticket to our cart in progress

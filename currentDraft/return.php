@@ -158,35 +158,30 @@ $result = mysqli_query($conn, $query);
           <thead class="bg-light">
           <tr>
               <th> Ticket ID </th>
-              <th> Brand </th>
-              <th> Description </th>
-              <th> Product Name </th>
-              <th> Product Type</th>
+              <th> Date </th>
               <th> Sale Quantity</th>
-              <th> Price </th>
+              <th> Customer </th>
               <th> Return </th>
               <th> </th>
             </tr>
           </thead>
           <tbody class="bg-white">
             <?php
-
             if (isset($_POST['submit-search'])) {
                 $search = mysqli_real_escape_string($conn, $_POST['ticket']);
-                $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
-                        LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
-                        cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
-                        WHERE ticket_system.ticket_id LIKE '%$search%'";
+                $sql = "SELECT * FROM ticket_system WHERE ticket_id LIKE '%$search%'";
                 $result = mysqli_query($conn, $sql);
                 $queryResults = mysqli_num_rows($result);
-
+                
+                $_SESSION['ticket'] = "";
                 if ($queryResults > 0) {
                 echo "<div class='row mt-3'>There are $queryResults results matching your search</div><br>";
                 while ($row = mysqli_fetch_assoc($result)) {
+                  $_SESSION['ticket'] = $row['ticket_id'];
+
                   echo "<tr><td>" . $row['ticket_id'] . "</td><td>"
-                    . $row['brand'] . "</td><td>" . $row['description'] . "</td><td>" . $row['productName'] . "</td><td>"
-                    . $row['productType'] . "</td><td>" . $row['qty'] . "</td><td>" . $row['unit_price'] . "</td><td><a class='btn-sm btn-dark' role='button' href='completereturn.php?Ret="
-                    . $row['product_id'] . "'>Select</a></td><td>";
+                    . $row['date'] . "</td><td>" . $row['quantity'] . "</td><td>" . $row['customer_id'] . "</td><td><a class='btn-sm btn-dark' role='button' href='completereturn.php?Ret="
+                    . $row['ticket_id'] . "'>Select</a></td><td>";
                 }
               } else {
                 echo "<div class='row mt-3'>There are no results matching your search</div>";

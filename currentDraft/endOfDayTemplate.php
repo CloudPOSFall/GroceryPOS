@@ -275,9 +275,8 @@ $date = date("Y-m-d", strtotime($_POST['date']));
                           LEFT JOIN return_table ON return_table.ticket_id=ticket_system.ticket_id 
                           WHERE return_table.date LIKE '$date'";
                    $result = mysqli_query($conn, $sql);
-                   while ($row = mysqli_fetch_assoc($result)) {
-                   $sum += $row['RTID'];
-                   }
+                   $rows = mysqli_num_rows($result);
+                   $sum+= $rows;
                   ?>
                   <th class="pr-5"> Returns </th>
                   <td class="text-right"><?php echo $sum; ?></td>

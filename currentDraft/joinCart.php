@@ -3,7 +3,7 @@
 
     include_once('config.php');
     // Joins product_inventory and cart tables in order to pull names and prices
-    $query = "SELECT product_inventory.productName, product_inventory.cost, cart.qty FROM product_inventory 
+    $query = "SELECT product_inventory.*, cart.qty FROM product_inventory 
               INNER JOIN cart ON product_inventory.product_id=cart.product_id";
     $result = mysqli_query($conn, $query) or die("Execution Failed");
 
@@ -16,7 +16,7 @@
 
     // Total cost is calculated and as well as quantity
     while($row = mysqli_fetch_assoc($result)) {
-        $newCost = $row['qty'] * $row['cost'];
+        $newCost = $row['qty'] * $row['unit_price'];
         $format = number_format($newCost, 2);
         $total = $total + $format;
         $qtyTotal = $qtyTotal + $row['qty'];

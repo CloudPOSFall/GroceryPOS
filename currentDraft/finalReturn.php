@@ -121,168 +121,79 @@ var_dump($_SESSION['customer']);
         </div>
     </nav>
 
-    <!--page content-->
-    <div id="content">
 
 
-        <!--
-            <nav id="paymentbar">
-            <div class="container-fluid">
-                <ul class="list-unstyled components">
-                    <li class="active">
-                    <li>
-                        Subtotal
-                    </li>
-                    </li>
-                    <li>
-                        Discounts
-                    </li>
-                    <li>
-                        Tax
-                    </li>
-                    <div id="payline"></div>
-                    <div class="sidebar-header">
-                        <h5>Total <div id="total" style="float: right;"></div></h5>
-                    </div>
-                    <div id="payline"></div>
-                    <div class="container text-center">
-                
-                        <button class="btn-lg btn-success navbar-btn" id="paybtn"> Payment</button></div>
-                </ul>
-            </div>
-        </nav> -->
+    <div class="container center" style="padding-left: 200px;">
+    <br>
+<?php
+        if(isset($_GET['Fin']))
+        {
+            $product = $_GET['Fin'];
+            $query = "SELECT * FROM product_inventory WHERE product_id='$product'";
+            $result = mysqli_query($conn, $query) or die("Execution Failed");
+    
+        
+        $cartCode = "<table class='table' name='product'>";
+        $cartCode .= "<tr> <th>Brand</th> <th>Description</th> <th>Product Name</th> <th>Quantity</th> <th>Product Price</th> </tr>";
+        
+        $total=0;
+        while($row = mysqli_fetch_assoc($result)) {
+        $total -= $row['unit_price'];
+        
+        $cartCode .= "<tr> <th>".$row['brand']."</th> <th>".$row['description']."</th> <th>"
+        .$row['productName']."</th><th>".'1'."</th><th>".$row['unit_price']."</th> <th>";
 
-        <!--location navbar-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="locnav">
-            <button type="button" id="sidebarCollapse" class="btn btn-success">
-                <i class="fas fa-align-left"></i>
-            </button>
+        }
+    
+        $_SESSION['total'] = $total;
+        echo($cartCode);
+        echo("Total Amount: $");
+        echo($total);
+        }
+?>
 
+<br>
+<form method="post" type="button" action="<?php echo $_SERVER['PHP_SELF'];?>">
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="nav navbar-nav mr-auto">
-                    <a class="navbar-brand" href="salescontrolv3.html"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-credit-card-2-back" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M14 3H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2z" />
-                            <path d="M11 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1zM1 9h14v2H1V9z" />
-                        </svg> Sales</a>
-                </ul>
-            </div>
-        </nav>
+   
+    Choose a Payment Type:
+    <select name="payment">
+        <option value="Cash">Cash</option>
+        <option value="Credit">Credit</option>
+    </select> <input type="submit" name ="submit" value="Payment Type"> <br>
+       
+        <br>Cash Amount: <input type="text" name="cash">
 
-        <nav class="navbar navbar-light" style="background-color: #a1b6a8;" id="salespanel">
-                    <?php
-                    if (isset($_GET['Add'])) {
-                        $ID = $_GET['Add'];
-                        $cQuery = "SELECT * FROM customer_info WHERE customer_id LIKE '%$ID%'";
-                        $cResult = mysqli_query($conn, $cQuery);
-                        $cQueryRes= mysqli_num_rows($cResult);
-                        if ($cQueryRes > 0) {
-                            while ($crow = mysqli_fetch_assoc($cResult)) {
-                                $_SESSION['customer']['fname'] = $crow['first_name'];
-                                $_SESSION['customer']['lname'] = $crow['last_name'];
-                                echo "<form class='form-inline'><div class='card' style='padding: 8px'>" . $_SESSION['customer']['fname'] . " " . $_SESSION['customer']['lname'] . "</div>
-                                <div class='nav-item'><button href='sale.php' class='btn navbar-btn'> Remove</button></div></form>";
-								array_push($_SESSION['customer'],$_GET['Add']);
-                            }
-                        } 
-                    }else {
-                        echo "<form class='form-inline' method='post' action='customerview.php'><div class='card' style='padding: 8px'>No Customer Selected</div>
-                        <div class='nav-item'>
-                        <input class='form-control col-5' name='customer' placeholder='Search Customers' aria-label='Search'>
-                        <button class='btn btn-dark navbar-btn' name='sale-search'> Look Up</button></div></form>";
-                    }
-                    ?>
-                
-                
-                <div class="nav-item"><button class="btn navbar-btn"> New</button></div>
+    <br><br>
+    <input type='submit' name='fin' value="Complete Return"/>
+    <br><bR>
+</form>
+
+<?php
+    
+    if(isset($_POST['fin'])) {
+        $total=$_SESSION['total'];
+
+        $sql = "SELECT ticket_id FROM ticket_system WHERE ticket_id LIKE '".$_SESSION['ticket']."'";
+        $result = mysqli_query($conn, $sql);
             
+        while ($row = mysqli_fetch_assoc($result)) {
+            $ticketid = $row['ticket_id'];
+        }
 
-        </nav>
-
-
-        <nav class="navbar navbar-light" style="background-color: #e2e2e2;">
-            <form class="form-inline" method="post" action="saleitemslist.php">
-                <input class="form-control" name="isearch" placeholder="Item Search" aria-label="Search">
-                <button class="btn btn-dark navbar-btn" name="item-search"> Search</button>
-                <div class="nav-item">
-                    <button class="btn navbar-btn"> Misc</button>
-                </div>
-                <div class="nav-item">
-                    <button class="btn btn-secondary navbar-btn"> Gift Card</button>
-                </div>
-            </form>
-
-        </nav>
-
-    <div class="table-responsive">
-        <table class="table table-striped table-hove" id="salescontent">
-            <thead>
-            
-                <tr>
-                    <th class="col-2" class="hover">Brand</th>
-                    <th class="col-5 ml-auto">Description</th>
-                    <th class="col-5 ml-auto">Product Name</th>
-                    <th class="col-1 text-center">Quantity</th>
-                    <th class="col-2 text-center">Subtotal</th>
-                    <th class="col-2 text-center">Return</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <?php
-                //if ($row['in_stock'] > 0){}
-                //}else{
-                //echo "<div>The item you searched for is not in stock</div>";
-                if(isset($_GET['Ret']))
-                {
-                    $ticket = $_GET['Ret'];
-                    $sql = "SELECT ticket_system.ticket_id, product_inventory.*, item_list.product_id FROM ticket_system 
-                        LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
-                        cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
-                        WHERE item_list.CID LIKE '$ticket'";
-                    $result = mysqli_query($conn, $sql);
-                    
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<tr><td>"
-                    . $row['brand'] . "</td><td>" . $row['description'] . "</td><td>" . $row['productName'] . "</td><td>"
-                    . '1' . "</td><td>" . $row['unit_price'] . "</td><td><a class='btn-sm btn-dark' role='button' href='finalReturn.php?Fin="
-                    . $row['product_id'] . "'>Select</a></td><td>";
-                
-                    }
-                }
-                
-
-                if (isset($_POST['additem'])) {
-                    $search = $_POST['sproduct'];
-                    $query = "SELECT * FROM product_inventory WHERE product_id LIKE '%$search%'";
-                    $taxquery = "SELECT tax_rate FROM tax_table";
-                    $result = mysqli_query($conn, $query);
-                    $taxres = mysqli_query($conn, $taxquery);
-                    $tax = mysqli_fetch_assoc($taxres);
-                    $queryResults = mysqli_num_rows($result);
-                    if ($queryResults > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<tr><td>" . $row['productName'] . "</td><td>" . $row['unit_price'] . "</td><td class='text-center'> 1 </td><td class='text-center'>"
-                                . number_format($row['unit_price'] * $tax['tax_rate'], 2) . "</td><td class='text-center'>" . number_format($row['unit_price'] * (1 + $tax['tax_rate']), 2)  . "</td></tr>";
-                        }
-                    } else {
-                        echo "Problem adding item via Product ID";
-                    }
-                } 
-                ?>
-            </tbody>
-        </table>
-    </div>       
-  <!--#e2e2e2-->
-
-
+        $query = "INSERT INTO return_table (ticket_id, date, time, refunds)
+                    VALUES ('$ticketid', CURRENT_DATE(), CURRENT_TIME(), '$total')";
+        $result = mysqli_query($conn, $query) or die("Return Failed");
+        
+        if($result) 
+        {
+            header("location:salescontrolpanel.php");
+        }
+    }
+       
+?>
     </div>
 
-
-
-
-    
-    <!--END page content-->
 
     <script type="text/javascript">
         $(document).ready(function () {

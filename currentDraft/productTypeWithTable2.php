@@ -9,7 +9,7 @@
 
     while($row = mysqli_fetch_assoc($result)) {
         $tableCode .= "<tr> <th>".$row['productName']."</th> <th>".$row['productType']."</th> <th>"
-        .$row['productSubType']."</th><th>".$row['unit_price']."</th><th><input type='submit' name='addToOrder' value=".$row['product_id']."
+        .$row['productSubType']."</th><th>".$row['cost']."</th><th><input type='submit' name='addToOrder' value=".$row['product_id']."
         ></th> </tr>";
     }
     $tableCode .= "</table>";
