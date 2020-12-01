@@ -172,9 +172,9 @@ var_dump($_SESSION['customer']);
      <?php
 		if(isset($_SESSION['custfirst']))
 		{
-				echo "<form class='form-inline'><div 
+				echo "<form class='form-inline' method='post' action ='removecust.php'> <div 
 				class='card' style='padding: 8px'>" . $_SESSION['custfirst'] . " " . $_SESSION['custlast'] . "</div>
-                <div class='nav-item'><button href='removecust.php' class='btn navbar-btn'> Remove</button></div></form>";
+                <div class='nav-item'><button action='index.php' class='btn navbar-btn'> Remove</button></div></form>";
 		}else{
                     if (isset($_POST['scustomer'])) {
                         $ID = $_POST['scustomer'];
@@ -189,7 +189,7 @@ var_dump($_SESSION['customer']);
 								$last = mysqli_real_escape_string($conn,$last);
 								echo "<form class='form-inline'><div 
 								class='card' style='padding: 8px'>" . $first . " " . $last . "</div>
-                                <div class='nav-item'><button href='removecust.php' class='btn navbar-btn'> Remove</button></div></form>";
+                                <div class='nav-item'><button href='index.php' class='btn navbar-btn'> Remove</button></div></form>";
 								$_SESSION['custfirst'] = $first;
 								$_SESSION['custlast'] = $last;
                             }
