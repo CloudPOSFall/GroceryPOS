@@ -217,10 +217,10 @@ $result = mysqli_query($conn, $query);
             <?php
 
             if (isset($_POST['submit-search'])) {
-              $search = mysqli_real_escape_string($conn, $_POST['product']);
-              $query = "SELECT orders_ticket.*, product_inventory.* FROM orders_ticket LEFT JOIN orders
+              $search = mysqli_real_escape_string($conn, $_POST['order']);
+              $query = "SELECT orders_ticket.*, orders.*, product_inventory.* FROM orders_ticket LEFT JOIN orders
               ON orders_ticket.OTID=orders.OTID LEFT JOIN product_inventory ON orders.product_id=product_inventory.product_id
-              WHERE productName LIKE '%$search%' OR productType LIKE '%$search%' OR order_id LIKE '%$search%' OR vendor_id LIKE '%$search%'";
+              WHERE orders_ticket.OTID LIKE '%$search%'";
               $result = mysqli_query($conn, $query);
               $queryResults = mysqli_num_rows($result);
 

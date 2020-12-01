@@ -67,9 +67,8 @@
                 if(isset($_GET['final'])) {
                     $OTID = $_SESSION['OTID'];
 
-                    
                     $query = "UPDATE orders_ticket SET date = CURRENT_DATE(), time = CURRENT_TIME(), quantity = '$qtyTotal', subtotal = '$subTotal', 
-                    total = '$total', tax = '$tax', tax_rate = '$taxrate', cash = '$total', status = '0' WHERE OTID = '$OTID'";
+                    total = '$total', tax = '$tax', tax_rate = '$taxrate', cash = '$total', status = '0', vendor_id = '".$_SESSION['vendor']."' WHERE OTID = '$OTID'";
                     $result = mysqli_query($conn, $query) or die("Order Ticket Failed");
 
                     if($result)

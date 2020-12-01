@@ -117,6 +117,13 @@ var_dump($_SESSION['customer']);
             </div>
         
     </li>
+    <li>
+        <div class="card text-center" id="footerbtn" style="background: #016923;">
+          <a role="button" href="logout.php"> Logout</a>
+
+
+        </div>
+        </li>
         </ul>
         </div>
     </nav>
@@ -124,7 +131,7 @@ var_dump($_SESSION['customer']);
     <!--page content-->
     <div id="content">
 
-
+<!--
         <nav id="paymentbar">
             <div class="container-fluid">
                 <ul class="list-unstyled components">
@@ -150,7 +157,7 @@ var_dump($_SESSION['customer']);
                 </ul>
             </div>
         </nav>
-
+-->
         <!--location navbar-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="locnav">
             <button type="button" id="sidebarCollapse" class="btn btn-success">

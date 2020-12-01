@@ -1,5 +1,6 @@
 <?php
 include_once('config.php');
+$_SESSION['vendor']= $_GET['Ven'];
 include ('orderticketinsert.php');
 $query = "SELECT * FROM product_inventory";
 $result = mysqli_query($conn, $query);

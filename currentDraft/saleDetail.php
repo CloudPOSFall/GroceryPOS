@@ -111,6 +111,13 @@ if (isset($_GET['Detail'])) {
             </div>
         
     </li>
+    <li>
+        <div class="card text-center" id="footerbtn" style="background: #016923;">
+          <a role="button" href="logout.php"> Logout</a>
+
+
+        </div>
+        </li>
         </ul>
         </div>
     </nav>

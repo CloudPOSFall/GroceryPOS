@@ -9,9 +9,10 @@
       $UnitPrice = $_POST['unit'];
       $Cost = $_POST['cost'];
       $InStock = $_POST['in'];
+      $Vendor = $_POST['vendor'];
 
-      $query = "insert into product_inventory (productName, productType, productSubType, unit_price, cost, in_stock)
-              values ('$ProductName', '$ProductType', '$ProductSubtype', '$UnitPrice', '$Cost', '$InStock')";
+      $query = "insert into product_inventory (productName, productType, productSubType, unit_price, cost, in_stock, vendor_id)
+              values ('$ProductName', '$ProductType', '$ProductSubtype', '$UnitPrice', '$Cost', '$InStock','$Vendor')";
 
       $result = mysqli_query($conn, $query);
 

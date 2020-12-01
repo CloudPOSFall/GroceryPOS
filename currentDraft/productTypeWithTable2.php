@@ -1,9 +1,8 @@
 <?php
     include_once('config.php');
 
-    $query = "SELECT * FROM product_inventory";
+    $query = "SELECT * FROM product_inventory WHERE vendor_id = '".$_SESSION['vendor']."'";
     $result = mysqli_query($conn, $query) or die("Execution Failed");
-
     $tableCode = "<table border='1' name='product'>";
     $tableCode .= "<tr> <th>Product Name</th> <th>Product Type</th> <th>Product Sub Type</th> <th>Price</th> <th>Add to Order</th> </tr>";
 
