@@ -170,9 +170,9 @@ var_dump($_SESSION['customer']);
 
         <nav class="navbar navbar-light" style="background-color: #a1b6a8;" id="salespanel">
                     <?php
-					$first = $last = "";
-                    if (isset($_SESSION['id'])) {
-                        $ID = $_SESSION['id'];
+					
+                    if (isset($_POST['scustomer'])) {
+                        $ID = $_POST['scustomer'];
                         $cQuery = "SELECT * FROM customer_info WHERE customer_id LIKE '%$ID%'";
                         $cResult = mysqli_query($conn, $cQuery);
                         $cQueryRes= mysqli_num_rows($cResult);
@@ -182,7 +182,7 @@ var_dump($_SESSION['customer']);
 								$first = mysqli_real_escape_string($conn,$first);
                                 $last = $crow['last_name'];
 								$last = mysqli_real_escape_string($conn,$last);
-								$setButton .="<form class='form-inline'><div 
+								echo "<form class='form-inline'><div 
 								class='card' style='padding: 8px'>" . $first . " " . $last . "</div>
                                 <div class='nav-item'><button href='index.php' class='btn navbar-btn'> Remove</button></div></form>";
                             }
@@ -193,7 +193,6 @@ var_dump($_SESSION['customer']);
                         <input class='form-control col-5' name='customer' placeholder='Search Customers' aria-label='Search'>
                         <button class='btn btn-dark navbar-btn' name='sale-search'> Look Up</button></div></form>";
                     }
-					echo $setButton;
                     ?>
                 
                 <div class="nav-item"><button class="btn navbar-btn"> New</button></div>
@@ -238,7 +237,6 @@ var_dump($_SESSION['customer']);
                 //if ($row['in_stock'] > 0){}
                 //}else{
                 //echo "<div>The item you searched for is not in stock</div>";
-
 
                 if (isset($_POST['additem'])) {
                     $search = $_POST['sproduct'];

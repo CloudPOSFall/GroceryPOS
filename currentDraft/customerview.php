@@ -197,15 +197,15 @@ $result = mysqli_query($conn, $query);
               if ($queryResults > 0) {
                 echo "<div class='row mt-3'>There are $queryResults results matching your search</div><br>";
                 while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<tr><td>" . $row['customer_id'] . "</td><td>"
+					echo "<tr><td>" . $row['customer_id'] . "</td><td>"
                     . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
                     . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
                     . $row['email'] . "</td><td class='text-center'>"  . $row['rewards'] .
                     "</td><td><a class='btn-sm btn-dark' role='button' href='customerdelete.php?Del="
                     . $row['customer_id'] . "'>Remove</a></td><td><a class='btn-sm btn-dark' role='button' href='customeredit.php?Upd="
                     . $row['customer_id'] . "'>Select</a></td></tr>";
-                }
-              } else {
+                	}
+              	} else {
                 echo "<div class='row mt-3'>There are no results matching your search</div>";
               }
             } else if (isset($_POST['sale-search'])) {
@@ -221,29 +221,13 @@ $result = mysqli_query($conn, $query);
                     . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
                     . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
                     . $row['email'] . "</td><td>"  . $row['rewards'] .
-                    "</td><td><a class='btn btn-dark' role='button' href='sale.php'
-                    >Attach</a></td><td><a class='btn btn-dark' role='button' href='customeredit.php?Upd="
+                    "</td><td><form method = 'post' action='sale.php'><button class = 'btn btn-dark' name ='attatchCustomer'>Attatch</td><input name='scustomer' size = '1' value='". $row['customer_id']."' readonly hidden/></form><td><a class='btn btn-dark' role='button' href='customeredit.php?Upd="
                     . $row['customer_id'] . "'>Update</a></td></tr>";
 					  
                   }
                 } else {
-                  echo "<div>There are no results matching your search</div>";
+					echo "<div>There are no results matching your search</div>";
                 }
-              }
-              
-              else {
-                while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<tr><td>" . $row['customer_id'] . "</td><td>"
-                    . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
-                    . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
-                    . $row['email'] . "</td><td class='text-center'>"  . $row['rewards'] .
-                    "</td><td><a class='btn-sm btn-dark' role='button' href='sale.php?Add="
-                    . $row['customer_id'] . "'>Attach</a></td><td><a class='btn-sm btn-dark' role='button' href='customeredit.php?Upd="
-                    . $row['customer_id'] . "'>Update</a></td></tr>";
-                }
-              } else {
-                echo "<div class='row mt-3'>There are no results matching your search</div>";
-              }
             } else {
               while ($row = mysqli_fetch_assoc($result)) {
                 echo "<tr><td>" . $row['customer_id'] . "</td><td>"
