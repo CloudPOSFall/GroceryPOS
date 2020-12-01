@@ -115,6 +115,11 @@ $result = mysqli_query($conn, $query);
             </svg> Switch User</a>
 
         </div>
+        <li>
+        <div class="card text-center" id="footerbtn" style="background: #016923;">
+          <a role="button" href="logout.php"> Logout</a>
+        </div>
+      </li>
 
       </li>
     </ul>
@@ -164,7 +169,7 @@ $result = mysqli_query($conn, $query);
       <div class="row px-4 justify-content-center">
         <table class="table table-bordered table-hover mt-3 table-responsive" style="font-size:80%;">
           <thead class="bg-light">
-            <tr>
+          <tr>
               <th> ID </th>
               <th> First Name </th>
               <th> Last Name </th>
@@ -175,6 +180,8 @@ $result = mysqli_query($conn, $query);
               <th> Phone Number </th>
               <th> Email </th>
               <th> Rewards </th>
+              <th> Delete </th>
+              <th> Update </th>
               <th> </th>
             </tr>
           </thead>
@@ -195,8 +202,8 @@ $result = mysqli_query($conn, $query);
                     . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
                     . $row['email'] . "</td><td class='text-center'>"  . $row['rewards'] .
                     "</td><td><a class='btn-sm btn-dark' role='button' href='customerdelete.php?Del="
-                    . $row['customer_id'] . "'>Delete</a></td><td><a class='btn-sm btn-dark' role='button' href='customeredit.php?Upd="
-                    . $row['customer_id'] . "'>Update</a></td></tr>";
+                    . $row['customer_id'] . "'>Remove</a></td><td><a class='btn-sm btn-dark' role='button' href='customeredit.php?Upd="
+                    . $row['customer_id'] . "'>Select</a></td></tr>";
                 }
               } else {
                 echo "<div class='row mt-3'>There are no results matching your search</div>";
@@ -237,11 +244,21 @@ $result = mysqli_query($conn, $query);
               } else {
                 echo "<div class='row mt-3'>There are no results matching your search</div>";
               }
-					$_SESSION['id'] = $row['customer_id'];
-              ?>
-            </tbody>
-          </table>
-        </div>
+            } else {
+              while ($row = mysqli_fetch_assoc($result)) {
+                echo "<tr><td>" . $row['customer_id'] . "</td><td>"
+                  . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
+                  . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
+                  . $row['email'] . "</td><td class='text-center'>"  . $row['rewards'] .
+                  "</td><td><a class='btn-sm btn-dark' role='button' href='customerdelete.php?Del="
+                  . $row['customer_id'] . "'>Remove</a></td><td><a class='btn-sm btn-dark' role='button' href='customeredit.php?Upd="
+                  . $row['customer_id'] . "'>Edit</a></td></tr>";
+              }
+            }
+
+            ?>
+          </tbody>
+        </table>
       </div>
     </div>
 

@@ -2,18 +2,21 @@
 <?php
 
     include_once('config.php');
-
-    $query = "SELECT product_inventory.productName, product_inventory.cost, cart.qty FROM product_inventory 
+    // Joins product_inventory and cart tables in order to pull names and prices
+    $query = "SELECT product_inventory.*, cart.qty FROM product_inventory 
               INNER JOIN cart ON product_inventory.product_id=cart.product_id";
     $result = mysqli_query($conn, $query) or die("Execution Failed");
 
-    $cartCode = "<table border='1' name='product'>";
+    // completed cart is initialized
+    $cartCode = "<table class='table' name='product'>";
     $cartCode .= "<tr> <th>Product Name</th> <th>Quantity</th> <th>Product Price</th> </tr>";
+    // initializing total and quantity
     $total = 0.00;
     $qtyTotal = 0;
 
+    // Total cost is calculated and as well as quantity
     while($row = mysqli_fetch_assoc($result)) {
-        $newCost = $row['qty'] * $row['cost'];
+        $newCost = $row['qty'] * $row['unit_price'];
         $format = number_format($newCost, 2);
         $total = $total + $format;
         $qtyTotal = $qtyTotal + $row['qty'];
@@ -21,6 +24,7 @@
         $newCost = 0.00;
     }
 
+    // completed cart is displayed as well as total cost
     echo($cartCode);
     echo("Total Amount: $");
     echo($total);

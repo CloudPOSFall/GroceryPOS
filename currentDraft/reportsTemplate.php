@@ -1,7 +1,7 @@
 <?php
 include_once('config.php');
-$query = "SELECT * FROM ticket_system, inventory sales";
-$result = mysqli_query($conn, $query);
+$sql = "SELECT * FROM ticket_system";
+$result = mysqli_query($conn, $sql);
 ?>
 <!DOCTYPE html>
 <html>
@@ -172,7 +172,7 @@ $result = mysqli_query($conn, $query);
             <div class="form-group">
               <div class="input-group" style="width: 220px; padding: 10px;">
                 <label class="control-label border bg-light" for="start"><span class="input-group-addon px-2"> Start </span></label>
-                <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text" />
+                <input class="form-control" id="date" name="sdate" placeholder="MM/DD/YYY" type="text" />
               </div>
             </div>
 
@@ -180,7 +180,7 @@ $result = mysqli_query($conn, $query);
             <div class="form-group">
               <div class="input-group" style="width: 220px; padding: 10px;">
                 <label class="control-label border bg-light" for="end"><span class="align-middle px-2"> End </span></label>
-                <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text" />
+                <input class="form-control" id="date" name="edate" placeholder="MM/DD/YYY" type="text" />
               </div>
             </div>
 
@@ -244,34 +244,133 @@ $result = mysqli_query($conn, $query);
             </tr>
           </thead>
           <tbody >
+          <?php
+    
+    if (isset($_POST['submit'])) {
+    $DateBegin = date('Y-m-d', strtotime($_POST['sdate']));
+    $DateEnd = date('Y-m-d', strtotime($_POST['edate']));
+    $search = mysqli_real_escape_string($conn, $DateBegin);
+    $sql = "SELECT * FROM ticket_system WHERE date LIKE '$search%'";
+    $result = mysqli_query($conn, $sql);
+    while ($row = mysqli_fetch_assoc($result)) {
+    if (($row['date'] >= $DateBegin) && ($row['date'] <= $DateEnd)){
+        echo "<tr><td>" 
+        . $row['ticket_id'] . "</td><td>". $row['subtotal'] . "</td><td>" . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['total'] . "</td><td>" . "</td><td>" 
+        . "</td><td>" . "</td><td>" . $row['time'] . "</td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td><a class='btn btn-dark' 
+        role='button' href='customerDetail.php?Detail=". $row['customer_id'] . "'>View</a>";
+      }
+      }
+        ?>
+                <!-- Retrieved SQL Data Goes Here Instead of empty tds -->
+                
+              </tbody>
+            </table>
+          </div>
+    
+          <div id="contentline"></div>
+    
+          <div class="row pl-3">
+            <div class="px-1">
+              <table class="table table-responsive" style="font-size:80%;">
+                <thead>
+    
+                </thead>
+                <tbody>
+                  <tr>
+                  <?php 
+                  $sum=0;
+                  $sql = "SELECT * FROM ticket_system WHERE date LIKE '$DateBegin'";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                  $sum += $row['subtotal'];
+                  }
+                  ?>
+                    <th style="padding-right: 30px;"> Subtotal </th>
+                    <td class="text-right">$<?php echo $sum; ?></td>
+                  </tr>
+                  <tr>
+                  <?php 
+                  $sum=0;
+                  $sql = "SELECT * FROM ticket_system WHERE date LIKE '$DateBegin'";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                  $sum += $row['discount'];
+                  }
+                  ?>
+                    <th style="padding-right: 30px;"> Discounts </th>
+                    <td class="text-right">$<?php echo $sum; ?></td>
+                  </tr>
+                  <tr>
+                  <?php 
+                  $sum=0;
+                  $sql = "SELECT * FROM ticket_system WHERE date LIKE '$DateBegin'";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                  $sum += $row['tax'];
+                  }
+                  ?>
+                    <th style="padding-right: 30px;"> Tax </th>
+                    <td class="text-right">$<?php echo $sum; ?></td>
+                  </tr>
+                  <tr>
+                  <?php 
+                  $sum=0;
+                  $sql = "SELECT * FROM ticket_system WHERE date LIKE '$DateBegin'";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                  $sum += $row['total'];
+                  }
+                  ?>
+                    <th style="padding-right: 30px;"> Total </th>
+                    <td class="text-right">$<?php echo $sum ?></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="px-1">
+              <table class="table table-responsive" style="font-size:80%;">
+                <thead>
+    
+                </thead>
+                <tbody>
+                  <tr>
+                    <th style="padding-right: 50px;"> Taxed </th>
+                    <td class="text-right">$0</td>
+                  </tr>
+                  <tr>
+                    <th style="padding-right: 50px;"> Untaxed </th>
+                    <td class="text-right">$0</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="px-1">
+              <table class="table table-responsive" style="font-size:80%;">
+                <thead>
+    
+                </thead>
+                <tbody>
+                  <tr>
+                    <th style="padding-right: 50px;"> Cost </th>
+                    <td class="text-right">$0</td>
+                  </tr>
+                  <tr>
+                    <th style="padding-right: 50px;"> Profit </th>
+                    <td class="text-right">$0</td>
+                  </tr>
+                  <tr>
+                    <th style="padding-right: 50px;"> Margin </th>
+                    <td class="text-right">0%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
 
             <!-- Retrieved SQL Data Goes Here Instead of empty tds -->
-            <tr>
-              <th></th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th></th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
+            
           </tbody>
         </table>
       </div>
@@ -286,21 +385,53 @@ $result = mysqli_query($conn, $query);
             </thead>
             <tbody>
               <tr>
-                <th style="padding-right: 30px;"> Subtotal </th>
-                <td class="text-right">$500</td>
-              </tr>
-              <tr>
-                <th style="padding-right: 30px;"> Discounts </th>
-                <td class="text-right">$0</td>
-              </tr>
-              <tr>
-                <th style="padding-right: 30px;"> Tax </th>
-                <td class="text-right">$123</td>
-              </tr>
-              <tr>
-                <th style="padding-right: 30px;"> Total </th>
-                <td class="text-right">$623</td>
-              </tr>
+              <?php 
+                  $sum=0;
+                  $sql = "SELECT * FROM ticket_system";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                  $sum += $row['subtotal'];
+                  }
+                  ?>
+                    <th style="padding-right: 30px;"> Subtotal </th>
+                    <td class="text-right">$<?php echo $sum; ?></td>
+                  </tr>
+                  <tr>
+                  <?php 
+                  $sum=0;
+                  $sql = "SELECT * FROM ticket_system";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                  $sum += $row['discount'];
+                  }
+                  ?>
+                    <th style="padding-right: 30px;"> Discounts </th>
+                    <td class="text-right">$<?php echo $sum; ?></td>
+                  </tr>
+                  <tr>
+                  <?php 
+                  $sum=0;
+                  $sql = "SELECT * FROM ticket_system";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                  $sum += $row['tax'];
+                  }
+                  ?>
+                    <th style="padding-right: 30px;"> Tax </th>
+                    <td class="text-right">$<?php echo $sum; ?></td>
+                  </tr>
+                  <tr>
+                  <?php 
+                  $sum=0;
+                  $sql = "SELECT * FROM ticket_system";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                  $sum += $row['total'];
+                  }
+                  ?>
+                    <th style="padding-right: 30px;"> Total </th>
+                    <td class="text-right">$<?php echo $sum ?></td>
+                  </tr>
             </tbody>
           </table>
         </div>
@@ -312,7 +443,7 @@ $result = mysqli_query($conn, $query);
             <tbody>
               <tr>
                 <th style="padding-right: 50px;"> Taxed </th>
-                <td class="text-right">$500</td>
+                <td class="text-right">$0</td>
               </tr>
               <tr>
                 <th style="padding-right: 50px;"> Untaxed </th>
@@ -329,21 +460,22 @@ $result = mysqli_query($conn, $query);
             <tbody>
               <tr>
                 <th style="padding-right: 50px;"> Cost </th>
-                <td class="text-right">$200</td>
+                <td class="text-right">$0</td>
               </tr>
               <tr>
                 <th style="padding-right: 50px;"> Profit </th>
-                <td class="text-right">$423</td>
+                <td class="text-right">$0</td>
               </tr>
               <tr>
                 <th style="padding-right: 50px;"> Margin </th>
-                <td class="text-right">67.9%</td>
+                <td class="text-right">0%</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
     </div>
+
 
 
 
@@ -373,10 +505,9 @@ $result = mysqli_query($conn, $query);
       todayHighlight: true,
       autoSize: true,
       autoclose: true,
-      orientation: "top",
+      orientation: "top right",
     };
     date_input.datepicker(options);
   })
 </script>
-
 </html>

@@ -166,13 +166,17 @@ $result = mysqli_query($conn, $query);
           <thead class="bg-light">
             <tr>
               <td> ID </td>
-              <td> Vendor Name </td>
+              <td> Company Name </td>
+              <td> Department </td>
               <td> Street Address </td>
               <td> City </td>
               <td> State </td>
               <td> Zip Code </td>
-              <td> Shipments </td>
-              <td> Category Code </td>
+              <td> Phone Number </td>
+              <td> Fax Number </td>
+              <td> Email </td>
+              <td> Delete </td>
+              <td> Update </td>
             </tr>
           </thead>
 
@@ -182,7 +186,7 @@ $result = mysqli_query($conn, $query);
 
           if (isset($_POST['submit-search'])) {
             $search = mysqli_real_escape_string($conn, $_POST['vendor']);
-            $sql = "SELECT * FROM vendorinfo WHERE vendor_name LIKE '%$search%' OR vendor_number LIKE '%$search%' OR company_code LIKE '%$search%'";
+            $sql = "SELECT * FROM vendorinfo WHERE company_name LIKE '%$search%' OR phone_number LIKE '%$search%' OR email LIKE '%$search%'";
             $result = mysqli_query($conn, $sql);
             $queryResults = mysqli_num_rows($result);
 
@@ -190,9 +194,10 @@ $result = mysqli_query($conn, $query);
               echo "<div class='row mt-3'>There are $queryResults results matching your search</div><br>";
               while ($row = mysqli_fetch_assoc($result)) {
                 echo "<tr><td>" . $row['vendor_id'] . "</td><td>"
-                  . $row['vendor_name'] . "</td><td>" . $row['street_address'] . "</td><td>" . $row['city'] . "</td><td>" . $row['state'] . "</td><td>"
-                  . $row['zip_code'] . "</td><td>" . $row['shipments'] . "</td><td>" . $row['category_code'] . "</td><td> <a class='btn navbar-btn btn-dark' role='button' href='vendordelete.php?Del='"
-                  . $row['vendor_id'] . "'>Delete</a></td></tr>";
+                  . $row['company_name'] . "</td><td>" . $row['department'] . "</td><td>" . $row['street_address'] . "</td><td>" . $row['city'] . "</td><td>" . $row['state'] . "</td><td>"
+                  . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>" . $row['fax_number'] . "</td><td>" . $row['email'] . "</td><td><a class='btn-sm btn-dark' role='button' href='vendordelete.php?Del="
+                  . $row['vendor_id'] . "'>Remove</a></td><td><a class='btn-sm btn-dark' role='button' href='vendoredit.php?Upd="
+                  . $row['vendor_id'] . "'>Edit</a></td></tr>";
               }
             } else {
               echo "<div class='row mt-3'>There are no results matching your search</div>";
@@ -200,10 +205,11 @@ $result = mysqli_query($conn, $query);
           } else {
             while ($row = mysqli_fetch_assoc($result)) {
               echo "<tr><td>" . $row['vendor_id'] . "</td><td>"
-                . $row['vendor_name'] . "</td><td>" . $row['street_address'] . "</td><td>" . $row['city'] . "</td><td>" . $row['state'] . "</td><td>"
-                . $row['zip_code'] . "</td><td>" . $row['shipments'] . "</td><td>" . $row['category_code'] . "</td><td> <a class='btn navbar-btn btn-dark' role='button' href='vendordelete.php?Del='"
-                . $row['vendor_id'] . "'>Delete</a></td></tr>";
-            }
+                  . $row['company_name'] . "</td><td>" . $row['department'] . "</td><td>" . $row['street_address'] . "</td><td>" . $row['city'] . "</td><td>" . $row['state'] . "</td><td>"
+                  . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>" . $row['fax_number'] . "</td><td>" . $row['email'] . "</td><td><a class='btn-sm btn-dark' role='button' href='vendordelete.php?Del="
+                  . $row['vendor_id'] . "'>Remove</a></td><td><a class='btn-sm btn-dark' role='button' href='vendoredit.php?Upd="
+                  . $row['vendor_id'] . "'>Edit</a></td></tr>";
+              }
           }
 
           ?>

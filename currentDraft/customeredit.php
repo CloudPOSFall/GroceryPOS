@@ -164,7 +164,7 @@ if (isset($_GET['Upd'])) {
           </div>
           <div class="form-group row">
             <label class="col-4" for="Password">Password</label>
-            <input type="text" value=" <?php echo $row['password'] ?> " name="password" />
+            <input type="password" value=" <?php echo $row['password'] ?> " name="password" />
           </div>
           <div class="form-group row">
             <label class="col-4" for="First Name">First Name</label>

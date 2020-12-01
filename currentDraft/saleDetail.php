@@ -2,7 +2,7 @@
 include_once('config.php');
 if (isset($_GET['Detail'])) {
     $findID = $_GET['Detail'];
-    $query = "SELECT * FROM cart_table, product_inventory WHERE sale_id LIKE '%$findID%'";
+    $query = "SELECT * FROM cart_table WHERE sale_id LIKE '%$findID%'";
     $result = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>

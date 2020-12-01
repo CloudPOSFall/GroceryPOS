@@ -217,6 +217,8 @@ include_once('config.php');
               $tresult = mysqli_query($conn, $tquery);
               $total = 0;
               $yearTotal = 0;
+              if($row['rewards'] != 0)
+              {
               while ($trow = mysqli_fetch_assoc($tresult)) {
                 $date = new DateTime($trow['date']);
                 $date->format('Y');
@@ -226,6 +228,7 @@ include_once('config.php');
                 }
                 $total += $trow['total'];
               }
+              //echo "$date";
               echo "
                   <tr>
                   <td>" . $row['first_name'] . " " . $row['last_name'] . "</td>
@@ -233,6 +236,7 @@ include_once('config.php');
                   <td>" . $yearTotal . "</td>
                   <td>" . $row['rewards'] . "</td>
                   <tr>";
+              }
             }
             ?>
 

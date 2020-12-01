@@ -1,25 +1,32 @@
 <form method="get" type="button" action="<?php echo $_SERVER['PHP_SELF'];?>">
 
     <?php 
+<<<<<<< Updated upstream
 
     echo ($tableCode);
-    //$saleid = "SELECT MAX(sale_id) AS LargestId FROM ticket_system";
-    //$curentId = mysqli_query($conn,$saleid);
 
     if(isset($_GET['addToCart'])) {
+        $query = "SELECT * FROM cart WHERE product_id = '".$_GET['addToCart']."'";
+=======
+    
+    echo($tableCode);
+    
+    if(isset($_GET['addToCart']))
+     {
         $ID = $_GET['addToCart'];
         $query = "SELECT * FROM cart WHERE product_id LIKE $ID";
+>>>>>>> Stashed changes
         $result = mysqli_query($conn,$query);
         $rows = mysqli_num_rows($result);
 
-        if($rows > 0)
-        {
-            $update = "UPDATE cart SET qty = qty + 1 WHERE product_id LIKE $ID";
+        if($rows > 0){
+            $update = "UPDATE cart SET qty = qty + 1 WHERE product_id = '".$_GET['addToCart']."'";
             $result = mysqli_query($conn,$update);
         }else{
             $query = "INSERT INTO cart (product_id) VALUE ('".$_GET['addToCart']."')";
             $result = mysqli_query($conn, $query) or die(" Execution Failed addCart");
-            $qupdate = "UPDATE cart SET qty = 1 WHERE $ID LIKE product_id";
+
+            $qupdate = "UPDATE cart SET qty = 1 WHERE product_id = '".$_GET['addToCart']."'";
             $rupdatezero = mysqli_query($conn,$qupdate);
         } 
     }
