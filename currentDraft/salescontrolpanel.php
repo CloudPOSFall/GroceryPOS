@@ -3,6 +3,7 @@ include_once('config.php');
 //this can reset the auto increment when all registers are cleared out
 //mysqli_query($conn, "ALTER TABLE registers_table AUTO_INCREMENT = 1");
 
+//if open reg submit is pushed
 if (isset($_POST['submitcount'])) {
   $opentotal = $_POST['opensum'];
   $employeeid = $_SESSION['emp_id'];
@@ -19,7 +20,25 @@ if (isset($_POST['submitcount'])) {
   } else {
     echo "Please Check Your Query";
   }
+}
 
+//if close reg submit is pushed
+if (isset($_POST['submitclose'])) {
+  $closesum = $_POST['closesum'];
+  $employeeid = $_SESSION['emp_id'];
+  //$regRadio = $_POST['reg_radio'];
+
+  $query = "INSERT into registers_table (open_total, employee_id)
+          values ($opentotal, (SELECT employee_id from employee_info where employee_id = $employeeid))";
+
+  $result = mysqli_query($conn, $query);
+
+  if ($result) {
+    $register = mysqli_insert_id($conn);
+    $_SESSION['register'] = $register;
+  } else {
+    echo "Please Check Your Query";
+  }
 }
 
 //if switch reg is pushed
@@ -28,6 +47,8 @@ if (isset($_POST['selectreg'])) {
   $_SESSION['register'] = $register;
 }
 ?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -380,6 +401,7 @@ if (isset($_POST['selectreg'])) {
     </div>
   </div> -->
 
+  <!-- Open Register Modal -->
   <div class="modal fade" id="openreg" tabindex="-1" role="dialog" aria-labelledby="openreg" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -493,6 +515,121 @@ if (isset($_POST['selectreg'])) {
   </div>
 
 
+  <!-- Close Register Modal -->
+  <div class="modal fade" id="openreg" tabindex="-1" role="dialog" aria-labelledby="openreg" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="modal-title" id="exampleModalLongTitle">Open Register</span>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container text-center">
+            <span style="font-weight: 400">Opening Count</span>
+            <div class="row">
+              <div class="col mt-5 pt-5">
+                
+              <?php
+/*               $select = "SELECT reg_num FROM registers_table WHERE close_total is NULL";
+              $result = mysqli_query($conn, $select);
+              $numrows = mysqli_num_rows($result);
+              $regArray = array(1,2,3);
+              if ($numrows != 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                  $opencheck = in_array($row['reg_num'], $regArray);
+                  if ($opencheck){
+                    unset($regArray[$row['reg_num']]);
+                  }
+                }
+                  if (!empty($regArray)){
+                    echo '
+                    <legend class="col-form-label mt-5 pt-5">Open which register?</legend>
+                      <div class="col-sm-10">';
+                      foreach($regArray as $reg){
+                        echo '
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="regradio" id="radio'. $reg .'" value="'. $reg .'">
+                            <label class="form-check-label">
+                              Register ' . $reg .'
+                            </label>
+                          </div>';
+                      }
+                    echo '</div>';
+                  }else{
+                    echo 'All your registers are open';
+                  }
+              }  */
+              ?>
+              </div>
+              <div id="bills" class=" col-5">
+                <form class="form-inline ml-4" method="post" action="salescontrolpanel.php">
+                  <div>
+                    <div class="input-group mb-2 mr-4">
+                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $100 </span></label>
+                      <input type="text" maxlength="3" onblur="findTotal()"  name="bills" class="form-control w-25" placeholder="">
+                    </div>
+                    <div class="input-group mb-2 mr-4">
+                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $50 </span></label>
+                      <input type="text" maxlength="3" onblur="findTotal()"  name="bills"  class="form-control w-25" placeholder="">
+                    </div>
+                    <div class="input-group mb-2 mr-4">
+                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $20 </span></label>
+                      <input type="text" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
+                    </div>
+                    <div class="input-group mb-2 mr-4">
+                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $10 </span></label>
+                      <input type="text" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
+                    </div>
+                    <div class="input-group mb-2 mr-4">
+                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $5 </span></label>
+                      <input type="text" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
+                    </div>
+                    <div class="input-group mb-2 mr-4">
+                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $1 </span></label>
+                      <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
+                    </div>
+                    <div class="input-group mb-2 mr-4">
+                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 25¢ </span></label>
+                      <input type="text" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
+                    </div>
+                    <div class="input-group mb-2 mr-4">
+                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 10¢ </span></label>
+                      <input type="text" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
+                    </div>
+                    <div class="input-group mb-2 mr-4">
+                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 5¢ </span></label>
+                      <input type="text" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
+                    </div>
+                    <div class="input-group mb-2 mr-4">
+                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 1¢ </span></label>
+                      <input type="text" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
+                    </div>
+                    <div class="input-group mb-2">
+                      <label class="control-label border bg-white" style="width:55px"><span class="input-group-addon px-2"> Total </span></label>
+                      <input name="closesum" id="total" type="text" maxlength="8" class="form-control w-50" value="0" readonly>
+                    </div>
+                  </div>
+              </div>
+
+            </div>
+
+          </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" name="submitclose" class="btn btn-success">Submit Count</button>
+          <button type="button" class="btn btn-dark" data-dismiss="modal">Cancel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Switch Registers Modal -->
   <div class="modal fade" id="switchreg" tabindex="-1" role="dialog" aria-labelledby="switchreg" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
