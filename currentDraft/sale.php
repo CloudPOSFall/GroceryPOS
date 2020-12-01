@@ -169,8 +169,13 @@ var_dump($_SESSION['customer']);
         </nav>
 
         <nav class="navbar navbar-light" style="background-color: #a1b6a8;" id="salespanel">
-                    <?php
-					
+     <?php
+		if(isset($_SESSION['custfirst']))
+		{
+				echo "<form class='form-inline'><div 
+				class='card' style='padding: 8px'>" . $_SESSION['custfirst'] . " " . $_SESSION['custlast'] . "</div>
+                <div class='nav-item'><button href='removecust.php' class='btn navbar-btn'> Remove</button></div></form>";
+		}else{
                     if (isset($_POST['scustomer'])) {
                         $ID = $_POST['scustomer'];
                         $cQuery = "SELECT * FROM customer_info WHERE customer_id LIKE '%$ID%'";
@@ -184,7 +189,9 @@ var_dump($_SESSION['customer']);
 								$last = mysqli_real_escape_string($conn,$last);
 								echo "<form class='form-inline'><div 
 								class='card' style='padding: 8px'>" . $first . " " . $last . "</div>
-                                <div class='nav-item'><button href='index.php' class='btn navbar-btn'> Remove</button></div></form>";
+                                <div class='nav-item'><button href='removecust.php' class='btn navbar-btn'> Remove</button></div></form>";
+								$_SESSION['custfirst'] = $first;
+								$_SESSION['custlast'] = $last;
                             }
                         } 
                     }else {
@@ -193,6 +200,7 @@ var_dump($_SESSION['customer']);
                         <input class='form-control col-5' name='customer' placeholder='Search Customers' aria-label='Search'>
                         <button class='btn btn-dark navbar-btn' name='sale-search'> Look Up</button></div></form>";
                     }
+		}
                     ?>
                 
                 <div class="nav-item"><button class="btn navbar-btn"> New</button></div>
