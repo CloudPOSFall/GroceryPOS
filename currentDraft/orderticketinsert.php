@@ -3,7 +3,7 @@
     }
     else{
     $query = "INSERT INTO orders_ticket (employee_id, vendor_id) VALUES (NULL, NULL)";
-    $result = mysqli_query($conn, $query) or die(" Execution Failed inprog in finalize");
+    $result = mysqli_query($conn, $query) or die(" Execution Failed inprog");
     
     
         $query = "SELECT OTID FROM orders_ticket WHERE employee_id IS NULL";

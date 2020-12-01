@@ -110,6 +110,13 @@
                 </div>
 
             </li>
+            </li>
+      <li>
+        <div class="card text-center" id="footerbtn" style="background: #016923;">
+          <a role="button" href="logout.php"> Logout</a>
+
+
+        </div>
         </ul>
         </div>
     </nav>
@@ -175,6 +182,10 @@
             <div class = "form-group row">
             <label class = "col-4" for = "In Stock">In Stock </label>
             <input class ="col-6" type = "text" placeholder="In Stock " name="stock"/>
+            </div>
+            <div class = "form-group row">
+            <label class = "col-4" for = "Vendor ID">Vendor ID </label>
+            <input class ="col-6" type = "text" placeholder="Vendor ID " name="vendor"/>
             </div>
             <div class="text-center"><button name="submit" class="btn-lg btn-primary"> Submit</button></div>
           </form>

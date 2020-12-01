@@ -179,7 +179,7 @@ $result = mysqli_query($conn, $query);
     <nav class="navbar navbar-light" id="salespanel">
       <form class="form-inline" method="post" action="brandsview.php">
         <div class="nav-item" style="padding: 8px">
-          <input class="form-control" name="product" placeholder="Search Brand" aria-label="Search">
+          <input class="form-control" name="brand" placeholder="Search Brand" aria-label="Search">
           <button class="btn btn-dark navbar-btn" name="submit-search"> Look Up</button>
         </div>
 
@@ -208,8 +208,8 @@ $result = mysqli_query($conn, $query);
             <?php
 
             if (isset($_POST['submit-search'])) {
-              $search = mysqli_real_escape_string($conn, $_POST['product']);
-              $sql = "SELECT * FROM product_inventory WHERE productName LIKE '%$search%' OR productType LIKE '%$search%' OR productSubType LIKE '%$search%' OR vendor_id LIKE '%$search%'";
+              $search = mysqli_real_escape_string($conn, $_POST['brand']);
+              $sql = "SELECT * FROM product_inventory WHERE brand LIKE '%$search%'";
               $result = mysqli_query($conn, $sql);
               $queryResults = mysqli_num_rows($result);
 

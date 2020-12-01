@@ -64,7 +64,7 @@ include_once('config.php');
       </li>
       <div class="justify-content-center" id="navline"></div>
 
-      <li class="active">
+      <li>
         <a href="accounthomeDraft.php">
           <span style="padding:5px;">
             <svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-house-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -87,7 +87,7 @@ include_once('config.php');
               <path fill-rule="evenodd" d="M4.98 4a.5.5 0 0 0-.39.188L1.54 8H6a.5.5 0 0 1 .5.5 1.5 1.5 0 1 0 3 0A.5.5 0 0 1 10 8h4.46l-3.05-3.812A.5.5 0 0 0 11.02 4H4.98zm-1.17-.437A1.5 1.5 0 0 1 4.98 3h6.04a1.5 1.5 0 0 1 1.17.563l3.7 4.625a.5.5 0 0 1 .106.374l-.39 3.124A1.5 1.5 0 0 1 14.117 13H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .106-.374l3.7-4.625z" />
             </svg></span> Inventory</a>
       </li>
-      <li>
+      <li class="active">
         <a href="customercontrol.php">
           <span style="padding:5px;">
             <svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -217,6 +217,8 @@ include_once('config.php');
               $tresult = mysqli_query($conn, $tquery);
               $total = 0;
               $yearTotal = 0;
+              if($row['rewards'] != 0)
+              {
               while ($trow = mysqli_fetch_assoc($tresult)) {
                 $date = new DateTime($trow['date']);
                 $date->format('Y');
@@ -234,6 +236,7 @@ include_once('config.php');
                   <td>" . $yearTotal . "</td>
                   <td>" . $row['rewards'] . "</td>
                   <tr>";
+              }
             }
             ?>
 

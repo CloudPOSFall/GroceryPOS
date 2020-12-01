@@ -28,6 +28,6 @@
 <?php include('addCart2.php'); ?>
 
 <!-- Button which takes user to final sale page -->
-<form action="finalSale.php">
+<form action="finalSaleFront.php">
     <input type="submit" name="submit" value="Finalize Sale" />
 </form>

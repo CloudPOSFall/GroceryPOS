@@ -1,18 +1,13 @@
 <?php
 include_once('config.php');
-if (isset($_GET['Upd'])) {
-  $findID = $_GET['Upd'];
-  $query = "SELECT * FROM customer_info WHERE customer_id LIKE '%$findID%'";
-  $result = mysqli_query($conn, $query);
-  $row = mysqli_fetch_assoc($result);
-}
+$query = "SELECT * FROM ticket_system";
+$result = mysqli_query($conn, $query);
 ?>
-
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title>Edit Customer | MarketPOS</title>
+<title>Returns | MarketPOS</title>
 
 
   <!--bootstrap css -->
@@ -26,20 +21,20 @@ if (isset($_GET['Upd'])) {
   <script defer src="js/solid.js"></script>
   <script defer src="js/fontawesome.js"></script>
 
-  <!--jquery -->
-  <script src="js/jquery-3.5.1.min.js"></script>
-  <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-  <!-- bootstrap popper js-->
-  <script src="js/popper.min.js"></script>
-  <!-- bootstrap js -->
-  <script src="js/bootstrap.min.js"></script>
+    <!--jquery -->
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- bootstrap popper js-->
+    <script src="js/popper.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
 
 </head>
 
 <body>
 
-  <!--nav sidebar-->
-  <nav id="sidebar">
+<!--nav sidebar-->
+<nav id="sidebar">
     <div class="sidebar-header bg-dark">
       <h1><span><a class="navbar-brand relative-top" href="indexDraft.php"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1z" />
@@ -78,7 +73,7 @@ if (isset($_GET['Upd'])) {
               <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
             </svg></span> Home</a>
       </li>
-      <li>
+      <li class="active">
         <a href="salescontrolpanel.php">
           <span style="padding:5px;">
             <svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-credit-card-2-back" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -93,7 +88,7 @@ if (isset($_GET['Upd'])) {
               <path fill-rule="evenodd" d="M4.98 4a.5.5 0 0 0-.39.188L1.54 8H6a.5.5 0 0 1 .5.5 1.5 1.5 0 1 0 3 0A.5.5 0 0 1 10 8h4.46l-3.05-3.812A.5.5 0 0 0 11.02 4H4.98zm-1.17-.437A1.5 1.5 0 0 1 4.98 3h6.04a1.5 1.5 0 0 1 1.17.563l3.7 4.625a.5.5 0 0 1 .106.374l-.39 3.124A1.5 1.5 0 0 1 14.117 13H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .106-.374l3.7-4.625z" />
             </svg></span> Inventory</a>
       </li>
-      <li class="active">
+      <li>
         <a href="customercontrol.php">
           <span style="padding:5px;">
             <svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -121,18 +116,17 @@ if (isset($_GET['Upd'])) {
         </div>
 
       </li>
-      </li>
       <li>
         <div class="card text-center" id="footerbtn" style="background: #016923;">
           <a role="button" href="logout.php"> Logout</a>
 
 
         </div>
+        </li>
     </ul>
     </div>
   </nav>
   <!--END nav sidebar-->
-
   <!--page content-->
   <div id="content">
 
@@ -148,68 +142,64 @@ if (isset($_GET['Upd'])) {
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="nav navbar-nav mr-auto">
-            <a class="navbar-brand" href="customerview.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <a class="navbar-brand" href="salecontrolpanel.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
-              </svg> Customers</a>
+              </svg> Returns</a>
           </ul>
         </div>
       </div>
     </nav>
 
 
-    <div class="container justify-content-center">
-
-      <div class="card card-body bg-light" style="width: 35rem;" id="formscreen">
-        <form action="" method="post">
-          <div class="form-group row">
-            <label class="col-4" for="id">Customer ID: </label>
-            <input type="text" value=" <?php echo $findID ?> " name="id" readonly />
-          </div>
-          <div class="form-group row">
-            <label class="col-4" for="Email">Email</label>
-            <input type="text" value=" <?php echo $row['email'] ?> " name="email" />
-          </div>
-          <div class="form-group row">
-            <label class="col-4" for="Password">Password</label>
-            <input type="password" value=" <?php echo $row['password'] ?> " name="password" />
-          </div>
-          <div class="form-group row">
-            <label class="col-4" for="First Name">First Name</label>
-            <input type="text" value=" <?php echo $row['first_name'] ?> " name="fname" />
-          </div>
-          <div class="form-group row">
-            <label class="col-4" for="Last Name">Last Name</label>
-            <input type="text" value=" <?php echo $row['last_name'] ?> " name="lname" />
-          </div>
-          <div class="form-group row">
-            <label class="col-4" for="Phone Number">Phone Number</label>
-            <input type="tel" value=" <?php echo $row['phone_number'] ?> " name="number" />
-          </div>
-          <div class="form-group row">
-            <label class="col-4" for="Street">Street</label>
-            <input type="text" value=" <?php echo $row['street_address'] ?> " name="street" />
-          </div>
-          <div class="form-group row">
-            <label class="col-4" for="City">City</label>
-            <input type="text" value=" <?php echo $row['city'] ?> " name="city" />
-          </div>
-          <div class="form-group row">
-            <label class="col-4" for="State">State</label>
-            <input type="text" value=" <?php echo $row['state'] ?> " name="state" />
-          </div>
-          <div class="form-group row">
-            <label class="col-4" for="Zip Code">Zip Code</label>
-            <input type="text" value=" <?php echo $row['zip_code'] ?> " name="zip" />
-          </div>
-          <div class="form-group row">
-            <label class="col-4" for="Rewards">Rewards </label>
-            <input type="text" value=" <?php echo $row['rewards'] ?> " name="rewards" step="1" />
-          </div>
-          <div class="text-center"><button type="submit" name="update" class="btn-lg btn-primary"> Update</button></div>
+    <nav class="navbar navbar-light" id="salespanel">
+      <form class="form-inline" method="post" action="return.php">
+        <div class="nav-item" style="padding: 8px">
+          <input class="form-control" name="ticket" placeholder="Search Ticket" aria-label="Search">
+          <button class="btn btn-dark navbar-btn" name="submit-search"> Look Up</button>
+        </div>
         </form>
+    </nav>
+    <div class="wrapper mt-3">
+      <div class="row px-4 justify-content-center">
+        <table class="table table-bordered table-hover mt-3 table-responsive" style="font-size:80%;">
+          <thead class="bg-light">
+          <tr>
+              <th> Ticket ID </th>
+              <th> Date </th>
+              <th> Sale Quantity</th>
+              <th> Customer </th>
+              <th> Return </th>
+              <th> </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white">
+            <?php
+            if (isset($_POST['submit-search'])) {
+                $search = mysqli_real_escape_string($conn, $_POST['ticket']);
+                $sql = "SELECT * FROM ticket_system WHERE ticket_id LIKE '%$search%'";
+                $result = mysqli_query($conn, $sql);
+                $queryResults = mysqli_num_rows($result);
+                
+                $_SESSION['ticket'] = "";
+                if ($queryResults > 0) {
+                echo "<div class='row mt-3'>There are $queryResults results matching your search</div><br>";
+                while ($row = mysqli_fetch_assoc($result)) {
+                  $_SESSION['ticket'] = $row['ticket_id'];
+
+                  echo "<tr><td>" . $row['ticket_id'] . "</td><td>"
+                    . $row['date'] . "</td><td>" . $row['quantity'] . "</td><td>" . $row['customer_id'] . "</td><td><a class='btn-sm btn-dark' role='button' href='completereturn.php?Ret="
+                    . $row['ticket_id'] . "'>Select</a></td><td>";
+                }
+              } else {
+                echo "<div class='row mt-3'>There are no results matching your search</div>";
+              }
+            }
+
+            ?>
+          </tbody>
+        </table>
       </div>
-
-
+    </div>
 </body>
 
 <script type="text/javascript">
@@ -227,28 +217,3 @@ if (isset($_GET['Upd'])) {
 </script>
 
 </html>
-
-<?php
-if (isset($_POST['update'])) {
-
-  $id = $_POST['id'];
-  $Email = $_POST['email'];
-  $FirstName = $_POST['fname'];
-  $LastName = $_POST['lname'];
-  $PhoneNumber = $_POST['number'];
-  $Rewards = $_POST['rewards'];
-  $Street = $_POST['street'];
-  $City = $_POST['city'];
-  $State = $_POST['state'];
-  $Zip = $_POST['zip'];
-
-  $query = "UPDATE customer_info SET email = '$Email', first_name = '$FirstName', last_name = '$LastName', phone_number = '$PhoneNumber', rewards = '$Rewards', street_address = '$Street', city = '$City', state = '$State', zip_code = '$Zip' WHERE customer_id = '$id' ";
-  $result = mysqli_query($conn, $query);
-
-  if ($result) {
-    header("location:customerview.php");
-  } else {
-    echo ' Please Check Your Query ';
-  }
-}
-?>

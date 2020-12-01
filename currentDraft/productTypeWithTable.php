@@ -18,13 +18,13 @@
     $result = mysqli_query($conn, $query) or die("Execution Failed");
 
     // generation of table code
-    $tableCode = "<table border='1' name='product'>";
+    $tableCode = "<table class='table table-sm' name='product'>";
     // generation of table headers
-    $tableCode .= "<tr> <th>Product Name</th> <th>Product Type</th> <th>Product Sub Type</th> <th>Price</th> <th>Add to Cart</th> </tr>";
+    $tableCode .= "<tr> <th>Product Name</th> <th>Product Sub Type</th> <th>Price</th> <th>Add to Cart</th> </tr>";
 
     // loop throguh collected results and append corresponding information
     while($row = mysqli_fetch_assoc($result)) {
-        $tableCode .= "<tr> <th>".$row['productName']."</th> <th>".$row['productType']."</th> <th>"
+        $tableCode .= "<tr> <th>".$row['productName']."</th>  <th>"
         .$row['productSubType']."</th><th>".$row['unit_price']."</th><th><input type='submit' name='addToCart' value=".$row['product_id']."
         ></th> </tr>";
     }

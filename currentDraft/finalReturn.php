@@ -1,19 +1,24 @@
 <?php
 include_once('config.php');
-if (isset($_GET['Detail'])) {
-    $findID = $_GET['Detail'];
-    $query = "SELECT * FROM cart_table WHERE sale_id LIKE '%$findID%'";
-    $result = mysqli_query($conn, $query);
+if(!isset($_SESSION['sale'])){
+    //If it doesn't, create an empty array.
+    $_SESSION['customer'] = array();
+}
+var_dump($_SESSION['customer']);
 ?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title>Employee Details | MarketPOS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+    <title>New Sale | MarketPOS</title>
 
-   <!--bootstrap css -->
-   <link rel="stylesheet" href="css/bootstrap.min.css">
+     <!--bootstrap css -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
   <!--our css -->
   <link rel="stylesheet" href="userStyle2.css">
   <!--Scrollbar Custom css -->
@@ -36,8 +41,8 @@ if (isset($_GET['Detail'])) {
 
 <body>
 
-          <!--nav sidebar-->
-          <nav id="sidebar">
+    <!--nav sidebar-->
+    <nav id="sidebar">
         <div class="sidebar-header bg-dark">
             <h1><span><a class="navbar-brand relative-top" href="indexDraft.php"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1z" />
@@ -47,17 +52,18 @@ if (isset($_GET['Detail'])) {
 
         <ul class="list-unstyled components">
         <li>
-                <div id="usercard">
-                    <a href="" style="font-size: 1em;"><?php if(isset($_SESSION['company_name'])&& !empty($_SESSION['company_name'])) {echo $_SESSION['company_name'];} else {echo 'Company Name';} ?></br>Choose Register <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                        </svg></a>
-                </div>
-            </li>
-            <li>
-                <a href="employeePinLogin.php" style="font-size: 1em;"><?php if(isset($_SESSION['emp_fname'])&& !empty($_SESSION['emp_lname'])){ echo "" . $_SESSION['emp_fname'] . " " . $_SESSION['emp_lname'] . " ";} else{ echo "Current User";} ?><svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                    </svg></a>
-            </li>
+        <div id="usercard">
+          <a href="" style="font-size: 1em;"><?php if(isset($_SESSION['company_name'])&& !empty($_SESSION['company_name'])) {echo $_SESSION['company_name'];} else {echo 'Company Name';} ?></br>Choose Register <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+            </svg></a>
+        </div>
+      </li>
+      <li>
+        <li>
+        <a href="" style="font-size: 1em;"><?php if(isset($_SESSION['emp_fname'])&& !empty($_SESSION['emp_lname'])){ echo "" . $_SESSION['emp_fname'] . " " . $_SESSION['emp_lname'] . " ";} else{ echo "Current User";} ?><svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+            </svg></a>
+        </li>
         <div class="justify-content-center" id="navline"></div>
        
             <li>
@@ -68,7 +74,7 @@ if (isset($_GET['Detail'])) {
                             <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
                         </svg></span> Home</a>
             </li>
-            <li>
+            <li class="active">
                 <a href="salescontrolpanel.php">
                     <span style="padding:5px;">
                         <svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-credit-card-2-back" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -83,7 +89,7 @@ if (isset($_GET['Detail'])) {
                             <path fill-rule="evenodd" d="M4.98 4a.5.5 0 0 0-.39.188L1.54 8H6a.5.5 0 0 1 .5.5 1.5 1.5 0 1 0 3 0A.5.5 0 0 1 10 8h4.46l-3.05-3.812A.5.5 0 0 0 11.02 4H4.98zm-1.17-.437A1.5 1.5 0 0 1 4.98 3h6.04a1.5 1.5 0 0 1 1.17.563l3.7 4.625a.5.5 0 0 1 .106.374l-.39 3.124A1.5 1.5 0 0 1 14.117 13H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .106-.374l3.7-4.625z" />
                         </svg></span> Inventory</a>
             </li>
-            <li class="active">
+            <li>
                 <a href="customercontrol.php">
                     <span style="padding:5px;">
                         <svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -111,91 +117,145 @@ if (isset($_GET['Detail'])) {
             </div>
         
     </li>
-    <li>
+    </li>
+      <li>
         <div class="card text-center" id="footerbtn" style="background: #016923;">
           <a role="button" href="logout.php"> Logout</a>
 
 
         </div>
-        </li>
         </ul>
         </div>
     </nav>
-  <!--END nav sidebar-->
-
-  <!--page content-->
-  <div id="content">
-
-
-    <!--location navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="locnav">
-      <div class="container-fluid">
-
-        <button type="button" id="sidebarCollapse" class="btn btn-success">
-          <i class="fas fa-align-left"></i>
-        </button>
-
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="nav navbar-nav mr-auto">
-            <a class="navbar-brand" href="employeeDetail.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
-              </svg> Reports</a>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-
-    <div class="container justify-content-center" id="tablescreen">
 
 
 
-      <div class="col-12">
+    <div class="container center" style="padding-left: 200px;">
+    <br>
+<?php
+        if(isset($_GET['Fin']))
+        {
+            $product = $_GET['Fin'];
+            $query = "SELECT * FROM product_inventory WHERE product_id='$product'";
+            $result = mysqli_query($conn, $query) or die("Execution Failed");
+    
+        
+        $cartCode = "<table class='table' name='product'>";
+        $cartCode .= "<tr> <th>Brand</th> <th>Description</th> <th>Product Name</th> <th>Quantity</th> <th>Product Price</th> </tr>";
+        
+        $total=0;
+        while($row = mysqli_fetch_assoc($result)) {
+        $total -= $row['unit_price'];
+        
+        $cartCode .= "<tr> <th>".$row['brand']."</th> <th>".$row['description']."</th> <th>"
+        .$row['productName']."</th><th>".'1'."</th><th>".$row['unit_price']."</th> <th>";
 
-        <div class="card mt-5 bg-light">
-          <table class="table table-bordered" style="font-size:80%;">
-            <thead>
-              <tr>
-                <th class="col"> Sale ID </th>
-                <th class="col"> Quantity </th>
-                <th class="col"> Discount </th>
-                <th class="col"> Product Name </th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
+        }
+    
+        $_SESSION['total'] = $total;
+        echo($cartCode);
+        echo("Total Amount: $");
+        echo($total);
+        }
+?>
 
-                while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<tr><td>" . $row['sale_id'] . "</td><td>"
-                    . $row['qty'] . "</td><td>" . $row['discount'] . "</td><td><a class='btn btn-dark' 
-                    role='button' href='productDetail.php?Detail=". $row['product_id'] . "'>View</a>";;
-                }
-            }
+<br>
+<form method="post" type="button" action="<?php echo $_SERVER['PHP_SELF'];?>">
 
-              ?>
-            </tbody>
-          </table>
-        </div>
-      </div>
+   
+    Choose a Payment Type:
+    <select name="payment">
+        <option value="Cash">Cash</option>
+        <option value="Credit">Credit</option>
+    </select> <input type="submit" name ="submit" value="Payment Type"> <br>
+       
+        <br>Cash Amount: <input type="text" name="cash">
 
+    <br><br>
+    <input type='submit' name='fin' value="Complete Return"/>
+    <br><bR>
+</form>
+
+<?php
+    
+    if(isset($_POST['fin'])) {
+        $total=$_SESSION['total'];
+
+        $sql = "SELECT ticket_id FROM ticket_system WHERE ticket_id LIKE '".$_SESSION['ticket']."'";
+        $result = mysqli_query($conn, $sql);
+            
+        while ($row = mysqli_fetch_assoc($result)) {
+            $ticketid = $row['ticket_id'];
+        }
+
+        $query = "INSERT INTO return_table (ticket_id, date, time, refunds)
+                    VALUES ('$ticketid', CURRENT_DATE(), CURRENT_TIME(), '$total')";
+        $result = mysqli_query($conn, $query) or die("Return Failed");
+        
+        if($result) 
+        {
+            header("location:salescontrolpanel.php");
+        }
+    }
+       
+?>
     </div>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal"
+            });
+
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar, #content').toggleClass('active');
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+
+
+             // event begins when the user releases the key
+            $('#search').keyup(function() {
+                // creates null result field
+                $('#result').html('');
+                // variable to hold search input
+                var searchField = $('#search').val();
+                // function that creates a variable which matches the search as a regular expression
+                var expression = new RegExp(searchField, "i");
+                // loads JSON file 
+                $.getJSON('products.json', function(data) { $.each(data, function(key, value) {
+                // .search to see if the string matches the expression
+                if (value.name.search(expression) != -1 || value.price.search(expression) != -1) {
+                    // creates the list items which are the results from the search
+                    $('#result').append('<li class="list-group-item link-class"> '+value.name+' | <span class="text-muted">'+value.price+'</span></li>');
+                }});   
+            });});
+            // event which replaces the search area with chosen result
+            $('#result').on('click', 'li', function() {
+            // seperates price with a vertical bar
+            var click_text = $(this).text().split('|');
+            // attatch bar
+            $('#search').val($.trim(click_text[0]));
+            // creates null result field
+            $("#result").html('');
+        });
+        });
+
+        //global variables for both the sum and table
+        var totalSum = 0;
+
+        var table = document.getElementById("salestable");
+        //loop through table to add together the costs
+        for (var i = 1; i < table.rows.length; i++) {
+            totalSum = totalSum + parseFloat(table.rows[i].cells[1].innerHTML);
+        }
+        //function to display total price onclick
+        function total() {
+            document.getElementById("total").innerHTML = Math.round((totalSum + Number.EPSILON) * 100) / 100;
+        }
+
+    </script>
 </body>
-
-<script type="text/javascript">
-  $(document).ready(function()
-   {
-    $("#sidebar").mCustomScrollbar({
-      theme: "minimal"
-    });
-
-    $('#sidebarCollapse').on('click', function() 
-    {
-      $('#sidebar, #content').toggleClass('active');
-      $('.collapse.in').toggleClass('in');
-      $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-    });
-  });
-</script>
 
 </html>

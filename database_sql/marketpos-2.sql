@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 25, 2020 at 06:08 AM
+-- Generation Time: Nov 28, 2020 at 03:18 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -30,8 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `cart` (
   `cart_id` int(11) NOT NULL,
   `CID` int(11) DEFAULT NULL,
-  `qty` int(11) NOT NULL,
-  `discount` varchar(50) NOT NULL,
+  `qty` int(11) DEFAULT NULL,
+  `discount` varchar(50) DEFAULT NULL,
   `cart_purchase` tinyint(1) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -47,6 +47,14 @@ CREATE TABLE `cart_inprogress` (
   `customer_id` int(11) DEFAULT NULL,
   `ticket_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cart_inprogress`
+--
+
+INSERT INTO `cart_inprogress` (`CID`, `customer_id`, `ticket_id`) VALUES
+(72, NULL, 72),
+(73, NULL, 73);
 
 -- --------------------------------------------------------
 
@@ -140,8 +148,7 @@ CREATE TABLE `gift_card` (
 --
 
 INSERT INTO `gift_card` (`gift_id`, `promo_number`, `card_balance`, `ticket_id`, `customer_id`) VALUES
-(1, 2095, 10, NULL, NULL),
-(2, 965, 20, NULL, NULL);
+(3, 26576, 10, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -156,6 +163,24 @@ CREATE TABLE `item_list` (
   `product_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `item_list`
+--
+
+INSERT INTO `item_list` (`ITID`, `CID`, `qty`, `product_id`) VALUES
+(55, 72, 1, 8),
+(56, 72, 1, 7),
+(57, 72, 2, 8),
+(58, 72, 1, 1),
+(59, 72, 2, 7),
+(60, 72, 1, 9),
+(61, 73, 1, 9),
+(62, 73, 1, 3),
+(63, 73, 1, 6),
+(64, 73, 2, 6),
+(65, 73, 2, 9),
+(66, 73, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -165,10 +190,28 @@ CREATE TABLE `item_list` (
 CREATE TABLE `orders` (
   `OID` int(11) NOT NULL,
   `OTID` int(11) DEFAULT NULL,
-  `cost` float NOT NULL,
-  `stock_amount` int(11) NOT NULL,
+  `cost` float DEFAULT NULL,
+  `stock_amount` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`OID`, `OTID`, `cost`, `stock_amount`, `product_id`) VALUES
+(248, 149, NULL, 2, 4),
+(249, 149, NULL, 1, 5),
+(250, 149, NULL, 1, 6),
+(251, 150, NULL, 1, 4),
+(252, 150, NULL, 1, 5),
+(253, 150, NULL, 1, 3),
+(254, 150, NULL, 1, 2),
+(255, 150, NULL, 1, 1),
+(256, 150, NULL, 1, 6),
+(257, 150, NULL, 1, 7),
+(258, 150, NULL, 1, 8),
+(259, 150, NULL, 1, 9);
 
 -- --------------------------------------------------------
 
@@ -192,6 +235,14 @@ CREATE TABLE `orders_ticket` (
   `employee_id` int(11) DEFAULT NULL,
   `vendor_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders_ticket`
+--
+
+INSERT INTO `orders_ticket` (`OTID`, `date`, `time`, `quantity`, `subtotal`, `total`, `discount`, `tax`, `tax_rate`, `cash`, `credit`, `status`, `employee_id`, `vendor_id`) VALUES
+(149, '2020-11-27', '21:04:51', 4, 24.42, 24.42, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+(150, '2020-11-27', '21:05:12', 9, 55.29, 55.29, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -219,13 +270,13 @@ CREATE TABLE `product_inventory` (
 INSERT INTO `product_inventory` (`product_id`, `brand`, `description`, `productName`, `productType`, `productSubType`, `unit_price`, `cost`, `in_stock`, `vendor_id`) VALUES
 (1, 'Fat Free', 'Half and Half', 'Dairy Pure', 'dairy', 'milk', 8.99, 6.99, 10, 1),
 (2, 'Organic Whole Milk', 'Organic Vitamin D Milk', 'Horizon', 'dairy', 'milk', 10.45, 8.99, 3, 1),
-(3, '', '', 'Old Croc Chedder', 'dairy', 'cheese', 7.89, 5.15, 5, 1),
-(4, '', '', 'Kerrygold Chedder', 'dairy', 'cheese', 9.99, 6.99, 65, 1),
-(5, '', '', 'Dole Banana', 'produce', 'banana', 4.99, 3.45, 56, 1),
-(6, '', '', 'Chiquita', 'produce', 'banana', 8.95, 6.99, 45, 1),
-(7, '', '', 'Cherry', 'produce', 'tomato', 5.59, 3.99, 21, 1),
-(8, '', '', 'Brandywine', 'produce', 'tomato', 8.99, 5.75, 2, 1),
-(9, '', ' Sht Cuts Grlld Ital Chic Strip', 'Perdue', 'poultry', 'chicken ', 7.49, 6.99, 7, 1);
+(3, 'Cheddar Sliced Cheese', 'Natural Medium', 'Sargento', 'dairy', 'cheese', 7.89, 5.15, 5, 1),
+(4, 'Irish Cheddar', 'Reverse Cheddar Cheese', 'Kerrygold Cheddar', 'dairy', 'cheese', 9.99, 6.99, 65, 1),
+(5, 'Organic Banana', '2lbs', 'Dole', 'produce', 'banana', 4.99, 3.45, 56, 1),
+(6, 'Strawberries', '1lb package', 'Driscoll\'s', 'produce', 'strawberries', 8.95, 6.99, 45, 1),
+(7, 'Red Cherry Tomato', '10.5oz package', 'Cherry', 'produce', 'tomato', 5.59, 3.99, 21, 1),
+(8, 'Organic Red Grape Tomatoes', '10 oz package', 'Brandywine', 'produce', 'tomato', 8.99, 5.75, 2, 1),
+(9, ' Sht Cuts Grlld Ital Chic Strip', '22oz', 'Perdue', 'poultry', 'chicken ', 7.49, 6.99, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -276,19 +327,20 @@ CREATE TABLE `return_table` (
   `ticket_id` int(11) DEFAULT NULL,
   `date` date NOT NULL,
   `time` time NOT NULL,
-  `refunds` float NOT NULL
+  `refunds` float NOT NULL,
+  `exchanges` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rewards_table`
+-- Table structure for table `stores`
 --
 
-CREATE TABLE `rewards_table` (
-  `RID` int(11) NOT NULL,
-  `points` int(11) NOT NULL,
-  `customer_id` int(11) DEFAULT NULL
+CREATE TABLE `stores` (
+  `SID` int(11) NOT NULL,
+  `company_name` varchar(50) DEFAULT NULL,
+  `employee_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -336,6 +388,14 @@ CREATE TABLE `ticket_system` (
   `customer_id` int(11) DEFAULT NULL,
   `employee_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ticket_system`
+--
+
+INSERT INTO `ticket_system` (`ticket_id`, `date`, `company_name`, `time`, `quantity`, `subtotal`, `total`, `discount`, `tax`, `tax_rate`, `cash`, `credit`, `cart_purchase`, `customer_id`, `employee_id`) VALUES
+(72, '2020-11-27', NULL, '13:00:06', 6, 33.46, 33.46, NULL, 0, NULL, 0, 0, NULL, NULL, NULL),
+(73, '2020-11-27', NULL, '13:00:25', 6, 40.1, 40.1, NULL, 0, NULL, 0, 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -417,8 +477,8 @@ ALTER TABLE `item_list`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`OID`),
-  ADD UNIQUE KEY `product_id` (`product_id`),
-  ADD KEY `OTID` (`OTID`);
+  ADD KEY `OTID` (`OTID`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `orders_ticket`
@@ -457,11 +517,11 @@ ALTER TABLE `return_table`
   ADD KEY `ticket_id` (`ticket_id`);
 
 --
--- Indexes for table `rewards_table`
+-- Indexes for table `stores`
 --
-ALTER TABLE `rewards_table`
-  ADD PRIMARY KEY (`RID`),
-  ADD UNIQUE KEY `customer_id` (`customer_id`);
+ALTER TABLE `stores`
+  ADD PRIMARY KEY (`SID`),
+  ADD KEY `employee_id` (`employee_id`);
 
 --
 -- Indexes for table `tax_table`
@@ -491,13 +551,13 @@ ALTER TABLE `vendorinfo`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
 
 --
 -- AUTO_INCREMENT for table `cart_inprogress`
 --
 ALTER TABLE `cart_inprogress`
-  MODIFY `CID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `CID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT for table `customer_info`
@@ -515,25 +575,25 @@ ALTER TABLE `employee_info`
 -- AUTO_INCREMENT for table `gift_card`
 --
 ALTER TABLE `gift_card`
-  MODIFY `gift_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `gift_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `item_list`
 --
 ALTER TABLE `item_list`
-  MODIFY `ITID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ITID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `OID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=262;
 
 --
 -- AUTO_INCREMENT for table `orders_ticket`
 --
 ALTER TABLE `orders_ticket`
-  MODIFY `OTID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `OTID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
 
 --
 -- AUTO_INCREMENT for table `product_inventory`
@@ -560,10 +620,10 @@ ALTER TABLE `return_table`
   MODIFY `RTID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `rewards_table`
+-- AUTO_INCREMENT for table `stores`
 --
-ALTER TABLE `rewards_table`
-  MODIFY `RID` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `stores`
+  MODIFY `SID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tax_table`
@@ -575,7 +635,7 @@ ALTER TABLE `tax_table`
 -- AUTO_INCREMENT for table `ticket_system`
 --
 ALTER TABLE `ticket_system`
-  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `vendorinfo`
@@ -625,8 +685,8 @@ ALTER TABLE `item_list`
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE NO ACTION ON UPDATE SET NULL,
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`OTID`) REFERENCES `orders_ticket` (`OTID`) ON DELETE NO ACTION ON UPDATE SET NULL;
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`OTID`) REFERENCES `orders_ticket` (`OTID`) ON DELETE SET NULL ON UPDATE NO ACTION,
+  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
 
 --
 -- Constraints for table `orders_ticket`
@@ -660,10 +720,10 @@ ALTER TABLE `return_table`
   ADD CONSTRAINT `return_table_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `ticket_system` (`ticket_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
 
 --
--- Constraints for table `rewards_table`
+-- Constraints for table `stores`
 --
-ALTER TABLE `rewards_table`
-  ADD CONSTRAINT `rewards_table_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+ALTER TABLE `stores`
+  ADD CONSTRAINT `stores_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee_info` (`employee_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
 
 --
 -- Constraints for table `ticket_system`

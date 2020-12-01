@@ -28,22 +28,32 @@
     <?php
             $tax = 0;
             $discount = 0;
-            $query = "SELECT tax_rate FROM tax_table WHERE TTID=1";
+            // tax selected for our region
+            $query = "SELECT tax_rate FROM tax_table WHERE TTID='1'";
             $result = mysqli_query($conn, $query) or die("Execution Failed");
-            $row = mysqli_fetch_assoc($result);
             while($row = mysqli_fetch_assoc($result)) {
-                $tax = $row['tax_rate'];
+                $taxrate = $row['tax_rate'];
+                $formatted = number_format($taxrate, 2);
+                $taxrate = $formatted;
             }
-
+            // subtotal saved
             $subTotal = $total;
-            $total = $total + $tax;
-
+            // new total is subtotal plus tax
+            $total = $total + ($total * $taxrate);
+            $total = number_format($total, 2);
+            $tax = $total * $taxrate;
+            $tax = number_format($tax, 2);
+            $credit = 0;
+            $cash = 0;
+            // trigger to get back change
             if(isset($_GET['change'])) {
                 $change = $_GET['cash'] - $subTotal;
                 $formatted = number_format($change, 2);
     ?>
     <br>
         <?php
+
+                // output change
                 echo('Change: $');
                 echo($formatted);
             }
@@ -57,26 +67,12 @@
                 if(isset($_GET['final'])) {
                     $OTID = $_SESSION['OTID'];
 
-                    //$query = "UPDATE ticket_system SET quantity ='".$qtyTotal."', subtotal ='".$subTotal."', total ='".$total."', 
-                            //tax ='".$tax."' WHERE cart_purchase = 1 ";
-                    //$result = mysqli_query($conn, $query) or die("Execution Failed");
-
-                    //$query = "UPDATE cart_inprogress SET ticket";
-                    
-                    $query = "SELECT tax_rate FROM tax_table WHERE TTID=1";
-                    $result = mysqli_query($conn, $query) or die("Execution Failed");
-                    $row = mysqli_fetch_assoc($result);
-                    while($row = mysqli_fetch_assoc($result)) {
-                        $tax = $row['tax_rate'];
-                    }
-                    $query = "UPDATE orders_ticket SET date = CURRENT_DATE(), time = CURRENT_TIME(), quantity = '$qtyTotal', subtotal = '$subTotal', total = '$total', tax = '$tax' WHERE OTID = '$OTID'";
+                    $query = "UPDATE orders_ticket SET date = CURRENT_DATE(), time = CURRENT_TIME(), quantity = '$qtyTotal', subtotal = '$subTotal', 
+                    total = '$total', tax = '$tax', tax_rate = '$taxrate', cash = '$total', status = '0', vendor_id = '".$_SESSION['vendor']."' WHERE OTID = '$OTID'";
                     $result = mysqli_query($conn, $query) or die("Order Ticket Failed");
 
                     if($result)
                     {
-                        //$query = "INSERT INTO orders (cost) VALUES (NULL)";
-                        //$result = mysqli_query($conn, $query) or die(" Execution Failed orders insert on finalize");
-
                         header("location:purchaseorders.php");
                     }
                     

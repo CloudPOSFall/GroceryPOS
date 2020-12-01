@@ -115,15 +115,15 @@ var_dump($_SESSION['customer']);
                         </svg> Switch User</a>
                 
             </div>
-        
-    </li>
-    <li>
+            </li>
+      <li>
         <div class="card text-center" id="footerbtn" style="background: #016923;">
           <a role="button" href="logout.php"> Logout</a>
 
 
         </div>
-        </li>
+        
+    </li>
         </ul>
         </div>
     </nav>
@@ -131,8 +131,9 @@ var_dump($_SESSION['customer']);
     <!--page content-->
     <div id="content">
 
-<!--
-        <nav id="paymentbar">
+
+        <!--
+            <nav id="paymentbar">
             <div class="container-fluid">
                 <ul class="list-unstyled components">
                     <li class="active">
@@ -156,8 +157,8 @@ var_dump($_SESSION['customer']);
                         <button class="btn-lg btn-success navbar-btn" id="paybtn"> Payment</button></div>
                 </ul>
             </div>
-        </nav>
--->
+        </nav> -->
+
         <!--location navbar-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="locnav">
             <button type="button" id="sidebarCollapse" class="btn btn-success">
@@ -221,28 +222,42 @@ var_dump($_SESSION['customer']);
         </nav>
 
     <div class="table-responsive">
-
-        
         <table class="table table-striped table-hove" id="salescontent">
             <thead>
+            
                 <tr>
+                    <th class="col-2" class="hover">Brand</th>
                     <th class="col-5 ml-auto">Description</th>
-                    <th class="col-2">Price</th>
+                    <th class="col-5 ml-auto">Product Name</th>
                     <th class="col-1 text-center">Quantity</th>
-                    <th class="col-2 text-center">Tax</th>
                     <th class="col-2 text-center">Subtotal</th>
+                    <th class="col-2 text-center">Return</th>
                 </tr>
             </thead>
             <tbody>
-            
-            
-            <?php include('productForm.php') ?>
 
                 <?php
                 //if ($row['in_stock'] > 0){}
                 //}else{
                 //echo "<div>The item you searched for is not in stock</div>";
-
+                if(isset($_GET['Ret']))
+                {
+                    $ticket = $_GET['Ret'];
+                    $sql = "SELECT ticket_system.ticket_id, product_inventory.*, item_list.product_id FROM ticket_system 
+                        LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
+                        cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
+                        WHERE item_list.CID LIKE '$ticket'";
+                    $result = mysqli_query($conn, $sql);
+                    
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<tr><td>"
+                    . $row['brand'] . "</td><td>" . $row['description'] . "</td><td>" . $row['productName'] . "</td><td>"
+                    . '1' . "</td><td>" . $row['unit_price'] . "</td><td><a class='btn-sm btn-dark' role='button' href='finalReturn.php?Fin="
+                    . $row['product_id'] . "'>Select</a></td><td>";
+                
+                    }
+                }
+                
 
                 if (isset($_POST['additem'])) {
                     $search = $_POST['sproduct'];
