@@ -3,10 +3,9 @@
     
     <?php include 'productTypeWithTable2.php'; ?>
 
-
 </form>
 
-<?php include('addOrder.php'); ?>
+<?php include('addOrder.php');?>
 
 <form action="finalSaleOrder.php">
     <input type="submit" name="submit" value="Finalize Order" />

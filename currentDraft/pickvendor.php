@@ -182,15 +182,18 @@ $result = mysqli_query($conn, $query);
                 $result = mysqli_query($conn, $sql);
                 $queryResults = mysqli_num_rows($result);
                 
-
                 if ($queryResults > 0) {
                 echo "<div class='row mt-3'>There are $queryResults results matching your search</div><br>";
                 while ($row = mysqli_fetch_assoc($result)) {
-                  $vendor = $row['vendor_id'];
-                  echo "<tr><td>" . $row['vendor_id'] . "</td><td>"
-                    . $row['company_name'] . "</td><td>" . $row['street_address'] . "</td><td>" . $row['city'] . "</td><td>" . $row['state'] . "</td><td>"
-                    . $row['zip_code'] . "</td><td><a class='btn-sm btn-dark' role='button' href='neworder.php?Ven="
-                    . $row['vendor_id'] . ">Select</a></td><td>";
+                  //$vendor = $row['vendor_id'];
+                  //echo "<tr><td>" . $row['vendor_id'] . "</td><td>"
+                  //  . $row['company_name'] . "</td><td>" . $row['street_address'] . "</td><td>" . $row['city'] . "</td><td>" . $row['state'] . "</td><td>"
+                  //  . $row['zip_code'] . "</td><td><a class='btn-sm btn-dark' role='button' href='neworder.php?Ven="
+                  //  . $row['vendor_id'] . "'>Select</a></td><td>";
+                    echo "<tr><td><form method='post' action='neworder.php'><button class='btn navbar-btn btn-light' name='vendor'>
+                            Select</button></td><input name='vendorid' size='1' value='". $row['vendor_id'] ."' readonly hidden/></form><td>" 
+                            .$row['company_name']. "</td><td>" .$row['street_address']. "</td><td>".$row['city']. "</td><td>" .$row['state'].
+                            "</td><td>" .$row['zip_code']. "</td></tr>";
                 }
               } else {
                 echo "<div class='row mt-3'>There are no results matching your search</div>";
