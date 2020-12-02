@@ -1,4 +1,3 @@
-<!--<form method="post" type="button" action="<?php //echo $_SERVER['PHP_SELF'];?>" -->
 
      <!-- Option to choose a payment type -->
     Choose a Payment Type:
@@ -18,4 +17,4 @@
     ?>
 
     <br>
-<!--</form>-->
+
