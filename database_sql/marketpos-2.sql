@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 28, 2020 at 03:18 AM
+-- Generation Time: Dec 02, 2020 at 03:24 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -47,14 +47,6 @@ CREATE TABLE `cart_inprogress` (
   `customer_id` int(11) DEFAULT NULL,
   `ticket_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `cart_inprogress`
---
-
-INSERT INTO `cart_inprogress` (`CID`, `customer_id`, `ticket_id`) VALUES
-(72, NULL, 72),
-(73, NULL, 73);
 
 -- --------------------------------------------------------
 
@@ -163,24 +155,6 @@ CREATE TABLE `item_list` (
   `product_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `item_list`
---
-
-INSERT INTO `item_list` (`ITID`, `CID`, `qty`, `product_id`) VALUES
-(55, 72, 1, 8),
-(56, 72, 1, 7),
-(57, 72, 2, 8),
-(58, 72, 1, 1),
-(59, 72, 2, 7),
-(60, 72, 1, 9),
-(61, 73, 1, 9),
-(62, 73, 1, 3),
-(63, 73, 1, 6),
-(64, 73, 2, 6),
-(65, 73, 2, 9),
-(66, 73, 1, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -194,24 +168,6 @@ CREATE TABLE `orders` (
   `stock_amount` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`OID`, `OTID`, `cost`, `stock_amount`, `product_id`) VALUES
-(248, 149, NULL, 2, 4),
-(249, 149, NULL, 1, 5),
-(250, 149, NULL, 1, 6),
-(251, 150, NULL, 1, 4),
-(252, 150, NULL, 1, 5),
-(253, 150, NULL, 1, 3),
-(254, 150, NULL, 1, 2),
-(255, 150, NULL, 1, 1),
-(256, 150, NULL, 1, 6),
-(257, 150, NULL, 1, 7),
-(258, 150, NULL, 1, 8),
-(259, 150, NULL, 1, 9);
 
 -- --------------------------------------------------------
 
@@ -229,20 +185,12 @@ CREATE TABLE `orders_ticket` (
   `discount` float DEFAULT NULL,
   `tax` float DEFAULT NULL,
   `tax_rate` float DEFAULT NULL,
-  `cash` int(11) DEFAULT NULL,
-  `credit` int(11) DEFAULT NULL,
+  `cash` float DEFAULT NULL,
+  `credit` float DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `employee_id` int(11) DEFAULT NULL,
   `vendor_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `orders_ticket`
---
-
-INSERT INTO `orders_ticket` (`OTID`, `date`, `time`, `quantity`, `subtotal`, `total`, `discount`, `tax`, `tax_rate`, `cash`, `credit`, `status`, `employee_id`, `vendor_id`) VALUES
-(149, '2020-11-27', '21:04:51', 4, 24.42, 24.42, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-(150, '2020-11-27', '21:05:12', 9, 55.29, 55.29, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -276,7 +224,7 @@ INSERT INTO `product_inventory` (`product_id`, `brand`, `description`, `productN
 (6, 'Strawberries', '1lb package', 'Driscoll\'s', 'produce', 'strawberries', 8.95, 6.99, 45, 1),
 (7, 'Red Cherry Tomato', '10.5oz package', 'Cherry', 'produce', 'tomato', 5.59, 3.99, 21, 1),
 (8, 'Organic Red Grape Tomatoes', '10 oz package', 'Brandywine', 'produce', 'tomato', 8.99, 5.75, 2, 1),
-(9, ' Sht Cuts Grlld Ital Chic Strip', '22oz', 'Perdue', 'poultry', 'chicken ', 7.49, 6.99, 7, 1);
+(9, ' Sht Cuts Grlld Ital Chic Strip', '22oz', 'Perdue', 'poultry', 'chicken ', 7.49, 6.99, 7, 2);
 
 -- --------------------------------------------------------
 
@@ -287,7 +235,8 @@ INSERT INTO `product_inventory` (`product_id`, `brand`, `description`, `productN
 CREATE TABLE `registers_table` (
   `register_id` int(11) NOT NULL,
   `open_total` float NOT NULL,
-  `close_total` float NOT NULL,
+  `close_total` float DEFAULT NULL,
+  `register_num` int(11) NOT NULL,
   `employee_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -327,8 +276,8 @@ CREATE TABLE `return_table` (
   `ticket_id` int(11) DEFAULT NULL,
   `date` date NOT NULL,
   `time` time NOT NULL,
-  `refunds` float NOT NULL,
-  `exchanges` float NOT NULL
+  `refunds` float DEFAULT NULL,
+  `exchanges` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -389,14 +338,6 @@ CREATE TABLE `ticket_system` (
   `employee_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `ticket_system`
---
-
-INSERT INTO `ticket_system` (`ticket_id`, `date`, `company_name`, `time`, `quantity`, `subtotal`, `total`, `discount`, `tax`, `tax_rate`, `cash`, `credit`, `cart_purchase`, `customer_id`, `employee_id`) VALUES
-(72, '2020-11-27', NULL, '13:00:06', 6, 33.46, 33.46, NULL, 0, NULL, 0, 0, NULL, NULL, NULL),
-(73, '2020-11-27', NULL, '13:00:25', 6, 40.1, 40.1, NULL, 0, NULL, 0, 0, NULL, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -421,7 +362,8 @@ CREATE TABLE `vendorinfo` (
 --
 
 INSERT INTO `vendorinfo` (`vendor_id`, `company_name`, `department`, `street_address`, `city`, `state`, `zip_code`, `phone_number`, `fax_number`, `email`) VALUES
-(1, 'Krasdale Foods Inc', 'Frozen and Dairy', '400 Food Center Dr', 'Bronx', 'NY', 10474, 7183781100, 9146975200, 'web-inquiries@krasdalefoods.com');
+(1, 'Krasdale Foods Inc', 'Frozen and Dairy', '400 Food Center Dr', 'Bronx', 'NY', 10474, 7183781100, 9146975200, 'web-inquiries@krasdalefoods.com'),
+(2, 'vendor name', 'produce', '12 Some Street', 'Some City', 'CY', 0, 2121111111, 2120000000, 'name@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -551,13 +493,13 @@ ALTER TABLE `vendorinfo`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
 
 --
 -- AUTO_INCREMENT for table `cart_inprogress`
 --
 ALTER TABLE `cart_inprogress`
-  MODIFY `CID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `CID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `customer_info`
@@ -581,19 +523,19 @@ ALTER TABLE `gift_card`
 -- AUTO_INCREMENT for table `item_list`
 --
 ALTER TABLE `item_list`
-  MODIFY `ITID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `ITID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=262;
+  MODIFY `OID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=294;
 
 --
 -- AUTO_INCREMENT for table `orders_ticket`
 --
 ALTER TABLE `orders_ticket`
-  MODIFY `OTID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
+  MODIFY `OTID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=189;
 
 --
 -- AUTO_INCREMENT for table `product_inventory`
@@ -617,7 +559,7 @@ ALTER TABLE `report_system`
 -- AUTO_INCREMENT for table `return_table`
 --
 ALTER TABLE `return_table`
-  MODIFY `RTID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `RTID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `stores`
@@ -635,13 +577,13 @@ ALTER TABLE `tax_table`
 -- AUTO_INCREMENT for table `ticket_system`
 --
 ALTER TABLE `ticket_system`
-  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `vendorinfo`
 --
 ALTER TABLE `vendorinfo`
-  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
