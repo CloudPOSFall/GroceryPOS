@@ -27,9 +27,10 @@ if (isset($_POST['submitcount'])) {
 if (isset($_POST['submitclose'])) {
   $closesum = $_POST['closesum'];
   $closeRegId = $_POST['closeRegId'];
+  $dropNote = $_POST['dropNote'];
   $employeeid = $_SESSION['emp_id'];
 
-  $closequery = "UPDATE registers_table SET close_total = '$closesum', close_emp_id = (SELECT employee_id from employee_info where employee_id = $employeeid), close_time = now() WHERE register_id = '$closeRegId' ";
+  $closequery = "UPDATE registers_table SET close_total = '$closesum', close_emp_id = (SELECT employee_id from employee_info where employee_id = $employeeid), close_time = now(), note = '$dropNote' WHERE register_id = '$closeRegId' ";
 
   $result = mysqli_query($conn, $closequery);
 
@@ -51,9 +52,10 @@ if (isset($_POST['selectreg'])) {
 if (isset($_POST['submitdrop'])) {
   $dropsum = $_POST['dropsum'];
   $dropRegId = $_POST['dropRegId'];
+  $dropNote = $_POST['dropNote'];
   $employeeid = $_SESSION['emp_id'];
 
-  $closequery = "UPDATE registers_table SET drop_total = '$dropsum', drop_emp_id = (SELECT employee_id from employee_info where employee_id = $employeeid), drop_time = now() WHERE register_id = '$dropRegId' ";
+  $closequery = "UPDATE registers_table SET drop_total = '$dropsum', drop_emp_id = (SELECT employee_id from employee_info where employee_id = $employeeid), drop_time = now(), note = '$dropNote' WHERE register_id = '$dropRegId' ";
 
   $result = mysqli_query($conn, $closequery);
 
@@ -647,6 +649,8 @@ if (isset($_POST['submitdrop'])) {
                       </tr>
                     </tbody>
                   </table>
+
+                  <input class="float-right my-2" name="dropNote" placeholder="Note"/>
                   <input name="closeRegId" value="'.$row['register_id'].'" readonly hidden/>
                     ';
                     }
@@ -751,17 +755,17 @@ if (isset($_POST['submitdrop'])) {
                   
 
 
-        echo '<div class="row">
+        echo '<div class="row">';
 
-            <form method="post" action="salescontrolpanel.php">';
+            
 
-          $dropQuery = "SELECT register_id, drop_total FROM registers_table WHERE close_total is NULL AND register_num = $regToClose";
+          $dropQuery = "SELECT register_id, drop_total, open_total FROM registers_table WHERE close_total is NULL AND register_num = $regToClose";
           $result = mysqli_query($conn, $dropQuery);
           $numrows = mysqli_num_rows($result);
           if ($numrows != 0) {
             while ($row = mysqli_fetch_assoc($result)) {
               echo'<div class="col mt-2">
-                
+              <h6 class="text-right py-2">Opening Total: $'.$row['open_total'].'</h6>
                   
               </div>';
 
@@ -815,13 +819,16 @@ if (isset($_POST['submitdrop'])) {
                         <label class="control-label border bg-white" style="width:60px"><span class="input-group-addon px-2"> Total </span></label>
                         <input name="dropsum" id="totaldrop" type="text" maxlength="10" class="form-control w-50" value="0.00" readonly>
                       </div>
+                      
                     </div>
+                    
                   </div>
                 </div>
-                
+                <input class="float-right my-2" name="dropNote" placeholder="Note"/>
               </div>
+
               <input name="dropRegId" value="'.$row['register_id'].'" readonly hidden/>';
-              //<input name="dropRegId" value="'.$row['register_id'].'" readonly hidden/>';
+              
             }
           }
 
