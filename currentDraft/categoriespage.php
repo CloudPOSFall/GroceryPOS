@@ -1,19 +1,15 @@
 <?php
 include_once('config.php');
 include_once('sidebarconnect.php');
-$query = "SELECT orders_ticket.*, orders.*, product_inventory.* FROM orders_ticket LEFT JOIN orders
-ON orders_ticket.OTID=orders.OTID LEFT JOIN product_inventory ON orders.product_id=product_inventory.product_id";
-$result = mysqli_query($conn, $query);
 ?>
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
 <head>
-  <meta charset="utf-8">
+ <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>Purchase Orders | MarketPOS</title>
+  <title>Inventory | MarketPOS</title>
 
   <!--bootstrap css -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -34,19 +30,14 @@ $result = mysqli_query($conn, $query);
   <!-- bootstrap js -->
   <script src="js/bootstrap.min.js"></script>
 
+
 </head>
 
 <body>
-
-
-
-
-
-
-<!--nav sidebar-->
-<nav id="sidebar">
+	 <!--nav sidebar-->
+  <nav id="sidebar">
     <div class="sidebar-header bg-dark">
-      <h1 id="brand"><span><a class="navbar-brand relative-top" href="indexDraft.php"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <h1><span><a class="navbar-brand relative-top" href="indexDraft.php"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1z" />
             </svg>
             <span style="color: #00b300"> Market</span>POS</a></h1>
@@ -55,19 +46,21 @@ $result = mysqli_query($conn, $query);
     <ul class="list-unstyled components">
       <li>
         <div id="usercard">
-          <a href="salescontrolpanel.php#switchreg" style="font-size: 1em;"><?php if ((isset($_SESSION['emp_id'])) ) echo $row['company_name']; else  echo 'Company Name'; ?></br>
-            <?php if (isset($_SESSION['register'])) echo "Register " .$_SESSION['register'];else  echo 'Choose Register'; ?> <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <a href="" style="font-size: 1em;"><?php  if(isset($_SESSION['emp_company'])&& !empty($_SESSION['emp_company'])) {echo $_SESSION['emp_company'];} else {echo 'Company Name';} ?></br>Choose Register <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
             </svg></a>
         </div>
       </li>
       <li>
-        <a href="employeePinLogin.php" style="font-size: 1em;"><?php if ((isset($_SESSION['emp_id']))) echo "". $row['first_name']. " " . $row['last_name'] . " ";else echo "Current User";?><svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <a href="employeePinLogin.php" style="font-size: 1em;"><?php if (isset($_SESSION['emp_fname']) && !empty($_SESSION['emp_lname'])) {
+                                                                  echo "" . $_SESSION['emp_fname'] . " " . $_SESSION['emp_lname'] . " ";
+                                                                } else {
+                                                                  echo "Current User";
+                                                                } ?><svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
           </svg></a>
       </li>
       <div class="justify-content-center" id="navline"></div>
-
 
       <li>
         <a href="accounthomeDraft.php">
@@ -85,7 +78,7 @@ $result = mysqli_query($conn, $query);
               <path d="M11 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1zM1 9h14v2H1V9z" /></svg>
           </span> Sales</a>
       </li>
-      <li class=active>
+      <li class="active">
         <a href="inventorycontrol.php">
           <span style="padding:5px;">
             <svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-inbox-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -99,11 +92,9 @@ $result = mysqli_query($conn, $query);
               <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
             </svg></span> Customers</a>
       </li>
-     
-
       <?php
-            if (isset($_SESSION['emp_id']))
-        if ($row['user_type'] == 1) {
+      if (isset($_SESSION['emp_type'])) {
+        if ($_SESSION['emp_type'] == 1) {
 
           echo "
           <li>
@@ -123,8 +114,9 @@ $result = mysqli_query($conn, $query);
                 </svg></span> Reports</a>
           </li>";
         }
-      
+      }
       ?>
+
 
       </br></br></br></br>
       <li class="sidebar-footer">
@@ -134,134 +126,48 @@ $result = mysqli_query($conn, $query);
             </svg> Switch User</a>
 
         </div>
-
       </li>
       <li>
         <div class="card text-center" id="footerbtn" style="background: #016923;">
           <a role="button" href="logout.php"> Logout</a>
+
+
         </div>
+
       </li>
     </ul>
     </div>
   </nav>
- <!--END nav sidebar-->
-
-  <!--page content-->
+	<!--page content-->
   <div id="content">
+	  <?php
+	  	include('categoryForm.php'); 
+	  ?>
+</div>
+ <script type="text/javascript">
+    $(document).ready(function() {
+      $("#sidebar").mCustomScrollbar({
+        theme: "minimal"
+      });
 
+      $('#sidebarCollapse').on('click', function() {
+        $('#sidebar, #content').toggleClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+    });
 
-    <!--location navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="locnav">
-      <div class="container-fluid">
-
-        <button type="button" id="sidebarCollapse" class="btn btn-success">
-          <i class="fas fa-align-left"></i>
-        </button>
-
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="nav navbar-nav mr-auto">
-            <a class="navbar-brand" href="inventorycontrol.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
-              </svg> Purchase Orders</a>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-
-    <nav class="navbar navbar-light" id="salespanel">
-      <form class="form-inline" method="post" action="purchaseorders.php">
-        <div class="nav-item" style="padding: 8px">
-          <input class="form-control" name="order" placeholder="Search Order Detail" aria-label="Search">
-          <button class="btn btn-dark navbar-btn" name="submit-search"> Look Up</button>
-        </div>
-
-        <div class="nav-item mr-auto">
-          <a class="btn navbar-btn btn-light" href="neworder.php" role="button"> New Order</a></div>
-      </form>
-    </nav>
-
-
-
-    <div class="wrapper mt-3">
-      <div class="row px-4 justify-content-center">
-        <table class="table table-bordered table-hover mt-3 table-responsive" style="font-size:80%;">
-          <thead class="bg-light">
-            <tr>
-              <th> Order ID</th>
-              <th> Date </th>
-              <th> Time </th>
-              <th> Brand </th>
-              <th> Description </th>
-              <th> Product Name </th>
-              <th> Product Type </th>
-              <th> Quantity </th>
-              <th> Subtotal </th>
-              <th> Total </th>
-              <th> Tax </th>
-              <th> Status </th>
-              <th> Vendor ID </th>
-              <th> Edit Status </th>
-              <th> </th>
-            </tr>
-          </thead>
-          <tbody class="bg-white">
-            <?php
-
-            if (isset($_POST['submit-search'])) {
-              $search = mysqli_real_escape_string($conn, $_POST['order']);
-              $query = "SELECT orders_ticket.*, orders.*, product_inventory.* FROM orders_ticket LEFT JOIN orders
-              ON orders_ticket.OTID=orders.OTID LEFT JOIN product_inventory ON orders.product_id=product_inventory.product_id
-              WHERE orders_ticket.OTID LIKE '%$search%'";
-              $result = mysqli_query($conn, $query);
-              $queryResults = mysqli_num_rows($result);
-
-              if ($queryResults > 0) {
-                echo "<div class='row mt-3'>There are $queryResults results matching your search</div><br>";
-                while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<tr><td>" . $row['OTID'] . "</td><td>"
-                    . date('m-d-Y', strtotime($row['date'])) . "</td><td>" . $row['time'] . "</td><td>" . $row['brand'] . "</td><td>" . $row['description'] . "</td><td>"
-                    . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['stock_amount'] . "</td><td>" . $row['subtotal'] . "</td><td>"
-                    . $row['total'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['status'] . "</td><td>"
-                    . $row['vendor_id'] . "</td><td><a class='btn-sm btn-dark' role='button' href='editstatus.php?Stat="
-                    . $row['OTID'] . "'>Select</a>";
-                }
-              } else {
-                echo "<div class='row mt-3'>There are no results matching your search</div>";
-              }
-            } else {
-              while ($row = mysqli_fetch_assoc($result)) {
-                echo "<tr><td>" . $row['OTID'] . "</td><td>"
-                    . date('m-d-Y', strtotime($row['date'])) . "</td><td>" . $row['time'] . "</td><td>" . $row['brand'] . "</td><td>" . $row['description'] . "</td><td>"
-                    . $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" . $row['stock_amount'] . "</td><td>" . $row['subtotal'] . "</td><td>"
-                    . $row['total'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['status'] . "</td><td>"
-                    . $row['vendor_id'] . "</td><td><a class='btn-sm btn-dark' role='button' href='editstatus.php?Stat="
-                    . $row['OTID'] . "'>Select</a>";
-                }
-            }
-
-            ?>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-
+    $(document).ready(function() {
+      $(".card").hover(
+        function() {
+          $(this).addClass('shadow').css('cursor', 'pointer');
+        },
+        function() {
+          $(this).removeClass('shadow');
+        }
+      );
+    });
+  </script>
 </body>
-
-<script type="text/javascript">
-  $(document).ready(function() {
-    $("#sidebar").mCustomScrollbar({
-      theme: "minimal"
-    });
-
-    $('#sidebarCollapse').on('click', function() {
-      $('#sidebar, #content').toggleClass('active');
-      $('.collapse.in').toggleClass('in');
-      $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-    });
-  });
-</script>
 
 </html>

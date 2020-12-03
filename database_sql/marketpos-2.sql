@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 03, 2020 at 02:00 AM
+-- Generation Time: Dec 03, 2020 at 06:16 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -221,7 +221,10 @@ INSERT INTO `product_inventory` (`product_id`, `brand`, `description`, `productN
 (6, 'Strawberries', '1lb package', 'Driscoll\'s', 'produce', 'strawberries', 8.95, 6.99, 45, 1),
 (7, 'Red Cherry Tomato', '10.5oz package', 'Cherry', 'produce', 'tomato', 5.59, 3.99, 21, 1),
 (8, 'Organic Red Grape Tomatoes', '10 oz package', 'Brandywine', 'produce', 'tomato', 8.99, 5.75, 2, 1),
-(9, ' Sht Cuts Grlld Ital Chic Strip', '22oz', 'Perdue', 'poultry', 'chicken ', 7.49, 6.99, 7, 2);
+(9, ' Sht Cuts Grlld Ital Chic Strip', '22oz', 'Perdue chicken breast', 'poultry', 'chicken breast', 7.49, 6.99, 7, 2),
+(10, 'She Cuts Grlld Ital Chic Legs', '22oz', 'Perdue chicken legs', 'poultry', 'chicken leg', 7.49, 6.99, 12, 2),
+(11, 'Five Star Beef', '16 oz', 'Tyson Steaks', 'Beef', 'Steak', 10.49, 9.99, 19, 2),
+(12, 'Five Star Flanks', '30 oz', 'Tyson Flanks', 'Beef', 'Flank', 14.49, 12.99, 60, 2);
 
 -- --------------------------------------------------------
 
@@ -232,13 +235,16 @@ INSERT INTO `product_inventory` (`product_id`, `brand`, `description`, `productN
 CREATE TABLE `registers_table` (
   `register_id` int(11) NOT NULL,
   `open_total` float NOT NULL,
-  `open_time` time NOT NULL,
   `close_total` float DEFAULT NULL,
-  `close_time` time DEFAULT NULL,
-  `credit_total` float DEFAULT NULL,
   `register_num` int(11) NOT NULL,
-  `open_employee_id` int(11) NOT NULL,
-  `close_employee_id` int(11) NOT NULL
+  `open_emp_id` int(11) NOT NULL,
+  `close_emp_id` int(11) DEFAULT NULL,
+  `open_time` datetime NOT NULL,
+  `close_time` datetime DEFAULT NULL,
+  `drop_time` datetime DEFAULT NULL,
+  `drop_emp_id` int(11) DEFAULT NULL,
+  `drop_total` float DEFAULT NULL,
+  `note` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -356,7 +362,7 @@ CREATE TABLE `vendorinfo` (
 
 INSERT INTO `vendorinfo` (`vendor_id`, `company_name`, `department`, `street_address`, `city`, `state`, `zip_code`, `phone_number`, `fax_number`, `email`) VALUES
 (1, 'Krasdale Foods Inc', 'Frozen and Dairy', '400 Food Center Dr', 'Bronx', 'NY', 10474, 7183781100, 9146975200, 'web-inquiries@krasdalefoods.com'),
-(2, 'vendor name', 'produce', '12 Some Street', 'Some City', 'CY', 0, 2121111111, 2120000000, 'name@gmail.com');
+(2, 'J & J NY Distributors', 'Poultry', '1343 Lafayette Ave', 'Bronx', 'NY', 10474, 7185890517, 7185890517, 'info@jjnycorp.com');
 
 --
 -- Indexes for dumped tables
@@ -435,8 +441,9 @@ ALTER TABLE `product_inventory`
 --
 ALTER TABLE `registers_table`
   ADD PRIMARY KEY (`register_id`),
-  ADD KEY `employee_id` (`open_employee_id`),
-  ADD KEY `close_employee_id` (`close_employee_id`);
+  ADD KEY `fk_open_emp_id` (`open_emp_id`),
+  ADD KEY `fk_close_emp_id` (`close_emp_id`),
+  ADD KEY `fk_drop_emp_id` (`drop_emp_id`);
 
 --
 -- Indexes for table `report_system`
@@ -499,7 +506,7 @@ ALTER TABLE `cart_inprogress`
 -- AUTO_INCREMENT for table `customer_info`
 --
 ALTER TABLE `customer_info`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `employee_info`
@@ -523,25 +530,25 @@ ALTER TABLE `item_list`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=363;
+  MODIFY `OID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=366;
 
 --
 -- AUTO_INCREMENT for table `orders_ticket`
 --
 ALTER TABLE `orders_ticket`
-  MODIFY `OTID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=240;
+  MODIFY `OTID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
 
 --
 -- AUTO_INCREMENT for table `product_inventory`
 --
 ALTER TABLE `product_inventory`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `registers_table`
 --
 ALTER TABLE `registers_table`
-  MODIFY `register_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `register_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `report_system`
@@ -577,7 +584,7 @@ ALTER TABLE `ticket_system`
 -- AUTO_INCREMENT for table `vendorinfo`
 --
 ALTER TABLE `vendorinfo`
-  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -641,14 +648,9 @@ ALTER TABLE `product_inventory`
 -- Constraints for table `registers_table`
 --
 ALTER TABLE `registers_table`
-  ADD CONSTRAINT `registers_table_ibfk_1` FOREIGN KEY (`open_employee_id`) REFERENCES `employee_info` (`employee_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `registers_table_ibfk_2` FOREIGN KEY (`close_employee_id`) REFERENCES `employee_info` (`employee_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `report_system`
---
-ALTER TABLE `report_system`
-  ADD CONSTRAINT `report_system_ibfk_1` FOREIGN KEY (`register_id`) REFERENCES `registers_table` (`register_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+  ADD CONSTRAINT `fk_close_emp_id` FOREIGN KEY (`close_emp_id`) REFERENCES `employee_info` (`employee_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_drop_emp_id` FOREIGN KEY (`drop_emp_id`) REFERENCES `employee_info` (`employee_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_open_emp_id` FOREIGN KEY (`open_emp_id`) REFERENCES `employee_info` (`employee_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `return_table`

@@ -1,8 +1,9 @@
 <?php
 include_once('config.php');
 include_once('sidebarconnect.php');
+if (isset($_SESSION["init"])){
 $_SESSION["init"] += 1;
-
+}
 
 ?>
 
@@ -122,7 +123,7 @@ $_SESSION["init"] += 1;
       </br></br></br></br>
       <li class="sidebar-footer">
         <div class="text-center" id="usercard">
-          <a role="button" href="employeePinLogin.php"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <a role="button" href="<?php $_SESSION['url'] = "salescontrolpanel.php" ?> employeePinLogin.php"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z" />
             </svg> Switch User</a>
 
@@ -154,7 +155,7 @@ $_SESSION["init"] += 1;
     ?>
 
     <!--location navbar-->
-    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="locnav">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="locnav">
       <div class="container-fluid">
 
         <button type="button" id="sidebarCollapse" class="btn btn-success">
@@ -171,12 +172,12 @@ $_SESSION["init"] += 1;
           </ul>
         </div>
       </div>
-    </nav> -->
+    </nav> 
 
     <!--control buttons-->
 
-    <div align="center" style="padding-top: 40px;">
-      <div class="card" style="width: 12rem;">
+    <div style="margin-left: 490px; padding-top: 40px;">
+      <div class="card text-center" style="width: 12rem;">
 
         <img class="img-thumbnail" src="media/prof.png" style="height: 11rem;" alt="Card image cap" />
         <div class="card-body">
@@ -270,7 +271,7 @@ $_SESSION["init"] += 1;
         });
         <?php 
         if($_SESSION['init']==1){
-        echo "$.toaster({ priority : 'success', title : 'Success', message : 'Welcome, " . $_SESSION['emp_fname'] ."' })";
+        echo "$.toaster({ priority : 'success', title : 'Success', message : 'Welcome, " . $row['first_name'] ."' })";
         }
         ?>
       });

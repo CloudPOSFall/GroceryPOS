@@ -117,7 +117,7 @@ if (isset($_POST['submitdrop'])) {
     <ul class="list-unstyled components">
       <li>
         <div id="usercard">
-          <a href="salescontrolpanel.php#switchreg" style="font-size: 1em;"><?php if ((isset($_SESSION['emp_id'])) ) echo $row['company_name']; else  echo 'Company Name'; ?></br>
+          <a href="" style="font-size: 1em;"  data-toggle="modal" data-target="#switchreg"><?php if ((isset($_SESSION['emp_id'])) ) echo $row['company_name']; else  echo 'Company Name'; ?></br>
             <?php if (isset($_SESSION['register'])) echo "Register " .$_SESSION['register'];else  echo 'Choose Register'; ?> <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
             </svg></a>
@@ -185,10 +185,10 @@ if (isset($_POST['submitdrop'])) {
       
       ?>
 
-      </br></br></br></br>
+</br></br></br></br>
       <li class="sidebar-footer">
         <div class="text-center" id="usercard">
-          <a role="button" href="employeePinLogin.php"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <a role="button" href="<?php $_SESSION['url'] = "salescontrolpanel.php" ?> employeePinLogin.php"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z" />
             </svg> Switch User</a>
 
@@ -239,7 +239,7 @@ if (isset($_POST['submitdrop'])) {
       <div class="card-deck">
         <p>Sales Controls</p>
         <div class="line"></div>
-        <a class="btn" href="sale.php">
+        <a class="btn" href="<?php $_SESSION['url'] = "sale.php" ?> employeePinLogin.php">
           <div class="card" id="pagecard">
             <div class="card-body text-center">
               <span class="card-text">

@@ -15,10 +15,11 @@ include_once('config.php');
       $State = $_POST['state'];
       $ZipCode = $_POST['zip'];
       $Company = $_POST['code'];
+      $User = $_POST['type'];
       
 
       $query = "INSERT into employee_info (email, password, pin_number, first_name, last_name, phone_number, SSN, street_address, city, state, zip_code, company_name, user_type)
-              VALUES ('$Email', '$Password', '$Pin', '$FirstName', '$LastName', '$PhoneNumber', '$SSN', '$StreetAddress', '$City', '$State', '$ZipCode', '$Company', '2')";
+              VALUES ('$Email', '$Password', '$Pin', '$FirstName', '$LastName', '$PhoneNumber', '$SSN', '$StreetAddress', '$City', '$State', '$ZipCode', '$Company', '$User')";
 
       $result = mysqli_query($conn, $query);
 
@@ -26,7 +27,11 @@ include_once('config.php');
 
       if($result)
       {
-        header("location:employeecontrol.php");
+        $query = "INSERT into customer_info (email, password, first_name, last_name, phone_number, street_address, city, state, zip_code)
+              VALUES ('$Email', '$Password', '$FirstName', '$LastName', '$PhoneNumber', '$StreetAddress', '$City', '$State', '$ZipCode')";
+
+        $result = mysqli_query($conn, $query);
+        header("location:employeeview.php");
       }
       else
       {

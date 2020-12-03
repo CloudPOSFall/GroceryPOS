@@ -5,6 +5,8 @@ include_once('sidebarconnect.php');
 ob_start();
 
 ?>
+<!DOCTYPE html>
+<html>
 
 <head>
   <meta charset="UTF-8">
@@ -62,13 +64,15 @@ ob_start();
             if ($numrows == 1) {
               while ($row = mysqli_fetch_assoc($query)) {
                 $emp_id = $row['employee_id'];
-                
               }
               $_SESSION["emp_id"] = $emp_id;
               $_SESSION["init"] = 1;
               $_SESSION['timeout'] = time();
-
-              header("Location: accountHomeDraft.php");
+              if (isset($_SESSION['url']))
+              $url = $_SESSION['url'];
+              else
+              $url = "accountHomeDraft.php";
+              header("Refresh:1; url= $url");
               ob_end_flush();
             } else {
               $msg = "Incorrect pin";
@@ -104,8 +108,8 @@ ob_start();
             <div class="row justify-content-center" style="padding: 10px;">
               <div class="form-group">
                 <input type="password" name="pin" style="font-size: 1.5em" maxlength="4" size="6" class="form-control" <?php if (!isset($_POST["login"])) {
-                                                                                                          echo 'placeholder="PIN"';
-                                                                                                        } else echo 'value="' . $pin . '"' ?>>
+                                                                                                                          echo 'placeholder="PIN"';
+                                                                                                                        } else echo 'value="' . $pin . '"' ?>>
               </div>
               <div>
 
@@ -126,8 +130,22 @@ ob_start();
 
       </div>
     </div>
-
+    <script>
+      <?php
+      if (isset($_POST['login']) && $_SESSION["emp_id"]) {
+        echo "$.toaster({ priority : 'success', title : 'Success', message : 'Pin Verified' })";
+      }
+      ?>
+    </script>
 </body>
+<style>
+  .toaster {
+    left: 50%;
+    position: fixed;
+    transform: translate(-50%, 0px);
+    z-index: 9999;
+  }
+</style>
 
 
 </html>

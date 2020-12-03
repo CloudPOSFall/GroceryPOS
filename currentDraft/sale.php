@@ -119,16 +119,16 @@ include_once('sidebarconnect.php');
       ?>
 
         
-        </br></br></br></br>
-        <li class="sidebar-footer">
-            <div class="text-center" id="usercard">
-               <a role="button" href="employeePinLogin.php"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z" />
-                        </svg> Switch User</a>
-                
-            </div>
-        
-    </li>
+</br></br></br></br>
+      <li class="sidebar-footer">
+        <div class="text-center" id="usercard">
+          <a role="button" href="<?php $_SESSION['url'] = "salescontrolpanel.php" ?> employeePinLogin.php"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z" />
+            </svg> Switch User</a>
+
+        </div>
+
+      </li>
     <li>
         <div class="card text-center" id="footerbtn" style="background: #016923;">
           <a role="button" href="logout.php"> Logout</a>
@@ -188,19 +188,29 @@ include_once('sidebarconnect.php');
         </nav>
 
         <nav class="navbar navbar-light" style="background-color: #a1b6a8;" id="salespanel">
-                    <?php
-                    if (isset($_GET['Add'])) {
-                        $ID = $_GET['Add'];
+     <?php
+		if(isset($_SESSION['custfirst']))
+		{
+				echo "<form class='form-inline' method='post' action ='removecust.php'> <div 
+				class='card' style='padding: 8px'>" . $_SESSION['custfirst'] . " " . $_SESSION['custlast'] . "</div>
+                <div class='nav-item'><button action='index.php' class='btn navbar-btn'> Remove</button></div></form>";
+		}else{
+                    if (isset($_POST['scustomer'])) {
+                        $ID = $_POST['scustomer'];
                         $cQuery = "SELECT * FROM customer_info WHERE customer_id LIKE '%$ID%'";
                         $cResult = mysqli_query($conn, $cQuery);
                         $cQueryRes= mysqli_num_rows($cResult);
                         if ($cQueryRes > 0) {
                             while ($crow = mysqli_fetch_assoc($cResult)) {
-                                $_SESSION['customer']['fname'] = $crow['first_name'];
-                                $_SESSION['customer']['lname'] = $crow['last_name'];
-                                echo "<form class='form-inline'><div class='card' style='padding: 8px'>" . $_SESSION['customer']['fname'] . " " . $_SESSION['customer']['lname'] . "</div>
-                                <div class='nav-item'><button href='sale.php' class='btn navbar-btn'> Remove</button></div></form>";
-								array_push($_SESSION['customer'],$_GET['Add']);
+                                $first = $crow['first_name'];
+								$first = mysqli_real_escape_string($conn,$first);
+                                $last = $crow['last_name'];
+								$last = mysqli_real_escape_string($conn,$last);
+								echo "<form class='form-inline'><div 
+								class='card' style='padding: 8px'>" . $first . " " . $last . "</div>
+                                <div class='nav-item'><button href='index.php' class='btn navbar-btn'> Remove</button></div></form>";
+								$_SESSION['custfirst'] = $first;
+								$_SESSION['custlast'] = $last;
                             }
                         } 
                     }else {
@@ -209,8 +219,8 @@ include_once('sidebarconnect.php');
                         <input class='form-control col-5' name='customer' placeholder='Search Customers' aria-label='Search'>
                         <button class='btn btn-dark navbar-btn' name='sale-search'> Look Up</button></div></form>";
                     }
+		}
                     ?>
-                
                 
                 <div class="nav-item"><button class="btn navbar-btn"> New</button></div>
             
@@ -254,7 +264,6 @@ include_once('sidebarconnect.php');
                 //if ($row['in_stock'] > 0){}
                 //}else{
                 //echo "<div>The item you searched for is not in stock</div>";
-
 
                 if (isset($_POST['additem'])) {
                     $search = $_POST['sproduct'];
