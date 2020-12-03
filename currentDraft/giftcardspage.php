@@ -228,7 +228,7 @@ include_once('sidebarconnect.php');
                   <td>" . $row['card_balance'] . "</td>
                   <tr>";
             }
-
+              
             // }
 
             ?>

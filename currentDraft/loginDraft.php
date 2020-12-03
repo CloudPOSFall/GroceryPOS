@@ -48,13 +48,13 @@ if(isset($_POST["login"])) {
       $_SESSION["init"] = 0;
       $_SESSION['timeout'] = time();
       if(!empty($_POST["remember"])) {
-        setcookie ("user_login",$_POST["email"],time()+ (10 * 365 * 24 * 60 * 60));
-        setcookie ("userpassword",$_POST["password"],time()+ (10 * 365 * 24 * 60 * 60));
+        setcookie ("user_login", $_POST["email"], time()+ (10 * 365 * 24 * 60 * 60));
+        setcookie ("user_password", $_POST["password"], time()+ (10 * 365 * 24 * 60 * 60));
         } else {
         if(isset($_COOKIE["user_login"])) {
         setcookie ("user_login","");}
-        if(isset($_COOKIE["userpassword"])) {
-        setcookie ("userpassword","");
+        if(isset($_COOKIE["user_password"])) {
+        setcookie ("user_password","");
         }
       }
       header("Location: accountHomeDraft.php");
@@ -170,7 +170,7 @@ if(isset($_POST["login"])) {
             <form class="form-horizontal" action="loginDraft.php" method="post">
               <div class="form-group <?php echo (!empty($emsg)) ? 'has-error' : ''; ?>">
                 <label style="font-weight:500;" for="email">Email</label>
-                <input type="email" class="form-control" placeholder="email@address.com" name="email" value="<?php if(isset($_COOKIE["user_password"])) { echo $_COOKIE["user_password"]; } ?>">
+                <input type="email" class="form-control" placeholder="email@address.com" name="email" value="<?php if(isset($_COOKIE["user_login"])) { echo $_COOKIE["user_login"]; } ?>">
                 <span class="help-block"><?php echo $emsg; ?></span>
               </div>
               <div class="form-group" <?php echo (!empty($msg)) ? 'has-error' : ''; ?>>

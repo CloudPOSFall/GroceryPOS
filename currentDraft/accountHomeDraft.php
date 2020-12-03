@@ -154,7 +154,7 @@ $_SESSION["init"] += 1;
     ?>
 
     <!--location navbar-->
-    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="locnav">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="locnav">
       <div class="container-fluid">
 
         <button type="button" id="sidebarCollapse" class="btn btn-success">
@@ -171,12 +171,12 @@ $_SESSION["init"] += 1;
           </ul>
         </div>
       </div>
-    </nav> -->
+    </nav> 
 
     <!--control buttons-->
 
-    <div align="center" style="padding-top: 40px;">
-      <div class="card" style="width: 12rem;">
+    <div style="margin-left: 490px; padding-top: 40px;">
+      <div class="card text-center" style="width: 12rem;">
 
         <img class="img-thumbnail" src="media/prof.png" style="height: 11rem;" alt="Card image cap" />
         <div class="card-body">

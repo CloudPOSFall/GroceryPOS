@@ -96,7 +96,7 @@ $result = mysqli_query($conn, $sql);
               </svg></span> Customers</a>
         </li>
         <?php
-        if ($row['user_type'] == 1) {
+        if ($row['user_type'] == 1) {              
 
           echo "
           <li>
@@ -253,21 +253,22 @@ $result = mysqli_query($conn, $sql);
           <tbody >
           <?php
     
-    if (isset($_POST['submit'])) {
-    $DateBegin = date('Y-m-d', strtotime($_POST['sdate']));
-    $DateEnd = date('Y-m-d', strtotime($_POST['edate']));
-    $search = mysqli_real_escape_string($conn, $DateBegin);
-    $sql = "SELECT * FROM ticket_system WHERE date LIKE '$search%'";
-    $result = mysqli_query($conn, $sql);
-    while ($row = mysqli_fetch_assoc($result)) {
-    if (($row['date'] >= $DateBegin) && ($row['date'] <= $DateEnd)){
-        echo "<tr><td>" 
-        . $row['ticket_id'] . "</td><td>". $row['subtotal'] . "</td><td>" . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['total'] . "</td><td>" . "</td><td>" 
-        . "</td><td>" . "</td><td>" . $row['time'] . "</td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td><a class='btn btn-dark' 
-        role='button' href='customerDetail.php?Detail=". $row['customer_id'] . "'>View</a>";
-      }
-      }
-        ?>
+          if (isset($_POST['submit'])) {
+          $DateBegin = date('Y-m-d', strtotime($_POST['sdate']));
+          $DateEnd = date('Y-m-d', strtotime($_POST['edate']));
+          $search = mysqli_real_escape_string($conn, $DateBegin);
+          $sql = "SELECT * FROM ticket_system WHERE date LIKE '$search%'";
+          $result = mysqli_query($conn, $sql);
+            while ($row = mysqli_fetch_assoc($result)) {
+              if (($row['date'] >= $DateBegin) && ($row['date'] <= $DateEnd)){
+                  echo "<tr><td>" 
+                  . $row['ticket_id'] . "</td><td>". $row['subtotal'] . "</td><td>" . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['total'] . "</td><td>" . "</td><td>" 
+                  . "</td><td>" . "</td><td>" . $row['time'] . "</td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td><a class='btn btn-dark' 
+                  role='button' href='customerDetail.php?Detail=". $row['customer_id'] . "'>View</a>";
+                }
+            }
+          }
+          ?>
                 <!-- Retrieved SQL Data Goes Here Instead of empty tds -->
                 
               </tbody>
