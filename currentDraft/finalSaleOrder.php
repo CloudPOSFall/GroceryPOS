@@ -1,5 +1,9 @@
 <?php
     include('config.php');
+    if(isset($_GET['E']))
+    {
+    $ID = $_GET['E'];
+    }
     $query = "SELECT OTID FROM orders_ticket WHERE employee_id IS NULL";
         $result = mysqli_query($conn, $query) or die(" Execution Failed null address");
         $row = mysqli_num_rows($result);
@@ -10,6 +14,30 @@
         }
     
      include('joinOrder.php');
+     $tax = 0;
+        $discount = 0;
+        
+        // tax selected for our region
+        $query = "SELECT tax_rate FROM tax_table WHERE TTID='1'";
+        $result = mysqli_query($conn, $query) or die("Execution Failed");
+        
+        while($row = mysqli_fetch_assoc($result))
+        {
+            $taxrate = $row['tax_rate'];
+            $formatted = number_format($taxrate, 2);
+            $taxrate = $formatted;
+        }
+        
+        // subtotal saved
+        $subTotal = $total;
+        // new total is subtotal plus tax
+        $total = $total + ($total * $taxrate);
+        $total = number_format($total, 2);
+        $tax = $total * $taxrate;
+        $tax = number_format($tax, 2);
+
+        echo("Total Amount: $");
+        echo($total);
      
 ?>
 
@@ -31,15 +59,15 @@
             $payType = $_POST['payment'];
             if($payType == "Cash")
             {
-                header("location:cashpaymentOrder.php");
+                header("location:cashpaymentOrder.php?E=$ID");
             }
             else if($payType == "Credit")
             {
-                header("location:creditpaymentOrder.php");
+                header("location:creditpaymentOrder.php?E=$ID");
             }
             else
             {
-                header("location:bothpaymentOrder.php");
+                header("location:bothpaymentOrder.php?E=$ID");
             }
         }
     ?>

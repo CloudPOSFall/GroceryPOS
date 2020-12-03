@@ -63,8 +63,8 @@
         $CID = $_SESSION['CID'];
 
         // create new ticket for sale
-        $query = "INSERT INTO ticket_system (ticket_id, date, time, quantity, subtotal, total, tax, tax_rate, cash, credit)
-                    VALUES ('$CID', CURRENT_DATE(), CURRENT_TIME(), '$qtyTotal', '$subTotal', '$total', '$tax', '$taxrate', '$total', '$credit')";
+        $query = "INSERT INTO ticket_system (ticket_id, date, time, quantity, subtotal, total, tax, tax_rate, cash, credit, cart_purchase)
+                    VALUES ('$CID', CURRENT_DATE(), CURRENT_TIME(), '$qtyTotal', '$subTotal', '$total', '$tax', '$taxrate', '$total', '$credit', '0')";
         $result = mysqli_query($conn, $query) or die("Ticket Failed");
         
         // link new ticket to our cart in progress
