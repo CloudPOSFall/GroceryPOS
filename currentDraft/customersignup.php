@@ -1,3 +1,9 @@
+<?php
+include_once('config.php');
+include_once('sidebarconnect.php');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

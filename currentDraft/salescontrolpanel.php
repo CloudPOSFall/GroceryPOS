@@ -1,5 +1,6 @@
 <?php
 include_once('config.php');
+include_once('sidebarconnect.php');
 //this can reset the auto increment when all registers are cleared out
 //mysqli_query($conn, "ALTER TABLE registers_table AUTO_INCREMENT = 1");
 
@@ -104,8 +105,8 @@ if (isset($_POST['submitdrop'])) {
 
 
 
-  <!--nav sidebar-->
-  <nav id="sidebar">
+<!--nav sidebar-->
+<nav id="sidebar">
     <div class="sidebar-header bg-dark">
       <h1 id="brand"><span><a class="navbar-brand relative-top" href="indexDraft.php"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1z" />
@@ -116,26 +117,14 @@ if (isset($_POST['submitdrop'])) {
     <ul class="list-unstyled components">
       <li>
         <div id="usercard">
-          <a data-toggle="modal" data-target="#switchreg" style="font-size: 1em;"><?php if (isset($_SESSION['emp_company']) && !empty($_SESSION['emp_company'])) {
-                                                                                    echo $_SESSION['emp_company'];
-                                                                                  } else {
-                                                                                    echo 'Company Name';
-                                                                                  } ?></br>
-            <?php if (isset($_SESSION['register'])) {
-              echo "Register " . $_SESSION['register'];
-            } else {
-              echo 'Choose Register';
-            } ?> <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <a href="salescontrolpanel.php#switchreg" style="font-size: 1em;"><?php if ($numrows > 0) echo $row['company_name']; else  echo 'Company Name'; ?></br>
+            <?php if (isset($_SESSION['register'])) echo "Register " .$_SESSION['register'];else  echo 'Choose Register'; ?> <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
             </svg></a>
         </div>
       </li>
       <li>
-        <a href="employeePinLogin.php" style="font-size: 1em;"><?php if (isset($_SESSION['emp_fname']) && !empty($_SESSION['emp_lname'])) {
-                                                                  echo "" . $_SESSION['emp_fname'] . " " . $_SESSION['emp_lname'] . " ";
-                                                                } else {
-                                                                  echo "Current User";
-                                                                } ?><svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <a href="employeePinLogin.php" style="font-size: 1em;"><?php if ($numrows > 0) echo "". $row['first_name']. " " . $row['last_name'] . " ";else echo "Current User";?><svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
           </svg></a>
       </li>
@@ -172,8 +161,7 @@ if (isset($_POST['submitdrop'])) {
             </svg></span> Customers</a>
       </li>
       <?php
-      if (isset($_SESSION['emp_type'])) {
-        if ($_SESSION['emp_type'] == 1) {
+        if ($row['user_type'] == 1) {
 
           echo "
           <li>
@@ -193,7 +181,7 @@ if (isset($_POST['submitdrop'])) {
                 </svg></span> Reports</a>
           </li>";
         }
-      }
+      
       ?>
 
       </br></br></br></br>
@@ -386,7 +374,7 @@ if (isset($_POST['submitdrop'])) {
           <div class="container text-center">
             <h6 class="pb-3">Opening Count</h6>
             <div class="row">
-              <div class="col mt-5 pt-5">
+              <div class="col-sm">
                 <form method="post" action="salescontrolpanel.php">
                   <?php
                   $select = "SELECT register_num FROM registers_table WHERE close_total is NULL";
@@ -406,7 +394,7 @@ if (isset($_POST['submitdrop'])) {
                     }
                     if (!empty($regArray)) {
                       echo '
-                      <h5 class="mt-5 pt-5">Open which register?</h5>
+                      <h5 class="" style="margin-top: 200px">Open which register?</h5>
                         <div class="col-sm-10">';
                       foreach ($regArray as $i => $reg) {
                         echo '
@@ -441,51 +429,51 @@ if (isset($_POST['submitdrop'])) {
               <?php
               if (!empty($regArray)) {
                 echo '
-                <div id="bills" class=" col-5">
+                <div id="bills" class="col-5 float-right">
                   <div class="form-inline ml-4">
-                    <div>
-                      <div class="input-group mb-2 mr-4">
+                    <div class="col">
+                      <div class="input-group mb-2">
                         <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $100 </span></label>
-                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
-                      </div>
-                      <div class="input-group mb-2 mr-4">
-                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $50 </span></label>
-                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
-                      </div>
-                      <div class="input-group mb-2 mr-4">
-                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $20 </span></label>
-                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
-                      </div>
-                      <div class="input-group mb-2 mr-4">
-                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $10 </span></label>
-                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
-                      </div>
-                      <div class="input-group mb-2 mr-4">
-                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $5 </span></label>
-                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
-                      </div>
-                      <div class="input-group mb-2 mr-4">
-                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $1 </span></label>
-                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
-                      </div>
-                      <div class="input-group mb-2 mr-4">
-                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 25¢ </span></label>
-                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
-                      </div>
-                      <div class="input-group mb-2 mr-4">
-                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 10¢ </span></label>
-                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
-                      </div>
-                      <div class="input-group mb-2 mr-4">
-                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 5¢ </span></label>
-                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
-                      </div>
-                      <div class="input-group mb-2 mr-4">
-                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 1¢ </span></label>
-                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
+                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control" placeholder="">
                       </div>
                       <div class="input-group mb-2">
-                        <label class="control-label border bg-white" style="width:60px"><span class="input-group-addon px-2"> Total </span></label>
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $50 </span></label>
+                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control" placeholder="">
+                      </div>
+                      <div class="input-group mb-2">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $20 </span></label>
+                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control" placeholder="">
+                      </div>
+                      <div class="input-group mb-2">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $10 </span></label>
+                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control" placeholder="">
+                      </div>
+                      <div class="input-group mb-2">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $5 </span></label>
+                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control" placeholder="">
+                      </div>
+                      <div class="input-group mb-2">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $1 </span></label>
+                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control" placeholder="">
+                      </div>
+                      <div class="input-group mb-2">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 25¢ </span></label>
+                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control" placeholder="">
+                      </div>
+                      <div class="input-group mb-2">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 10¢ </span></label>
+                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control" placeholder="">
+                      </div>
+                      <div class="input-group mb-2">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 5¢ </span></label>
+                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control" placeholder="">
+                      </div>
+                      <div class="input-group mb-2">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 1¢ </span></label>
+                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control " placeholder="">
+                      </div>
+                      <div class="input-group mb-2">
+                        <label class="control-label border bg-white" style="font-size: 13px; width:40px"><span class="input-group-addon px-2"> Total </span></label>
                         <input name="opensum" id="total" type="text" maxlength="10" class="form-control w-50" value="0.00" readonly>
                       </div>
                     </div>
@@ -528,16 +516,16 @@ if (isset($_POST['submitdrop'])) {
           </button>
         </div>
         <div class="modal-body">
-          <div class="container px-2">
+          
           <?php
                   if (!isset($_SESSION['register'])){
                     echo '<h3 class="pb-5 text-center">Cannot Close<br> No Register Selected</h3>';
                   }else{
                   $regToClose = $_SESSION['register'];
             echo '<div class="col text-right"><h5 class"pb-3">Register '. $regToClose .'</h5></div> 
-              <div class="row">
+              <div class="row">';
               
-                <form method="post" action="salescontrolpanel.php">';
+                
 
                   $closeQuery = "SELECT register_id, open_total FROM registers_table WHERE close_total is NULL AND register_num = $regToClose";
                   $result = mysqli_query($conn, $closeQuery);
@@ -548,24 +536,25 @@ if (isset($_POST['submitdrop'])) {
                     <table class="table table-sm table-bordered" style="font-size:80%;">
                     <thead class="thead-light text-center">
                       <tr>
-                        <th class="col-2">Type</th>
-                        <th class="col-2">Starting</th>
-                        <th class="col-2">Payments</th>
-                        <th class="col-2">Withdraws</th>
-                        <th class="col-2">Total Remaining</th>
-                        <th class="col-2">Closing Count</th>
+                        <th scope="col-2">Type</th>
+                        <th scope="col-2">Starting</th>
+                        <th scope="col-2">Payments</th>
+                        <th scope="col-2">Withdraws</th>
+                        <th scope="col-2">Total Remaining</th>
+                        <th scope="col-2">Closing Count</th>
                       </tr>
                     </thead>
                     <tbody class="text-right">
+                    <form method="post" action="salescontrolpanel.php">
                       <tr>
-                        <th class="text-left">Cash</th>
+                        <th scope="row" class="text-left">Cash</th>
                         <td>$'. number_format((float)$row['open_total'], 2, '.', '') .'</td>
                         <td>$0.00</td>
                         <td>$0.00</td>
                         <td>$'. number_format((float)$row['open_total'], 2, '.', '').'</td>
                         <td>
 
-                          <div id="bills">
+                          <div id="bills" class="col-5 mx-auto">
                             <div class="form-inline">
                               <div class="">
                                 <div class="input-group mb-2">
@@ -618,14 +607,14 @@ if (isset($_POST['submitdrop'])) {
                         </td>
                       </tr>
                       <tr>
-                        <th class="text-left">Credit</th>
+                        <th scope="row" class="text-left">Credit</th>
                         <td>$0.00</td>
                         <td>$0.00</td>
                         <td>$0.00</td>
                         <td>$0.00</td>
                         <td>
                           <div class="">
-                                <div class="col float-right">
+                                <div class="col-5 float-right">
                                   <div class="input-group mb-2">
                                     <input type="text" maxlength="10" class="form-control w-25" placeholder="">
                                   </div>
@@ -634,13 +623,13 @@ if (isset($_POST['submitdrop'])) {
                         </td>
                       </tr>
                       <tr>
-                        <th class="text-left">Gift Card</th>
+                        <th scope="row" class="text-left">Gift Card</th>
                         <td>$0.00</td>
                         <td>$0.00</td>
                         <td>$0.00</td>
                         <td>$0.00</td>
                         <td>
-                          <div class="col float-right">
+                          <div class="col-5 float-right">
                             <div class="input-group mb-2">
                               <input type="text" maxlength="10" class="form-control w-25" placeholder="">
                             </div>
@@ -649,8 +638,8 @@ if (isset($_POST['submitdrop'])) {
                       </tr>
                     </tbody>
                   </table>
-
-                  <input class="float-right my-2" name="dropNote" placeholder="Note"/>
+                      
+                      <div class="mx-auto"><input name="dropNote" placeholder="Note"/></div>
                   <input name="closeRegId" value="'.$row['register_id'].'" readonly hidden/>
                     ';
                     }
@@ -662,7 +651,7 @@ if (isset($_POST['submitdrop'])) {
               
 
 
-        echo'</div>
+              echo'
           </div>
         </div>
         <div class="modal-footer">';
@@ -692,7 +681,7 @@ if (isset($_POST['submitdrop'])) {
           </div>
           <div class="modal-body">
             <div class="container text-center">
-              <span style="font-weight: 400">Choose A Register</span>
+              <h6>Choose A Register</h6>
               <div class="form-inline justify-content-center">
 
                 <?php
@@ -751,21 +740,22 @@ if (isset($_POST['submitdrop'])) {
           echo '<h3 class="pb-5 text-center">Cannot Drop<br> No Register Selected</h3>';
         }else{
         $regToClose = $_SESSION['register'];
-          echo '<div class="col text-center"><h5 class"pb-3">Drop Cash</h5></div>';
-                  
+        $dropQuery = "SELECT register_id, drop_total, open_total FROM registers_table WHERE close_total is NULL AND register_num = $regToClose";
+        $result = mysqli_query($conn, $dropQuery);
+        $numrows = mysqli_num_rows($result);
+        if ($numrows != 0) {
+          while ($row = mysqli_fetch_assoc($result)) {
+          echo '<div class="col text-center"><h5 class"pb-2">Drop Cash</h5><h6 class"pb-2 pr-1"> Opening Total: $'.$row['open_total'].'</h6></div>';
+          
 
 
         echo '<div class="row">';
 
             
 
-          $dropQuery = "SELECT register_id, drop_total, open_total FROM registers_table WHERE close_total is NULL AND register_num = $regToClose";
-          $result = mysqli_query($conn, $dropQuery);
-          $numrows = mysqli_num_rows($result);
-          if ($numrows != 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
+
               echo'<div class="col mt-2">
-              <h6 class="text-right py-2">Opening Total: $'.$row['open_total'].'</h6>
+
                   
               </div>';
 
@@ -775,47 +765,47 @@ if (isset($_POST['submitdrop'])) {
                 echo '<div class="col text-center"><h5 class"pb-3">Register '. $regToClose .'</h5></div>
                   <div class="form-inline ml-4">
                     <div>
-                      <div class="input-group mb-2 mr-4">
+                      <div class="input-group mb-1 mr-4">
                         <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $100 </span></label>
                         <input type="text" maxlength="3" onblur="dropTotal()" name="bills3" class="form-control w-25" placeholder="">
                       </div>
-                      <div class="input-group mb-2 mr-4">
+                      <div class="input-group mb-1 mr-4">
                         <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $50 </span></label>
                         <input type="text" maxlength="3" onblur="dropTotal()" name="bills3" class="form-control w-25" placeholder="">
                       </div>
-                      <div class="input-group mb-2 mr-4">
+                      <div class="input-group mb-1 mr-4">
                         <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $20 </span></label>
                         <input type="text" maxlength="3" onblur="dropTotal()" name="bills3" class="form-control w-25" placeholder="">
                       </div>
-                      <div class="input-group mb-2 mr-4">
+                      <div class="input-group mb-1 mr-4">
                         <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $10 </span></label>
                         <input type="text" maxlength="3" onblur="dropTotal()" name="bills3" class="form-control w-25" placeholder="">
                       </div>
-                      <div class="input-group mb-2 mr-4">
+                      <div class="input-group mb-1 mr-4">
                         <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $5 </span></label>
                         <input type="text" maxlength="3" onblur="dropTotal()" name="bills3" class="form-control w-25" placeholder="">
                       </div>
-                      <div class="input-group mb-2 mr-4">
+                      <div class="input-group mb-1 mr-4">
                         <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $1 </span></label>
                         <input type="text" maxlength="3" onblur="dropTotal()" name="bills3" class="form-control w-25" placeholder="">
                       </div>
-                      <div class="input-group mb-2 mr-4">
+                      <div class="input-group mb-1 mr-4">
                         <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 25¢ </span></label>
                         <input type="text" maxlength="3" onblur="dropTotal()" name="bills3" class="form-control w-25" placeholder="">
                       </div>
-                      <div class="input-group mb-2 mr-4">
+                      <div class="input-group mb-1 mr-4">
                         <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 10¢ </span></label>
                         <input type="text" maxlength="3" onblur="dropTotal()" name="bills3" class="form-control w-25" placeholder="">
                       </div>
-                      <div class="input-group mb-2 mr-4">
+                      <div class="input-group mb-1 mr-4">
                         <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 5¢ </span></label>
                         <input type="text" maxlength="3" onblur="dropTotal()" name="bills3" class="form-control w-25" placeholder="">
                       </div>
-                      <div class="input-group mb-2 mr-4">
+                      <div class="input-group mb-1 mr-4">
                         <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 1¢ </span></label>
                         <input type="text" maxlength="3" onblur="dropTotal()" name="bills3" class="form-control w-25" placeholder="">
                       </div>
-                      <div class="input-group mb-2">
+                      <div class="input-group mb-1">
                         <label class="control-label border bg-white" style="width:60px"><span class="input-group-addon px-2"> Total </span></label>
                         <input name="dropsum" id="totaldrop" type="text" maxlength="10" class="form-control w-50" value="0.00" readonly>
                       </div>
@@ -823,8 +813,12 @@ if (isset($_POST['submitdrop'])) {
                     </div>
                     
                   </div>
+                  
                 </div>
-                <input class="float-right my-2" name="dropNote" placeholder="Note"/>
+
+                  <div class="input-group ml-5 pl-5">
+                    <input class="ml-5" name="dropNote" placeholder="Note"/>
+                  </div>
               </div>
 
               <input name="dropRegId" value="'.$row['register_id'].'" readonly hidden/>';
@@ -888,6 +882,13 @@ if (isset($_POST['submitdrop'])) {
     })
 
     $('#closereg').on('hidden.bs.modal', function() {
+      $(this)
+        .find("input,textarea,select")
+        .val('')
+        .end();
+    })
+
+    $('#dropcash').on('hidden.bs.modal', function() {
       $(this)
         .find("input,textarea,select")
         .val('')

@@ -1,22 +1,6 @@
 <?php
 include_once('config.php');
-if (isset($_SESSION['first_name'])) {
-  $fname = $_SESSION['first_name'];
-} else {
-  $fname = "First";
-}
-if (isset($_SESSION['first_name'])) {
-  $lname = $_SESSION['last_name'];
-} else {
-  $lname = "Last";
-}
-$format = '%s %s' . "<br>";
-$format1 = '%s' . "<br>";
-if (isset($_SESSION['company_name'])) {
-  $company = $_SESSION['company_name'];
-} else {
-  $company = "Company";
-}
+include_once('sidebarconnect.php');
 $_SESSION["init"] += 1;
 
 
@@ -67,26 +51,14 @@ $_SESSION["init"] += 1;
     <ul class="list-unstyled components">
       <li>
         <div id="usercard">
-          <a href="salescontrolpanel.php#switchreg" style="font-size: 1em;"><?php if (isset($_SESSION['emp_company']) && !empty($_SESSION['emp_company'])) {
-                                                echo $_SESSION['emp_company'];
-                                              } else {
-                                                echo 'Company Name';
-                                              } ?></br>
-            <?php if (isset($_SESSION['register'])) {
-              echo "Register " .$_SESSION['register'];
-            } else {
-              echo 'Choose Register';
-            } ?> <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <a href="salescontrolpanel.php#switchreg" style="font-size: 1em;"><?php if ($numrows > 0) echo $row['company_name']; else  echo 'Company Name'; ?></br>
+            <?php if (isset($_SESSION['register'])) echo "Register " .$_SESSION['register'];else  echo 'Choose Register'; ?> <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
             </svg></a>
         </div>
       </li>
       <li>
-        <a href="employeePinLogin.php" style="font-size: 1em;"><?php if (isset($_SESSION['emp_fname']) && !empty($_SESSION['emp_lname'])) {
-                                                                  echo "" . $_SESSION['emp_fname'] . " " . $_SESSION['emp_lname'] . " ";
-                                                                } else {
-                                                                  echo "Current User";
-                                                                } ?><svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <a href="employeePinLogin.php" style="font-size: 1em;"><?php if ($numrows > 0) echo "". $row['first_name']. " " . $row['last_name'] . " ";else echo "Current User";?><svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
           </svg></a>
       </li>
@@ -123,8 +95,7 @@ $_SESSION["init"] += 1;
             </svg></span> Customers</a>
       </li>
       <?php
-      if (isset($_SESSION['emp_type'])) {
-        if ($_SESSION['emp_type'] == 1) {
+        if ($row['user_type'] == 1) {
 
           echo "
           <li>
@@ -144,7 +115,7 @@ $_SESSION["init"] += 1;
                 </svg></span> Reports</a>
           </li>";
         }
-      }
+      
       ?>
 
       </br></br></br></br>
@@ -208,13 +179,7 @@ $_SESSION["init"] += 1;
 
         <img class="img-thumbnail" src="media/prof.png" style="height: 11rem;" alt="Card image cap" />
         <div class="card-body">
-          <?php
-          if (isset($_SESSION['emp_fname']) && !empty($_SESSION['emp_lname'])) {
-            echo "" . $_SESSION['emp_fname'] . " " . $_SESSION['emp_lname'] . " ";
-          } else {
-            echo "Current User";
-          }
-          ?>
+        <?php if ($numrows > 0) echo "". $row['first_name']. " " . $row['last_name'] . " ";else echo "Current User";?>
         </div>
       </div>
     </div>

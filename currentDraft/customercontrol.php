@@ -1,5 +1,6 @@
 <?php
 include_once('config.php');
+include_once('sidebarconnect.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -107,8 +108,7 @@ include_once('config.php');
             </svg></span> Customers</a>
       </li>
       <?php
-      if (isset($_SESSION['emp_type'])) {
-        if ($_SESSION['emp_type'] == 1) {
+        if ($row['user_type'] == 1) {
 
           echo "
           <li>
@@ -128,7 +128,7 @@ include_once('config.php');
                 </svg></span> Reports</a>
           </li>";
         }
-      }
+      
       ?>
 
       </br></br></br></br>

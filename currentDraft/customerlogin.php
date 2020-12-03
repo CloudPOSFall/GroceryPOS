@@ -1,5 +1,6 @@
 <?php
 include_once('config.php');
+include_once('sidebarconnect.php');
 // Initialize the session
 ob_start();
 // Check if the user is already logged in, if yes then redirect him to welcome page

@@ -1,5 +1,6 @@
 <?php
 include_once('config.php');
+include_once('sidebarconnect.php');
 $productType = '';
 $query = "SELECT productType FROM product_inventory GROUP BY productType ORDER BY productType ASC";
 $result = mysqli_query($conn, $query);
