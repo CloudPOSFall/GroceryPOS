@@ -25,7 +25,11 @@
 
       if($result)
       {
-          header("location:accountHomeDraft.php");
+        $query = "INSERT into customer_info (email, password, first_name, last_name, phone_number, street_address, city, state, zip_code)
+        VALUES ('$Email', '$Password', '$FirstName', '$LastName', '$PhoneNumber', '$StreetAddress', '$City', '$State', '$ZipCode')";
+
+        $result = mysqli_query($conn, $query);
+        header("location:accountHomeDraft.php");
       }
       else
       {

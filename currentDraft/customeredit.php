@@ -196,7 +196,7 @@ if (isset($_GET['Upd'])) {
             <input type="tel" value=" <?php echo $row['phone_number'] ?> " name="number" />
           </div>
           <div class="form-group row">
-            <label class="col-4" for="Street">Street</label>
+            <label class="col-4" for="Street Address">Street Address</label>
             <input type="text" value=" <?php echo $row['street_address'] ?> " name="street" />
           </div>
           <div class="form-group row">

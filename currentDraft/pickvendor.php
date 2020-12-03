@@ -178,8 +178,6 @@ $result = mysqli_query($conn, $query);
               <th> City </th>
               <th> State </th>
               <th> Zip Code </th>
-              <th>  </th>
-              <th> </th>
             </tr>
           </thead>
           <tbody class="bg-white">

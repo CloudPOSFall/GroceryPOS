@@ -210,6 +210,10 @@
             <label class = "col-4" for = "Pin Number">Pin Number </label>
             <input class ="col-6" type = "text" placeholder="Pin Number " name="pnum"/>
             </div>
+            <div class = "form-group row">
+            <label class = "col-4" for = "User Type">User Type </label>
+            <input class ="col-6" type = "number" placeholder="User Type " name="type"/>
+            </div>
             <div class="text-center"><button name="submit" class="btn-lg btn-primary"> Submit</button></div>
           </form>
         </div>
