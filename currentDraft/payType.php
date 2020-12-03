@@ -15,13 +15,13 @@
             if($payType == $cash) {
                 echo($payType);
                 echo(" Chosen");
-                $cash = 1;
-                $credit = 0;
+                $csh = 1;
+                $crdit = 0;
             } else if($payType == $credit) {
                 echo($payType);
                 echo(" Chosen");
-                $cash = 0;
-                $credit = 1;
+                $csh = 0;
+                $crdit = 1;
             }
         }
     

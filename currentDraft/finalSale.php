@@ -9,7 +9,13 @@
 <form method="post" type="button" action="<?php echo $_SERVER['PHP_SELF'];?>">
 
 
-    <?php include('payType.php') ?>
+    <?php
+        $csh = "";
+        $crdit = "";
+        include('payType.php');
+        $cash = $csh;
+        $credit = $crdit;
+     ?>
 
         <!-- Input for money recieved -->
         <br>Cash Amount: <input type="text" name="cash">
@@ -34,8 +40,8 @@
             $total = number_format($total, 2);
             $tax = $total * $taxrate;
             $tax = number_format($tax, 2);
-            $credit = 0;
-            $cash = 0;
+            //$credit = 0;
+            //$cash = 0;
             // trigger to get back change
             if(isset($_POST['change'])) {
                 $change = $_POST['cash'] - $subTotal;
