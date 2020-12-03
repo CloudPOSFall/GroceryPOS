@@ -46,6 +46,23 @@ if (isset($_POST['selectreg'])) {
   $register = $_POST['register'];
   $_SESSION['register'] = $register;
 }
+
+//if drop cash submit is pushed
+if (isset($_POST['submitdrop'])) {
+  $dropsum = $_POST['dropsum'];
+  $dropRegId = $_POST['dropRegId'];
+  $employeeid = $_SESSION['emp_id'];
+
+  $closequery = "UPDATE registers_table SET drop_total = '$dropsum', drop_emp_id = (SELECT employee_id from employee_info where employee_id = $employeeid), drop_time = now() WHERE register_id = '$dropRegId' ";
+
+  $result = mysqli_query($conn, $closequery);
+
+  if ($result) {
+
+  } else {
+    echo "Please Check Your Query";
+  }
+}
 ?>
 
 
@@ -332,7 +349,7 @@ if (isset($_POST['selectreg'])) {
           </div>
         </a>
 
-        <a class="btn" href="#" data-toggle="modal" data-target="#testreg">
+        <a class="btn" href="#" data-toggle="modal" data-target="#dropcash">
           <div class="card" id="pagecard">
             <div class="card-body text-center">
               <span class="card-text align-middle">
@@ -712,7 +729,122 @@ if (isset($_POST['selectreg'])) {
       </div>
     </div>
 
+  <!-- Drop Cash Register Modal -->
+  <div class="modal fade" id="dropcash" tabindex="-1" role="dialog" aria-labelledby="dropcash" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        
+        <div class="modal-header">
+          <h6 class="modal-title" id="exampleModalLongTitle">Payout</h6>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container text-center">
+          <?php
+         if (!isset($_SESSION['register'])){
+          echo '<h3 class="pb-5 text-center">Cannot Drop<br> No Register Selected</h3>';
+        }else{
+        $regToClose = $_SESSION['register'];
+          echo '<div class="col text-center"><h5 class"pb-3">Drop Cash</h5></div>';
+                  
 
+
+        echo '<div class="row">
+
+            <form method="post" action="salescontrolpanel.php">';
+
+          $dropQuery = "SELECT register_id, drop_total FROM registers_table WHERE close_total is NULL AND register_num = $regToClose";
+          $result = mysqli_query($conn, $dropQuery);
+          $numrows = mysqli_num_rows($result);
+          if ($numrows != 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+              echo'<div class="col mt-2">
+                
+                  
+              </div>';
+
+                echo '
+                <form method="post" action="salescontrolpanel.php">
+                <div id="bills" class=" col-5 float-right">';
+                echo '<div class="col text-center"><h5 class"pb-3">Register '. $regToClose .'</h5></div>
+                  <div class="form-inline ml-4">
+                    <div>
+                      <div class="input-group mb-2 mr-4">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $100 </span></label>
+                        <input type="text" maxlength="3" onblur="dropTotal()" name="bills3" class="form-control w-25" placeholder="">
+                      </div>
+                      <div class="input-group mb-2 mr-4">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $50 </span></label>
+                        <input type="text" maxlength="3" onblur="dropTotal()" name="bills3" class="form-control w-25" placeholder="">
+                      </div>
+                      <div class="input-group mb-2 mr-4">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $20 </span></label>
+                        <input type="text" maxlength="3" onblur="dropTotal()" name="bills3" class="form-control w-25" placeholder="">
+                      </div>
+                      <div class="input-group mb-2 mr-4">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $10 </span></label>
+                        <input type="text" maxlength="3" onblur="dropTotal()" name="bills3" class="form-control w-25" placeholder="">
+                      </div>
+                      <div class="input-group mb-2 mr-4">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $5 </span></label>
+                        <input type="text" maxlength="3" onblur="dropTotal()" name="bills3" class="form-control w-25" placeholder="">
+                      </div>
+                      <div class="input-group mb-2 mr-4">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $1 </span></label>
+                        <input type="text" maxlength="3" onblur="dropTotal()" name="bills3" class="form-control w-25" placeholder="">
+                      </div>
+                      <div class="input-group mb-2 mr-4">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 25¢ </span></label>
+                        <input type="text" maxlength="3" onblur="dropTotal()" name="bills3" class="form-control w-25" placeholder="">
+                      </div>
+                      <div class="input-group mb-2 mr-4">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 10¢ </span></label>
+                        <input type="text" maxlength="3" onblur="dropTotal()" name="bills3" class="form-control w-25" placeholder="">
+                      </div>
+                      <div class="input-group mb-2 mr-4">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 5¢ </span></label>
+                        <input type="text" maxlength="3" onblur="dropTotal()" name="bills3" class="form-control w-25" placeholder="">
+                      </div>
+                      <div class="input-group mb-2 mr-4">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 1¢ </span></label>
+                        <input type="text" maxlength="3" onblur="dropTotal()" name="bills3" class="form-control w-25" placeholder="">
+                      </div>
+                      <div class="input-group mb-2">
+                        <label class="control-label border bg-white" style="width:60px"><span class="input-group-addon px-2"> Total </span></label>
+                        <input name="dropsum" id="totaldrop" type="text" maxlength="10" class="form-control w-50" value="0.00" readonly>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+              <input name="dropRegId" value="'.$row['register_id'].'" readonly hidden/>';
+              //<input name="dropRegId" value="'.$row['register_id'].'" readonly hidden/>';
+            }
+          }
+
+            
+
+        echo '</div>
+
+
+        </div>
+        <div class="modal-footer">';
+
+            echo '<button type="submit" name="submitdrop" class="btn btn-success">Submit Count</button>';
+      } 
+    ?>
+
+           <button type="button" class="btn btn-dark" data-dismiss="modal">Cancel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div> 
     
 
   </div>
@@ -927,6 +1059,61 @@ if (isset($_POST['selectreg'])) {
         tot += subtot;
       }
       document.getElementById('closetotal').value = (Math.round(tot * 100) / 100).toFixed(2);
+    }
+
+        //add up input fields in close register // Didn't work with above method due to multiple forms with the same name
+        function dropTotal() {
+      var arr = document.getElementsByName('bills3');
+      var tot = 0;
+      for (var i = 0; i < arr.length; i++) {
+        var subtot = 0;
+        if (parseInt(arr[i].value)) {
+          var item = parseInt(arr[i].value);
+          switch (i) {
+            case 0:
+              subtot = item * 100;
+              break;
+
+            case 1:
+              subtot = item * 50;
+              break;
+
+            case 2:
+              subtot = item * 20;
+              break;
+
+            case 3:
+              subtot = item * 10;
+              break;
+
+            case 4:
+              subtot = item * 5;
+              break;
+
+            case 5:
+              subtot = item * 1;
+              break;
+
+            case 6:
+              subtot = item * .25;
+              break;
+
+            case 7:
+              subtot = item * .10;
+              break;
+
+            case 8:
+              subtot = item * .05;
+              break;
+
+            case 9:
+              subtot = item * .01;
+              break;
+          }
+        }
+        tot += subtot;
+      }
+      document.getElementById('totaldrop').value = (Math.round(tot * 100) / 100).toFixed(2);
     }
   </script>
 </body>
