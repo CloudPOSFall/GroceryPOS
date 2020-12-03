@@ -7,6 +7,6 @@
 
 <?php include('addOrder.php');?>
 
-<form action="employeePinOrder.php">
+<form action="finalSaleOrder.php">
     <input type="submit" name="submit" value="Finalize Order" />
 </form>

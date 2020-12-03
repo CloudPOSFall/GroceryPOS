@@ -1,9 +1,5 @@
 <?php
     include('config.php');
-    if(isset($_GET['E']))
-    {
-    $ID = $_GET['E'];
-    }
     $query = "SELECT OTID FROM orders_ticket WHERE employee_id IS NULL";
     $result = mysqli_query($conn, $query) or die(" Execution Failed null address");
     $row = mysqli_num_rows($result);
@@ -90,7 +86,7 @@
             $OTID = $_SESSION['OTID'];
 
             $query = "UPDATE orders_ticket SET date = CURRENT_DATE(), time = CURRENT_TIME(), quantity = '$qtyTotal', subtotal = '$subTotal', 
-                    total = '$total', tax = '$tax', tax_rate = '$taxrate', status = '0', employee_id = '$ID' WHERE OTID = '$OTID'";
+                    total = '$total', tax = '$tax', tax_rate = '$taxrate', status = '0', employee_id = '".$_SESSION['emp_id']."' WHERE OTID = '$OTID'";
             $result = mysqli_query($conn, $query) or die("Order Ticket Failed");
 
             if($result)
