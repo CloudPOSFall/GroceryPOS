@@ -17,8 +17,8 @@
         $qtyTotal = 0;
 
         echo($cartCode);
-        echo("Total Amount: $");
-        echo($total);
+        //echo("Total Amount: $");
+        //echo($total);
     }
     else
     {
@@ -38,8 +38,8 @@
         }
 
         echo($cartCode);
-        echo("Total Amount: $");
-        echo($total);
+        //echo("Total Amount: $");
+        //echo($total);
     }
     
 ?>

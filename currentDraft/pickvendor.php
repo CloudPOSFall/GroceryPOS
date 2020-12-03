@@ -1,22 +1,15 @@
 <?php
 include_once('config.php');
-if (isset($_GET['Upd'])) {
-  $findID = $_GET['Upd'];
-  $query = "SELECT * FROM vendorinfo WHERE vendor_id LIKE '%$findID%'";
-  $result = mysqli_query($conn, $query);
-  $row = mysqli_fetch_assoc($result);
-}
+include_once('sidebarconnect.php');
+$query = "SELECT * FROM vendorinfo";
+$result = mysqli_query($conn, $query);
 ?>
-
 <!DOCTYPE html>
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Pick Vendor | MarketPOS</title>
 
-  <title>Vendors | MarketPOS</title>
 
   <!--bootstrap css -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -29,28 +22,22 @@ if (isset($_GET['Upd'])) {
   <script defer src="js/solid.js"></script>
   <script defer src="js/fontawesome.js"></script>
 
-  <!--jquery -->
-  <script src="js/jquery-3.5.1.min.js"></script>
-  <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-  <!-- bootstrap popper js-->
-  <script src="js/popper.min.js"></script>
-  <!-- bootstrap js -->
-  <script src="js/bootstrap.min.js"></script>
+    <!--jquery -->
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- bootstrap popper js-->
+    <script src="js/popper.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
 
 </head>
 
 <body>
 
-
-
-
-
-
-
-  <!--nav sidebar-->
-  <nav id="sidebar">
+<!--nav sidebar-->
+<nav id="sidebar">
     <div class="sidebar-header bg-dark">
-      <h1><span><a class="navbar-brand relative-top" href="indexDraft.php"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <h1 id="brand"><span><a class="navbar-brand relative-top" href="indexDraft.php"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1z" />
             </svg>
             <span style="color: #00b300"> Market</span>POS</a></h1>
@@ -59,21 +46,14 @@ if (isset($_GET['Upd'])) {
     <ul class="list-unstyled components">
       <li>
         <div id="usercard">
-          <a href="" style="font-size: 1em;"><?php if (isset($_SESSION['emp_company']) && !empty($_SESSION['emp_company'])) {
-                                                echo $_SESSION['emp_company'];
-                                              } else {
-                                                echo 'Company Name';
-                                              } ?></br>Choose Register <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <a href="salescontrolpanel.php#switchreg" style="font-size: 1em;"><?php if ((isset($_SESSION['emp_id'])) ) echo $row['company_name']; else  echo 'Company Name'; ?></br>
+            <?php if (isset($_SESSION['register'])) echo "Register " .$_SESSION['register'];else  echo 'Choose Register'; ?> <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
             </svg></a>
         </div>
       </li>
       <li>
-        <a href="employeePinLogin.php" style="font-size: 1em;"><?php if (isset($_SESSION['emp_fname']) && !empty($_SESSION['emp_lname'])) {
-                                                                  echo "" . $_SESSION['emp_fname'] . " " . $_SESSION['emp_lname'] . " ";
-                                                                } else {
-                                                                  echo "Current User";
-                                                                } ?><svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <a href="employeePinLogin.php" style="font-size: 1em;"><?php if ((isset($_SESSION['emp_id']))) echo "". $row['first_name']. " " . $row['last_name'] . " ";else echo "Current User";?><svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
           </svg></a>
       </li>
@@ -109,21 +89,18 @@ if (isset($_GET['Upd'])) {
               <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
             </svg></span> Customers</a>
       </li>
-     
+      <?php
+                  if (isset($_SESSION['emp_id']))
+        if ($row['user_type'] == 1) {
 
-      <li>
-            <a href='employeecontrol.php'>
-              <span style='padding:5px;'>
-              <svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-file-person-fill' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-              <path fill-rule='evenodd' d='M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z'/>
-            </svg></span> Employees</a>
-          </li>
-
-          <?php
-          if (isset($_SESSION['emp_type'])) {
-            if ($_SESSION['emp_type'] == 1) {
-    
-              echo "
+          echo "
+          <li>
+          <a href='employeecontrol.php'>
+            <span style='padding:5px;'>
+            <svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-file-person-fill' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+            <path fill-rule='evenodd' d='M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z'/>
+          </svg></span> Employees</a>
+        </li>
           <li>
             <a href='reportsControlPanel.php'>
               <span style='padding:5px;'>
@@ -134,7 +111,7 @@ if (isset($_GET['Upd'])) {
                 </svg></span> Reports</a>
           </li>";
         }
-      }
+      
       ?>
 
       </br></br></br></br>
@@ -147,16 +124,17 @@ if (isset($_GET['Upd'])) {
         </div>
 
       </li>
+      </li>
       <li>
         <div class="card text-center" id="footerbtn" style="background: #016923;">
           <a role="button" href="logout.php"> Logout</a>
+
+
         </div>
-      </li>
     </ul>
     </div>
   </nav>
   <!--END nav sidebar-->
-
   <!--page content-->
   <div id="content">
 
@@ -172,64 +150,69 @@ if (isset($_GET['Upd'])) {
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="nav navbar-nav mr-auto">
-            <a class="navbar-brand" href="vendorview.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <a class="navbar-brand" href="inventorycontrolpanel.php"><svg width=".8em" height=".8em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
-              </svg> Vendors</a>
+              </svg> Pick Vendor</a>
           </ul>
         </div>
       </div>
     </nav>
 
 
-    <div class="container justify-content-center">
-
-      <div class="card card-body bg-light" style="width: 35rem;" id="formscreen">
-        <form action="" method="post">
-          <div class="form-group row">
-            <label class="col-4" for="id">Vendor ID: </label>
-            <input type="text" value=" <?php echo $findID ?> " name="id" readonly />
-          </div>
-          <div class="form-group row">
-            <label class="col-4" for="Company Name">Company Name</label>
-            <input type="text" value=" <?php echo $row['company_name'] ?> " name="name" />
-          </div>
-          <div class="form-group row">
-              <label class="col-4"  for="Department">Department </label>
-              <input type="text" value=" <?php echo $row['department'] ?> " name="department" />
-            </div>
-            <div class="form-group row">
-              <label class="col-4"  for="Street Address">Street Address </label>
-              <input type="text" value=" <?php echo $row['street_address'] ?> " name="street" />
-            </div>
-            <div class="form-group row">
-              <label class="col-4"  for="City">City </label>
-              <input type="text" value=" <?php echo $row['city'] ?> " name="city" />
-            </div>
-            <div class="form-group row">
-              <label class="col-4"  for="State">State </label>
-              <input type="text" value=" <?php echo $row['state'] ?> " name="state" />
-            </div>
-            <div class="form-group row">
-              <label class="col-4"  for="Zip Code">Zip Code </label>
-              <input type="text" value=" <?php echo $row['zip_code'] ?> " name="zip" />
-            </div>
-            <div class="form-group row">
-              <label class="col-4"  for="Phone Number">Phone Number</label>
-              <input type="tel" value=" <?php echo $row['phone_number'] ?> " name="phone" />
-            </div>
-            <div class="form-group row">
-              <label class="col-4"  for="Fax Number">Fax Number</label>
-              <input type="tel" value=" <?php echo $row['fax_number'] ?> " name="fax" />
-            </div>
-            <div class="form-group row">
-              <label class="col-4"  for="Email">Email</label>
-              <input type="email" value=" <?php echo $row['email'] ?> " name="email" />
-            </div>
-          <div class="text-center"><button type="submit" name="update" class="btn-lg btn-primary"> Update</button></div>
+    <nav class="navbar navbar-light" id="salespanel">
+      <form class="form-inline" method="post" action="pickvendor.php">
+        <div class="nav-item" style="padding: 8px">
+          <input class="form-control" name="vendor" placeholder="Search Vendor" aria-label="Search">
+          <button class="btn btn-dark navbar-btn" name="submit-search"> Look Up</button>
+        </div>
         </form>
+    </nav>
+    <div class="wrapper mt-3">
+      <div class="row px-4 justify-content-center">
+        <table class="table table-bordered table-hover mt-3 table-responsive" style="font-size:80%;">
+          <thead class="bg-light">
+          <tr>
+              <th> Vendor ID </th>
+              <th> Company Name </th>
+              <th> Street Address</th>
+              <th> City </th>
+              <th> State </th>
+              <th> Zip Code </th>
+              <th>  </th>
+              <th> </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white">
+            <?php
+            if (isset($_POST['submit-search'])) {
+                $search = mysqli_real_escape_string($conn, $_POST['vendor']);
+                $sql = "SELECT * FROM vendorinfo WHERE vendor_id LIKE '%$search%'";
+                $result = mysqli_query($conn, $sql);
+                $queryResults = mysqli_num_rows($result);
+                
+                if ($queryResults > 0) {
+                echo "<div class='row mt-3'>There are $queryResults results matching your search</div><br>";
+                while ($row = mysqli_fetch_assoc($result)) {
+                  //$vendor = $row['vendor_id'];
+                  //echo "<tr><td>" . $row['vendor_id'] . "</td><td>"
+                  //  . $row['company_name'] . "</td><td>" . $row['street_address'] . "</td><td>" . $row['city'] . "</td><td>" . $row['state'] . "</td><td>"
+                  //  . $row['zip_code'] . "</td><td><a class='btn-sm btn-dark' role='button' href='neworder.php?Ven="
+                  //  . $row['vendor_id'] . "'>Select</a></td><td>";
+                    echo "<tr><td><form method='post' action='neworder.php'><button class='btn navbar-btn btn-light' name='vendor'>
+                            Select</button></td><input name='vendorid' size='1' value='". $row['vendor_id'] ."' readonly hidden/></form><td>" 
+                            .$row['company_name']. "</td><td>" .$row['street_address']. "</td><td>".$row['city']. "</td><td>" .$row['state'].
+                            "</td><td>" .$row['zip_code']. "</td></tr>";
+                }
+              } else {
+                echo "<div class='row mt-3'>There are no results matching your search</div>";
+              }
+            }
+
+            ?>
+          </tbody>
+        </table>
       </div>
-
-
+    </div>
 </body>
 
 <script type="text/javascript">
@@ -247,30 +230,3 @@ if (isset($_GET['Upd'])) {
 </script>
 
 </html>
-
-<?php
-if (isset($_POST['update'])) {
-
-  $id = $_POST['id'];
-  $Company = $_POST['name'];
-  $Dept = $_POST['department'];
-  $StreetAddress = $_POST['street'];
-  $City = $_POST['city'];
-  $State = $_POST['state'];
-  $Zip = $_POST['zip'];
-  $Phone = $_POST['phone'];
-  $Fax = $_POST['fax'];
-  $Email = $_POST['email'];
-
-  $query = "UPDATE vendorinfo SET company_name = '$Company', department = '$Dept', street_address = '$StreetAddress', city = '$City',
-            state = '$State', zip_code = '$Zip', phone_number = '$Phone', fax_number = '$Fax', email = '$Email' WHERE vendor_id = '$id' ";
-  $result = mysqli_query($conn, $query);
-
-  if ($result) {
-    header("location:vendorview.php");
-  } else {
-    echo ' Please Check Your Query ';
-  }
-}
-?>
-<html>

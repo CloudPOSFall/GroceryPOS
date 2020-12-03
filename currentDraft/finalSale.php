@@ -8,12 +8,9 @@
 <!-- form to reload page with correct change -->
 <form method="post" type="button" action="<?php echo $_SERVER['PHP_SELF'];?>">
 
-    <!-- Option to choose a payment type -->
-    Choose a Payment Type:
-    <select name="payment">
-        <option value="Cash">Cash</option>
-        <option value="Credit">Credit</option>
-    </select> <input type="submit" name ="submit" value="Payment Type"> <br>
+
+    <?php include('payType.php') ?>
+
         <!-- Input for money recieved -->
         <br>Cash Amount: <input type="text" name="cash">
         <input type='submit' name='change' value="Get Change"/><br>
@@ -66,8 +63,8 @@
         $CID = $_SESSION['CID'];
 
         // create new ticket for sale
-        $query = "INSERT INTO ticket_system (ticket_id, date, time, quantity, subtotal, total, tax, tax_rate, cash, credit)
-                    VALUES ('$CID', CURRENT_DATE(), CURRENT_TIME(), '$qtyTotal', '$subTotal', '$total', '$tax', '$taxrate', '$total', '$credit')";
+        $query = "INSERT INTO ticket_system (ticket_id, date, time, quantity, subtotal, total, tax, tax_rate, cash, credit, cart_purchase)
+                    VALUES ('$CID', CURRENT_DATE(), CURRENT_TIME(), '$qtyTotal', '$subTotal', '$total', '$tax', '$taxrate', '$total', '$credit', '0')";
         $result = mysqli_query($conn, $query) or die("Ticket Failed");
         
         // link new ticket to our cart in progress

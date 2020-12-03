@@ -1,5 +1,6 @@
 <?php
 include_once('config.php');
+include_once('sidebarconnect.php');
 $query = "SELECT * FROM product_inventory";
 $result = mysqli_query($conn, $query);
 ?>
@@ -36,16 +37,10 @@ $result = mysqli_query($conn, $query);
 
 <body>
 
-
-
-
-
-
-
-  <!--nav sidebar-->
-  <nav id="sidebar">
+<!--nav sidebar-->
+<nav id="sidebar">
     <div class="sidebar-header bg-dark">
-      <h1><span><a class="navbar-brand relative-top" href="indexDraft.php"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <h1 id="brand"><span><a class="navbar-brand relative-top" href="indexDraft.php"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1z" />
             </svg>
             <span style="color: #00b300"> Market</span>POS</a></h1>
@@ -54,25 +49,19 @@ $result = mysqli_query($conn, $query);
     <ul class="list-unstyled components">
       <li>
         <div id="usercard">
-          <a href="" style="font-size: 1em;"><?php if (isset($_SESSION['emp_company']) && !empty($_SESSION['emp_company'])) {
-                                                echo $_SESSION['emp_company'];
-                                              } else {
-                                                echo 'Company Name';
-                                              } ?></br>Choose Register <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <a href="salescontrolpanel.php#switchreg" style="font-size: 1em;"><?php if ((isset($_SESSION['emp_id'])) ) echo $row['company_name']; else  echo 'Company Name'; ?></br>
+            <?php if (isset($_SESSION['register'])) echo "Register " .$_SESSION['register'];else  echo 'Choose Register'; ?> <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
             </svg></a>
         </div>
       </li>
       <li>
-        <a href="employeePinLogin.php" style="font-size: 1em;"><?php if (isset($_SESSION['emp_fname']) && !empty($_SESSION['emp_lname'])) {
-                                                                  echo "" . $_SESSION['emp_fname'] . " " . $_SESSION['emp_lname'] . " ";
-                                                                } else {
-                                                                  echo "Current User";
-                                                                } ?><svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <a href="employeePinLogin.php" style="font-size: 1em;"><?php if ((isset($_SESSION['emp_id']))) echo "". $row['first_name']. " " . $row['last_name'] . " ";else echo "Current User";?><svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
           </svg></a>
       </li>
       <div class="justify-content-center" id="navline"></div>
+
 
       <li>
         <a href="accounthomeDraft.php">
@@ -106,19 +95,18 @@ $result = mysqli_query($conn, $query);
       </li>
      
 
-      <li>
-            <a href='employeecontrol.php'>
-              <span style='padding:5px;'>
-              <svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-file-person-fill' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-              <path fill-rule='evenodd' d='M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z'/>
-            </svg></span> Employees</a>
-          </li>
+      <?php
+            if (isset($_SESSION['emp_id']))
+        if ($row['user_type'] == 1) {
 
-          <?php
-          if (isset($_SESSION['emp_type'])) {
-            if ($_SESSION['emp_type'] == 1) {
-    
-              echo "
+          echo "
+          <li>
+          <a href='employeecontrol.php'>
+            <span style='padding:5px;'>
+            <svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-file-person-fill' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+            <path fill-rule='evenodd' d='M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z'/>
+          </svg></span> Employees</a>
+        </li>
           <li>
             <a href='reportsControlPanel.php'>
               <span style='padding:5px;'>
@@ -129,7 +117,7 @@ $result = mysqli_query($conn, $query);
                 </svg></span> Reports</a>
           </li>";
         }
-      }
+      
       ?>
 
       </br></br></br></br>
@@ -179,7 +167,7 @@ $result = mysqli_query($conn, $query);
     <nav class="navbar navbar-light" id="salespanel">
       <form class="form-inline" method="post" action="brandsview.php">
         <div class="nav-item" style="padding: 8px">
-          <input class="form-control" name="product" placeholder="Search Brand" aria-label="Search">
+          <input class="form-control" name="brand" placeholder="Search Brand" aria-label="Search">
           <button class="btn btn-dark navbar-btn" name="submit-search"> Look Up</button>
         </div>
 
@@ -208,8 +196,8 @@ $result = mysqli_query($conn, $query);
             <?php
 
             if (isset($_POST['submit-search'])) {
-              $search = mysqli_real_escape_string($conn, $_POST['product']);
-              $sql = "SELECT * FROM product_inventory WHERE productName LIKE '%$search%' OR productType LIKE '%$search%' OR productSubType LIKE '%$search%' OR vendor_id LIKE '%$search%'";
+              $search = mysqli_real_escape_string($conn, $_POST['brand']);
+              $sql = "SELECT * FROM product_inventory WHERE brand LIKE '%$search%'";
               $result = mysqli_query($conn, $sql);
               $queryResults = mysqli_num_rows($result);
 

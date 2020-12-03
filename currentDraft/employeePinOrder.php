@@ -1,8 +1,5 @@
 <?php
 include_once('config.php');
-include_once('sidebarconnect.php');
-// Initialize the session
-ob_start();
 
 ?>
 
@@ -51,25 +48,18 @@ ob_start();
           <br>
           <?php
           include_once('config.php');
-          ob_start();
-          // Define variables and initialize with empty values
           $pin = "";
           $msg = "";
+          $ID = "";
           if (isset($_POST['login']) && !empty(trim($_POST['pin']))) {
             $pin = trim($_POST["pin"]);
             $query = mysqli_query($conn, "SELECT * FROM employee_info WHERE pin_number = '$pin'");
             $numrows = mysqli_num_rows($query);
             if ($numrows == 1) {
               while ($row = mysqli_fetch_assoc($query)) {
-                $emp_id = $row['employee_id'];
-                
+                $ID = $row['employee_id'];
               }
-              $_SESSION["emp_id"] = $emp_id;
-              $_SESSION["init"] = 1;
-              $_SESSION['timeout'] = time();
-
-              header("Location: accountHomeDraft.php");
-              ob_end_flush();
+              header("Location: finalSaleOrder.php?E=$ID");
             } else {
               $msg = "Incorrect pin";
               echo $msg;
