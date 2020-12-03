@@ -1,8 +1,9 @@
 <?php
 include_once('config.php');
 include_once('sidebarconnect.php');
+if (isset($_SESSION["init"])){
 $_SESSION["init"] += 1;
-
+}
 
 ?>
 
@@ -270,7 +271,7 @@ $_SESSION["init"] += 1;
         });
         <?php 
         if($_SESSION['init']==1){
-        echo "$.toaster({ priority : 'success', title : 'Success', message : 'Welcome, " . $_SESSION['emp_fname'] ."' })";
+        echo "$.toaster({ priority : 'success', title : 'Success', message : 'Welcome, " . $row['first_name'] ."' })";
         }
         ?>
       });

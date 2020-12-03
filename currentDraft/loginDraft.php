@@ -10,10 +10,10 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
 
 // Define variables and initialize with empty values
 $email = $password = "";
-$emsg = $msg= "";
+$emsg = $msg = "";
 
 // Processing form data when form is submitted
-if(isset($_POST["login"])) {
+if (isset($_POST["login"])) {
 
   // Check if email is empty
   if (empty(trim($_POST["email"]))) {
@@ -40,21 +40,21 @@ if(isset($_POST["login"])) {
       while ($row = mysqli_fetch_assoc($result)) {
         $emp_id = $row['employee_id'];
       }
-      
-      
-      $_SESSION["emp_id"] = $emp_id;
 
+
+      $_SESSION["emp_id"] = $emp_id;
       $_SESSION["loggedin"] = true;
       $_SESSION["init"] = 0;
       $_SESSION['timeout'] = time();
-      if(!empty($_POST["remember"])) {
-        setcookie ("user_login", $_POST["email"], time()+ (10 * 365 * 24 * 60 * 60));
-        setcookie ("user_password", $_POST["password"], time()+ (10 * 365 * 24 * 60 * 60));
-        } else {
-        if(isset($_COOKIE["user_login"])) {
-        setcookie ("user_login","");}
-        if(isset($_COOKIE["user_password"])) {
-        setcookie ("user_password","");
+      if (!empty($_POST["remember"])) {
+        setcookie("user_login", $_POST["email"], time() + (10 * 365 * 24 * 60 * 60));
+        setcookie("user_password", $_POST["password"], time() + (10 * 365 * 24 * 60 * 60));
+      } else {
+        if (isset($_COOKIE["user_login"])) {
+          setcookie("user_login", "");
+        }
+        if (isset($_COOKIE["user_password"])) {
+          setcookie("user_password", "");
         }
       }
       header("Location: accountHomeDraft.php");
@@ -158,7 +158,9 @@ if(isset($_POST["login"])) {
 
 
         <div class="card bg-white" id="loginitems" style="margin-top: 50px;">
-          <div class="card-header"><h6>MarketPOS Retail</h6></div><br>
+          <div class="card-header">
+            <h6>MarketPOS Retail</h6>
+          </div><br>
           <div class="card-title text-center">
             <h1 id="brand"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1z" /></svg>
@@ -170,7 +172,9 @@ if(isset($_POST["login"])) {
             <form class="form-horizontal" action="loginDraft.php" method="post">
               <div class="form-group <?php echo (!empty($emsg)) ? 'has-error' : ''; ?>">
                 <label style="font-weight:500;" for="email">Email</label>
-                <input type="email" class="form-control" placeholder="email@address.com" name="email" value="<?php if(isset($_COOKIE["user_login"])) { echo $_COOKIE["user_login"]; } ?>">
+                <input type="email" class="form-control" placeholder="email@address.com" name="email" value="<?php if (isset($_COOKIE["user_login"])) {
+                                                                                                                echo $_COOKIE["user_login"];
+                                                                                                              } ?>">
                 <span class="help-block"><?php echo $emsg; ?></span>
               </div>
               <div class="form-group" <?php echo (!empty($msg)) ? 'has-error' : ''; ?>>
@@ -178,11 +182,13 @@ if(isset($_POST["login"])) {
                   <div class="col-8"> <label style="font-weight:500;" for="password">Password</label></div>
                   <div class="col"><a style="font-size:.8em;" class="text-right" href="">Forgot Password?</a></div>
                 </div>
-                <input type="password" class="form-control" placeholder="********" name="password" value="<?php if(isset($_COOKIE["user_password"])) { echo $_COOKIE["user_password"]; } ?>">
+                <input type="password" class="form-control" placeholder="********" name="password" value="<?php if (isset($_COOKIE["user_password"])) {
+                                                                                                            echo $_COOKIE["user_password"];
+                                                                                                          } ?>">
                 <span class="help-block"><?php echo $msg; ?></span>
               </div>
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="remember" <?php if(isset($_COOKIE["user_login"])) { ?> checked <?php } ?>>
+                <input type="checkbox" class="form-check-input" id="remember" <?php if (isset($_COOKIE["user_login"])) { ?> checked <?php } ?>>
                 <label class="form-check-label" name="remember">Remember me</label>
               </div>
 

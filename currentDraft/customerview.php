@@ -1,4 +1,4 @@
-<strong><?php
+<?php
 include_once('config.php');
 include_once('sidebarconnect.php');
 $query = "SELECT * FROM customer_info";
@@ -273,4 +273,3 @@ $result = mysqli_query($conn, $query);
 </script>
 
 </html>
-</strong>
