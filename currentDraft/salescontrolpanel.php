@@ -9,8 +9,8 @@ if (isset($_POST['submitcount'])) {
   $employeeid = $_SESSION['emp_id'];
   $regRadio = $_POST['reg_radio'];
 
-  $query = "INSERT into registers_table (open_total, employee_id, register_num)
-          values ($opentotal, (SELECT employee_id from employee_info where employee_id = $employeeid), $regRadio)";
+  $query = "INSERT into registers_table (open_time, open_total, open_emp_id, register_num)
+          values (now(), $opentotal, (SELECT employee_id from employee_info where employee_id = $employeeid), $regRadio)";
 
   $result = mysqli_query($conn, $query);
 
@@ -29,7 +29,7 @@ if (isset($_POST['submitclose'])) {
   $closeRegId = $_POST['closeRegId'];
   $employeeid = $_SESSION['emp_id'];
 
-  $closequery = "UPDATE registers_table SET close_total = '$closesum' WHERE register_id = '$closeRegId' ";
+  $closequery = "UPDATE registers_table SET close_total = '$closesum', close_emp_id = (SELECT employee_id from employee_info where employee_id = $employeeid), close_time = now() WHERE register_id = '$closeRegId' ";
 
   $result = mysqli_query($conn, $closequery);
 
