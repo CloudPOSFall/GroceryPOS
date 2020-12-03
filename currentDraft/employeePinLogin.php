@@ -68,11 +68,16 @@ ob_start();
               $_SESSION["emp_id"] = $emp_id;
               $_SESSION["init"] = 1;
               $_SESSION['timeout'] = time();
+<<<<<<< HEAD
               if (isset($_SESSION['url']))
               $url = $_SESSION['url'];
               else
               $url = "accountHomeDraft.php";
               header("Refresh:1; url= $url");
+=======
+
+              header("Refresh:1; url=accountHomeDraft.php");
+>>>>>>> master
               ob_end_flush();
             } else {
               $msg = "Incorrect pin";

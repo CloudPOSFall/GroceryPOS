@@ -1,6 +1,9 @@
 <?php
 include_once('config.php');
+<<<<<<< HEAD
 include_once('sidebarconnect.php');
+=======
+>>>>>>> master
 ?>
 <!doctype html>
 <html>
