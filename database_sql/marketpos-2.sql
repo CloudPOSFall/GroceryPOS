@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 02, 2020 at 03:24 AM
+-- Generation Time: Dec 03, 2020 at 02:00 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -29,11 +29,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cart` (
   `cart_id` int(11) NOT NULL,
-  `CID` int(11) DEFAULT NULL,
-  `qty` int(11) DEFAULT NULL,
-  `discount` varchar(50) DEFAULT NULL,
-  `cart_purchase` tinyint(1) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL
+  `CID` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -103,7 +101,7 @@ CREATE TABLE `employee_info` (
   `start_date` date DEFAULT NULL,
   `company_name` varchar(50) NOT NULL,
   `number_of_stores` varchar(11) DEFAULT NULL,
-  `user_type` int(11) DEFAULT NULL,
+  `user_type` int(11) NOT NULL,
   `customer_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -164,7 +162,6 @@ CREATE TABLE `item_list` (
 CREATE TABLE `orders` (
   `OID` int(11) NOT NULL,
   `OTID` int(11) DEFAULT NULL,
-  `cost` float DEFAULT NULL,
   `stock_amount` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -189,7 +186,7 @@ CREATE TABLE `orders_ticket` (
   `credit` float DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `employee_id` int(11) DEFAULT NULL,
-  `vendor_id` int(11) DEFAULT NULL
+  `vendor_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -208,7 +205,7 @@ CREATE TABLE `product_inventory` (
   `unit_price` float NOT NULL,
   `cost` float NOT NULL,
   `in_stock` int(11) NOT NULL,
-  `vendor_id` int(11) DEFAULT NULL
+  `vendor_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -235,9 +232,13 @@ INSERT INTO `product_inventory` (`product_id`, `brand`, `description`, `productN
 CREATE TABLE `registers_table` (
   `register_id` int(11) NOT NULL,
   `open_total` float NOT NULL,
+  `open_time` time NOT NULL,
   `close_total` float DEFAULT NULL,
+  `close_time` time DEFAULT NULL,
+  `credit_total` float DEFAULT NULL,
   `register_num` int(11) NOT NULL,
-  `employee_id` int(11) DEFAULT NULL
+  `open_employee_id` int(11) NOT NULL,
+  `close_employee_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -257,14 +258,6 @@ CREATE TABLE `report_system` (
   `loss` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `report_system`
---
-
-INSERT INTO `report_system` (`report_id`, `date`, `total_sales`, `new_customers`, `total_orders`, `register_id`, `deposited_cash`, `loss`) VALUES
-(1, '2020-11-20', 45, 12, 0, NULL, 0, 0),
-(3, '2020-11-21', 1235, 33, 0, NULL, 0, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -273,10 +266,10 @@ INSERT INTO `report_system` (`report_id`, `date`, `total_sales`, `new_customers`
 
 CREATE TABLE `return_table` (
   `RTID` int(11) NOT NULL,
-  `ticket_id` int(11) DEFAULT NULL,
+  `ticket_id` int(11) NOT NULL,
   `date` date NOT NULL,
   `time` time NOT NULL,
-  `refunds` float DEFAULT NULL,
+  `refunds` float NOT NULL,
   `exchanges` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -288,8 +281,8 @@ CREATE TABLE `return_table` (
 
 CREATE TABLE `stores` (
   `SID` int(11) NOT NULL,
-  `company_name` varchar(50) DEFAULT NULL,
-  `employee_id` int(11) DEFAULT NULL
+  `company_name` varchar(50) NOT NULL,
+  `employee_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -322,18 +315,18 @@ INSERT INTO `tax_table` (`TTID`, `tax_year`, `state_tax`, `county_tax`, `city_ra
 
 CREATE TABLE `ticket_system` (
   `ticket_id` int(11) NOT NULL,
-  `date` date DEFAULT NULL,
+  `date` date NOT NULL,
   `company_name` varchar(50) DEFAULT NULL,
-  `time` time DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  `subtotal` float DEFAULT NULL,
-  `total` float DEFAULT NULL,
+  `time` time NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `subtotal` float NOT NULL,
+  `total` float NOT NULL,
   `discount` float DEFAULT NULL,
-  `tax` float DEFAULT NULL,
-  `tax_rate` float DEFAULT NULL,
-  `cash` float DEFAULT NULL,
-  `credit` float DEFAULT NULL,
-  `cart_purchase` tinyint(1) DEFAULT NULL,
+  `tax` float NOT NULL,
+  `tax_rate` float NOT NULL,
+  `cash` float NOT NULL,
+  `credit` float NOT NULL,
+  `cart_purchase` tinyint(1) NOT NULL,
   `customer_id` int(11) DEFAULT NULL,
   `employee_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -442,7 +435,8 @@ ALTER TABLE `product_inventory`
 --
 ALTER TABLE `registers_table`
   ADD PRIMARY KEY (`register_id`),
-  ADD KEY `employee_id` (`employee_id`);
+  ADD KEY `employee_id` (`open_employee_id`),
+  ADD KEY `close_employee_id` (`close_employee_id`);
 
 --
 -- Indexes for table `report_system`
@@ -493,13 +487,13 @@ ALTER TABLE `vendorinfo`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
 
 --
 -- AUTO_INCREMENT for table `cart_inprogress`
 --
 ALTER TABLE `cart_inprogress`
-  MODIFY `CID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `CID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT for table `customer_info`
@@ -523,19 +517,19 @@ ALTER TABLE `gift_card`
 -- AUTO_INCREMENT for table `item_list`
 --
 ALTER TABLE `item_list`
-  MODIFY `ITID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `ITID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=294;
+  MODIFY `OID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=363;
 
 --
 -- AUTO_INCREMENT for table `orders_ticket`
 --
 ALTER TABLE `orders_ticket`
-  MODIFY `OTID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=189;
+  MODIFY `OTID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=240;
 
 --
 -- AUTO_INCREMENT for table `product_inventory`
@@ -577,7 +571,7 @@ ALTER TABLE `tax_table`
 -- AUTO_INCREMENT for table `ticket_system`
 --
 ALTER TABLE `ticket_system`
-  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT for table `vendorinfo`
@@ -593,8 +587,8 @@ ALTER TABLE `vendorinfo`
 -- Constraints for table `cart`
 --
 ALTER TABLE `cart`
-  ADD CONSTRAINT `cart_ibfk_4` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE NO ACTION ON UPDATE SET NULL,
-  ADD CONSTRAINT `cart_ibfk_5` FOREIGN KEY (`CID`) REFERENCES `cart_inprogress` (`CID`) ON DELETE NO ACTION ON UPDATE SET NULL;
+  ADD CONSTRAINT `cart_ibfk_4` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `cart_ibfk_5` FOREIGN KEY (`CID`) REFERENCES `cart_inprogress` (`CID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `cart_inprogress`
@@ -607,14 +601,14 @@ ALTER TABLE `cart_inprogress`
 -- Constraints for table `employee_info`
 --
 ALTER TABLE `employee_info`
-  ADD CONSTRAINT `employee_info_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+  ADD CONSTRAINT `employee_info_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `gift_card`
 --
 ALTER TABLE `gift_card`
-  ADD CONSTRAINT `gift_card_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `ticket_system` (`ticket_id`) ON DELETE NO ACTION ON UPDATE SET NULL,
-  ADD CONSTRAINT `gift_card_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+  ADD CONSTRAINT `gift_card_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `ticket_system` (`ticket_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `gift_card_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `item_list`
@@ -634,20 +628,21 @@ ALTER TABLE `orders`
 -- Constraints for table `orders_ticket`
 --
 ALTER TABLE `orders_ticket`
-  ADD CONSTRAINT `orders_ticket_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee_info` (`employee_id`) ON DELETE NO ACTION ON UPDATE SET NULL,
-  ADD CONSTRAINT `orders_ticket_ibfk_2` FOREIGN KEY (`vendor_id`) REFERENCES `vendorinfo` (`vendor_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+  ADD CONSTRAINT `orders_ticket_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee_info` (`employee_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `orders_ticket_ibfk_2` FOREIGN KEY (`vendor_id`) REFERENCES `vendorinfo` (`vendor_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `product_inventory`
 --
 ALTER TABLE `product_inventory`
-  ADD CONSTRAINT `product_inventory_ibfk_2` FOREIGN KEY (`vendor_id`) REFERENCES `vendorinfo` (`vendor_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+  ADD CONSTRAINT `product_inventory_ibfk_2` FOREIGN KEY (`vendor_id`) REFERENCES `vendorinfo` (`vendor_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `registers_table`
 --
 ALTER TABLE `registers_table`
-  ADD CONSTRAINT `registers_table_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee_info` (`employee_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+  ADD CONSTRAINT `registers_table_ibfk_1` FOREIGN KEY (`open_employee_id`) REFERENCES `employee_info` (`employee_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `registers_table_ibfk_2` FOREIGN KEY (`close_employee_id`) REFERENCES `employee_info` (`employee_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `report_system`
@@ -659,20 +654,20 @@ ALTER TABLE `report_system`
 -- Constraints for table `return_table`
 --
 ALTER TABLE `return_table`
-  ADD CONSTRAINT `return_table_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `ticket_system` (`ticket_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+  ADD CONSTRAINT `return_table_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `ticket_system` (`ticket_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `stores`
 --
 ALTER TABLE `stores`
-  ADD CONSTRAINT `stores_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee_info` (`employee_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+  ADD CONSTRAINT `stores_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee_info` (`employee_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `ticket_system`
 --
 ALTER TABLE `ticket_system`
-  ADD CONSTRAINT `ticket_system_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`) ON DELETE SET NULL ON UPDATE NO ACTION,
-  ADD CONSTRAINT `ticket_system_ibfk_2` FOREIGN KEY (`employee_id`) REFERENCES `employee_info` (`employee_id`) ON DELETE SET NULL ON UPDATE NO ACTION;
+  ADD CONSTRAINT `ticket_system_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `ticket_system_ibfk_2` FOREIGN KEY (`employee_id`) REFERENCES `employee_info` (`employee_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
