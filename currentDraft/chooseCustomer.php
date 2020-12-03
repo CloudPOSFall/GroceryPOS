@@ -1,4 +1,4 @@
-<form method="post" type="button" action="<?php echo $_SERVER['PHP_SELF'];?>">
+
 Choose a Customer: 
 <?php
 
@@ -30,4 +30,3 @@ Choose a Customer:
 
 ?>
     
-</form>
