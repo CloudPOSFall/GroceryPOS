@@ -180,7 +180,7 @@ $_SESSION["init"] += 1;
 
         <img class="img-thumbnail" src="media/prof.png" style="height: 11rem;" alt="Card image cap" />
         <div class="card-body">
-        <?php if ($numrows > 0) echo "". $row['first_name']. " " . $row['last_name'] . " ";else echo "Current User";?>
+        <?php if ((isset($_SESSION['emp_id']))) echo "". $row['first_name']. " " . $row['last_name'] . " ";else echo "Current User";?>
         </div>
       </div>
     </div>

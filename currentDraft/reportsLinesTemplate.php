@@ -1,5 +1,5 @@
 <?php
-
+include_once('sidebarconnect.php');
 include_once('config.php');
 $query = "SELECT ticket_system.*, product_inventory.productName, product_inventory.productType FROM ticket_system
       LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON cart_inprogress.CID=item_list.CID
@@ -43,38 +43,30 @@ $result = mysqli_query($conn, $query);
 
 <body>
 
-  <!--nav sidebar-->
-  <div>
-    <nav id="sidebar">
-      <div class="sidebar-header bg-dark">
-        <h1><span><a class="navbar-brand relative-top" href="indexDraft.php"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1z" />
-              </svg>
-              <span style="color: #00b300"> Market</span>POS</a></h1>
-      </div>
+<!--nav sidebar-->
+<nav id="sidebar">
+    <div class="sidebar-header bg-dark">
+      <h1 id="brand"><span><a class="navbar-brand relative-top" href="indexDraft.php"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-basket2-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383L5.93 1.757zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0v-2zm4-1a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1z" />
+            </svg>
+            <span style="color: #00b300"> Market</span>POS</a></h1>
+    </div>
 
-      <ul class="list-unstyled components">
-        <li>
-          <div id="usercard">
-            <a href="" style="font-size: 1em;"><?php if (isset($_SESSION['company_name']) && !empty($_SESSION['company_name'])) {
-                                                  echo $_SESSION['company_name'];
-                                                } else {
-                                                  echo 'Company Name';
-                                                } ?></br>Choose Register <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-              </svg></a>
-          </div>
-        </li>
-        <li>
-          <a href="employeePinLogin.php" style="font-size: 1em;"><?php if (isset($_SESSION['emp_fname']) && !empty($_SESSION['emp_lname'])) {
-                                                                    echo "" . $_SESSION['emp_fname'] . " " . $_SESSION['emp_lname'] . " ";
-                                                                  } else {
-                                                                    echo "Current User";
-                                                                  } ?><svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <ul class="list-unstyled components">
+      <li>
+        <div id="usercard">
+          <a href="salescontrolpanel.php#switchreg" style="font-size: 1em;"><?php if ((isset($_SESSION['emp_id'])) ) echo $row['company_name']; else  echo 'Company Name'; ?></br>
+            <?php if (isset($_SESSION['register'])) echo "Register " .$_SESSION['register'];else  echo 'Choose Register'; ?> <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
             </svg></a>
-        </li>
-        <div class="justify-content-center" id="navline"></div>
+        </div>
+      </li>
+      <li>
+        <a href="employeePinLogin.php" style="font-size: 1em;"><?php if ((isset($_SESSION['emp_id']))) echo "". $row['first_name']. " " . $row['last_name'] . " ";else echo "Current User";?><svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+          </svg></a>
+      </li>
+      <div class="justify-content-center" id="navline"></div>
 
         <li>
           <a href="accounthomeDraft.php">
@@ -106,6 +98,22 @@ $result = mysqli_query($conn, $query);
                 <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
               </svg></span> Customers</a>
         </li>
+
+        <?php
+    if (isset($_SESSION['emp_id']))
+        if ($row['user_type'] == 1) {
+
+          echo "
+          <li>
+          <a href='employeecontrol.php'>
+            <span style='padding:5px;'>
+            <svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-file-person-fill' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+            <path fill-rule='evenodd' d='M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z'/>
+          </svg></span> Employees</a>
+        </li>";
+        }
+      
+      ?>
         <li class="active">
           <a href="reportsControlPanel.php">
             <span style="padding:5px;">
