@@ -214,9 +214,7 @@ $result = mysqli_query($conn, $query);
                   echo "<tr><td>" . $row['ticket_id'] . "</td><td>"
                     . date('m-d-Y', strtotime($row['date'])) . "</td><td>" . $row['time'] . "</td><td>" . $row['subtotal'] . "</td><td>"
                     . $row['total'] . "</td><td>" . $row['brand'] . "</td><td>" . $row['description'] . "</td><td>" . $row['productName'] . "</td><td>"
-                    . $row['cash'] . "</td><td>" . $row['credit'] . "</td><td><a class='btn-sm btn-dark' role='button' href='employeeDetail.php?Empl="
-                    . $row['employee_id'] . "'>View</a></td><td><a class='btn-sm btn-dark' role='button' href='customerDetail.php?Detail="
-                    . $row['customer_id'] . "'>View</a></td></tr>";
+                    . $row['cash'] . "</td><td>" . $row['credit'] . "</td><td><form method = 'post' action= 'employeeDetail.php'><button class = 'btn btn-dark' name='Empl'>View</td><input name='Empl' size = '1' value='". $row['$employee_id']."' readonly hidden/></form><td><form method = 'post' action= 'customerDetail.php'><button class = 'btn btn-dark' name='Detail'>View</td><input name='Detail' size = '1' value='". $row['$customer_id']."' readonly hidden/></form></td></tr>";
                 }
               } else {
                 echo "<div class='row mt-3'>There are no results matching your search</div>";
@@ -226,9 +224,7 @@ $result = mysqli_query($conn, $query);
                 echo "<tr><td>" . $row['ticket_id'] . "</td><td>"
                     . date('m-d-Y', strtotime($row['date'])) . "</td><td>" . $row['time'] . "</td><td>" . $row['subtotal'] . "</td><td>"
                     . $row['total'] . "</td><td>" . $row['brand'] . "</td><td>" . $row['description'] . "</td><td>" . $row['productName'] . "</td><td>"
-                    . $row['cash'] . "</td><td>" . $row['credit'] . "</td><td><a class='btn-sm btn-dark' role='button' href='employeeDetail.php?Empl="
-                    . $row['employee_id'] . "'>View</a></td><td><a class='btn-sm btn-dark' role='button' href='customerDetail.php?Detail="
-                    . $row['customer_id'] . "'>View</a></td></tr>";
+                    . $row['cash'] . "</td><td>" . $row['credit'] . "</td><td><form method='post' action = 'employeeDetail.php'><button class='btn-sm btn-dark' name ='Empl'>View</td><input name ='Empl' size = '1' value='".$row['employee_id']."' readonly hidden/></form><td><form method= 'post' action = 'customerDetail.php'><button class  ='btn-sm btn-dark' name='Detail'>View</td><input name='Detail' size = '1' value='".$row['customer_id']."' readonly hidden/></form></td></tr>";
                 }
             }
 

@@ -1,8 +1,8 @@
 <?php
 include_once('config.php');
 include_once('sidebarconnect.php');
-if (isset($_GET['Empl'])) {
-    $findID = $_GET['Empl'];
+if (isset($_POST['Empl'])) {
+    $findID = $_POST['Empl'];
     $query = "SELECT * FROM employee_info WHERE employee_id LIKE '%$findID%'";
     $result = mysqli_query($conn, $query);
 ?>
