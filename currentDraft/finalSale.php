@@ -51,6 +51,10 @@
         
         ?>
     <br><br>
+
+    <?php include('chooseCustomer.php') ?>
+    
+    <br><br>
     <!-- Finalize Sale -->
     <input type='submit' name='final' value="Complete Sale"/>
     <br><bR>
