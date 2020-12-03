@@ -132,7 +132,7 @@ ob_start();
     </div>
     <script>
       <?php
-      if (isset($_POST['login']) && $_SESSION["emp_id"]) {
+      if (isset($_POST['login']) && ($_SESSION["init"] ==1)) {
         echo "$.toaster({ priority : 'success', title : 'Success', message : 'Pin Verified' })";
       }
       ?>
