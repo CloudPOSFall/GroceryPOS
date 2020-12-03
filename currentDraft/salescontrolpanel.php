@@ -7,35 +7,35 @@ include_once('config.php');
 if (isset($_POST['submitcount'])) {
   $opentotal = $_POST['opensum'];
   $employeeid = $_SESSION['emp_id'];
-  //$regRadio = $_POST['reg_radio'];
+  $regRadio = $_POST['reg_radio'];
 
-  $query = "INSERT into registers_table (open_total, employee_id)
-          values ($opentotal, (SELECT employee_id from employee_info where employee_id = $employeeid))";
+  $query = "INSERT into registers_table (open_total, employee_id, register_num)
+          values ($opentotal, (SELECT employee_id from employee_info where employee_id = $employeeid), $regRadio)";
 
   $result = mysqli_query($conn, $query);
 
   if ($result) {
-    $register = mysqli_insert_id($conn);
+    $register = $regRadio;
     $_SESSION['register'] = $register;
   } else {
-    echo "Please Check Your Query";
+    echo "$query, Please Check Your Query";
+    echo $result ? 'true' : 'false';
   }
 }
 
 //if close reg submit is pushed
 if (isset($_POST['submitclose'])) {
   $closesum = $_POST['closesum'];
+  $closeRegId = $_POST['closeRegId'];
   $employeeid = $_SESSION['emp_id'];
-  //$regRadio = $_POST['reg_radio'];
 
-  $query = "INSERT into registers_table (open_total, employee_id)
-          values ($opentotal, (SELECT employee_id from employee_info where employee_id = $employeeid))";
+  $closequery = "UPDATE registers_table SET close_total = '$closesum' WHERE register_id = '$closeRegId' ";
 
-  $result = mysqli_query($conn, $query);
+  $result = mysqli_query($conn, $closequery);
 
   if ($result) {
-    $register = mysqli_insert_id($conn);
-    $_SESSION['register'] = $register;
+
+    unset($_SESSION['register']);
   } else {
     echo "Please Check Your Query";
   }
@@ -306,7 +306,7 @@ if (isset($_POST['selectreg'])) {
           </div>
         </a>
 
-        <a class="btn" href="#">
+        <a class="btn" href="#" data-toggle="modal" data-target="#closereg">
           <div class="card" id="pagecard">
             <div class="card-body text-center">
               <span class="card-text">
@@ -332,7 +332,7 @@ if (isset($_POST['selectreg'])) {
           </div>
         </a>
 
-        <a class="btn" href="#">
+        <a class="btn" href="#" data-toggle="modal" data-target="#testreg">
           <div class="card" id="pagecard">
             <div class="card-body text-center">
               <span class="card-text align-middle">
@@ -352,152 +352,130 @@ if (isset($_POST['selectreg'])) {
   </div>
 
   <!-- Modals -->
-  <!-- <div class="modal fade" id="pickreg" tabindex="-1" role="dialog" aria-labelledby="pickreg" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header h-25">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="card-deck mb-5">
-            <p></p>
-            <span style="font-weight: 400">Choose A Register</span>
-            <div class="line"></div>
-            <div class="container mb-5 ml-4">
-              <a class="btn" href="#" data-toggle="modal" data-target="#openreg" data-dismiss="modal">
-                <div class="card" id="pagecard">
-                  <div class="card-body text-center">
-                    <span class="card-text">
-                      <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-archive-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd" d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
-                        </svg></h5>
-                      Register 1
-                    </span>
-                  </div>
-                </div>
-              </a>
-
-              <a class="btn" href="#" data-toggle="modal" data-target="#openreg" data-dismiss="modal">
-                <div class="card" id="pagecard">
-                  <div class="card-body text-center">
-                    <span class="card-text">
-                      <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-archive-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd" d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
-                        </svg></h5>
-                      Register 2
-                    </span>
-                  </div>
-                </div>
-              </a>
-            </div>
-
-
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div> -->
 
   <!-- Open Register Modal -->
   <div class="modal fade" id="openreg" tabindex="-1" role="dialog" aria-labelledby="openreg" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <span class="modal-title" id="exampleModalLongTitle">Open Register</span>
+          <h6 class="modal-title" id="exampleModalLongTitle">Open Register</h6>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           <div class="container text-center">
-            <span style="font-weight: 400">Opening Count</span>
+            <h6 class="pb-3">Opening Count</h6>
             <div class="row">
               <div class="col mt-5 pt-5">
-                
-              <?php
-/*               $select = "SELECT reg_num FROM registers_table WHERE close_total is NULL";
-              $result = mysqli_query($conn, $select);
-              $numrows = mysqli_num_rows($result);
-              $regArray = array(1,2,3);
-              if ($numrows != 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                  $opencheck = in_array($row['reg_num'], $regArray);
-                  if ($opencheck){
-                    unset($regArray[$row['reg_num']]);
-                  }
-                }
-                  if (!empty($regArray)){
-                    echo '
-                    <legend class="col-form-label mt-5 pt-5">Open which register?</legend>
-                      <div class="col-sm-10">';
-                      foreach($regArray as $reg){
+                <form method="post" action="salescontrolpanel.php">
+                  <?php
+                  $select = "SELECT register_num FROM registers_table WHERE close_total is NULL";
+                  $result = mysqli_query($conn, $select);
+                  $regArray = array(
+                    1 => 1,
+                    2 => 2,
+                    3 => 3
+                  );
+                  $numrows = mysqli_num_rows($result);
+                  if ($numrows != 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                      $needle = (int) $row['register_num'];
+                      $opencheck = in_array($needle, $regArray);
+                      if ($opencheck)
+                        unset($regArray[$needle]);
+                    }
+                    if (!empty($regArray)) {
+                      echo '
+                      <h5 class="mt-5 pt-5">Open which register?</h5>
+                        <div class="col-sm-10">';
+                      foreach ($regArray as $i => $reg) {
                         echo '
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="regradio" id="radio'. $reg .'" value="'. $reg .'">
-                            <label class="form-check-label">
-                              Register ' . $reg .'
-                            </label>
-                          </div>';
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="reg_radio" value="' . $reg . '">
+                              <label class="form-check-label">
+                                Register ' . $reg . '
+                              </label>
+                            </div>';
                       }
+                      echo '</div>';
+                    } else
+                      echo '<h3 class="pb-5"> All Registers are Open</h3>';
+                  } else {
+                    echo '
+                      <h5 class=" mt-5 pt-5">Open which register?</h5>
+                        <div class="col-sm-10">';
+                    foreach ($regArray as $i => $reg) {
+                      echo '
+                            <div class="form-check py-1">
+                              <input class="form-check-input" type="radio" name="reg_radio" value="' . $reg . '">
+                              <label class="form-check-label">
+                                Register ' . $reg . '
+                              </label>
+                            </div>';
+                    }
                     echo '</div>';
-                  }else{
-                    echo 'All your registers are open';
                   }
-              }  */
-              ?>
+                  ?>
               </div>
-              <div id="bills" class=" col-5">
-                <form class="form-inline ml-4" method="post" action="salescontrolpanel.php">
-                  <div>
-                    <div class="input-group mb-2 mr-4">
-                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $100 </span></label>
-                      <input type="text" maxlength="3" onblur="findTotal()"  name="bills" class="form-control w-25" placeholder="">
-                    </div>
-                    <div class="input-group mb-2 mr-4">
-                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $50 </span></label>
-                      <input type="text" maxlength="3" onblur="findTotal()"  name="bills"  class="form-control w-25" placeholder="">
-                    </div>
-                    <div class="input-group mb-2 mr-4">
-                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $20 </span></label>
-                      <input type="text" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
-                    </div>
-                    <div class="input-group mb-2 mr-4">
-                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $10 </span></label>
-                      <input type="text" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
-                    </div>
-                    <div class="input-group mb-2 mr-4">
-                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $5 </span></label>
-                      <input type="text" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
-                    </div>
-                    <div class="input-group mb-2 mr-4">
-                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $1 </span></label>
-                      <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
-                    </div>
-                    <div class="input-group mb-2 mr-4">
-                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 25¢ </span></label>
-                      <input type="text" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
-                    </div>
-                    <div class="input-group mb-2 mr-4">
-                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 10¢ </span></label>
-                      <input type="text" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
-                    </div>
-                    <div class="input-group mb-2 mr-4">
-                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 5¢ </span></label>
-                      <input type="text" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
-                    </div>
-                    <div class="input-group mb-2 mr-4">
-                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 1¢ </span></label>
-                      <input type="text" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
-                    </div>
-                    <div class="input-group mb-2">
-                      <label class="control-label border bg-white" style="width:55px"><span class="input-group-addon px-2"> Total </span></label>
-                      <input name="opensum" id="total" type="text" maxlength="8" class="form-control w-50" value="0" readonly>
+
+              <?php
+              if (!empty($regArray)) {
+                echo '
+                <div id="bills" class=" col-5">
+                  <div class="form-inline ml-4">
+                    <div>
+                      <div class="input-group mb-2 mr-4">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $100 </span></label>
+                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
+                      </div>
+                      <div class="input-group mb-2 mr-4">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $50 </span></label>
+                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
+                      </div>
+                      <div class="input-group mb-2 mr-4">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $20 </span></label>
+                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
+                      </div>
+                      <div class="input-group mb-2 mr-4">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $10 </span></label>
+                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
+                      </div>
+                      <div class="input-group mb-2 mr-4">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $5 </span></label>
+                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
+                      </div>
+                      <div class="input-group mb-2 mr-4">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $1 </span></label>
+                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
+                      </div>
+                      <div class="input-group mb-2 mr-4">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 25¢ </span></label>
+                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
+                      </div>
+                      <div class="input-group mb-2 mr-4">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 10¢ </span></label>
+                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
+                      </div>
+                      <div class="input-group mb-2 mr-4">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 5¢ </span></label>
+                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
+                      </div>
+                      <div class="input-group mb-2 mr-4">
+                        <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 1¢ </span></label>
+                        <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
+                      </div>
+                      <div class="input-group mb-2">
+                        <label class="control-label border bg-white" style="width:60px"><span class="input-group-addon px-2"> Total </span></label>
+                        <input name="opensum" id="total" type="text" maxlength="10" class="form-control w-50" value="0.00" readonly>
+                      </div>
                     </div>
                   </div>
-              </div>
+                </div>
+                ';
+              }
+              ?>
+
 
             </div>
 
@@ -506,7 +484,12 @@ if (isset($_POST['selectreg'])) {
 
         </div>
         <div class="modal-footer">
-          <button type="submit" name="submitcount" class="btn btn-success">Submit Count</button>
+          <?php
+          if (!empty($regArray)) {
+            echo '<button type="submit" name="submitcount" class="btn btn-success">Submit Count</button>';
+          }
+          ?>
+
           <button type="button" class="btn btn-dark" data-dismiss="modal">Cancel</button>
           </form>
         </div>
@@ -516,112 +499,159 @@ if (isset($_POST['selectreg'])) {
 
 
   <!-- Close Register Modal -->
-  <div class="modal fade" id="openreg" tabindex="-1" role="dialog" aria-labelledby="openreg" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal fade" id="closereg" tabindex="-1" role="dialog" aria-labelledby="closereg" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <span class="modal-title" id="exampleModalLongTitle">Open Register</span>
+          <h6 class="modal-title" id="exampleModalLongTitle">Close Register</h6>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <div class="container text-center">
-            <span style="font-weight: 400">Opening Count</span>
-            <div class="row">
-              <div class="col mt-5 pt-5">
-                
-              <?php
-/*               $select = "SELECT reg_num FROM registers_table WHERE close_total is NULL";
-              $result = mysqli_query($conn, $select);
-              $numrows = mysqli_num_rows($result);
-              $regArray = array(1,2,3);
-              if ($numrows != 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                  $opencheck = in_array($row['reg_num'], $regArray);
-                  if ($opencheck){
-                    unset($regArray[$row['reg_num']]);
+          <div class="container px-2">
+          <?php
+                  if (!isset($_SESSION['register'])){
+                    echo '<h3 class="pb-5 text-center">Cannot Close<br> No Register Selected</h3>';
+                  }else{
+                  $regToClose = $_SESSION['register'];
+            echo '<div class="col text-right"><h5 class"pb-3">Register '. $regToClose .'</h5></div> 
+              <div class="row">
+              
+                <form method="post" action="salescontrolpanel.php">';
+
+                  $closeQuery = "SELECT register_id, open_total FROM registers_table WHERE close_total is NULL AND register_num = $regToClose";
+                  $result = mysqli_query($conn, $closeQuery);
+                  $numrows = mysqli_num_rows($result);
+                  if ($numrows != 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                    echo '
+                    <table class="table table-sm table-bordered" style="font-size:80%;">
+                    <thead class="thead-light text-center">
+                      <tr>
+                        <th class="col-2">Type</th>
+                        <th class="col-2">Starting</th>
+                        <th class="col-2">Payments</th>
+                        <th class="col-2">Withdraws</th>
+                        <th class="col-2">Total Remaining</th>
+                        <th class="col-2">Closing Count</th>
+                      </tr>
+                    </thead>
+                    <tbody class="text-right">
+                      <tr>
+                        <th class="text-left">Cash</th>
+                        <td>$'. number_format((float)$row['open_total'], 2, '.', '') .'</td>
+                        <td>$0.00</td>
+                        <td>$0.00</td>
+                        <td>$'. number_format((float)$row['open_total'], 2, '.', '').'</td>
+                        <td>
+
+                          <div id="bills">
+                            <div class="form-inline">
+                              <div class="">
+                                <div class="input-group mb-2">
+                                  <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $100 </span></label>
+                                  <input type="text" maxlength="3" onblur="closeTotal()" name="bills2" class="form-control w-25" placeholder="">
+                                </div>
+                                <div class="input-group mb-2">
+                                  <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $50 </span></label>
+                                  <input type="text" maxlength="3" onblur="closeTotal()" name="bills2" class="form-control w-25" placeholder="">
+                                </div>
+                                <div class="input-group mb-2">
+                                  <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $20 </span></label>
+                                  <input type="text" maxlength="3" onblur="closeTotal()" name="bills2" class="form-control w-25" placeholder="">
+                                </div>
+                                <div class="input-group mb-2">
+                                  <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $10 </span></label>
+                                  <input type="text" maxlength="3" onblur="closeTotal()" name="bills2" class="form-control w-25" placeholder="">
+                                </div>
+                                <div class="input-group mb-2">
+                                  <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $5 </span></label>
+                                  <input type="text" maxlength="3" onblur="closeTotal()" name="bills2" class="form-control w-25" placeholder="">
+                                </div>
+                                <div class="input-group mb-2">
+                                  <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $1 </span></label>
+                                  <input type="text" maxlength="3" onblur="closeTotal()" name="bills2" class="form-control w-25" placeholder="">
+                                </div>
+                                <div class="input-group mb-2">
+                                  <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 25¢ </span></label>
+                                  <input type="text" maxlength="3" onblur="closeTotal()" name="bills2" class="form-control w-25" placeholder="">
+                                </div>
+                                <div class="input-group mb-2">
+                                  <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 10¢ </span></label>
+                                  <input type="text" maxlength="3" onblur="closeTotal()" name="bills2" class="form-control w-25" placeholder="">
+                                </div>
+                                <div class="input-group mb-2">
+                                  <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 5¢ </span></label>
+                                  <input type="text" maxlength="3" onblur="closeTotal()" name="bills2" class="form-control w-25" placeholder="">
+                                </div>
+                                <div class="input-group mb-2">
+                                  <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 1¢ </span></label>
+                                  <input type="text" maxlength="3" onblur="closeTotal()" name="bills2" class="form-control w-25" placeholder="">
+                                </div>
+                                <div class="input-group mb-2">
+                                  <input style="font-weight: 500" name="closesum" id="closetotal" type="text" maxlength="10" class="form-control text-right" value="0.00" readonly>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class="text-left">Credit</th>
+                        <td>$0.00</td>
+                        <td>$0.00</td>
+                        <td>$0.00</td>
+                        <td>$0.00</td>
+                        <td>
+                          <div class="">
+                                <div class="col float-right">
+                                  <div class="input-group mb-2">
+                                    <input type="text" maxlength="10" class="form-control w-25" placeholder="">
+                                  </div>
+                                </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class="text-left">Gift Card</th>
+                        <td>$0.00</td>
+                        <td>$0.00</td>
+                        <td>$0.00</td>
+                        <td>$0.00</td>
+                        <td>
+                          <div class="col float-right">
+                            <div class="input-group mb-2">
+                              <input type="text" maxlength="10" class="form-control w-25" placeholder="">
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <input name="closeRegId" value="'.$row['register_id'].'" readonly hidden/>
+                    ';
+                    }
+                  }else{
+                    echo '<h3 class="pb-5">Cannot Close<br> No Registers are Open</h3>';
                   }
                 }
-                  if (!empty($regArray)){
-                    echo '
-                    <legend class="col-form-label mt-5 pt-5">Open which register?</legend>
-                      <div class="col-sm-10">';
-                      foreach($regArray as $reg){
-                        echo '
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="regradio" id="radio'. $reg .'" value="'. $reg .'">
-                            <label class="form-check-label">
-                              Register ' . $reg .'
-                            </label>
-                          </div>';
-                      }
-                    echo '</div>';
-                  }else{
-                    echo 'All your registers are open';
-                  }
-              }  */
-              ?>
-              </div>
-              <div id="bills" class=" col-5">
-                <form class="form-inline ml-4" method="post" action="salescontrolpanel.php">
-                  <div>
-                    <div class="input-group mb-2 mr-4">
-                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $100 </span></label>
-                      <input type="text" maxlength="3" onblur="findTotal()"  name="bills" class="form-control w-25" placeholder="">
-                    </div>
-                    <div class="input-group mb-2 mr-4">
-                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $50 </span></label>
-                      <input type="text" maxlength="3" onblur="findTotal()"  name="bills"  class="form-control w-25" placeholder="">
-                    </div>
-                    <div class="input-group mb-2 mr-4">
-                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $20 </span></label>
-                      <input type="text" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
-                    </div>
-                    <div class="input-group mb-2 mr-4">
-                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $10 </span></label>
-                      <input type="text" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
-                    </div>
-                    <div class="input-group mb-2 mr-4">
-                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $5 </span></label>
-                      <input type="text" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
-                    </div>
-                    <div class="input-group mb-2 mr-4">
-                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> $1 </span></label>
-                      <input type="text" maxlength="3" onblur="findTotal()" name="bills" class="form-control w-25" placeholder="">
-                    </div>
-                    <div class="input-group mb-2 mr-4">
-                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 25¢ </span></label>
-                      <input type="text" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
-                    </div>
-                    <div class="input-group mb-2 mr-4">
-                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 10¢ </span></label>
-                      <input type="text" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
-                    </div>
-                    <div class="input-group mb-2 mr-4">
-                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 5¢ </span></label>
-                      <input type="text" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
-                    </div>
-                    <div class="input-group mb-2 mr-4">
-                      <label class="control-label border bg-light" style="width:55px"><span class="input-group-addon px-2"> 1¢ </span></label>
-                      <input type="text" maxlength="3" onblur="findTotal()" name="bills"  class="form-control w-25" placeholder="">
-                    </div>
-                    <div class="input-group mb-2">
-                      <label class="control-label border bg-white" style="width:55px"><span class="input-group-addon px-2"> Total </span></label>
-                      <input name="closesum" id="total" type="text" maxlength="8" class="form-control w-50" value="0" readonly>
-                    </div>
-                  </div>
-              </div>
+              
+              
 
-            </div>
 
+        echo'</div>
           </div>
-
-
         </div>
-        <div class="modal-footer">
-          <button type="submit" name="submitclose" class="btn btn-success">Submit Count</button>
-          <button type="button" class="btn btn-dark" data-dismiss="modal">Cancel</button>
+        <div class="modal-footer">';
+
+              if ($numrows != 0) {
+                echo '<button type="submit" name="submitclose" class="btn btn-success">Submit Count</button>';
+              }
+            ?>
+
+            <button type="button" class="btn btn-dark" data-dismiss="modal">Cancel</button>
           </form>
         </div>
       </div>
@@ -629,94 +659,69 @@ if (isset($_POST['selectreg'])) {
   </div>
 
 
-  <!-- Switch Registers Modal -->
-  <div class="modal fade" id="switchreg" tabindex="-1" role="dialog" aria-labelledby="switchreg" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header h-25">
-          <span style="font-weight: 400">Switch Register</span>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="container text-center">
-            <span style="font-weight: 400">Choose A Register</span>
-            <div class="form-inline justify-content-center">
+    <!-- Switch Registers Modal -->
+    <div class="modal fade" id="switchreg" tabindex="-1" role="dialog" aria-labelledby="switchreg" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header h-25">
+            <h5>Switch Register</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="container text-center">
+              <span style="font-weight: 400">Choose A Register</span>
+              <div class="form-inline justify-content-center">
 
-              <?php
-              $query = "SELECT * FROM registers_table WHERE close_total is NULL";
-              $result = mysqli_query($conn, $query);
+                <?php
+                $query = "SELECT register_num FROM registers_table WHERE close_total is NULL";
+                $result = mysqli_query($conn, $query);
 
-              $numrows = mysqli_num_rows($result);
-              if ($numrows != 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                  echo
-                    '<form class="p-3" method="post" action="salescontrolpanel.php">
-                  <button name="selectreg" class="btn">
-                  <div class="card" id="pagecard">
-                    <div class="card-body text-center">
-                      <span class="card-text">
-                        <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-archive-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
-                          </svg></h5>
-                        Register ' . $row['register_id'] . '
-                       </span>
+                $numrows = mysqli_num_rows($result);
+                if ($numrows != 0) {
+                  while ($row = mysqli_fetch_assoc($result)) {
+                    echo
+                      '<form class="p-3" method="post" action="salescontrolpanel.php">
+                    <button name="selectreg" class="btn">
+                    <div class="card" id="pagecard">
+                      <div class="card-body text-center">
+                        <span class="card-text">
+                          <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-archive-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
+                            </svg></h5>
+                          Register ' . $row['register_num'] . '
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </button>
-                <input name="register" size="1" value="' . $row['register_id'] . '" hidden readonly/>
-                </form>';
+                  </button>
+                  <input name="register" size="1" value="' . $row['register_num'] . '" hidden readonly/>
+                  </form>';
+                  }
+                } else {
+                  echo '<h3 class="py-5">Please Open A Register</h3>';
                 }
-              } else {
-                echo '<span style="font-weight: 400">Please Open A Register</span>';
-              }
-              ?>
-
-              <!-- <a role="button" class="btn" type="submit" name="reg1" data-toggle="modal" data-target="#regopen" data-dismiss="modal">
-                <div class="card" id="pagecard">
-                  <div class="card-body text-center">
-                    <span class="card-text">
-                      <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-archive-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd" d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
-                        </svg></h5>
-                      Register 1
-                    </span>
-                  </div>
-                </div>
-              </a>
-
-              <a type="button" class="btn" name="reg2" data-toggle="modal" data-target="#regopen" data-dismiss="modal" onclick="regswitch()">
-                <div class="card" id="pagecard">
-                  <div class="card-body text-center">
-                    <span class="card-text">
-                      <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-archive-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd" d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
-                        </svg></h5>
-                      Register 2
-                    </span>
-                  </div>
-                </div>
-              </a> -->
+                ?>
+              </div>
             </div>
           </div>
+
+
+
         </div>
-
-
-
       </div>
     </div>
+
+
+    
+
   </div>
-  </div>
-
-
-
 
   <!--END page content-->
 
 
   <script type="text/javascript">
-  //scrollbar
+    //scrollbar
     $(document).ready(function() {
       $("#sidebar").mCustomScrollbar({
         theme: "minimal"
@@ -728,22 +733,29 @@ if (isset($_POST['selectreg'])) {
         $('a[aria-expanded=true]').attr('aria-expanded', 'false');
       });
 
-//open modals
+      //open modals
       $('#openreg', '#pickreg', '#switchreg').on('shown.bs.modal', function() {
         $('#myInput').trigger('focus')
       });
     });
 
 
-//clear modal input fields on close
+    //clear openreg modal input fields on close
     $('#openreg').on('hidden.bs.modal', function() {
       $(this)
         .find("input,textarea,select")
         .val('')
         .end();
-    }) 
+    })
 
-//control panel buttons hoverable shadow
+    $('#closereg').on('hidden.bs.modal', function() {
+      $(this)
+        .find("input,textarea,select")
+        .val('')
+        .end();
+    })
+
+    //control panel buttons hoverable shadow
     $(document).ready(function() {
       $(".card").hover(
         function() {
@@ -767,9 +779,10 @@ if (isset($_POST['selectreg'])) {
       request.send();
     }
 
-//method to open switch reg modal from other pages
+    //method to open switch reg modal from other pages
     (function() {
       'use strict';
+
       function remoteModal(idModal) {
         var vm = this;
         vm.modal = $(idModal);
@@ -806,61 +819,115 @@ if (isset($_POST['selectreg'])) {
       window.remoteModal('#switchreg');
     });
 
-//add up input fields in open reg
-    function findTotal(){
-    var arr = document.getElementsByName('bills');
-    var tot=0;
-    for(var i=0;i<arr.length;i++){
-      var subtot=0;
-        if(parseInt(arr[i].value)){
-            var item = parseInt(arr[i].value);
-          switch(i) {
+    //add up input fields in open register
+    function findTotal() {
+      var arr = document.getElementsByName('bills');
+      var tot = 0;
+      for (var i = 0; i < arr.length; i++) {
+        var subtot = 0;
+        if (parseInt(arr[i].value)) {
+          var item = parseInt(arr[i].value);
+          switch (i) {
             case 0:
               subtot = item * 100;
-            break;
+              break;
 
             case 1:
               subtot = item * 50;
-            break;
+              break;
 
             case 2:
               subtot = item * 20;
-            break;
+              break;
 
             case 3:
               subtot = item * 10;
-            break;
+              break;
 
             case 4:
               subtot = item * 5;
-            break;
+              break;
 
             case 5:
               subtot = item * 1;
-            break;
+              break;
 
             case 6:
               subtot = item * .25;
-            break;
+              break;
 
             case 7:
               subtot = item * .10;
-            break;
+              break;
 
             case 8:
               subtot = item * .05;
-            break;
-            
+              break;
+
             case 9:
               subtot = item * .01;
-            break;
+              break;
           }
         }
         tot += subtot;
+      }
+      document.getElementById('total').value = (Math.round(tot * 100) / 100).toFixed(2);
     }
-    document.getElementById('total').value = (Math.round(tot * 100) / 100).toFixed(2);
-}
 
+    //add up input fields in close register // Didn't work with above method due to multiple forms with the same name
+      function closeTotal() {
+      var arr = document.getElementsByName('bills2');
+      var tot = 0;
+      for (var i = 0; i < arr.length; i++) {
+        var subtot = 0;
+        if (parseInt(arr[i].value)) {
+          var item = parseInt(arr[i].value);
+          switch (i) {
+            case 0:
+              subtot = item * 100;
+              break;
+
+            case 1:
+              subtot = item * 50;
+              break;
+
+            case 2:
+              subtot = item * 20;
+              break;
+
+            case 3:
+              subtot = item * 10;
+              break;
+
+            case 4:
+              subtot = item * 5;
+              break;
+
+            case 5:
+              subtot = item * 1;
+              break;
+
+            case 6:
+              subtot = item * .25;
+              break;
+
+            case 7:
+              subtot = item * .10;
+              break;
+
+            case 8:
+              subtot = item * .05;
+              break;
+
+            case 9:
+              subtot = item * .01;
+              break;
+          }
+        }
+        tot += subtot;
+      }
+      document.getElementById('closetotal').value = (Math.round(tot * 100) / 100).toFixed(2);
+    }
   </script>
 </body>
 
