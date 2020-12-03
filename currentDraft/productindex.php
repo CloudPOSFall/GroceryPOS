@@ -159,6 +159,14 @@
             </div> -->
         <div class="card-body">
           <form action="productinsert.php" method="post">
+          <div class = "form-group row">
+            <label class = "col-4" for = "Brand">Brand </label>
+                    <input class ="col-6" type = "text" placeholder=" Brand " name="brand"/>
+            </div>
+            <div class = "form-group row">
+            <label class = "col-4" for = "Description">Description </label>
+                    <input class ="col-6" type = "text" placeholder=" Description " name="description"/>
+            </div>
             <div class = "form-group row">
             <label class = "col-4" for = "Product Name">Product Name </label>
                     <input class ="col-6" type = "text" placeholder=" Product Name " name="pname"/>

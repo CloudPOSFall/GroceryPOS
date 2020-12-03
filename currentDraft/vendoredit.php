@@ -195,35 +195,35 @@ if (isset($_GET['Upd'])) {
           </div>
           <div class="form-group row">
               <label class="col-4"  for="Department">Department </label>
-              <input class="col-6"  type="text" placeholder=" Department " name="department" />
+              <input type="text" value=" <?php echo $row['department'] ?> " name="department" />
             </div>
             <div class="form-group row">
               <label class="col-4"  for="Street Address">Street Address </label>
-              <input class="col-6"  type="text" placeholder=" Street Address " name="street" />
+              <input type="text" value=" <?php echo $row['street_address'] ?> " name="street" />
             </div>
             <div class="form-group row">
               <label class="col-4"  for="City">City </label>
-              <input class="col-6"  type="text" placeholder=" City " name="city" />
+              <input type="text" value=" <?php echo $row['city'] ?> " name="city" />
             </div>
             <div class="form-group row">
               <label class="col-4"  for="State">State </label>
-              <input class="col-6"  type="text" placeholder=" State " name="state" />
+              <input type="text" value=" <?php echo $row['state'] ?> " name="state" />
             </div>
             <div class="form-group row">
               <label class="col-4"  for="Zip Code">Zip Code </label>
-              <input class="col-6"  type="text" placeholder=" Zip Code " name="zip" />
+              <input type="text" value=" <?php echo $row['zip_code'] ?> " name="zip" />
             </div>
             <div class="form-group row">
               <label class="col-4"  for="Phone Number">Phone Number</label>
-              <input class="col-6"  type="tel" placeholder=" Phone Number " name="phone" />
+              <input type="tel" value=" <?php echo $row['phone_number'] ?> " name="phone" />
             </div>
             <div class="form-group row">
               <label class="col-4"  for="Fax Number">Fax Number</label>
-              <input class="col-6"  type="tel" placeholder=" Fax Number " name="fax" />
+              <input type="tel" value=" <?php echo $row['fax_number'] ?> " name="fax" />
             </div>
             <div class="form-group row">
               <label class="col-4"  for="Email">Email</label>
-              <input class="col-6"  type="email" placeholder=" Email " name="email" />
+              <input type="email" value=" <?php echo $row['email'] ?> " name="email" />
             </div>
           <div class="text-center"><button type="submit" name="update" class="btn-lg btn-primary"> Update</button></div>
         </form>

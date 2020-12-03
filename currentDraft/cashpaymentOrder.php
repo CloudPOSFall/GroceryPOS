@@ -1,5 +1,9 @@
 <?php
     include('config.php');
+    if(isset($_GET['E']))
+    {
+    $ID = $_GET['E'];
+    }
     $query = "SELECT OTID FROM orders_ticket WHERE employee_id IS NULL";
     $result = mysqli_query($conn, $query) or die(" Execution Failed null address");
     $row = mysqli_num_rows($result);
@@ -11,13 +15,6 @@
     }
 
     include('joinOrder.php');
-?>
-<form method="post" type="button">
-<br>
-    <br>Cash Amount: <input type="text" name="cash">
-    <input type='submit' name='change' value="Get Change"/><br>
-
-    <?php
         $tax = 0;
         $discount = 0;
         
@@ -40,6 +37,16 @@
         $tax = $total * $taxrate;
         $tax = number_format($tax, 2);
         
+        echo("Total Amount: $");
+        echo($total);
+?>
+
+<form method="post" type="button">
+<br>
+    <br>Cash Amount: <input type="text" name="cash">
+    <input type='submit' name='change' value="Get Change"/><br>
+        
+        <?php
         // trigger to get back change
         if(isset($_POST['change']))
         {
@@ -62,7 +69,7 @@
             $OTID = $_SESSION['OTID'];
 
             $query = "UPDATE orders_ticket SET date = CURRENT_DATE(), time = CURRENT_TIME(), quantity = '$qtyTotal', subtotal = '$subTotal', 
-                    total = '$total', tax = '$tax', tax_rate = '$taxrate', cash = '$total', status = '0' WHERE OTID = '$OTID'";
+                    total = '$total', tax = '$tax', tax_rate = '$taxrate', cash = '$total', status = '0', employee_id = '$ID' WHERE OTID = '$OTID'";
             $result = mysqli_query($conn, $query) or die("Order Ticket Failed");
 
             if($result)
