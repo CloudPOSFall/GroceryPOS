@@ -267,7 +267,7 @@ include_once('sidebarconnect.php');
           </div>
         </a>
 
-        <a class="btn" href="#">
+<!--         <a class="btn" href="#">
           <div class="card" id="pagecard">
             <div class="card-body text-center">
               <h5 class="card-title"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-book-half" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -276,7 +276,7 @@ include_once('sidebarconnect.php');
               <span class="card-text">Vendor Catalogs</span>
             </div>
           </div>
-        </a>
+        </a> -->
 
       </div>
 <!-- 

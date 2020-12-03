@@ -10,14 +10,14 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
 
 // Define variables and initialize with empty values
 $email = $password = "";
-$email_err = $password_err = "";
+$emsg = $msg= "";
 
 // Processing form data when form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if(isset($_POST["login"])) {
 
   // Check if email is empty
   if (empty(trim($_POST["email"]))) {
-    $email_err = "Please enter email.";
+    $emsg = "Please enter email.";
   } else {
     $email = trim($_POST["email"]);
     $email = mysqli_real_escape_string($conn, $email);
@@ -25,14 +25,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   // Check if password is empty
   if (empty(trim($_POST["password"]))) {
-    $password_err = "Please enter your password.";
+    $msg = "Please enter your password.";
   } else {
     $mypassword = trim($_POST["password"]);
     $mypassword = mysqli_real_escape_string($conn, $mypassword);
   }
 
   // Validate credentials
-  if (empty($email_err) && empty($password_err)) {
+  if (empty($emsg) && empty($msg)) {
     $query = "SELECT email, password, employee_id, user_type FROM employee_info WHERE email = '$email' AND password = '$mypassword'";
     $result = mysqli_query($conn, $query);
     $numrows = mysqli_num_rows($result);
@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       header("Location: accountHomeDraft.php");
       ob_end_flush();
     } else {
-      $password_wrong = "Invalid Username or Password.";
+      $msg = "Invalid Email or Password.";
     }
   }
 }
@@ -167,19 +167,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </div><br>
 
           <div class="card-body">
-            <form class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-              <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
+            <form class="form-horizontal" action="loginDraft.php" method="post">
+              <div class="form-group <?php echo (!empty($emsg)) ? 'has-error' : ''; ?>">
                 <label style="font-weight:500;" for="email">Email</label>
                 <input type="email" class="form-control" placeholder="email@address.com" name="email" value="<?php if(isset($_COOKIE["user_password"])) { echo $_COOKIE["user_password"]; } ?>">
-                <span class="help-block"><?php echo $email_err; ?></span>
+                <span class="help-block"><?php echo $emsg; ?></span>
               </div>
-              <div class="form-group" <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>>
+              <div class="form-group" <?php echo (!empty($msg)) ? 'has-error' : ''; ?>>
                 <div class="form-row">
                   <div class="col-8"> <label style="font-weight:500;" for="password">Password</label></div>
                   <div class="col"><a style="font-size:.8em;" class="text-right" href="">Forgot Password?</a></div>
                 </div>
                 <input type="password" class="form-control" placeholder="********" name="password" value="<?php if(isset($_COOKIE["user_password"])) { echo $_COOKIE["user_password"]; } ?>">
-                <span class="help-block"><?php echo $password_err; ?></span>
+                <span class="help-block"><?php echo $msg; ?></span>
               </div>
               <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="remember" <?php if(isset($_COOKIE["user_login"])) { ?> checked <?php } ?>>
@@ -187,7 +187,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               </div>
 
               <div class="text-center">
-                <button type="submit" style="padding: 10px" class="btn-lg btn-success"> Log In</button></div><br>
+                <button name="login" type="submit" style="padding: 10px" class="btn-lg btn-success"> Log In</button></div><br>
               <p>Don't have an account? <a href="AdminsignupDraft.php">Sign up now</a>.</p>
             </form>
           </div>
