@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 04, 2020 at 03:22 PM
+-- Generation Time: Dec 04, 2020 at 06:03 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -220,31 +220,31 @@ INSERT INTO `product_inventory` (`product_id`, `brand`, `description`, `productN
 (6, 'Strawberries', '1lb package', 'Driscolls', 'Produce', 'Strawberries', 8.95, 6.99, 45, 1),
 (7, 'Red Cherry Tomato', '10.5oz package', 'Cherry', 'Produce', 'Tomato', 5.59, 3.99, 21, 1),
 (8, 'Organic Red Grape Tomatoes', '10 oz package', 'Brandywine', 'Produce', 'Tomato', 8.99, 5.75, 2, 1),
-(9, ' Sht Cuts Grlld Ital Chic Strip', '22oz', 'Perdue chicken breast', 'Poultry', 'Chicken Breast', 7.49, 6.99, 7, 2),
-(10, ' Sht Cuts Grlld Ital Chic Legs', '22oz', 'Perdue chicken legs', 'Poultry', 'Chicken Leg', 7.49, 6.99, 12, 2),
+(9, ' Sht Cuts Grlld Ital Chic Strip', '22oz', 'Perdue chicken breast', 'Poultry', 'ChickenBreast', 7.49, 6.99, 7, 2),
+(10, ' Sht Cuts Grlld Ital Chic Legs', '22oz', 'Perdue chicken legs', 'Poultry', 'ChickenLeg', 7.49, 6.99, 12, 2),
 (12, ' Five Star Beef', '16oz', 'Tyson steaks', 'Beef', 'Steak', 10.49, 9.99, 19, 2),
 (13, ' Five Star Flanks', '30oz', 'Tyson flanks', 'Beef', 'Flank', 14.49, 12.99, 60, 2),
-(14, ' Bush', '2oz', 'Bushs Black Beans', 'Dry Goods', 'Beans', 4.49, 2.99, 20, 2),
-(15, ' Heinz', '5oz', 'Heinz Baked Beans', 'Dry Goods', 'Beans', 5.49, 4.99, 60, 2),
-(16, ' Goya', '4oz', 'Goya Black Beans', 'Dry Goods', 'Beans', 6.99, 5.99, 6, 2),
-(17, ' Hormel Foods', '3oz', 'Canned Spam', 'Dry Goods', 'Cans', 3.49, 2.99, 50, 2),
-(18, ' Dole', '3oz', 'Doles Canned Tropical Fruit', 'Dry Goods', 'Cans', 4.49, 2.99, 60, 2),
-(19, ' Campbells', '3oz', 'Campbells Canned Soup', 'Dry Goods', 'Cans', 3.49, 2.99, 50, 2),
-(20, ' Healthy Choice', '4oz', 'Healthy Choice Canned Peas', 'Dry Goods', 'Cans', 3.65, 2.89, 50, 2),
-(21, ' Heckers', '4lb', 'Heckers All Purpose Flour', 'Dry Goods', 'Flour', 10.99, 9.99, 68, 2),
-(22, ' Bobs Red Mill', '4lb', 'Bobs Red Mill All Purpose Flour', 'Dry Goods', 'Flour', 12.99, 10.99, 32, 2),
-(23, ' King Arthur', '4lb', 'King Arthur All Purpose Flour', 'Dry Goods', 'Flour', 13.99, 12.99, 54, 2),
-(24, ' Pillsbury', '4oz', 'Pillsburrys Best All Purpose Flour', 'Dry Goods', 'Flour', 12.99, 11.99, 61, 2),
-(25, ' Domino', '5oz', 'Domino Sugar', 'Dry Goods', 'Sugar', 6.99, 5.99, 6, 2),
-(26, ' NJOY', '5oz', 'NJOY Pure Cane Sugar', 'Dry Goods', 'Sugar', 7.99, 6.99, 62, 2),
-(27, ' Anthonys', '5oz', 'Organic Cane Sugar by Anthonys', 'Dry Goods', 'Sugar', 7.99, 6.99, 62, 2),
-(28, ' Pedigree', '7lb', 'Pedigrees Roasted Chicken ', 'Pet Food', 'Dog', 10.99, 9.99, 64, 2),
-(29, ' Blue Wilderness', '7lb', 'Blue Wilderness Salmon', 'Pet Food', 'Dog', 6.99, 5.99, 6, 2),
-(30, ' Cesars', '5oz', 'Cesars Filet', 'Pet Food', 'Dog', 4.99, 3.99, 63, 2),
-(31, ' Meow Mix', '7lb', 'Meow Mix Dry Chicken', 'Pet Food', 'Cat', 6.99, 5.99, 7, 2),
-(32, ' Purina', '7lb', 'Purina Salmon Flavor', 'Pet Food', 'Cat', 6.99, 5.99, 73, 2),
-(33, ' American Journey', '7lb', 'American Journey turkey and Chicken', 'Pet Food', 'Cat', 8.99, 7.99, 45, 2),
-(34, ' Nine Lives', '7lb', 'Nine Lives Daily Essentials ', 'Pet Food', 'Cat', 6.99, 5.99, 73, 2),
+(14, ' Bush', '2oz', 'Bushs Black Beans', 'DryGoods', 'Beans', 4.49, 2.99, 20, 2),
+(15, ' Heinz', '5oz', 'Heinz Baked Beans', 'DryGoods', 'Beans', 5.49, 4.99, 60, 2),
+(16, ' Goya', '4oz', 'Goya Black Beans', 'DryGoods', 'Beans', 6.99, 5.99, 6, 2),
+(17, ' Hormel Foods', '3oz', 'Canned Spam', 'DryGoods', 'Cans', 3.49, 2.99, 50, 2),
+(18, ' Dole', '3oz', 'Doles Canned Tropical Fruit', 'DryGoods', 'Cans', 4.49, 2.99, 60, 2),
+(19, ' Campbells', '3oz', 'Campbells Canned Soup', 'DryGoods', 'Cans', 3.49, 2.99, 50, 2),
+(20, ' Healthy Choice', '4oz', 'Healthy Choice Canned Peas', 'DryGoods', 'Cans', 3.65, 2.89, 50, 2),
+(21, ' Heckers', '4lb', 'Heckers All Purpose Flour', 'DryGoods', 'Flour', 10.99, 9.99, 68, 2),
+(22, ' Bobs Red Mill', '4lb', 'Bobs Red Mill All Purpose Flour', 'DryGoods', 'Flour', 12.99, 10.99, 32, 2),
+(23, ' King Arthur', '4lb', 'King Arthur All Purpose Flour', 'DryGoods', 'Flour', 13.99, 12.99, 54, 2),
+(24, ' Pillsbury', '4oz', 'Pillsburrys Best All Purpose Flour', 'DryGoods', 'Flour', 12.99, 11.99, 61, 2),
+(25, ' Domino', '5oz', 'Domino Sugar', 'DryGoods', 'Sugar', 6.99, 5.99, 6, 2),
+(26, ' NJOY', '5oz', 'NJOY Pure Cane Sugar', 'DryGoods', 'Sugar', 7.99, 6.99, 62, 2),
+(27, ' Anthonys', '5oz', 'Organic Cane Sugar by Anthonys', 'DryGoods', 'Sugar', 7.99, 6.99, 62, 2),
+(28, ' Pedigree', '7lb', 'Pedigrees Roasted Chicken ', 'PetFood', 'Dog', 10.99, 9.99, 64, 2),
+(29, ' Blue Wilderness', '7lb', 'Blue Wilderness Salmon', 'PetFood', 'Dog', 6.99, 5.99, 6, 2),
+(30, ' Cesars', '5oz', 'Cesars Filet', 'PetFood', 'Dog', 4.99, 3.99, 63, 2),
+(31, ' Meow Mix', '7lb', 'Meow Mix Dry Chicken', 'PetFood', 'Cat', 6.99, 5.99, 7, 2),
+(32, ' Purina', '7lb', 'Purina Salmon Flavor', 'PetFood', 'Cat', 6.99, 5.99, 73, 2),
+(33, ' American Journey', '7lb', 'American Journey turkey and Chicken', 'PetFood', 'Cat', 8.99, 7.99, 45, 2),
+(34, ' Nine Lives', '7lb', 'Nine Lives Daily Essentials ', 'PetFood', 'Cat', 6.99, 5.99, 73, 2),
 (35, ' Barilla', '5oz', 'Barilla Spaghetti', 'Pasta', 'Spaghetti', 6.99, 5.99, 62, 2),
 (36, ' De Cecco', '5oz', 'De Cecco Spaghetti', 'Pasta', 'Spaghetti', 8.99, 6.99, 64, 2),
 (37, ' Whole Foods', '5oz', 'Whole Foods 365 Spaghetti', 'Pasta', 'Spaghetti', 7.99, 6.99, 63, 2),
@@ -255,24 +255,24 @@ INSERT INTO `product_inventory` (`product_id`, `brand`, `description`, `productN
 (42, ' Mrs Leepers', '7oz', 'Mrs Leepers Gluten free Mac and Cheese', 'Pasta', 'Macaroni', 14.99, 13.99, 634, 2),
 (43, ' Kraft', '7oz', 'Kraft Macaroni and Cheese', 'Pasta', 'Macaroni', 14.99, 13.99, 264, 2),
 (44, ' Velveeta', '7oz', 'Velveeta Macaroni', 'Pasta', 'Macaroni', 13.99, 12.99, 1624, 2),
-(45, ' Ronzoni', '7oz', 'Garafalo Rigatoni', 'Pasta', 'Rigatoni', 13.99, 12.99, 134, 2),
+(45, ' Ronzoni', '7oz', 'Ronzoni Rigatoni', 'Pasta', 'Rigatoni', 12.99, 11.99, 14, 2),
 (46, ' Organic', '7oz', 'Organic Brown Rigatoni', 'Pasta', 'Rigatoni', 15.99, 12.99, 114, 2),
 (47, ' Ronzoni', '7oz', 'Garafalo Rigatoni', 'Pasta', 'Rigatoni', 13.99, 12.99, 134, 2),
-(48, ' Angel Soft', '2lb', 'Angel Soft Single Sheet', 'Bathroom', 'Toilet Paper', 12.99, 11.99, 16, 2),
-(49, ' Charmin Ultrta', '2lb', 'Charmin Ultrta Soft', 'Bathroom', 'Toilet Paper', 15.99, 14.99, 164, 2),
-(50, ' Charmin Ultrta', '2lb', 'Charmin Ultrta Strong', 'Bathroom', 'Toilet Paper', 16.99, 15.99, 1645, 2),
-(51, ' Green Forest', '2lb', 'Green Forest Two Ply', 'Bathroom', 'Toilet Paper', 16.99, 15.99, 124, 2),
-(52, ' Soft Soap', '2oz', 'Soft Soap Fresh Breeze', 'Bathroom', 'Hand Soap', 13.99, 12.99, 14, 2),
-(53, ' Dial', '2oz', 'Dial Coconut Water', 'Bathroom', 'Hand Soap', 10.99, 9.99, 16, 2),
-(54, ' Meyers', '4lb', 'Meyers Clean Day', 'Bathroom', 'Hand Soap', 11.99, 10.99, 23, 2),
-(55, ' Bounty', '4lb', 'Bounty Quicker Picker Upper', 'Bathroom', 'Paper Towels', 15.99, 14.99, 23, 2),
-(56, ' Marcal', '4lb', 'Marcal Double Sheet', 'Bathroom', 'Paper Towels', 18.99, 17.99, 23, 2),
-(57, ' Brawny', '4lb', 'Brawny XL', 'Bathroom', 'Paper Towels', 12.99, 11.99, 23, 2),
-(58, ' Sparkle', '4lb', 'Sparkle Ultra Strong', 'Bathroom', 'Paper Towels', 14.99, 13.99, 23, 2),
-(59, ' Glad', '4lb', 'Glad Guarenteed Strong', 'Bathroom', 'Garbage Bags', 15.99, 14.99, 23, 2),
-(60, ' Hefty', '4lb', 'Hefty Extra Strong', 'Bathroom', 'Garbage Bags', 14.99, 13.99, 23, 2),
-(61, ' Kirkland', '4lb', 'Kirkland Drawstring Bag', 'Bathroom', 'Garbage Bags', 16.99, 15.99, 23, 2),
-(62, ' Glad', '4lb', 'Glad Force Flex', 'Bathroom', 'Garbage Bags', 15.99, 14.99, 23, 2);
+(48, ' Angel Soft', '2lb', 'Angel Soft Single Sheet', 'Bathroom', 'ToiletPaper', 12.99, 11.99, 16, 2),
+(49, ' Charmin Ultrta', '2lb', 'Charmin Ultrta Soft', 'Bathroom', 'ToiletPaper', 15.99, 14.99, 164, 2),
+(50, ' Charmin Ultrta', '2lb', 'Charmin Ultrta Strong', 'Bathroom', 'ToiletPaper', 16.99, 15.99, 1645, 2),
+(51, ' Green Forest', '2lb', 'Green Forest Two Ply', 'Bathroom', 'ToiletPaper', 16.99, 15.99, 124, 2),
+(52, ' Soft Soap', '2oz', 'Soft Soap Fresh Breeze', 'Bathroom', 'HandSoap', 13.99, 12.99, 14, 2),
+(53, ' Dial', '2oz', 'Dial Coconut Water', 'Bathroom', 'HandSoap', 10.99, 9.99, 16, 2),
+(54, ' Meyers', '4lb', 'Meyers Clean Day', 'Bathroom', 'HandSoap', 11.99, 10.99, 23, 2),
+(55, ' Bounty', '4lb', 'Bounty Quicker Picker Upper', 'Bathroom', 'PaperTowels', 15.99, 14.99, 23, 2),
+(56, ' Marcal', '4lb', 'Marcal Double Sheet', 'Bathroom', 'PaperTowels', 18.99, 17.99, 23, 2),
+(57, ' Brawny', '4lb', 'Brawny XL', 'Bathroom', 'PaperTowels', 12.99, 11.99, 23, 2),
+(58, ' Sparkle', '4lb', 'Sparkle Ultra Strong', 'Bathroom', 'PaperTowels', 14.99, 13.99, 23, 2),
+(59, ' Glad', '4lb', 'Glad Guarenteed Strong', 'Bathroom', 'GarbageBags', 15.99, 14.99, 23, 2),
+(60, ' Hefty', '4lb', 'Hefty Extra Strong', 'Bathroom', 'GarbageBags', 14.99, 13.99, 23, 2),
+(61, ' Kirkland', '4lb', 'Kirkland Drawstring Bag', 'Bathroom', 'GarbageBags', 16.99, 15.99, 23, 2),
+(62, ' Glad', '4lb', 'Glad Force Flex', 'Bathroom', 'GarbageBags', 15.99, 14.99, 23, 2);
 
 -- --------------------------------------------------------
 
@@ -358,6 +358,7 @@ CREATE TABLE `ticket_system` (
   `quantity` int(11) NOT NULL,
   `subtotal` float NOT NULL,
   `total` float NOT NULL,
+  `cost` float NOT NULL,
   `discount` float DEFAULT NULL,
   `tax` float NOT NULL,
   `tax_rate` float NOT NULL,
@@ -518,13 +519,13 @@ ALTER TABLE `vendorinfo`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
 
 --
 -- AUTO_INCREMENT for table `cart_inprogress`
 --
 ALTER TABLE `cart_inprogress`
-  MODIFY `CID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `CID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `customer_info`
@@ -548,7 +549,7 @@ ALTER TABLE `gift_card`
 -- AUTO_INCREMENT for table `item_list`
 --
 ALTER TABLE `item_list`
-  MODIFY `ITID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
+  MODIFY `ITID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=177;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -572,7 +573,7 @@ ALTER TABLE `product_inventory`
 -- AUTO_INCREMENT for table `registers_table`
 --
 ALTER TABLE `registers_table`
-  MODIFY `register_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `register_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `return_table`
@@ -596,7 +597,7 @@ ALTER TABLE `tax_table`
 -- AUTO_INCREMENT for table `ticket_system`
 --
 ALTER TABLE `ticket_system`
-  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `vendorinfo`

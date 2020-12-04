@@ -74,13 +74,27 @@
 			$CustID = mysqli_real_escape_string($conn,$CustID);
 		}
         // create new ticket for sale
-        $query = "INSERT INTO ticket_system (ticket_id, date, time, quantity, subtotal, total, tax, tax_rate, cash, credit, cart_purchase,customer_id,employee_id)
-                    VALUES ('$CID', CURRENT_DATE(), CURRENT_TIME(), '$qtyTotal', '$subTotal', '$total', '$tax', '$taxrate', '$total', '$credit', '0','$CustID','$empID')";
+        $query = "INSERT INTO ticket_system (ticket_id, date, time, quantity, subtotal, total, cost, tax, tax_rate, cash, credit, cart_purchase,customer_id,employee_id)
+                    VALUES ('$CID', CURRENT_DATE(), CURRENT_TIME(), '$qtyTotal', '$subTotal', '$total', '0', '$tax', '$taxrate', '$total', '$credit', '0','$CustID','$empID')";
         $result = mysqli_query($conn, $query) or die("Ticket Failed");
         
         // link new ticket to our cart in progress
         $update = "UPDATE cart_inprogress SET ticket_id = '$CID' WHERE CID='$CID'";
         $result = mysqli_query($conn, $update) or die("Insert Failed");
+
+        $sql = "SELECT item_list.*, product_inventory.cost FROM item_list LEFT JOIN cart_inprogress ON
+                    item_list.CID=cart_inprogress.CID LEFT JOIN ticket_system ON cart_inprogress.ticket_id=ticket_system.ticket_id 
+                    LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id WHERE item_list.CID='$CID'";
+        $result = mysqli_query($conn, $sql) or die("Execution Failed cost");
+        $cost = 0;
+        while($row = mysqli_fetch_assoc($result)) {
+            $cost += $row['cost'];
+            $formatted = number_format($cost, 2);
+            $cost = $formatted;
+        }
+
+        $update = "UPDATE ticket_system SET cost = '$cost' WHERE ticket_id='$CID'";
+        $result = mysqli_query($conn, $update) or die("cost Failed");
 
         // send user back to the sale page
         if($result) 
