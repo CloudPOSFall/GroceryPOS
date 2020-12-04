@@ -65,14 +65,14 @@
     if(isset($_POST['final'])) {
         // cart ID retrieved from cookie data
         $CID = $_SESSION['CID'];
-		$empID = $_SESSION['emp_id'];
+        $empID = $_SESSION['emp_id'];
 		$key = $_SESSION['custfirst'];
 		$cquery = "SELECT customer_id FROM customer_info WHERE first_name LIKE '%$key%'";
 		$cresult = mysqli_query($conn,$cquery);
 		while($crow = mysqli_fetch_assoc($cresult)){
 			$CustID = $crow['customer_id'];
 			$CustID = mysqli_real_escape_string($conn,$CustID);
-		}
+        }
         // create new ticket for sale
         $query = "INSERT INTO ticket_system (ticket_id, date, time, quantity, subtotal, total, cost, tax, tax_rate, cash, credit, cart_purchase, customer_id, employee_id)
                     VALUES ('$CID', CURRENT_DATE(), CURRENT_TIME(), '$qtyTotal', '$subTotal', '$total', '0', '$tax', '$taxrate', '$total', '$credit', '0','$CustID','$empID')";
@@ -97,11 +97,10 @@
         $result = mysqli_query($conn, $update) or die("cost Failed");
 
         // send user back to the sale page
-        if($result) 
-        {
+        if($result) {
             $sql = "DELETE FROM cart";
             $result = mysqli_query($conn, $sql) or die("Insert Failed");
-            echo "<script type='text/javascript'>document.location.href='receipt.php?Tic=". $CID .";</script>";
+            echo "<script type='text/javascript'>document.location.href='salescontrolpanel.php';</script>";
         }
     }             
 ?>
