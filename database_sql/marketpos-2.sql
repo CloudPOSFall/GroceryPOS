@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 04, 2020 at 12:45 AM
+-- Generation Time: Dec 04, 2020 at 03:22 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -116,10 +116,7 @@ INSERT INTO `employee_info` (`employee_id`, `email`, `password`, `pin_number`, `
 (3, 'bronny45@hotmail.com', 'lebron', 113, 'Bronny', 'James', 112323454, 2124568745, 78234325, '21 Wood Street', 'Woodhaven', 'VT', 12321, '2019-03-02', 'Walmart', NULL, 2, 3),
 (4, 'usher54@aim.com', 'usher', 555, 'Usher', 'Man', 345432345, 8454342212, 958674345, '76 Cross Street', 'Houston', 'NY', 85743, '2020-12-05', 'Walmart', NULL, 2, NULL),
 (5, 'chrisbrown@gmail.com', 'pass', 111, 'Chris', 'Brown', 111111111, 7187654783, 746378273, '19 West Street', 'Denver', 'CL', 43454, '2019-07-03', 'Walmart', NULL, 2, NULL),
-(6, 'kyrieirving2@hotmail.com', 'kyrie', 705, 'Kyrie', 'Irving', 123456789, 2129857843, 123456789, '71 2nd Ave', 'New York', 'NY', 12343, '2017-07-03', 'Tops', '4', 1, 4),
-(7, 'georgemartin3432@gmail.com', 'mypassword', 912, 'George', 'Martin', NULL, 2124545434, NULL, '256 97th Street', 'New York', 'NY', 10035, NULL, 'KeyFood', '3', 1, NULL),
-(8, 'bobgz@gmail.com', 'secret', 888, 'Bob', 'Gomez', NULL, 8457631279, 764571465, '7 Grand St', 'New Paltz', 'NY', 12561, NULL, 'Walmart', NULL, 2, NULL),
-(35, 'bgates19@hotmail.com', 'apple', 839, 'Bill', 'Gates', NULL, 3479845093, 495284270, '109 19th Street', 'Sacramento', 'CA', 29343, NULL, 'CTown', NULL, 2, NULL);
+(6, 'kyrieirving2@hotmail.com', 'kyrie', 705, 'Kyrie', 'Irving', 123456789, 2129857843, 123456789, '71 2nd Ave', 'New York', 'NY', 12343, '2017-07-03', 'Tops', '4', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -150,9 +147,9 @@ INSERT INTO `gift_card` (`gift_id`, `promo_number`, `card_balance`, `ticket_id`,
 
 CREATE TABLE `item_list` (
   `ITID` int(11) NOT NULL,
-  `CID` int(11) DEFAULT NULL,
-  `qty` int(11) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL
+  `CID` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -163,9 +160,9 @@ CREATE TABLE `item_list` (
 
 CREATE TABLE `orders` (
   `OID` int(11) NOT NULL,
-  `OTID` int(11) DEFAULT NULL,
-  `stock_amount` int(11) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL
+  `OTID` int(11) NOT NULL,
+  `stock_amount` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -301,23 +298,6 @@ CREATE TABLE `registers_table` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `report_system`
---
-
-CREATE TABLE `report_system` (
-  `report_id` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `total_sales` int(11) NOT NULL,
-  `new_customers` int(11) NOT NULL,
-  `total_orders` int(11) NOT NULL,
-  `register_id` int(11) DEFAULT NULL,
-  `deposited_cash` float NOT NULL,
-  `loss` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `return_table`
 --
 
@@ -385,7 +365,7 @@ CREATE TABLE `ticket_system` (
   `credit` float NOT NULL,
   `cart_purchase` tinyint(1) NOT NULL,
   `customer_id` int(11) DEFAULT NULL,
-  `employee_id` int(11) DEFAULT NULL
+  `employee_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -497,13 +477,6 @@ ALTER TABLE `registers_table`
   ADD KEY `fk_drop_emp_id` (`drop_emp_id`);
 
 --
--- Indexes for table `report_system`
---
-ALTER TABLE `report_system`
-  ADD PRIMARY KEY (`report_id`),
-  ADD KEY `register_id` (`register_id`);
-
---
 -- Indexes for table `return_table`
 --
 ALTER TABLE `return_table`
@@ -545,25 +518,25 @@ ALTER TABLE `vendorinfo`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
 
 --
 -- AUTO_INCREMENT for table `cart_inprogress`
 --
 ALTER TABLE `cart_inprogress`
-  MODIFY `CID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `CID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `customer_info`
 --
 ALTER TABLE `customer_info`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `employee_info`
 --
 ALTER TABLE `employee_info`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `gift_card`
@@ -575,19 +548,19 @@ ALTER TABLE `gift_card`
 -- AUTO_INCREMENT for table `item_list`
 --
 ALTER TABLE `item_list`
-  MODIFY `ITID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+  MODIFY `ITID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=385;
+  MODIFY `OID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=489;
 
 --
 -- AUTO_INCREMENT for table `orders_ticket`
 --
 ALTER TABLE `orders_ticket`
-  MODIFY `OTID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=245;
+  MODIFY `OTID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=286;
 
 --
 -- AUTO_INCREMENT for table `product_inventory`
@@ -600,12 +573,6 @@ ALTER TABLE `product_inventory`
 --
 ALTER TABLE `registers_table`
   MODIFY `register_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `report_system`
---
-ALTER TABLE `report_system`
-  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `return_table`
@@ -629,7 +596,7 @@ ALTER TABLE `tax_table`
 -- AUTO_INCREMENT for table `ticket_system`
 --
 ALTER TABLE `ticket_system`
-  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT for table `vendorinfo`
@@ -672,15 +639,15 @@ ALTER TABLE `gift_card`
 -- Constraints for table `item_list`
 --
 ALTER TABLE `item_list`
-  ADD CONSTRAINT `item_list_ibfk_1` FOREIGN KEY (`CID`) REFERENCES `cart_inprogress` (`CID`) ON DELETE NO ACTION ON UPDATE SET NULL,
-  ADD CONSTRAINT `item_list_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+  ADD CONSTRAINT `item_list_ibfk_1` FOREIGN KEY (`CID`) REFERENCES `cart_inprogress` (`CID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `item_list_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`OTID`) REFERENCES `orders_ticket` (`OTID`) ON DELETE SET NULL ON UPDATE NO ACTION,
-  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`OTID`) REFERENCES `orders_ticket` (`OTID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`product_id`) REFERENCES `product_inventory` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `orders_ticket`
