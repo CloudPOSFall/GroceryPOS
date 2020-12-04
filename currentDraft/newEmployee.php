@@ -211,6 +211,14 @@
             <input class ="col-6" type = "text" placeholder="Pin Number " name="pnum"/>
             </div>
             <div class = "form-group row">
+            <label class = "col-4" for = "User ID">User ID </label>
+            <input class ="col-6" type = "text" placeholder="User ID " name="uid"/>
+            </div>
+            <div class = "form-group row">
+            <label class = "col-4" for = "Start Date">Start Date </label>
+            <input class ="col-6" type = "date" placeholder="Start Date " name="date"/>
+            </div>
+            <div class = "form-group row">
             <label class = "col-4" for = "User Type">User Type </label>
             <input class ="col-6" type = "number" placeholder="User Type " name="type"/>
             </div>

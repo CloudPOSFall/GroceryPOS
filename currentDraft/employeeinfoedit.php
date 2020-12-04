@@ -232,8 +232,16 @@ if (isset($_GET['Upd'])) {
             <input type="text" value=" <?php echo $row['zip_code'] ?> " name="zip" />
           </div>
           <div class="form-group row">
-            <label class="col-4" for="Start">Start Date </label>
+            <label class="col-4" for="Start Date">Start Date </label>
             <input type="text" value=" <?php echo date("m-d-Y", strtotime($row['start_date'])); ?> " name="start" />
+          </div>
+          <div class="form-group row">
+            <label class="col-4" for="Company Name">Company Name </label>
+            <input type="text" value=" <?php echo $row['company_name']; ?> " name="company" />
+          </div>
+          <div class="form-group row">
+            <label class="col-4" for="User Type">User Type </label>
+            <input type="text" value=" <?php echo $row['user_type']; ?> " name="type" />
           </div>
           <div class="text-center"><button type="submit" name="update" class="btn-lg btn-primary"> Update</button></div>
         </form>
@@ -274,17 +282,19 @@ if (isset($_POST['update'])) {
   $City = $_POST['city'];
   $State = $_POST['state'];
   $Zip = $_POST['zip'];
-  $SDate = $_POST['start'];
+  $Comapany = $_POST['company'];
+  $User = $_POST['type'];
+  $SDate = date('Y-m-d', strtotime($_POST['start']));
 
   $query = "UPDATE employee_info SET email = '$Email', password = '$Password', pin_number = '$PinNumber', first_name = '$FirstName', 
   last_name = '$LastName', user_id = '$UserID', phone_number = '$PhoneNumber', SSN = '$Social', street_address = '$Street', city = '$City',
-  state = '$State', zip_code = '$Zip', start_date = '$SDate' WHERE employee_id = '$id' ";
+  state = '$State', zip_code = '$Zip', start_date = '$SDate', company_name = '$Comapany', user_type = '$User' WHERE employee_id = '$id' ";
   $result = mysqli_query($conn, $query);
 
   if ($result) {
     header("location:employeeview.php");
   } else {
-    echo ' Please Check Your Query ';
+    echo "$query, Please Check Your Query";
   }
 }
 ?>

@@ -195,24 +195,24 @@ include_once('sidebarconnect.php');
               <input class="col-6" type="tel" placeholder=" Phone Number " name="number" />
             </div>
             <div class="form-group row">
-              <label class="col-4" for="Street">Street</label>
-              <input class="col-6" type="text" placeholder=" Last Name " name="street" />
+              <label class="col-4" for="Street Address">Street Address</label>
+              <input class="col-6" type="text" placeholder=" Street Address " name="street" />
             </div>
             <div class="form-group row">
               <label class="col-4" for="City">City</label>
-              <input class="col-6" type="text" placeholder=" Last Name " name="city" />
+              <input class="col-6" type="text" placeholder=" City " name="city" />
             </div>
             <div class="form-group row">
               <label class="col-4" for="State">State</label>
-              <input class="col-6" type="text" placeholder=" Last Name " name="state" />
+              <input class="col-6" type="text" placeholder=" State " name="state" />
             </div>
             <div class="form-group row">
               <label class="col-4" for="Zip Code">Zip Code</label>
-              <input class="col-6" type="text" placeholder=" Last Name " name="zip" />
+              <input class="col-6" type="text" placeholder=" Zip Code " name="zip" />
             </div>
             <div class="form-group row">
               <label class="col-4" for="Rewards">Rewards </label>
-              <input class="col-6" type="number" placeholder=" Rewards " name="rewards" step="1" />
+              <input class="col-6" type="text" placeholder=" Rewards " name="rewards" step="1" />
             </div>
             <div class="text-center"><button name="submit" class="btn-lg btn-primary"> Submit</button></div>
           </form>
