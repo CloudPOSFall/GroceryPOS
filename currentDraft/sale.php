@@ -206,11 +206,15 @@ include_once('sidebarconnect.php');
 								$first = mysqli_real_escape_string($conn,$first);
                                 $last = $crow['last_name'];
 								$last = mysqli_real_escape_string($conn,$last);
+								$custID = $crow['customer_id'];
+								$custID = mysqli_real_escape_string($conn,$custID);
 								echo "<form class='form-inline'><div 
 								class='card' style='padding: 8px'>" . $first . " " . $last . "</div>
                                 <div class='nav-item'><button href='index.php' class='btn navbar-btn'> Remove</button></div></form>";
 								$_SESSION['custfirst'] = $first;
 								$_SESSION['custlast'] = $last;
+								$_SESSION['CustID'] = $custID;
+
                             }
                         } 
                     }else {
@@ -312,6 +316,7 @@ include_once('sidebarconnect.php');
 
              // event begins when the user releases the key
             $('#search').keyup(function() {
+
                 // creates null result field
                 $('#result').html('');
                 // variable to hold search input

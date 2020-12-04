@@ -3,7 +3,7 @@ include_once('config.php');
 include_once('sidebarconnect.php');
 if (isset($_POST['Empl'])) {
     $findID = $_POST['Empl'];
-    $query = "SELECT * FROM employee_info WHERE employee_id LIKE '%$findID%'";
+    $query = "SELECT * FROM ticket_system WHERE employee_id LIKE '%$findID%'";
     $result = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
@@ -189,9 +189,14 @@ if (isset($_POST['Empl'])) {
               <?php
 
                 while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<tr><td>" . $row['employee_id'] . "</td><td>"
-                    . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['phone_number'] . "</td><td>"
-                    . $row['company_name'] . "</td><td>" . $row['user_id'] . "</td><td>";
+					$EID = $row['employee_id'];
+					$employQuery = "SELECT * FROM employee_info WHERE employee_id LIKE '%$EID%'";
+					$eresult = mysqli_query($conn, $employQuery);
+					while($erow = mysqli_fetch_assoc($eresult)){
+						echo "<tr><td>" . $erow['employee_id'] . "</td><td>"
+                    . $erow['first_name'] . "</td><td>" . $erow['last_name'] . "</td><td>" . $erow['phone_number'] . "</td><td>"
+                    . $erow['company_name'] . "</td><td>" . $erow['user_id'] . "</td><td>";
+					}
                 }
             }
 

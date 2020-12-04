@@ -10,21 +10,12 @@
     
         if(isset($_POST['submitPay'])) {
             $payType = $_POST['payment'];
-            $cash = "Cash";
-            $credit = "Credit";
-            if($payType == $cash) {
-                echo($payType);
-                echo(" Chosen");
-                $csh = 1;
-                $crdit = 0;
-            } else if($payType == $credit) {
-                echo($payType);
-                echo(" Chosen");
-                $csh = 0;
-                $crdit = 1;
-            }
+            echo($payType);
+            echo(" Chosen");
         }
-    
+	$format = 'Customer: %s %s';
+    echo sprintf($format,$_SESSION['custfirst'],$_SESSION['custlast']) ;
+	$_SESSION['customerID'] = $_SESSION['custfirst'];
     ?>
 
     <br>
