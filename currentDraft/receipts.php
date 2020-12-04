@@ -1,9 +1,16 @@
 <?php
 include_once('config.php');
 include_once('sidebarconnect.php');
+if (isset($_GET['Tic'])) {
+    $findID = $_GET['Tic'];
+    $append = "WHERE ticket_system.ticket_id = $findID";
+}
+else{
+    $append = "";
+}
 $sql = "SELECT ticket_system.*, product_inventory.productName, product_inventory.unit_price, product_inventory.productType, item_list.qty, employee_info.first_name FROM ticket_system
       LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON cart_inprogress.CID=item_list.CID
-      LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id LEFT JOIN employee_info ON ticket_system.employee_id=employee_info.employee_id";
+      LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id LEFT JOIN employee_info ON ticket_system.employee_id=employee_info.employee_id $append";
 $q_result = mysqli_query($conn, $sql);
 $num_rows = mysqli_num_rows($q_result);
 if ($num_rows){

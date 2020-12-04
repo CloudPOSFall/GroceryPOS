@@ -232,7 +232,7 @@ $result = mysqli_query($conn, $query);
                     . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
                     . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
                     . $row['email'] . "</td><td>"  . $row['rewards'] .
-                    "</td><td><form method = 'post' action='sale.php'><button class = 'btn btn-dark' name ='attatchCustomer'>Attatch</td><input name='scustomer' size = '1' value='". $row['customer_id']."' readonly hidden/></form><td><a class='btn btn-dark' role='button' href='customeredit.php?Upd="
+                    "</td><td><form method = 'post' action='sale.php'><button class = 'btn btn-dark' name ='attatchCustomer'>Attach</td><input name='scustomer' size = '1' value='". $row['customer_id']."' readonly hidden/></form><td><a class='btn btn-dark' role='button' href='customeredit.php?Upd="
                     . $row['customer_id'] . "'>Update</a></td></tr>";
 					  
                   }
