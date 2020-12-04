@@ -1,9 +1,5 @@
 <?php
     include('config.php');
-    if(isset($_GET['E']))
-    {
-    $ID = $_GET['E'];
-    }
     $query = "SELECT OTID FROM orders_ticket WHERE employee_id IS NULL";
         $result = mysqli_query($conn, $query) or die(" Execution Failed null address");
         $row = mysqli_num_rows($result);
@@ -59,15 +55,15 @@
             $payType = $_POST['payment'];
             if($payType == "Cash")
             {
-                header("location:cashpaymentOrder.php?E=$ID");
+                header("location:cashpaymentOrder.php");
             }
             else if($payType == "Credit")
             {
-                header("location:creditpaymentOrder.php?E=$ID");
+                header("location:creditpaymentOrder.php");
             }
             else
             {
-                header("location:bothpaymentOrder.php?E=$ID");
+                header("location:bothpaymentOrder.php");
             }
         }
     ?>

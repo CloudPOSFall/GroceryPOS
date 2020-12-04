@@ -10,8 +10,19 @@
     
         if(isset($_POST['submitPay'])) {
             $payType = $_POST['payment'];
-            echo($payType);
-            echo(" Chosen");
+            $cash = "Cash";
+            $credit = "Credit";
+            if($payType == $cash) {
+                echo($payType);
+                echo(" Chosen");
+                $csh = 1;
+                $crdit = 0;
+            } else if($payType == $credit) {
+                echo($payType);
+                echo(" Chosen");
+                $csh = 0;
+                $crdit = 1;
+            }
         }
     
     ?>

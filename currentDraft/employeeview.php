@@ -199,7 +199,6 @@ $result = mysqli_query($conn, $query);
               <th> User ID </th>
               <th> Street </th>
               <th> City</th>
-              <th> State</th>
               <th> Zip Code</th>
               <th> Start Date</th>
               <th> Delete</th>
@@ -223,7 +222,7 @@ $result = mysqli_query($conn, $query);
                     . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['email'] . "</td><td>" 
                     . $row['phone_number'] . "</td><td>" . $row['pin_number'] . "</td><td>" . $row['user_id'] . "</td><td>" 
                     . $row['street_address'] . "</td><td>" . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" 
-                    . $row['zip_code'] . "</td><td>" . $Date . "</td><td><a class='btn-sm btn-dark' role='button' href='employeeinfodelete.php?Del="
+                    . $row['zip_code'] . "</td><td><a class='btn-sm btn-dark' role='button' href='employeeinfodelete.php?Del="
                     . $row['employee_id'] . "'>Remove</a></td><td><a class='btn-sm btn-dark' role='button' href='employeeinfoedit.php?Upd="
                     . $row['employee_id'] . "'>Select</a></td></tr>";
                 }
@@ -237,7 +236,7 @@ $result = mysqli_query($conn, $query);
                     . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['email'] . "</td><td>" 
                     . $row['phone_number'] . "</td><td>" . $row['pin_number'] . "</td><td>" . $row['user_id'] . "</td><td>" 
                     . $row['street_address'] . "</td><td>" . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" 
-                    . $row['zip_code'] . "</td><td>" . $Date . "</td><td><a class='btn-sm btn-dark' role='button' href='employeeinfodelete.php?Del="
+                    . $row['zip_code'] . "</td><td><a class='btn-sm btn-dark' role='button' href='employeeinfodelete.php?Del="
                     . $row['employee_id'] . "'>Remove</a></td><td><a class='btn-sm btn-dark' role='button' href='employeeinfoedit.php?Upd="
                     . $row['employee_id'] . "'>Select</a></td></tr>";
                 }
