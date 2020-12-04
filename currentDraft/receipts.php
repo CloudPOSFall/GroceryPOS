@@ -1,8 +1,15 @@
 <?php
 include_once('config.php');
 include_once('sidebarconnect.php');
-$query = "SELECT * FROM ticket_system";
-$result = mysqli_query($conn, $query);
+$sql = "SELECT ticket_system.*, product_inventory.productName, product_inventory.unit_price, product_inventory.productType, item_list.qty, employee_info.first_name FROM ticket_system
+      LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON cart_inprogress.CID=item_list.CID
+      LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id LEFT JOIN employee_info ON ticket_system.employee_id=employee_info.employee_id";
+$q_result = mysqli_query($conn, $sql);
+$num_rows = mysqli_num_rows($q_result);
+if ($num_rows){
+    $t_row = mysqli_fetch_assoc($q_result);
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -50,7 +57,7 @@ $result = mysqli_query($conn, $query);
         <ul class="list-unstyled components">
             <li>
                 <div id="usercard">
-                    <a href="" style="font-size: 1em;" data-toggle="modal" data-target="#switchreg"><?php if ((isset($_SESSION['emp_id']))) echo $row['company_name'];
+                    <a href="salescontrolpanel.php#switchreg" style="font-size: 1em;" data-toggle="modal" data-target="#switchreg"><?php if ((isset($_SESSION['emp_id']))) echo $row['company_name'];
                                                                                                     else  echo 'Company Name'; ?></br>
                         <?php if (isset($_SESSION['register'])) echo "Register " . $_SESSION['register'];
                         else  echo 'Choose Register'; ?> <svg width=".6em" height=".6em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -231,14 +238,14 @@ $result = mysqli_query($conn, $query);
                         <div class="card-body">
                             <span class="text-center">
                                 <h5>Sales Receipt</h5>
-                                <p style="font-size: 85%">12/04/2020 11:05PM</p> 
+                                <p style="font-size: 85%"><?php if ($num_rows) echo $t_row['date']. ' '.$t_row['time']  ?></p> 
                             </span>
                             <div class="col mt-3" style="font-size: 90%">
-                                <span>Ticket: </span><br>
-                                <span>Register: </span><br>
-                                <span>Employee: </span><br>
+                                <span>Ticket: <?php if ($num_rows)  echo $t_row['ticket_id'] ?></span><br>
+                                <span>Register: <?php if (isset($_SESSION['register'])) echo $_SESSION['register'] ?></span><br>
+                                <span>Employee: <?php if ($num_rows)  echo $t_row['first_name'] ?></span><br>
                             </div>
-                            <div class="container" >
+                            <div class="container">
                                 <table class="table table-sm table-borderless mt-2" style="font-size: 90%">
                                     <thead class="border-bottom">
                                         <th class="col-10">Items</th>
@@ -246,37 +253,33 @@ $result = mysqli_query($conn, $query);
                                         <th class="col-1">Price</th>
                                     </thead>
                                     <tbody>
+                                        <?php 
+                                        while ($q_row = mysqli_fetch_assoc($q_result)){
+                                        echo '
                                         <tr>
-                                            <td>Item 1<td>
-                                            <td>1<td>
-                                            <td>$9.99<td>
-                                        </tr>
-                                        <tr>
-                                            <td>Item 2<td>
-                                            <td>1<td>
-                                            <td>$9.99<td>
-                                        </tr>
-                                        <tr class="border-bottom">
-                                            <td>Item 3<td>
-                                            <td>2<td>
-                                            <td>$11.99<td>
-                                        </tr>
+                                            <td>'. $q_row['productName'] .'<td>
+                                            <td>'. $q_row['qty'] .'<td>
+                                            <td>$'. $q_row['unit_price'] .'<td>
+                                        </tr>';
+                                        }
+                                    echo'
+                                    <tr class="border-bottom"></tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <td><td>
-                                            <td>SubTotal<td>
-                                            <td>$11.99<td>
+                                            <td>Subtotal<td>
+                                            <td>$'. $t_row['subtotal'] .'<td>
                                         </tr>
                                         <tr>
                                             <td><td>
-                                            <td>Tax<td>
-                                            <td>$11.99<td>
+                                            <td>Tax @ '. $t_row['tax_rate'] . '<td>
+                                            <td>$'. $t_row['tax'] .'<td>
                                         </tr>
                                         <tr>
                                             <td><td>
                                             <th>Total<th>
-                                            <th>$11.99<th>
+                                            <th>$'. $t_row['total'] .'<th>
                                         </tr>
                                         <tr class="border-bottom">
                                             <td>Payments<td>
@@ -285,9 +288,16 @@ $result = mysqli_query($conn, $query);
                                         </tr>
                                         <tr>
                                             <td><td>
-                                            <th><th>
-                                            <th>$29.99<th>
+                                            <th>Cash<th>
+                                            <th>$'. $t_row['cash'] .'<th>
                                         </tr>
+                                        <tr>
+                                        <td><td>
+                                        <th>Credit<th>
+                                        <th>$'. $t_row['credit'] .'<th>
+                                        </tr>';
+                                                
+                                        ?>
                                     </tfoot>
                                 </table>
                                 <div class="text-center" style="font-size: 90%"><span>Return policy for the business is outlined here.</span></div>
