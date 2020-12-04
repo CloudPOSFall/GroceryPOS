@@ -22,7 +22,7 @@
     }
     else
     {
-        $query = "SELECT product_inventory.productName, product_inventory.cost, orders.stock_amount FROM product_inventory 
+        $query = "SELECT product_inventory.productName, product_inventory.cost, orders.stock_amount, product_inventory.product_id FROM product_inventory 
                   LEFT JOIN orders ON product_inventory.product_id=orders.product_id WHERE OTID='$OTID'";
         $result = mysqli_query($conn, $query) or die("Execution Failed");
         $total = 0.00;
@@ -34,6 +34,8 @@
             $total = $total + $format;
             $qtyTotal = $qtyTotal + $row['stock_amount'];
             $cartCode .= "<tr> <th>".$row['productName']."</th> <th>".$row['stock_amount']."</th> <th>".$format."</th> </tr>";
+            $cartCode .= "<tr> <th><a class='btn-sm btn-dark' role='button' href='itemdelete.php?Del="
+            . $row['product_id'] . "'>Remove</a></th> </tr>";
             $newCost = 0.00;
         }
 
