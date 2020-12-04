@@ -1,11 +1,7 @@
 <?php
 include_once('config.php');
 include_once('sidebarconnect.php');
-if(!isset($_SESSION['sale'])){
-    //If it doesn't, create an empty array.
-    $_SESSION['customer'] = array();
-}
-var_dump($_SESSION['customer']);
+
 ?>
 
 <!DOCTYPE html>
