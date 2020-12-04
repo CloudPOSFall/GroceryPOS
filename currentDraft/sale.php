@@ -194,7 +194,7 @@ include_once('sidebarconnect.php');
             <?php
             if (isset($_SESSION['custfirst'])) {
                 echo "<form class='form-inline' method='post' action ='removecust.php'> <div 
-				class='card ml-5' style='padding: 8px'>" . $_SESSION['custfirst'] . " " . $_SESSION['custlast'] . "</div>
+				class='card ml-2' style='padding: 8px'>" . $_SESSION['custfirst'] . " " . $_SESSION['custlast'] . "</div>
                 <div class='nav-item'><button action='index.php' class='btn navbar-btn'> Remove</button></div></form>";
 		}else{
                     if (isset($_POST['scustomer'])) {
@@ -220,7 +220,7 @@ include_once('sidebarconnect.php');
                             }
                         } 
                     }else {
-                        echo "<form class='form-inline' method='post' action='customerview.php'><div class='card' style='padding: 8px'>No Customer Selected</div>
+                        echo "<form class='form-inline' method='post' action='customerview.php'><div class='card ml-2' style='padding: 8px'>No Customer Selected</div>
                         <div class='nav-item'>
                         <input class='form-control col-5' name='customer' placeholder='Search Customers' aria-label='Search'>
                         <button class='btn btn-light navbar-btn' name='sale-search'> Search</button></form>
@@ -236,7 +236,7 @@ include_once('sidebarconnect.php');
 
 
         <nav class="navbar navbar-light" style="background-color: #e2e2e2;">
-            <form class="form-inline" method="post" action="saleitemslist.php">
+            <form class="form-inline" method="post" action="sale.php">
             <div class="nav-item">
                 <input class="form-control" name="isearch" placeholder="Item Search" aria-label="Search">
                 <button class="btn btn-dark navbar-btn" name="item-search"> Search</button>
@@ -263,7 +263,7 @@ include_once('sidebarconnect.php');
                 </thead>
                 <tbody>
 
-
+                    
                     <?php include('productForm.php') ?>
 
                     <?php

@@ -40,16 +40,16 @@ ob_start();
   </script>
 </head>
 
-<body>
+<body class="bg-light">
   <div class="container-fluid text-center ">
 
     <div class="row content">
-      <div class="col-sm-4 sidenav">
+      <div class="col-sm-4">
       </div>
 
 
       <div class="col-sm-4">
-        <div class="card text-center bg-light" id="loginitems" style="margin-top: 50%; padding: 20px;">
+        <div class="card text-center bg-white" id="loginitems" style="margin-top: 150px; padding: 20px;">
           <br>
           <?php
           include_once('config.php');
