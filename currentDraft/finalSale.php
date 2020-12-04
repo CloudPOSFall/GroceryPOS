@@ -9,18 +9,12 @@
 <form method="post" type="button" action="<?php echo $_SERVER['PHP_SELF'];?>">
 
 
-    <?php
-        $csh = "";
-        $crdit = "";
-        include('payType.php');
-        $cash = $csh;
-        $credit = $crdit;
-     ?>
-
+    <?php include('payType.php') ?>
+		
         <!-- Input for money recieved -->
         <br>Cash Amount: <input type="text" name="cash">
         <input type='submit' name='change' value="Get Change"/><br>
-
+		
     <?php
             // initializing tax and discount data
             $tax = 0;
@@ -40,8 +34,8 @@
             $total = number_format($total, 2);
             $tax = $total * $taxrate;
             $tax = number_format($tax, 2);
-            //$credit = 0;
-            //$cash = 0;
+            $credit = 0;
+            $cash = 0;
             // trigger to get back change
             if(isset($_POST['change'])) {
                 $change = $_POST['cash'] - $subTotal;
@@ -58,7 +52,7 @@
         ?>
     <br><br>
 
-    <?php include('chooseCustomer.php') ?>
+    <?php include('chooseCustomer.php')  ?>
     
     <br><br>
     <!-- Finalize Sale -->
@@ -71,10 +65,17 @@
     if(isset($_POST['final'])) {
         // cart ID retrieved from cookie data
         $CID = $_SESSION['CID'];
-
+		$empID = $_SESSION['emp_id'];
+		$key = $_SESSION['custfirst'];
+		$cquery = "SELECT customer_id FROM customer_info WHERE first_name LIKE '%$key%'";
+		$cresult = mysqli_query($conn,$cquery);
+		while($crow = mysqli_fetch_assoc($cresult)){
+			$CustID = $crow['customer_id'];
+			$CustID = mysqli_real_escape_string($conn,$CustID);
+		}
         // create new ticket for sale
-        $query = "INSERT INTO ticket_system (ticket_id, date, time, quantity, subtotal, total, tax, tax_rate, cash, credit, cart_purchase)
-                    VALUES ('$CID', CURRENT_DATE(), CURRENT_TIME(), '$qtyTotal', '$subTotal', '$total', '$tax', '$taxrate', '$cash', '$credit', '0')";
+        $query = "INSERT INTO ticket_system (ticket_id, date, time, quantity, subtotal, total, tax, tax_rate, cash, credit, cart_purchase,customer_id,employee_id)
+                    VALUES ('$CID', CURRENT_DATE(), CURRENT_TIME(), '$qtyTotal', '$subTotal', '$total', '$tax', '$taxrate', '$total', '$credit', '0','$CustID','$empID')";
         $result = mysqli_query($conn, $query) or die("Ticket Failed");
         
         // link new ticket to our cart in progress

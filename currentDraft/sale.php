@@ -196,27 +196,31 @@ include_once('sidebarconnect.php');
                 echo "<form class='form-inline' method='post' action ='removecust.php'> <div 
 				class='card ml-5' style='padding: 8px'>" . $_SESSION['custfirst'] . " " . $_SESSION['custlast'] . "</div>
                 <div class='nav-item'><button action='index.php' class='btn navbar-btn'> Remove</button></div></form>";
-            } else {
-                if (isset($_POST['scustomer'])) {
-                    $ID = $_POST['scustomer'];
-                    $cQuery = "SELECT * FROM customer_info WHERE customer_id LIKE '%$ID%'";
-                    $cResult = mysqli_query($conn, $cQuery);
-                    $cQueryRes = mysqli_num_rows($cResult);
-                    if ($cQueryRes > 0) {
-                        while ($crow = mysqli_fetch_assoc($cResult)) {
-                            $first = $crow['first_name'];
-                            $first = mysqli_real_escape_string($conn, $first);
-                            $last = $crow['last_name'];
-                            $last = mysqli_real_escape_string($conn, $last);
-                            echo "<form class='form-inline'><div 
+		}else{
+                    if (isset($_POST['scustomer'])) {
+                        $ID = $_POST['scustomer'];
+                        $cQuery = "SELECT * FROM customer_info WHERE customer_id LIKE '%$ID%'";
+                        $cResult = mysqli_query($conn, $cQuery);
+                        $cQueryRes= mysqli_num_rows($cResult);
+                        if ($cQueryRes > 0) {
+                            while ($crow = mysqli_fetch_assoc($cResult)) {
+                                $first = $crow['first_name'];
+								$first = mysqli_real_escape_string($conn,$first);
+                                $last = $crow['last_name'];
+								$last = mysqli_real_escape_string($conn,$last);
+								$custID = $crow['customer_id'];
+								$custID = mysqli_real_escape_string($conn,$custID);
+								echo "<form class='form-inline'><div 
 								class='card' style='padding: 8px'>" . $first . " " . $last . "</div>
-                                <div class='nav-item'><button href='index.php' class='btn navbar-btn btn-light'> Remove</button></div></form>";
-                            $_SESSION['custfirst'] = $first;
-                            $_SESSION['custlast'] = $last;
-                        }
-                    }
-                } else {
-                    echo "<form class='form-inline' method='post' action='customerview.php'><div class='card ml-2' style='padding: 8px'>No Customer Selected</div>
+                                <div class='nav-item'><button href='index.php' class='btn navbar-btn'> Remove</button></div></form>";
+								$_SESSION['custfirst'] = $first;
+								$_SESSION['custlast'] = $last;
+								$_SESSION['CustID'] = $custID;
+
+                            }
+                        } 
+                    }else {
+                        echo "<form class='form-inline' method='post' action='customerview.php'><div class='card' style='padding: 8px'>No Customer Selected</div>
                         <div class='nav-item'>
                         <input class='form-control col-5' name='customer' placeholder='Search Customers' aria-label='Search'>
                         <button class='btn btn-light navbar-btn' name='sale-search'> Search</button></form>
@@ -314,6 +318,7 @@ include_once('sidebarconnect.php');
 
             // event begins when the user releases the key
             $('#search').keyup(function() {
+
                 // creates null result field
                 $('#result').html('');
                 // variable to hold search input

@@ -1,9 +1,9 @@
 <?php
 include_once('config.php');
 include_once('sidebarconnect.php');
-if (isset($_GET['Detail'])) {
-    $findID = $_GET['Detail'];
-    $query = "SELECT * FROM customer_info WHERE customer_id LIKE '%$findID%'";
+if (isset($_POST['Detail'])) {
+    $findID = $_POST['Detail'];
+    $query = "SELECT * FROM ticket_system WHERE customer_id LIKE '%$findID%'";
     $result = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
@@ -191,10 +191,16 @@ if (isset($_GET['Detail'])) {
               <?php
 
                 while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<tr><td>" . $row['customer_id'] . "</td><td>"
-                    . $row['first_name'] . "</td><td>" . $row['last_name'] . "</td><td>" . $row['street_address'] . "</td><td>"
-                    . $row['city'] . "</td><td>" . $row['state'] . "</td><td>" . $row['zip_code'] . "</td><td>" . $row['phone_number'] . "</td><td>"
-                    . $row['email'] . "</td><td>";
+					$CID = $row['customer_id'];
+					$custQuery = "SELECT * FROM customer_info WHERE customer_id LIKE '%$CID%'";
+					$cresult = mysqli_query($conn, $custQuery);
+					while($crow = mysqli_fetch_assoc($cresult))
+					{
+						echo "<tr><td>" . $crow['customer_id'] . "</td><td>"
+                    . $crow['first_name'] . "</td><td>" . $crow['last_name'] . "</td><td>" . $crow['street_address'] . "</td><td>"
+                    . $crow['city'] . "</td><td>" . $crow['state'] . "</td><td>" . $crow['zip_code'] . "</td><td>" . $crow['phone_number'] . "</td><td>"
+                    . $crow['email'] . "</td><td>";
+					}
                 }
             }
 

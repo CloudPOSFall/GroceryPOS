@@ -6,7 +6,7 @@
     $query = "SELECT product_inventory.*, cart.qty FROM product_inventory 
               INNER JOIN cart ON product_inventory.product_id=cart.product_id";
     $result = mysqli_query($conn, $query) or die("Execution Failed");
-
+	
     // completed cart is initialized
     $cartCode = "<table class='table' name='product'>";
     $cartCode .= "<tr> <th>Product Name</th> <th>Quantity</th> <th>Product Price</th> </tr>";
