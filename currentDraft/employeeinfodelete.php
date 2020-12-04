@@ -4,12 +4,12 @@ include_once ('config.php');
   if(isset($_GET['Del']))
   {
     $ID = $_GET['Del'];
-    $query = " delete from employee_info where employee_information = '".$ID."'";
+    $query = " delete from employee_info where employee_id = '".$ID."'";
     $result = mysqli_query($conn,$query);
 
     if($result)
     {
-      header("location:employeeinfoview.php");
+      header("location:employeeview.php");
     }
     else
     {
@@ -18,7 +18,7 @@ include_once ('config.php');
   }
   else
   {
-    header("location:employeeinfoview.php");
+    header("location:employeeview.php");
   }
 
  ?>
