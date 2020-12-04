@@ -74,7 +74,7 @@
 			$CustID = mysqli_real_escape_string($conn,$CustID);
 		}
         // create new ticket for sale
-        $query = "INSERT INTO ticket_system (ticket_id, date, time, quantity, subtotal, total, cost, tax, tax_rate, cash, credit, cart_purchase,customer_id,employee_id)
+        $query = "INSERT INTO ticket_system (ticket_id, date, time, quantity, subtotal, total, cost, tax, tax_rate, cash, credit, cart_purchase, customer_id, employee_id)
                     VALUES ('$CID', CURRENT_DATE(), CURRENT_TIME(), '$qtyTotal', '$subTotal', '$total', '0', '$tax', '$taxrate', '$total', '$credit', '0','$CustID','$empID')";
         $result = mysqli_query($conn, $query) or die("Ticket Failed");
         
