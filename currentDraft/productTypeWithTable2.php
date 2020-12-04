@@ -1,7 +1,7 @@
 <?php
     include_once('config.php');
 
-    if(isset($_GET['addToOrder'])) {
+    if(isset($_POST['addToOrder'])) {
         include('emptyorder.php');
         $vendor = $_SESSION1;
         

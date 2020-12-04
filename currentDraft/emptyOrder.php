@@ -1,5 +1,5 @@
 <?php
-    if(isset($_GET['addToOrder'])) {
+    if(isset($_POST['addToOrder'])) {
             $query = "SELECT OTID, vendor_id FROM orders_ticket WHERE employee_id IS NULL";
             $result = mysqli_query($conn, $query) or die(" Execution Failed null address");
             $row = mysqli_num_rows($result);

@@ -1,5 +1,5 @@
 <?php
-    if(isset($_GET['addToOrder'])) {
+    if(isset($_POST['addToOrder'])) {
     }
     else{
     $query = "INSERT INTO orders_ticket (employee_id, vendor_id) VALUES (NULL, '".$_POST['vendorid']."')";

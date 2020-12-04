@@ -200,7 +200,7 @@ $result = mysqli_query($conn, $query);
           </tbody>
         </table>
       </div>
-      <?php include ('orderForm.php');?>
+      <?php include ('orderform.php');?>
     </div>
 
 

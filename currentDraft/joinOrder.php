@@ -34,8 +34,6 @@
             $total = $total + $format;
             $qtyTotal = $qtyTotal + $row['stock_amount'];
             $cartCode .= "<tr> <th>".$row['productName']."</th> <th>".$row['stock_amount']."</th> <th>".$format."</th> </tr>";
-            $cartCode .= "<tr> <th><a class='btn-sm btn-dark' role='button' href='itemdelete.php?Del="
-            . $row['product_id'] . "'>Remove</a></th> </tr>";
             $newCost = 0.00;
         }
 
