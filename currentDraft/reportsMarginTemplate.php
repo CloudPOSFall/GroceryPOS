@@ -263,8 +263,8 @@ $result = mysqli_query($conn, $query);
         $margin = number_format($operation, 2, '.', '');
         echo "<tr><td>" 
         . $row['ticket_id'] . "</td><td>". $row['total'] . "</td><td>" . $row['cost'] . "</td><td>" 
-        . $profit ."</td><td>" . $margin . "% </td><td>". date('m-d-Y', strtotime($row['date'])) . "</td><td><a class='btn btn-dark' 
-        role='button' href='customerDetail.php?Detail=". $row['customer_id'] . "'>View</a>";
+        . $profit ."</td><td>" . $margin . "% </td><td>". date('m-d-Y', strtotime($row['date'])) . "</td><td><form method='post' action='customerDetail.php'><button class='btn navbar-btn btn-light' name='Detail'>
+        View</button></td><input name='Detail' size='1' value='". $row['customer_id'] ."' readonly hidden/></form>";
       }
       }
         ?>
@@ -411,8 +411,8 @@ $result = mysqli_query($conn, $query);
         $Date = date("m-d-Y", strtotime($row['date']));
         echo "<tr><td>" 
         . $row['ticket_id'] . "</td><td>". $row['total'] . "</td><td>" . $row['cost'] . "</td><td>" .
-        $profit . "</td><td>" . $margin . "% </td><td>". date('m-d-Y', strtotime($row['date'])) . "</td><td><a class='btn btn-dark' 
-        role='button' href='customerDetail.php?Detail=". $row['customer_id'] . "'>View</a>";
+        $profit . "</td><td>" . $margin . "% </td><td>". date('m-d-Y', strtotime($row['date'])) . "</td><td><form method='post' action='customerDetail.php'><button class='btn navbar-btn btn-light' name='Detail'>
+        View</button></td><input name='Detail' size='1' value='". $row['customer_id'] ."' readonly hidden/></form>";
       }
     }
     ?>

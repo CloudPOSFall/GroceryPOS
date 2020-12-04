@@ -247,7 +247,6 @@ $result = mysqli_query($conn, $query);
               <th> Product SubType </th>
               <th> Time </th>
               <th> Date </th>
-              <th> Customer</th>
             </tr>
           </thead>
           <tbody >
@@ -261,8 +260,7 @@ $result = mysqli_query($conn, $query);
     if (($row['date'] >= $DateBegin) && ($row['date'] <= $DateEnd)){
         echo "<tr><td>" 
         . $row['ticket_id'] . "</td><td>". $row['productSubType'] . "</td><td>" 
-        . $row['time'] . "</td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td><a class='btn btn-dark' 
-        role='button' href='customerDetail.php?Detail=". $row['customer_id'] . "'>View</a>";
+        . $row['time'] . "</td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td>";
       }
       }
         ?>
@@ -407,8 +405,7 @@ $result = mysqli_query($conn, $query);
         $Date = date("m-d-Y", strtotime($row['date']));
         echo "<tr><td>" 
         . $row['ticket_id'] . "</td><td>". $row['productSubType'] . "</td><td>" 
-        . $row['time'] . "</td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td><a class='btn btn-dark' 
-        role='button' href='customerDetail.php?Detail=". $row['customer_id'] . "'>View</a>";
+        . $row['time'] . "</td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td>";
       }
     }
     ?>

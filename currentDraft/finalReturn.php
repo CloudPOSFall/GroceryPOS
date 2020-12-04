@@ -209,7 +209,19 @@ var_dump($_SESSION['customer']);
         
         if($result) 
         {
-            header("location:salescontrolpanel.php");
+          $sql = "SELECT total, subtotal FROM ticket_system WHERE ticket_id = '$ticketid'";
+          $result = mysqli_query($conn, $sql);
+          while ($row = mysqli_fetch_assoc($result)) {
+            $btotal = $row['total'];
+            $bsubtotal = $row['subtotal'];
+          }
+
+          $atotal = $btotal + $total;
+          $asubtotal = $bsubtotal + $total;
+          $update = "UPDATE ticket_system SET total = '$atotal', subtotal = '$asubtotal' WHERE ticket_id='$ticketid'";
+          $result = mysqli_query($conn, $update) or die("refund ticket Failed");
+
+          echo "<script type='text/javascript'>document.location.href='salescontrolpanel.php';</script>";
         }
     }
        

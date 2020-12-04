@@ -251,7 +251,6 @@ INNER JOIN ticket_system ON product_inventory.product_id=cart.product_id";-->
               <th> Product Type </th>
               <th> Time </th>
               <th> Date </th>
-              <th> Customer</th>
             </tr>
           </thead>
           <tbody >
@@ -264,8 +263,7 @@ INNER JOIN ticket_system ON product_inventory.product_id=cart.product_id";-->
     if (($row['date'] >= $DateBegin) && ($row['date'] <= $DateEnd)){
         echo "<tr><td>" 
         . $row['ticket_id'] . "</td><td>". $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" 
-        . $row['time'] . "</td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td><a class='btn btn-dark' 
-        role='button' href='customerDetail.php?Detail=". $row['customer_id'] . "'>View</a>";
+        . $row['time'] . "</td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td>";
       }
       }
         ?>
@@ -410,8 +408,7 @@ INNER JOIN ticket_system ON product_inventory.product_id=cart.product_id";-->
         $Date = date("m-d-Y", strtotime($row['date']));
         echo "<tr><td>" 
         . $row['ticket_id'] . "</td><td>". $row['productName'] . "</td><td>" . $row['productType'] . "</td><td>" 
-        . $row['time'] . "</td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td><a class='btn btn-dark' 
-        role='button' href='customerDetail.php?Detail=". $row['customer_id'] . "'>View</a>";
+        . $row['time'] . "</td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td>";
       }
     }
     ?>
