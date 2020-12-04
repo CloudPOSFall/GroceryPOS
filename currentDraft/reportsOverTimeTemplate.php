@@ -1,9 +1,7 @@
 <?php
 include_once('config.php');
 include_once('sidebarconnect.php');
-$query = "SELECT ticket_system.*, product_inventory.cost, product_inventory.unit_price FROM ticket_system 
-          LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
-          cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id";
+$query = "SELECT * FROM ticket_system";
 $result = mysqli_query($conn, $query); 
 ?>
 <!DOCTYPE html>
@@ -263,14 +261,14 @@ $result = mysqli_query($conn, $query);
     $search = mysqli_real_escape_string($conn, $DateBegin);
     while ($row = mysqli_fetch_assoc($result)) {
     if (($row['date'] >= $DateBegin) && ($row['date'] <= $DateEnd)){
-      $profit = $row['unit_price'] - $row['cost'];
-      $operation = ($profit/$row['unit_price']) * 100;
+      $profit = $row['subtotal'] - $row['cost'];
+      $operation = ($profit/$row['subtotal']) * 100;
       $margin = number_format($operation, 2, '.', '');
         echo "<tr><td>" 
         . $row['ticket_id'] . "</td><td>". $row['time'] . "</td><td>" . $row['total'] . "</td><td>" . $row['subtotal']
         . "</td><td>" . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['cost'] . "</td><td>" 
-        . $profit . "</td><td>" . $margin . "% </td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td><a class='btn btn-dark' 
-        role='button' href='customerDetail.php?Detail=". $row['customer_id'] . "'>View</a>";
+        . $profit . "</td><td>" . $margin . "% </td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td><form method='post' action='customerDetail.php'><button class='btn navbar-btn btn-light' name='Detail'>
+        View</button></td><input name='Detail' size='1' value='". $row['customer_id'] ."' readonly hidden/></form>";
       }
       }
         ?>
@@ -292,7 +290,7 @@ $result = mysqli_query($conn, $query);
                   <tr>
                   <?php 
                   $sum=0;
-                  $sql = "SELECT subtotal FROM ticket_system WHERE date BETWEEN '$DateBegin' and '$DateEnd'";
+                  $sql = "SELECT * FROM ticket_system WHERE date BETWEEN '$DateBegin' and '$DateEnd'";
                   $result = mysqli_query($conn, $sql);
                   while ($row = mysqli_fetch_assoc($result)) {
                        $sum += $row['subtotal'];
@@ -304,7 +302,7 @@ $result = mysqli_query($conn, $query);
                   <tr>
                   <?php 
                   $sum=0;
-                  $sql = "SELECT discount FROM ticket_system WHERE date BETWEEN '$DateBegin' and '$DateEnd'";
+                  $sql = "SELECT * FROM ticket_system WHERE date BETWEEN '$DateBegin' and '$DateEnd'";
                   $result = mysqli_query($conn, $sql);
                   while ($row = mysqli_fetch_assoc($result)) {
                   $sum += $row['discount'];
@@ -316,7 +314,7 @@ $result = mysqli_query($conn, $query);
                   <tr>
                   <?php 
                   $sum=0;
-                  $sql = "SELECT tax FROM ticket_system WHERE date BETWEEN '$DateBegin' and '$DateEnd'";
+                  $sql = "SELECT * FROM ticket_system WHERE date BETWEEN '$DateBegin' and '$DateEnd'";
                   $result = mysqli_query($conn, $sql);
                   while ($row = mysqli_fetch_assoc($result)) {
                   $sum += $row['tax'];
@@ -328,7 +326,7 @@ $result = mysqli_query($conn, $query);
                   <tr>
                   <?php 
                   $sum=0;
-                  $sql = "SELECT total FROM ticket_system WHERE date BETWEEN '$DateBegin' and '$DateEnd'";
+                  $sql = "SELECT * FROM ticket_system WHERE date BETWEEN '$DateBegin' and '$DateEnd'";
                   $result = mysqli_query($conn, $sql);
                   while ($row = mysqli_fetch_assoc($result)) {
                   $sum += $row['total'];
@@ -366,10 +364,7 @@ $result = mysqli_query($conn, $query);
               <tr>
               <?php
               $sum=0;
-              $sql = "SELECT ticket_system.*, product_inventory.cost, product_inventory.unit_price FROM ticket_system 
-                        LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
-                        cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
-                        WHERE date BETWEEN '$DateBegin' and '$DateEnd'";
+              $sql = "SELECT * FROM ticket_system WHERE date BETWEEN '$DateBegin' and '$DateEnd'";
               $result = mysqli_query($conn, $sql);
               while ($row = mysqli_fetch_assoc($result)) {
                       $sum += $row['cost'];
@@ -381,13 +376,10 @@ $result = mysqli_query($conn, $query);
               <tr>
               <?php
               $sum=0;
-              $sql = "SELECT ticket_system.*, product_inventory.cost, product_inventory.unit_price FROM ticket_system 
-                        LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
-                        cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
-                        WHERE date BETWEEN '$DateBegin' and '$DateEnd'";
+              $sql = "SELECT * FROM ticket_system WHERE date BETWEEN '$DateBegin' and '$DateEnd'";
               $result = mysqli_query($conn, $sql);
               while ($row = mysqli_fetch_assoc($result)) {
-                $profit = $row['unit_price'] - $row['cost'];
+                $profit = $row['subtotal'] - $row['cost'];
                       $sum += $profit;
                 }
               ?>
@@ -397,13 +389,10 @@ $result = mysqli_query($conn, $query);
               <tr>
               <?php
               $sum=0;
-              $sql = "SELECT ticket_system.*, product_inventory.cost, product_inventory.unit_price FROM ticket_system 
-                        LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
-                        cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
-                        WHERE date BETWEEN '$DateBegin' and '$DateEnd'";
+              $sql = "SELECT * FROM ticket_system WHERE date BETWEEN '$DateBegin' and '$DateEnd'";
               $result = mysqli_query($conn, $sql);
               while ($row = mysqli_fetch_assoc($result)) {
-                $operation = ($profit/$row['unit_price']) * 100;
+                $operation = ($profit/$row['subtotal']) * 100;
                 $margin = number_format($operation, 2, '.', '');
                       $sum += $margin;
                 }
@@ -421,14 +410,14 @@ $result = mysqli_query($conn, $query);
     else {
       while ($row = mysqli_fetch_assoc($result)) {
         $Date = date("m-d-Y", strtotime($row['date']));
-        $profit = $row['unit_price'] - $row['cost'];
-        $operation = ($profit/$row['unit_price']) * 100;
+        $profit = $row['subtotal'] - $row['cost'];
+        $operation = ($profit/$row['subtotal']) * 100;
         $margin = number_format($operation, 2, '.', '');
         echo "<tr><td>" 
         . $row['ticket_id'] . "</td><td>". $row['time'] . "</td><td>" . $row['total'] . "</td><td>" . $row['subtotal']
         . "</td><td>" . $row['discount'] . "</td><td>" . $row['tax'] . "</td><td>" . $row['cost'] . "</td><td>" 
-        . $profit . "</td><td>" . $margin . "% </td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td><a class='btn btn-dark' 
-        role='button' href='customerDetail.php?Detail=". $row['customer_id'] . "'>View</a>";
+        . $profit . "</td><td>" . $margin . "% </td><td>" . date('m-d-Y', strtotime($row['date'])) . "</td><td><form method='post' action='customerDetail.php'><button class='btn navbar-btn btn-light' name='Detail'>
+        View</button></td><input name='Detail' size='1' value='". $row['customer_id'] ."' readonly hidden/></form>";
       }
     }
     ?>
@@ -524,9 +513,7 @@ $result = mysqli_query($conn, $query);
               <tr>
               <?php
               $sum=0;
-              $sql = "SELECT ticket_system.*, product_inventory.cost, product_inventory.unit_price FROM ticket_system 
-                        LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
-                        cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id";
+              $sql = "SELECT * FROM ticket_system";
               $result = mysqli_query($conn, $sql);
               while ($row = mysqli_fetch_assoc($result)) {
                       $sum += $row['cost'];
@@ -538,12 +525,10 @@ $result = mysqli_query($conn, $query);
               <tr>
               <?php
               $sum=0;
-              $sql = "SELECT ticket_system.*, product_inventory.cost, product_inventory.unit_price FROM ticket_system 
-                        LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
-                        cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id";
+              $sql = "SELECT * FROM ticket_system";
               $result = mysqli_query($conn, $sql);
               while ($row = mysqli_fetch_assoc($result)) {
-                $profit = $row['unit_price'] - $row['cost'];
+                $profit = $row['subtotal'] - $row['cost'];
                       $sum += $profit;
                 }
               ?>
@@ -553,12 +538,10 @@ $result = mysqli_query($conn, $query);
               <tr>
               <?php
               $sum=0;
-              $sql = "SELECT ticket_system.*, product_inventory.cost, product_inventory.unit_price FROM ticket_system 
-                        LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
-                        cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id";
+              $sql = "SELECT * FROM ticket_system";
               $result = mysqli_query($conn, $sql);
               while ($row = mysqli_fetch_assoc($result)) {
-                $operation = ($profit/$row['unit_price']) * 100;
+                $operation = ($profit/$row['subtotal']) * 100;
                 $margin = number_format($operation, 2, '.', '');
                       $sum += $margin;
                 }
