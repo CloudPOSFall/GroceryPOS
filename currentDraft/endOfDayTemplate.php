@@ -351,7 +351,7 @@ $date = date("Y-m-d", strtotime($_POST['date']));
                   $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
                   LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
                   cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
-                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='dairy'";
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Dairy'";
                   $result = mysqli_query($conn, $sql);
                    while ($row = mysqli_fetch_assoc($result)) {
                        $sum += $row['qty'];
@@ -364,7 +364,7 @@ $date = date("Y-m-d", strtotime($_POST['date']));
                   $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
                   LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
                   cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
-                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='dairy'";
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Dairy'";
                   $result = mysqli_query($conn, $sql);
                   while ($row = mysqli_fetch_assoc($result)) {
                     $limit = $row['qty'];
@@ -381,7 +381,7 @@ $date = date("Y-m-d", strtotime($_POST['date']));
                   $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
                   LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
                   cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
-                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='dairy'";
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Dairy'";
                   $result = mysqli_query($conn, $sql);
                   while ($row = mysqli_fetch_assoc($result)) {
                    $cost += $row['cost'] * $row['qty'];
@@ -393,13 +393,15 @@ $date = date("Y-m-d", strtotime($_POST['date']));
                   ?>
                   <td>$<?php echo $profit ?></td>
                 </tr>
+                
+                <!--Produce-->
                 <tr>
                 <?php 
                   $sum1=0;
                   $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
                   LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
                   cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
-                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='produce'";
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Produce'";
                   $result = mysqli_query($conn, $sql);
                    while ($row = mysqli_fetch_assoc($result)) {
                        $sum1 += $row['qty'];
@@ -412,7 +414,7 @@ $date = date("Y-m-d", strtotime($_POST['date']));
                   $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
                   LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
                   cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
-                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='produce'";
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Produce'";
                   $result = mysqli_query($conn, $sql);
                   while ($row = mysqli_fetch_assoc($result)) {
                     $limit1 = $row['qty'];
@@ -429,7 +431,7 @@ $date = date("Y-m-d", strtotime($_POST['date']));
                   $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
                   LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
                   cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
-                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='produce'";
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Produce'";
                   $result = mysqli_query($conn, $sql);
                   while ($row = mysqli_fetch_assoc($result)) {
                    $cost1 += $row['cost'] * $row['qty'];
@@ -441,13 +443,15 @@ $date = date("Y-m-d", strtotime($_POST['date']));
                   ?>
                   <td>$<?php echo $profit1 ?></td>
                 </tr>
+
+                <!--Poultry-->
                 <tr>
                 <?php 
                   $sum2=0;
                   $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
                   LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
                   cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
-                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='poultry'";
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Poultry'";
                   $result = mysqli_query($conn, $sql);
                    while ($row = mysqli_fetch_assoc($result)) {
                        $sum2 += $row['qty'];
@@ -460,7 +464,7 @@ $date = date("Y-m-d", strtotime($_POST['date']));
                   $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
                   LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
                   cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
-                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='poultry'";
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Poultry'";
                   $result = mysqli_query($conn, $sql);
                   while ($row = mysqli_fetch_assoc($result)) {
                     $limit2 = $row['qty'];
@@ -477,7 +481,7 @@ $date = date("Y-m-d", strtotime($_POST['date']));
                   $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
                   LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
                   cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
-                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='poultry'";
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Poultry'";
                   $result = mysqli_query($conn, $sql);
                   while ($row = mysqli_fetch_assoc($result)) {
                    $cost2 += $row['cost'] * $row['qty'];
@@ -488,6 +492,256 @@ $date = date("Y-m-d", strtotime($_POST['date']));
                   $profit2 = $retail2 - $cost2;
                   ?>
                   <td>$<?php echo $profit2 ?></td>
+                </tr>
+
+                <!--Beef-->
+                <tr>
+                <?php 
+                  $sum=0;
+                  $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
+                  LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
+                  cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Beef'";
+                  $result = mysqli_query($conn, $sql);
+                   while ($row = mysqli_fetch_assoc($result)) {
+                       $sum += $row['qty'];
+                  }
+                  ?>
+                  <td class="text-left">Beef</td>
+                  <td><?php echo $sum; ?></td>
+                  <?php 
+                  $retail=0;
+                  $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
+                  LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
+                  cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Beef'";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                    $limit = $row['qty'];
+                    while($limit>0)
+                    {
+                      $retail += $row['unit_price'];
+                      $limit--;
+                    }
+                  }
+                  ?>
+                  <td>$<?php echo $retail; ?></td>
+                  <?php 
+                  $cost=0;
+                  $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
+                  LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
+                  cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Beef'";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                   $cost += $row['cost'] * $row['qty'];
+                   }
+                  ?>
+                  <td>$<? echo $cost; ?></td>
+                  <?php 
+                  $profit = $retail - $cost;
+                  ?>
+                  <td>$<?php echo $profit ?></td>
+                </tr>
+
+                <!--Dry Goods-->
+                <tr>
+                <?php 
+                  $sum=0;
+                  $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
+                  LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
+                  cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Dry Goods'";
+                  $result = mysqli_query($conn, $sql);
+                   while ($row = mysqli_fetch_assoc($result)) {
+                       $sum += $row['qty'];
+                  }
+                  ?>
+                  <td class="text-left">Dry Goods</td>
+                  <td><?php echo $sum; ?></td>
+                  <?php 
+                  $retail=0;
+                  $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
+                  LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
+                  cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Dry goods'";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                    $limit = $row['qty'];
+                    while($limit>0)
+                    {
+                      $retail += $row['unit_price'];
+                      $limit--;
+                    }
+                  }
+                  ?>
+                  <td>$<?php echo $retail; ?></td>
+                  <?php 
+                  $cost=0;
+                  $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
+                  LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
+                  cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Dry Goods'";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                   $cost += $row['cost'] * $row['qty'];
+                   }
+                  ?>
+                  <td>$<? echo $cost; ?></td>
+                  <?php 
+                  $profit = $retail - $cost;
+                  ?>
+                  <td>$<?php echo $profit ?></td>
+                </tr>
+
+                <!--Pet Food-->
+                <tr>
+                <?php 
+                  $sum=0;
+                  $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
+                  LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
+                  cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Pet Food'";
+                  $result = mysqli_query($conn, $sql);
+                   while ($row = mysqli_fetch_assoc($result)) {
+                       $sum += $row['qty'];
+                  }
+                  ?>
+                  <td class="text-left">Pet Food</td>
+                  <td><?php echo $sum; ?></td>
+                  <?php 
+                  $retail=0;
+                  $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
+                  LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
+                  cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Pet Food'";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                    $limit = $row['qty'];
+                    while($limit>0)
+                    {
+                      $retail += $row['unit_price'];
+                      $limit--;
+                    }
+                  }
+                  ?>
+                  <td>$<?php echo $retail; ?></td>
+                  <?php 
+                  $cost=0;
+                  $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
+                  LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
+                  cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Pet Food'";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                   $cost += $row['cost'] * $row['qty'];
+                   }
+                  ?>
+                  <td>$<? echo $cost; ?></td>
+                  <?php 
+                  $profit = $retail - $cost;
+                  ?>
+                  <td>$<?php echo $profit ?></td>
+                </tr>
+
+                <!--Pasta-->
+                <tr>
+                <?php 
+                  $sum=0;
+                  $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
+                  LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
+                  cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Pasta'";
+                  $result = mysqli_query($conn, $sql);
+                   while ($row = mysqli_fetch_assoc($result)) {
+                       $sum += $row['qty'];
+                  }
+                  ?>
+                  <td class="text-left">Pasta</td>
+                  <td><?php echo $sum; ?></td>
+                  <?php 
+                  $retail=0;
+                  $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
+                  LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
+                  cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Pasta'";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                    $limit = $row['qty'];
+                    while($limit>0)
+                    {
+                      $retail += $row['unit_price'];
+                      $limit--;
+                    }
+                  }
+                  ?>
+                  <td>$<?php echo $retail; ?></td>
+                  <?php 
+                  $cost=0;
+                  $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
+                  LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
+                  cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Pasta'";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                   $cost += $row['cost'] * $row['qty'];
+                   }
+                  ?>
+                  <td>$<? echo $cost; ?></td>
+                  <?php 
+                  $profit = $retail - $cost;
+                  ?>
+                  <td>$<?php echo $profit ?></td>
+                </tr>
+
+                <!--Bathroom-->
+                <tr>
+                <?php 
+                  $sum=0;
+                  $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
+                  LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
+                  cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Bathroom'";
+                  $result = mysqli_query($conn, $sql);
+                   while ($row = mysqli_fetch_assoc($result)) {
+                       $sum += $row['qty'];
+                  }
+                  ?>
+                  <td class="text-left">Toiletries</td>
+                  <td><?php echo $sum; ?></td>
+                  <?php 
+                  $retail=0;
+                  $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
+                  LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
+                  cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Bathroom'";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                    $limit = $row['qty'];
+                    while($limit>0)
+                    {
+                      $retail += $row['unit_price'];
+                      $limit--;
+                    }
+                  }
+                  ?>
+                  <td>$<?php echo $retail; ?></td>
+                  <?php 
+                  $cost=0;
+                  $sql = "SELECT ticket_system.*, product_inventory.*, item_list.* FROM ticket_system 
+                  LEFT JOIN cart_inprogress ON ticket_system.ticket_id=cart_inprogress.CID LEFT JOIN item_list ON 
+                  cart_inprogress.CID=item_list.CID LEFT JOIN product_inventory ON item_list.product_id=product_inventory.product_id
+                  WHERE ticket_system.date LIKE '$date' AND product_inventory.productType='Bathroom'";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                   $cost += $row['cost'] * $row['qty'];
+                   }
+                  ?>
+                  <td>$<? echo $cost; ?></td>
+                  <?php 
+                  $profit = $retail - $cost;
+                  ?>
+                  <td>$<?php echo $profit ?></td>
                 </tr>
               </tbody>
               <tfoot class="bg-white">
