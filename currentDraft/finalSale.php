@@ -101,7 +101,7 @@
         {
             $sql = "DELETE FROM cart";
             $result = mysqli_query($conn, $sql) or die("Insert Failed");
-            echo "<script type='text/javascript'>document.location.href='receipt.php?Tic=". $CID .";</script>";
+            echo "<script type='text/javascript'>document.location.href='salescontrolpanel.php'</script>";
         }
     }             
 ?>
