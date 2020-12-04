@@ -87,7 +87,7 @@
         {
             $sql = "DELETE FROM cart";
             $result = mysqli_query($conn, $sql) or die("Insert Failed");
-            header("location:salescontrolpanel.php");
+            echo "<script type='text/javascript'>document.location.href='salescontrolpanel.php';</script>";
         }
     }             
 ?>
