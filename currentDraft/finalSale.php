@@ -1,5 +1,6 @@
 <br>
 <?php
+
     // display completed cart with saved variables
      include('joinCart.php');
 ?>
