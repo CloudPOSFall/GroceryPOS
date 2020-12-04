@@ -9,7 +9,7 @@
 	
     // completed cart is initialized
     $cartCode = "<table class='table' name='product'>";
-    $cartCode .= "<tr> <th>Product Name</th> <th>Quantity</th> <th>Product Price</th> </tr>";
+    $cartCode .= "<tr> <th>Product Name</th> <th>Quantity</th> <th>Product Price</th> <th>Remove From Cart</th> </tr>";
     // initializing total and quantity
     $total = 0.00;
     $qtyTotal = 0;
@@ -20,7 +20,8 @@
         $format = number_format($newCost, 2);
         $total = $total + $format;
         $qtyTotal = $qtyTotal + $row['qty'];
-        $cartCode .= "<tr> <th>".$row['productName']."</th> <th>".$row['qty']."</th> <th>".$format."</th> </tr>";
+        $cartCode .= "<tr> <th>".$row['productName']."</th> <th>".$row['qty']."</th> <th>".$format."</th>
+                      <th> <input type='submit' name='removeCart' value=".$row['product_id']."> </th> </tr>";
         $newCost = 0.00;
     }
 
