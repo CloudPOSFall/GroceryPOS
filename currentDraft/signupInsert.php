@@ -20,8 +20,9 @@
 
       $query = "INSERT into employee_info (email, password, first_name, last_name, phone_number, SSN, street_address, city, state, zip_code, company_name, number_of_stores, user_type)
               values ('$Email', '$Password', '$FirstName', '$LastName', '$PhoneNumber', '$SSN', '$StreetAddress', '$City', '$State', '$ZipCode', '$Company', '$Stores', '$User')";
-
       $result = mysqli_query($conn, $query);
+
+      echo $query;
 
       if($result)
       {

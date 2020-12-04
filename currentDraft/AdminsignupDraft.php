@@ -144,7 +144,7 @@
                 </select>
               </div>
               <div class="col text-center">
-                <button type="submit" class="btn-lg btn-success">Get Started</button>
+                <button type="submit" name='submit' class="btn-lg btn-success">Get Started</button>
               </div>
             </form>
           </div>
