@@ -26,7 +26,7 @@
 
 <!-- Functionality for adding items to a cart -->
 <?php include('addCart2.php'); ?>
-
+<?php include('removeCart.php'); ?>
 <!-- Button which takes user to final sale page -->
 <form action="finalSaleFront.php">
     <input type="submit" name="submit" value="Finalize Sale" />

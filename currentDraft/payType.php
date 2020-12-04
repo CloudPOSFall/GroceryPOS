@@ -13,9 +13,6 @@
             echo($payType);
             echo(" Chosen");
         }
-	$format = 'Customer: %s %s';
-    echo sprintf($format,$_SESSION['custfirst'],$_SESSION['custlast']) ;
-	$_SESSION['customerID'] = $_SESSION['custfirst'];
     ?>
 
     <br>
