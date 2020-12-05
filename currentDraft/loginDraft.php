@@ -57,7 +57,7 @@ if (isset($_POST["login"])) {
           setcookie("user_password", "");
         }
       }
-      header("Location: accountHomeDraft.php");
+      header("Location: salescontrolpanel.php");
       ob_end_flush();
     } else {
       $msg = "Invalid Email or Password.";

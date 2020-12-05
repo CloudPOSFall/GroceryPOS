@@ -30,7 +30,7 @@
         VALUES ('$Email', '$Password', '$FirstName', '$LastName', '$PhoneNumber', '$StreetAddress', '$City', '$State', '$ZipCode')";
 
         $result = mysqli_query($conn, $query);
-        header("location:accountHomeDraft.php");
+        header("location:salescontrolpanel.php");
       }
       else
       {
